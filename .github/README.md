@@ -16,7 +16,6 @@
 - [🚀 Deployment Status](#-deployment-status)
 - [🚀 Installation & Setup](#-installation--setup)
 - [🎥 How to Run the Application](#-how-to-run-the-application)
-- [👥 Contributors](#-contributors)
 - [📜 License](#-license)
 - [🏆 Acknowledgment](#-acknowledgment)
 
@@ -146,35 +145,6 @@ https://github.com/user-attachments/assets/floorplanning-ai-local-setup.mp4
 <p align="center">
 📌 Watch the full live demonstration:
 </p>
-
-https://github.com/user-attachments/assets/floorplanning-ai-demo.mp4
-
----
-
-<h2 align="center">
-  👥 Contributors
-</h2>
-
-<p align="center">
-  Huge thanks to the team who brought this vision to life:
-</p>
-
-<div align="center">
-  <a href="https://github.com/Arunim-Gogoi">
-    <img src="../assets/Contributors/Arunim Github Photo.png" alt="Arunim Gogoi" style="border-radius: 50%; margin: 5px; width: 100px; height: 100px;">
-  </a>
-  <a href="https://github.com/Lucifer-here">
-    <img src="../assets/Contributors/Ansh Github Photo.png" alt="Ansh Gaur" style="border-radius: 50%; margin: 5px; width: 100px; height: 100px;">
-  </a>
-  <a href="https://github.com/">
-    <img src="../assets/Contributors/" alt="Avinash Kushwaha" style="border-radius: 50%; margin: 5px; width: 100px; height: 100px;">
-  </a>
-  <a href="https://github.com/Jyotibrat">
-    <img src="../assets/Contributors/Bindupautra Github Photo.png" alt="Bindupautra Jyotibrat" style="border-radius: 50%; margin: 5px; width: 100px; height: 100px;">
-  </a>
-</div>
-
----
 
 ## 📜 License
 
