@@ -62,7 +62,7 @@ function MidjourneyPage() {
 
           <div class="aspect-video w-full rounded-lg mb-8 overflow-hidden shadow-lg border border-white/10">
             <img
-              src="../../public/ArchitectureImg/Gemini matplotlib model architecture.jpg"
+              src="/ArchitectureImg/Gemini matplotlib model architecture.jpg"
               alt="Gemini with Matplotlib Architecture"
               class="w-full h-full object-contain"
             />

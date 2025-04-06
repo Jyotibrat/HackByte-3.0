@@ -84,7 +84,7 @@ function StableDiffusionPage() {
 
           <div class="aspect-video w-full rounded-lg mb-8 overflow-hidden shadow-lg border border-white/10">
             <img
-              src="../../public/ArchitectureImg/stable diffusion controlnet model architecture.jpg"
+              src="/ArchitectureImg/stable diffusion controlnet model architecture.jpg"
               alt="Stable Diffusion Model Architecture"
               class="w-full h-full object-contain"
             />

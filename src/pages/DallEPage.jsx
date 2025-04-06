@@ -85,7 +85,7 @@ function DallEPage() {
 
           <div class="aspect-video w-full rounded-lg mb-8 overflow-hidden shadow-lg border border-white/10">
             <img
-              src="../../public/ArchitectureImg/multi modal model architecture.jpg"
+              src="/ArchitectureImg/multi modal model architecture.jpg"
               alt="Multi Modal Generator Architecture"
               class="w-full h-full object-contain"
             />

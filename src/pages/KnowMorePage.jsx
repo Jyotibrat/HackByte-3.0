@@ -17,7 +17,7 @@ function KnowMorePage() {
       bestFor: "Realistic designs",
       path: "/models/stable-diffusion",
       image:
-        "../../public/logos/stable diffusion and controlnet model logo.jpeg",
+        "/logos/stable diffusion and controlnet model logo.jpeg",
     },
     {
       id: "dall-e",
@@ -31,7 +31,7 @@ function KnowMorePage() {
       ],
       bestFor: "Creative concepts",
       path: "/models/dall-e",
-      image: "../../public/logos/multi modal logo.jpeg",
+      image: "/logos/multi modal logo.jpeg",
     },
     {
       id: "midjourney",
@@ -46,7 +46,7 @@ function KnowMorePage() {
       bestFor: "Artistic visualizations",
       path: "/models/midjourney",
       image:
-        "../../public/logos/gemini matplotlib model logo.jpeg",
+        "/logos/gemini matplotlib model logo.jpeg",
     },
   ];
 
