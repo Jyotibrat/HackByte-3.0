@@ -6,28 +6,28 @@ const contributors = [
     github: "https://github.com/AvinashK47",
     linkedin: "https://linkedin.com/in/avinash",
     role: "Frontend & Backend Developer",
-    profileImage: "../../public/profilePhotos/avinash.jpg", // Local path to profile photo
+    profileImage: "/profilePhotos/avinash.jpg", // Local path to profile photo
   },
   {
     name: "Bindupautra Jyotibrat",
     github: "https://github.com/bjyotibrat",
     linkedin: "https://linkedin.com/in/johndoe",
     role: "Backend Developer",
-    profileImage: "../../public/profilePhotos/bindupautra.jpg", // Local path to profile photo
+    profileImage: "/profilePhotos/bindupautra.jpg", // Local path to profile photo
   },
   {
     name: "Arunim Gogoi",
     github: "https://github.com/janesmith",
     linkedin: "https://linkedin.com/in/janesmith",
     role: "UI/UX Designer",
-    profileImage: "../../public/profilePhotos/arunim.jpg", // Local path to profile photo
+    profileImage: "/profilePhotos/arunim.jpg", // Local path to profile photo
   },
   {
     name: "Ansh Gaur",
     github: "https://github.com/janesmith",
     linkedin: "https://linkedin.com/in/janesmith",
     role: "Backend Developer",
-    profileImage: "../../public/profilePhotos/ansh.jpg", // Local path to profile photo
+    profileImage: "/profilePhotos/ansh.jpg", // Local path to profile photo
   },
 ];
 
