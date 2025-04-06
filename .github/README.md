@@ -15,7 +15,6 @@
 - [📂 Project Structure](#-project-structure)
 - [🚀 Deployment Status](#-deployment-status)
 - [🚀 Installation & Setup](#-installation--setup)
-- [🎥 How to Run the Application](#-how-to-run-the-application)
 - [📜 License](#-license)
 - [🏆 Acknowledgment](#-acknowledgment)
 
