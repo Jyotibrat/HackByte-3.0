@@ -6,7 +6,7 @@ const contributors = [
     github: "https://github.com/AvinashK47",
     linkedin: "https://linkedin.com/in/avinash",
     role: "Frontend & Backend Developer",
-    profileImage: "/profilePhotos/avinash.jpg", // Local path to profile photo
+    profileImage: "/profilePhotos/avinash.jpeg", // Local path to profile photo
   },
   {
     name: "Bindupautra Jyotibrat",
