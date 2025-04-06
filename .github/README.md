@@ -86,7 +86,7 @@ Floor-Planning-AI/
 
 ### 🔹 Frontend Deployment
 
-👉 [**Live Frontend Preview**](https://floorplanningai.netlify.app/)
+👉 [**Live Frontend Preview**](https://hack-byte-3-0.vercel.app/)
 
 ⚠️ **Note**: Backend deployment is currently under development. Please follow the setup instructions below to run the full application locally.
 
