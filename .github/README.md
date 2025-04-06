@@ -63,21 +63,13 @@ Floor-Planning-AI/
 ├───vite.config.ts
 │
 ├───src/
-│   ├───App.tsx
-│   ├───main.tsx
+│   ├───App.jsx
 │   ├───components/
-│   └───assets/
+│   └───pages/
 │
 ├───backend/
-│   ├───app.py
-│   ├───generator.py
-│   ├───router.py
-│   ├───env/
-│   └───requirements.txt
-│
-└───assets/
-    ├───Videos/
-    └───Contributors/
+    ├───app.py
+    └───requirements.txt
 ```
 
 ---
@@ -131,20 +123,6 @@ npm run dev
 ```
 
 ---
-
-<h2 align="center">🎥 How to Run the Application</h2>
-
-<p align="center">
-📌 Watch the tutorial below to set up the complete application locally:
-</p>
-
-https://github.com/user-attachments/assets/floorplanning-ai-local-setup.mp4
-
-<h2 align="center">🎥 Demo Video</h2>
-
-<p align="center">
-📌 Watch the full live demonstration:
-</p>
 
 ## 📜 License
 
