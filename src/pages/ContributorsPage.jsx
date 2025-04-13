@@ -4,7 +4,7 @@ const contributors = [
   {
     name: "Avinash Kushwaha",
     github: "https://github.com/AvinashK47",
-    linkedin: "https://linkedin.com/in/avinash",
+    linkedin: "https://linkedin.com/in/avinashkushwaha47",
     role: "Frontend & Backend Developer",
     profileImage: "/profilePhotos/avinash.jpeg", // Local path to profile photo
   },
