@@ -35,19 +35,19 @@ MODEL_CONFIGS = {
     "multi_modal": {
         "name": "multi_modal",
         "urls": [
-            "https://f280-34-83-10-91.ngrok-free.app",
-            # "https://2127-34-16-255-178.ngrok-free.app/",
-            # "https://third-ngrok-url.ngrok-free.app/",
-            # "https://fourth-ngrok-url.ngrok-free.app/"
+            "https://2a16-34-125-2-19.ngrok-free.app/",
+            "https://2127-34-16-255-178.ngrok-free.app/",
+            "https://third-ngrok-url.ngrok-free.app/",
+            "https://fourth-ngrok-url.ngrok-free.app/"
         ]
     },
     "stable_diffusion": {
         "name": "stable_diffusion",
-        "urls": ["https://f040-35-240-133-195.ngrok-free.app/"]
+        "urls": ["https://2a16-34-125-2-19.ngrok-free.app/"]
     },
     "floor_gpt": {
         "name": "floor_gpt",
-        "urls": ["https://16bf-34-60-203-206.ngrok-free.app/"]
+        "urls": ["https://2a16-34-125-2-19.ngrok-free.app/"]
     }
 }
 

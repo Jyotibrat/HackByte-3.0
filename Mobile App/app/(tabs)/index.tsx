@@ -18,8 +18,8 @@ import * as MediaLibrary from 'expo-media-library';
 import * as Sharing from 'expo-sharing';
 import { Download } from 'lucide-react-native';
 
-// Remove spaces from URL - this was causing issues
-const API_URL = 'https://6875-139-167-143-182.ngrok-free.app';
+// Remove spaces from URL - this was causing issue
+const API_URL = 'PASTE_THE_URL_HERE';
 
 const MODELS = [
   { id: 'floor_gpt', name: 'Gemini Model' },
