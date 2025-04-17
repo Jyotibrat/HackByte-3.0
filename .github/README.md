@@ -13,27 +13,31 @@
 
 - [**🌟 Features**](#-features)
 - [**📸 Results**](#-results)
-- [**🏗️ Tech Stack**](https://github.com/Jyotibrat/Document-Summarizer?tab=readme-ov-file#%EF%B8%8F-tech-stack)
+- [**🏗️ Tech Stack**](#️-tech-stack)
   - [**💻 Web Application**](#-web-application)
     - [**🔹 Frontend**](#-frontend)
     - [**🔹 Backend**](#-backend)
   - [**📱 Mobile Application**](#-mobile-application)
     - [**🔹 Frontend**](#-frontend-1)
     - [**🔹 Backend**](#-backend-1)
+  - [**🧠 Models Integrated**](#-models-integrated)
+    - [**🔹 Fused Stable Diffusion and ControlNet Model**](#-fused-stable-diffusion-and-controlnet-model)
+    - [**🔹 Gemini with Matplotlib Model**](#-gemini-with-matplotlib-model)
+    - [**🔹 Multi Stable Diffusion Models**](#-multi-stable-diffusion-models)
 - [**📂 Project Structure**](#-project-structure)
-  - [🫚 Directory Tree](#-directory-tree)
-  - [🔗 Links to Directories](#-links-to-directories)
+  - [**🫚 Directory Tree**](#-directory-tree)
+  - [**🔗 Links to Directories**](#-links-to-directories)
 - [**🚀 Deployment Status**](#-deployment-status)
   - [**🔹 Frontend Deployment**](#-frontend-deployment)
 - [**🚀 Installation & Setup**](#-installation--setup)
   - [**Clone the repository**](#clone-the-repository)
   - [**💻 For Web Application**](#-for-web-application)
-    - [**🖥️ Frontend Setup**](#️-4️⃣-frontend-setup)
-    - [**🧠 Backend Setup**](#-3️⃣-backend-setup)
+    - [**🖥️ Frontend Setup**](#️-frontend-setup)
+    - [**🧠 Backend Setup**](#-backend-setup)
     - [**🚀 Run Application**](#-run-application)
   - [**📱 For Mobile Application**](#-for-mobile-application)
     - [**🖥️ Frontend Setup**](#️-frontend-setup-1)
-    - [**🧠 Backend Setup**](#-backend-1)
+    - [**🧠 Backend Setup**](#-backend-setup-1)
     - [**🚀 Run Application**](#-run-application-1)
 - [**🎥 How to Run the Web Application**](#-how-to-run-the-application)
 - [**🎥 Demo Video**](#-demo-video)
@@ -50,15 +54,15 @@
 
 All the generated outputs from our models have been organized and stored systematically for easy access and review.
 
-👉 To view the generated results from each model, head over to the [Results/]() directory under the mobile app folder.
+👉 To view the generated results from each model, head over to the [Results/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Results) directory under the mobile app folder.
 
 You'll find subfolders for each model:
 
-[**Stable Diffusion**]() – Outputs from the fused Stable Diffusion + ControlNet model
+[**Stable Diffusion**](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Results/Stable%20Diffusion) – Outputs from the fused Stable Diffusion + ControlNet model
 
-[**Multi-Modal**]() – Results from our multimodal model pipeline
+[**Multi-Modal**](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Results/Multi%20Modal) – Results from our multimodal model pipeline
 
-[**Gemini with matplotlib**]() – Outputs refined through the Gemini + Matplotlib model
+[**Gemini with matplotlib**](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Results/Gemini) – Outputs refined through the Gemini + Matplotlib model
 
 Each folder contains sample prompts and corresponding visual results, demonstrating how each model interprets and responds to user inputs.
 
@@ -326,41 +330,41 @@ HackByte-3.0/
 
 ## 🔗 Links to Directories
 
-- [src/]()
-  - [services/]()
-  - [pages/]()
-  - [components/]()
-  - [assets/]()
-- [Results/]()
-  - [Stable Diffusion/]()
-  - [Multi Modal/]()
-  - [Gemini/]()
-- [public/]()
-  - [profilePhotos/]()
-  - [logos/]()
-  - [ArchitectureImg/]()
-- [backend/]()
-- [Notebooks/]()
-  - [Multi-Modal/]()
-  - [Gemini with Matplotlib Model/]()
-  - [Fused Stable Diffusion with ControlNet Model/]()
-- [Mobile App/]()
-  - [hooks/]()
-  - [backend/]()
-  - [assets/]()
-    - [images/]()
-      - [Results/]()
-        - [Stable Diffusion/]()
-        - [Multi Modal/]()
-        - [Gemini/]()
-      - [Model Architectures/]()
-      - [Contributors/]()
-  - [app/]()
-    - [(tabs)/]()
-- [Assets/]()
-  - [Contributors/]()
-- [.github/]()
-  - [ISSUE_TEMPLATE/]()
+- [src/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/src)
+  - [services/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/src/services)
+  - [pages/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/src/pages)
+  - [components/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/src/components)
+  - [assets/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/src/assets)
+- [Results/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Results)
+  - [Stable Diffusion/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Results/Stable%20Diffusion)
+  - [Multi Modal/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Results/Multi%20Modal)
+  - [Gemini/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Results/Gemini)
+- [public/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/public)
+  - [profilePhotos/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/public/profilePhotos)
+  - [logos/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/public/logos)
+  - [ArchitectureImg/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/public/ArchitectureImg)
+- [backend/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/backend)
+- [Notebooks/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Notebooks)
+  - [Multi-Modal/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Notebooks/Multi-Modal)
+  - [Gemini with Matplotlib Model/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Notebooks/Gemini%20with%20Matplotlib%20Model)
+  - [Fused Stable Diffusion with ControlNet Model/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Notebooks/Fused%20Stable%20Diffusion%20with%20ControlNet%20Model)
+- [Mobile App/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Mobile%20App)
+  - [hooks/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Mobile%20App/hooks)
+  - [backend/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Mobile%20App/backend)
+  - [assets/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Mobile%20App/assets/)
+    - [images/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Mobile%20App/assets/images)
+      - [Results/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Mobile%20App/assets/images/Results)
+        - [Stable Diffusion/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Mobile%20App/assets/images/Results/Stable%20Diffusion)
+        - [Multi Modal/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Mobile%20App/assets/images/Results/Multi%20Modal)
+        - [Gemini/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Mobile%20App/assets/images/Results/Gemini)
+      - [Model Architectures/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Mobile%20App/assets/images/Model%20Architectures)
+      - [Contributors/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Mobile%20App/assets/images/Contributors)
+  - [app/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Mobile%20App/app)
+    - [(tabs)/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Mobile%20App/app/(tabs))
+- [Assets/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Assets)
+  - [Contributors/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/Assets/Contributors)
+- [.github/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/.github)
+  - [ISSUE_TEMPLATE/](https://github.com/Jyotibrat/HackByte-3.0/tree/main/.github/ISSUE_TEMPLATE)
 
 ---
 ---
