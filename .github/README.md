@@ -43,7 +43,7 @@
 - [**🎥 Demo Video**](#-demo-video)
 - [**🎥 How to Run the Mobile Application**](#-how-to-run-the-application)
 - [**🎥 Demo Video**](#-demo-video)
-- [**👥 Contributors**](https://github.com/Jyotibrat/Document-Summarizer?tab=readme-ov-file#---contributors)
+- [**👥 Contributors**](https://github.com/Jyotibrat/HackByte-3.0?tab=readme-ov-file#---contributors)
 - [**📜 License**](#-license)
 - [**🏆 Acknowledgment**](#-acknowledgment)
   
