@@ -43,7 +43,7 @@
 - [**🎥 Demo Video**](#-demo-video)
 - [**🎥 How to Run the Mobile Application**](#-how-to-run-the-application)
 - [**🎥 Demo Video**](#-demo-video)
-- [**👥 Contributors**](#-license)
+- [**👥 Contributors**](https://github.com/Jyotibrat/HackByte-3.0?tab=readme-ov-file#---contributors)
 - [**📜 License**](#-license)
 - [**🏆 Acknowledgment**](#-acknowledgment)
   
@@ -939,13 +939,13 @@ const API_URL = 'PASTE_THE_URL_HERE';
 ---
 ---
 
-## 📜 License
+# 📜 License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 ---
 ---
 
-## 🏆 Acknowledgment
+# 🏆 Acknowledgment
 
 This project is part of **HackByte 3.0** conducted by **IIITDM Jabalpur**.
