@@ -13,5 +13,5 @@
 *.ipynb linguist-documentation
 
 # Then specifically include notebooks from backend folder
-NoteBooks/*.ipynb -linguist-documentation
-NoteBooks/**/*.ipynb -linguist-documentation
+Notebooks/*.ipynb -linguist-documentation
+Notebooks/**/*.ipynb -linguist-documentation
