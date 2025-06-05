@@ -1,0 +1,17 @@
+* text=auto
+
+.github/ export-ignore
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+
+*.ipynb diff=jupyternotebook
+
+# Default: exclude all Jupyter notebooks
+*.ipynb linguist-documentation
+
+# Then specifically include notebooks from backend folder
+NoteBooks/*.ipynb -linguist-documentation
+NoteBooks/**/*.ipynb -linguist-documentation

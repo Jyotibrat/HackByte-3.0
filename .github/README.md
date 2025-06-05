@@ -166,16 +166,17 @@ HackByte-3.0/
 ├───README.md
 ├───LICENSE
 ├───.gitignore
+├───.gitattributes
 │
 ├───src/
 │   ├───main.jsx
 │   ├───index.css
 │   ├───App.jsx
 │   ├───App.css
-│   └───services/
+│   ├───services/
 │   │   └───chatApiService.js
 │   │   
-│   └───pages/
+│   ├───pages/
 │   │   ├───StableDiffusionPage.jsx
 │   │   ├───ResultsPage.jsx
 │   │   ├───MidjourneyPage.jsx
@@ -213,10 +214,6 @@ HackByte-3.0/
 │   │   └───Result 1 multi modal.png
 │   │
 │   └───Gemini/
-│       ├───
-│       ├───
-│       ├───
-│       ├───
 │       └───Result 1 gemini.png
 │
 ├───public/
@@ -236,8 +233,9 @@ HackByte-3.0/
 │       ├───multi modal model architecture.jpg
 │       └───Gemini matplotlib model architecture.jpg
 │
-├───backend/
+├───Backend/
 │   ├───app.py
+│   ├───Readme.md
 │   └───requirements.txt
 │
 ├───Notebooks/
@@ -324,7 +322,6 @@ HackByte-3.0/
 └───.github/
      ├───README.md
      └───ISSUE_TEMPLATE/
-         ├───feature_request.md
          └───bug_report.md
 ```
 
