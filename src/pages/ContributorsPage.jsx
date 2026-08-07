@@ -33,8 +33,8 @@ const contributors = [
 
 function ContributorsPage() {
   return (
-    <div className="flex min-h-screen bg-gradient-animated text-white overflow-y-auto">
-      <div className="container mx-auto px-4 py-8 sm:py-12">
+    <div className="flex h-screen bg-gradient-animated text-white overflow-y-auto">
+      <div className="container mx-auto px-4 py-8 sm:py-12 mb-20">
         <h1
           className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8 text-center"
           style={{ fontFamily: "Josefin Sans, sans-serif" }}
