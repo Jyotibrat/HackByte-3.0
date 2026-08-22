@@ -63,13 +63,13 @@ function ResultsPage() {
       : resultsData.filter((result) => result.model === filterModel);
 
   return (
-    <div class="flex h-screen bg-gradient-animated text-white overflow-y-auto">
-      <div class="container mx-auto px-4 py-12 mb-20">
+    <div class="bg-gradient-animated">
+      <div class="container mx-auto px-4 py-12 sm:py-16">
         <h1
           class="text-4xl font-bold mb-4 text-center"
           style={{ fontFamily: "Josefin Sans, sans-serif" }}
         >
-          Model Results Gallery
+          Gallery
         </h1>
         <p class="text-xl text-center mb-8 max-w-3xl mx-auto">
           Explore floor plans and designs created by our AI models based on user

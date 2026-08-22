@@ -51,13 +51,13 @@ function KnowMorePage() {
   ];
 
   return (
-    <div class="flex h-screen bg-gradient-animated text-white overflow-y-auto">
-      <div class="container mx-auto px-4 py-12 mb-20">
+    <div class="bg-gradient-animated">
+      <div class="container mx-auto px-4 py-12 sm:py-16">
         <h1
           class="text-4xl font-bold mb-6 text-center"
           style={{ fontFamily: "Josefin Sans, sans-serif" }}
         >
-          Know More About Our Models
+          AI Models
         </h1>
 
         <p class="text-center max-w-3xl mx-auto mb-12 text-white/80">

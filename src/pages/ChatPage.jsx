@@ -1,4 +1,3 @@
-// ChatPage.jsx (updated to potentially handle Axios errors slightly differently)
 import React, { useState, useRef, useEffect } from "react";
 import Navbar from "../components/NavBar";
 import ChatSidebar from "../components/ChatSidebar";
@@ -18,9 +17,9 @@ function ChatPage() {
     "Multi Modal Text to Image Generator"
   );
   const [availableModels] = useState([
-    "Multi Modal Text to Image Generator",
-    "Fused Stable Diffusion and ControlNet",
-    "Gemini with Matplotlib Floor Planner",
+    "Flanora-v1",
+    "Flanora-v2",
+    "Flanora-v3",
   ]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -144,12 +143,12 @@ function ChatPage() {
 
   return (
     <div class="flex h-screen bg-gradient-animated text-white">
-      <Navbar />
+      <Navbar variant="app" />
 
       {/* Sidebar Toggle Button (remains the same) */}
       <button
         onClick={toggleSidebar}
-        class={`fixed top-4 ${
+        class={`fixed top-[4.5rem] ${
           sidebarExpanded ? "left-[292px]" : "left-4"
         } z-20 p-2 rounded-full bg-gray-800/90 hover:bg-gray-700/90 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all hover:scale-110`}
         aria-label={sidebarExpanded ? "Hide sidebar" : "Show sidebar"}
@@ -194,14 +193,14 @@ function ChatPage() {
       />
 
       {/* Main Chat Area (remains the same) */}
-      <div class="flex-1 flex flex-col">
+      <div class="flex-1 flex flex-col pt-14">
         <div class="flex-1 overflow-hidden flex flex-col">
           <div class="text-center pt-8 pb-4">
             <h2
               class="text-2xl font-bold mb-2 text-white"
               style={{ fontFamily: "Josefin Sans, sans-serif" }}
             >
-              FloorPlan AI Assistant
+              Flanora AI Assistant
             </h2>
             <p
               class="text-white"

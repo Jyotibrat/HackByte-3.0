@@ -19,7 +19,7 @@ const ChatSidebar = ({
       <div class="p-6 border-b border-white/20">
         <div class="flex items-center mb-6">
           <Link to="/" class="flex items-center">
-            <h1 class="text-xl font-bold">FloorPlan AI</h1>
+            <h1 class="text-xl font-bold">Flanora AI</h1>
           </Link>
         </div>
         <button

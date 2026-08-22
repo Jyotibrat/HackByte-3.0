@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 function DallEPage() {
   return (
-    <div class="flex h-screen bg-gradient-animated text-white overflow-y-auto">
-      <div class="container mx-auto px-4 py-12 mb-20 max-w-4xl">
+    <div class="bg-gradient-animated">
+      <div class="container mx-auto px-4 py-12 sm:py-16 mb-8 max-w-4xl">
         <div class="flex items-center mb-8">
           <Link
             to="/models"

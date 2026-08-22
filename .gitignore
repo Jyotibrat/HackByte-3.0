@@ -1,3 +1,7 @@
 node_modules
 .venv
 .env
+
+AGENTS.md
+docs
+dist

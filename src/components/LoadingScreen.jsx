@@ -43,7 +43,7 @@ function LoadingScreen() {
           class="text-2xl font-bold text-white mb-2 text-center"
           style={{ fontFamily: "Josefin Sans, sans-serif" }}
         >
-          FloorPlan AI
+          Flanora AI
         </h2>
 
         {/* Loading text */}

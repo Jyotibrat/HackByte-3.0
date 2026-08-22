@@ -91,13 +91,13 @@ export const getModelApiKey = (modelName) => {
     let apiKey;
     
     switch (modelName) {
-        case "Multi Modal Text to Image Generator":
+        case "Flanora-v1":
             apiKey = "multi_modal";
             break;
-        case "Fused Stable Diffusion and ControlNet":
+        case "Flanora-v2":
             apiKey = "stable_diffusion";
             break;
-        case "Gemini with Matplotlib Floor Planner":
+        case "Flanora-v3":
             apiKey = "floor_gpt";
             break;
         default:
@@ -112,13 +112,13 @@ export const getModelDescription = (modelName) => {
     let description;
     
     switch (modelName) {
-        case "Multi Modal Text to Image Generator":
+        case "Flanora-v1":
             description = "Best for creative and detailed designs";
             break;
-        case "Fused Stable Diffusion and ControlNet":
+        case "Flanora-v2":
             description = "Great for precise architectural visualization";
             break;
-        case "Gemini with Matplotlib Floor Planner":
+        case "Flanora-v3":
             description = "Excellent for technical and code-compliant plans";
             break;
         default:

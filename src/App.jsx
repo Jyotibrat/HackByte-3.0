@@ -9,25 +9,38 @@ import ResultsPage from "./pages/ResultsPage";
 import StableDiffusionPage from "./pages/StableDiffusionPage";
 import DallEPage from "./pages/DallEPage";
 import MidjourneyPage from "./pages/MidjourneyPage";
-import Navbar from "./components/NavBar";
+import FeaturesPage from "./pages/FeaturesPage";
+import AboutPage from "./pages/AboutPage";
+import ResearchPage from "./pages/ResearchPage";
+import MarketingLayout from "./components/MarketingLayout";
 import LoadingScreen from "./components/LoadingScreen";
 import PageTransition from "./components/PageTransition";
 
-// Wrapper component that provides the page transition effect
 function AnimatedRoutes() {
   const location = useLocation();
 
   return (
     <PageTransition>
       <Routes location={location}>
-        <Route path="/" element={<HomePage />} />
+        <Route element={<MarketingLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/features" element={<FeaturesPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/models" element={<KnowMorePage />} />
+          <Route path="/models/stable-diffusion" element={<StableDiffusionPage />} />
+          <Route path="/models/dall-e" element={<DallEPage />} />
+          <Route path="/models/midjourney" element={<MidjourneyPage />} />
+          <Route path="/team" element={<ContributorsPage />} />
+          <Route path="/showcase" element={<ResultsPage />} />
+          <Route path="/showcase/flanora-v1" element={<ResultsPage />} />
+          <Route path="/showcase/flanora-v2" element={<ResultsPage />} />
+          <Route path="/showcase/flanora-v3" element={<ResultsPage />} />
+          <Route path="/research" element={<ResearchPage />} />
+          <Route path="/research/publications" element={<ResearchPage />} />
+          <Route path="/research/articles" element={<ResearchPage />} />
+          <Route path="/research/technical-reports" element={<ResearchPage />} />
+        </Route>
         <Route path="/chat" element={<ChatPage />} />
-        <Route path="/models" element={<KnowMorePage />} />
-        <Route path="/models/stable-diffusion" element={<StableDiffusionPage />}/>
-        <Route path="/models/dall-e" element={<DallEPage />} />
-        <Route path="/models/midjourney" element={<MidjourneyPage />} />
-        <Route path="/contributors" element={<ContributorsPage />} />
-        <Route path="/results" element={<ResultsPage />} />
       </Routes>
     </PageTransition>
   );
@@ -38,14 +51,12 @@ function App() {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    // Simulate loading time - replace with actual resource loading logic
     const timer = setTimeout(() => {
       setIsLoading(false);
-      // Add a slight delay before showing content with animation
       setTimeout(() => {
         setShowContent(true);
       }, 100);
-    }, 2000); // Show loading screen for 2 seconds
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -61,7 +72,6 @@ function App() {
       }`}
     >
       <BrowserRouter>
-        <Navbar />
         <AnimatedRoutes />
       </BrowserRouter>
     </div>

@@ -8,7 +8,7 @@ function Welcome() {
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const [showElements, setShowElements] = useState(false);
 
-  const fullText = "Welcome to FloorPlan AI";
+  const fullText = "Welcome to Flanora AI";
 
   useEffect(() => {
     if (displayedText.length < fullText.length) {

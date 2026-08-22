@@ -1,58 +1,28 @@
 import React from "react";
-
-const contributors = [
-  {
-    name: "Avinash Kushwaha",
-    github: "https://github.com/AvinashK47",
-    linkedin: "https://linkedin.com/in/avinashkushwaha47",
-    role: "Frontend & Backend Developer",
-    profileImage: "/profilePhotos/avinash.jpeg", // Local path to profile photo
-  },
-  {
-    name: "Bindupautra Jyotibrat",
-    github: "https://github.com/bjyotibrat",
-    linkedin: "https://linkedin.com/in/johndoe",
-    role: "Backend Developer",
-    profileImage: "/profilePhotos/bindupautra.jpg", // Local path to profile photo
-  },
-  {
-    name: "Arunim Gogoi",
-    github: "https://github.com/janesmith",
-    linkedin: "https://linkedin.com/in/janesmith",
-    role: "UI/UX Designer",
-    profileImage: "/profilePhotos/arunim.jpg", // Local path to profile photo
-  },
-  {
-    name: "Ansh Gaur",
-    github: "https://github.com/janesmith",
-    linkedin: "https://linkedin.com/in/janesmith",
-    role: "Backend Developer",
-    profileImage: "/profilePhotos/ansh.jpg", // Local path to profile photo
-  },
-];
+import contributors from "../data/contributors";
 
 function ContributorsPage() {
   return (
-    <div className="flex h-screen bg-gradient-animated text-white overflow-y-auto">
-      <div className="container mx-auto px-4 py-8 sm:py-12 mb-20">
+    <div className="bg-gradient-animated">
+      <div className="container mx-auto px-4 py-12 sm:py-16">
         <h1
           className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8 text-center"
           style={{ fontFamily: "Josefin Sans, sans-serif" }}
         >
-          Project Contributors
+          Our Team
         </h1>
 
-        {/* 2×2 Grid Layout */}
+        {/* Team grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-3xl mx-auto">
-          {contributors.map((contributor, index) => (
+          {contributors.map((contributor) => (
             <div
-              key={index}
+              key={contributor.id}
               className="bg-gray-900/50 backdrop-blur-md rounded-xl shadow-lg overflow-hidden border border-white/10 hover:border-cyan-500/30 transition-all hover:shadow-cyan-500/10 flex flex-col h-full"
             >
               {/* Profile Image - using local file path */}
               <div className="w-full aspect-square sm:aspect-[4/3] overflow-hidden">
                 <img
-                  src={contributor.profileImage}
+                  src={contributor.profileImage || "https://placehold.co/400x400/222/fff?text=Profile"}
                   alt={`${contributor.name}'s profile`}
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                   onError={(e) => {
