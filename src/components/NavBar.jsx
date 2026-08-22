@@ -58,7 +58,7 @@ function ModelMenu() {
         </section>
       ))}
       <section className="flanora-menu-column flanora-coming-soon">
-        <span className="flanora-menu-title">flanora-v3</span>
+        <span className="flanora-menu-title">Flanora-v3</span>
         <p className="flanora-eyebrow">Coming soon</p>
         <p>The next generation of Flanora AI.</p>
       </section>

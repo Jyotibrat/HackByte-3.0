@@ -12,6 +12,7 @@ import MidjourneyPage from "./pages/MidjourneyPage";
 import FeaturesPage from "./pages/FeaturesPage";
 import AboutPage from "./pages/AboutPage";
 import ResearchPage from "./pages/ResearchPage";
+import PoliciesPage from "./pages/PoliciesPage";
 import MarketingLayout from "./components/MarketingLayout";
 import LoadingScreen from "./components/LoadingScreen";
 import PageTransition from "./components/PageTransition";
@@ -39,6 +40,9 @@ function AnimatedRoutes() {
           <Route path="/research/publications" element={<ResearchPage />} />
           <Route path="/research/articles" element={<ResearchPage />} />
           <Route path="/research/technical-reports" element={<ResearchPage />} />
+          <Route path="/policies" element={<PoliciesPage />} />
+          <Route path="/policies/terms-of-use" element={<PoliciesPage />} />
+          <Route path="/policies/privacy-policy" element={<PoliciesPage />} />
         </Route>
         <Route path="/chat" element={<ChatPage />} />
       </Routes>
