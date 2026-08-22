@@ -18,6 +18,37 @@ const values = [
   },
 ];
 
+const faqs = [
+  {
+    question: "Who is Flanora AI for?",
+    answer: "Flanora is designed primarily for architects, architectural students, and residential-design professionals.",
+  },
+  {
+    question: "What can I create with Flanora?",
+    answer: "You can generate conceptual floor plans for residential houses and apartments.",
+  },
+  {
+    question: "How many images can Flanora generate?",
+    answer: "A generation request can produce up to four images, with Flanora-v2 generating exactly four.",
+  },
+  {
+    question: "Can I use a Flanora-generated floor plan for construction?",
+    answer: "No, Flanora results are conceptual and require professional evaluation before real-world use.",
+  },
+  {
+    question: "Is Flanora free?",
+    answer: "Yes, Flanora is currently planned as a completely free platform with no paid tier.",
+  },
+  {
+    question: "What happens to my generated images?",
+    answer: "Generated images are stored according to Flanora's data-handling and privacy policies.",
+  },
+  {
+    question: "Is there a Flanora API?",
+    answer: "Not yet, but an API is planned as a future capability.",
+  },
+];
+
 function AboutPage() {
   return (
     <div className="bg-gradient-animated">
@@ -172,6 +203,28 @@ function AboutPage() {
           >
             Open the app
           </Link>
+        </div>
+      </section>
+
+      <section className="flanora-faq container mx-auto px-4 pb-24" aria-labelledby="faq-heading">
+        <div className="flanora-faq-intro">
+          <p>FAQ</p>
+          <h2 id="faq-heading">Questions, answered.</h2>
+          <span>Everything you need to know before exploring Flanora.</span>
+        </div>
+        <div className="flanora-faq-list">
+          {faqs.map((faq, index) => (
+            <details className="flanora-faq-item" key={faq.question}>
+              <summary>
+                <span className="flanora-faq-number">{String(index + 1).padStart(2, "0")}</span>
+                <span>{faq.question}</span>
+                <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
+                  <path d="M4 10h12M10 4v12" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
+                </svg>
+              </summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))}
         </div>
       </section>
     </div>
