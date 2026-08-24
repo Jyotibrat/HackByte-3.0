@@ -13,6 +13,7 @@ import FeaturesPage from "./pages/FeaturesPage";
 import AboutPage from "./pages/AboutPage";
 import ResearchPage from "./pages/ResearchPage";
 import PoliciesPage from "./pages/PoliciesPage";
+import ContactPage from "./pages/ContactPage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import MarketingLayout from "./components/MarketingLayout";
@@ -45,6 +46,7 @@ function AnimatedRoutes() {
           <Route path="/policies" element={<PoliciesPage />} />
           <Route path="/policies/terms-of-use" element={<PoliciesPage />} />
           <Route path="/policies/privacy-policy" element={<PoliciesPage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/chat" element={<ChatPage />} />
