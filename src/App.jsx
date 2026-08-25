@@ -58,12 +58,23 @@ function AnimatedRoutes() {
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
+  // Once the entrance transition has visibly finished, we drop the
+  // scale/opacity utility classes entirely. Tailwind's scale-100 still
+  // resolves to `transform: scale(1)`, and ANY non-"none" transform on an
+  // ancestor changes how descendant `position: fixed` elements (and GSAP
+  // ScrollTrigger pins, which rely on fixed positioning under the hood)
+  // are positioned — they end up relative to this element instead of the
+  // viewport. Leaving scale-100 applied forever was silently breaking the
+  // fixed navbar and pinned scroll sections further down the app.
+  const [transitionDone, setTransitionDone] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
       setTimeout(() => {
         setShowContent(true);
+        // Matches the 700ms transition duration below, plus a small buffer.
+        setTimeout(() => setTransitionDone(true), 750);
       }, 100);
     }, 2000);
 
@@ -74,12 +85,14 @@ function App() {
     return <LoadingScreen />;
   }
 
-  return (
-    <div
-      className={`app-container transition-all duration-700 ease-out ${
+  const transitionClasses = transitionDone
+    ? ""
+    : `transition-all duration-700 ease-out ${
         showContent ? "opacity-100 scale-100" : "opacity-0 scale-95"
-      }`}
-    >
+      }`;
+
+  return (
+    <div className={`app-container ${transitionClasses}`}>
       <BrowserRouter>
         <AnimatedRoutes />
       </BrowserRouter>
