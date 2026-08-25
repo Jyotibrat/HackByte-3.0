@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const primaryLinks = [
   { label: "About", to: "/about" },
@@ -83,6 +83,7 @@ function Navbar({ variant = "marketing", scrollState }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const progressRef = useRef(null);
 
   useEffect(() => {
     if (typeof scrollState === "boolean") {
@@ -90,11 +91,22 @@ function Navbar({ variant = "marketing", scrollState }) {
       return undefined;
     }
 
-    const updateNavbar = () => setIsScrolled(window.scrollY > 28);
+    const updateNavbar = () => {
+      setIsScrolled(window.scrollY > 28);
+
+      const progress = progressRef.current;
+      if (progress) {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = max > 0 ? window.scrollY / max : 0;
+        progress.style.transform = `scaleX(${ratio})`;
+      }
+    };
+
     updateNavbar();
     window.addEventListener("scroll", updateNavbar, { passive: true });
     return () => window.removeEventListener("scroll", updateNavbar);
   }, [scrollState]);
+
   const closeWhenLeaving = (event) => {
     if (!event.currentTarget.contains(event.relatedTarget)) setOpenMenu(null);
   };
@@ -110,9 +122,11 @@ function Navbar({ variant = "marketing", scrollState }) {
 
   const menu = openMenu === "models" ? <ModelMenu /> : <ResearchMenu />;
   return (
-    <header className={`flanora-navbar ${isScrolled ? "is-scrolled" : ""}`}>
+    <>
+      <div ref={progressRef} className="scroll-progress" aria-hidden="true" />
+      <header className={`flanora-navbar ${isScrolled ? "is-scrolled" : ""}`}>
       <div className="flanora-navbar-inner">
-        <Link to="/" className="flanora-wordmark" onClick={() => setMobileOpen(false)}><b>Flanora</b><i>/</i><b>AI</b></Link>
+        <Link to="/" className="flanora-wordmark" onClick={() => setMobileOpen(false)}><b>Flanora</b> <b>AI</b></Link>
         <nav className="flanora-desktop-nav" aria-label="Primary navigation">
           {primaryLinks.slice(0, 2).map((link) => <Link className={pathname === link.to ? "is-active" : ""} key={link.to} to={link.to}>{link.label}</Link>)}
           {[["models", "Models", "models-menu"], ["research", "Research", "research-menu"]].map(([key, label, menuId]) => (
@@ -135,7 +149,8 @@ function Navbar({ variant = "marketing", scrollState }) {
           <Link className="flanora-cta" to="/chat" onClick={() => setMobileOpen(false)}>Try Flanora</Link>
         </nav>
       )}
-    </header>
+      </header>
+    </>
   );
 }
 
