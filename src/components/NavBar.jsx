@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const primaryLinks = [
   { label: "About", to: "/about" },
@@ -78,10 +78,23 @@ function ResearchMenu() {
   );
 }
 
-function Navbar({ variant = "marketing" }) {
+function Navbar({ variant = "marketing", scrollState }) {
   const { pathname } = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    if (typeof scrollState === "boolean") {
+      setIsScrolled(scrollState);
+      return undefined;
+    }
+
+    const updateNavbar = () => setIsScrolled(window.scrollY > 28);
+    updateNavbar();
+    window.addEventListener("scroll", updateNavbar, { passive: true });
+    return () => window.removeEventListener("scroll", updateNavbar);
+  }, [scrollState]);
   const closeWhenLeaving = (event) => {
     if (!event.currentTarget.contains(event.relatedTarget)) setOpenMenu(null);
   };
@@ -97,9 +110,9 @@ function Navbar({ variant = "marketing" }) {
 
   const menu = openMenu === "models" ? <ModelMenu /> : <ResearchMenu />;
   return (
-    <header className="flanora-navbar">
+    <header className={`flanora-navbar ${isScrolled ? "is-scrolled" : ""}`}>
       <div className="flanora-navbar-inner">
-        <Link to="/" className="flanora-wordmark" onClick={() => setMobileOpen(false)}>Flanora</Link>
+        <Link to="/" className="flanora-wordmark" onClick={() => setMobileOpen(false)}><b>Flanora</b><i>/</i><b>AI</b></Link>
         <nav className="flanora-desktop-nav" aria-label="Primary navigation">
           {primaryLinks.slice(0, 2).map((link) => <Link className={pathname === link.to ? "is-active" : ""} key={link.to} to={link.to}>{link.label}</Link>)}
           {[["models", "Models", "models-menu"], ["research", "Research", "research-menu"]].map(([key, label, menuId]) => (
@@ -110,7 +123,7 @@ function Navbar({ variant = "marketing" }) {
           ))}
           <Link className={pathname.startsWith("/showcase") ? "is-active" : ""} to="/showcase">Showcase</Link>
         </nav>
-        <div className="flanora-navbar-actions"><Link className="flanora-login-link" to="/login">Log in</Link><Link className="flanora-cta" to="/chat">Try Flanora</Link></div>
+        <div className="flanora-navbar-actions"><Link className="flanora-login-link" to="/login">Log in</Link><Link className="flanora-cta" to="/chat">Try Flanora ↗</Link></div>
         <button type="button" className="flanora-mobile-toggle" aria-expanded={mobileOpen} aria-controls="mobile-navigation" aria-label={mobileOpen ? "Close navigation" : "Open navigation"} onClick={() => setMobileOpen(!mobileOpen)}><span /><span /></button>
       </div>
       {mobileOpen && (

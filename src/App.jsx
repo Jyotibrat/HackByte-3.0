@@ -27,7 +27,6 @@ function AnimatedRoutes() {
     <PageTransition>
       <Routes location={location}>
         <Route element={<MarketingLayout />}>
-          <Route path="/" element={<HomePage />} />
           <Route path="/features" element={<FeaturesPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/models" element={<KnowMorePage />} />
@@ -47,6 +46,7 @@ function AnimatedRoutes() {
           <Route path="/policies/:policy" element={<PoliciesPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Route>
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="*" element={<NotFoundPage />} />
