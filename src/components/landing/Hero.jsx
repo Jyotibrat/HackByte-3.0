@@ -1,14 +1,18 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useAuraVideo from "./useAuraVideo";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function Hero() {
   const mediaRef = useRef(null);
+  const videoRef = useRef(null);
   const wordRef = useRef(null);
   const topcopyRef = useRef(null);
   const linkRef = useRef(null);
+
+  useAuraVideo(videoRef, "play-once");
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -58,12 +62,11 @@ function Hero() {
     <section className="hero section">
       <div className="hero-media" ref={mediaRef}>
         <video
+          ref={videoRef}
           src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/generated-videos/8bd0314a-9525-4a13-996e-2c37cbd9e514/1784436357607-9c22882e-f726-4971-b85d-f7b5276000ff.mp4"
           poster="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/d1d195f0-17d7-4654-a1fc-c9e3192705c4_1600w.webp"
           muted
           playsInline
-          autoPlay
-          loop
           preload="metadata"
           aria-label="Editorial portrait"
         />
