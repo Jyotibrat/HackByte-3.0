@@ -57,7 +57,12 @@ function Engagement() {
         yPercent: 100,
         opacity: 0,
         duration: 1,
-        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          once: true,
+          invalidateOnRefresh: true,
+        },
       });
 
       gsap.from(cardRefs.current, {
@@ -66,11 +71,14 @@ function Engagement() {
         stagger: 0.12,
         duration: 1,
         ease: "power3.out",
-        scrollTrigger: { trigger: plansRef.current, start: "top 78%" },
+        scrollTrigger: {
+          trigger: plansRef.current,
+          start: "top 78%",
+          once: true,
+          invalidateOnRefresh: true,
+        },
       });
 
-      // Each card starts slightly rotated (outer two tilted, middle
-      // straight) and straightens out as the section scrolls through.
       cardRefs.current.forEach((card, i) => {
         gsap.fromTo(
           card,
@@ -83,13 +91,21 @@ function Engagement() {
               start: "top bottom",
               end: "center center",
               scrub: 1,
+              invalidateOnRefresh: true,
             },
           }
         );
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    // Re-refresh after a beat to handle any remaining layout shift
+    // from media loading above this section (see useLenis.js comment).
+    const t = setTimeout(() => ScrollTrigger.refresh(), 800);
+
+    return () => {
+      ctx.revert();
+      clearTimeout(t);
+    };
   }, []);
 
   return (
