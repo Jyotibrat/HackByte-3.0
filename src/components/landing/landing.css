@@ -13,7 +13,7 @@
   background: var(--paper);
   color: var(--ink);
   font-family: Inter, Arial, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
 }
 
@@ -382,6 +382,94 @@
 .nf-landing .cap-row:hover .image { opacity: 1; transform: rotate(-4deg) scale(1); }
 .nf-landing .cap-row:hover h3 { transform: translateX(24px); color: var(--acid); }
 
+/* Engagement */
+.nf-landing .engagement { padding: 170px 0; background: #e8e6df; }
+.nf-landing .section-title { font-size: clamp(58px, 9vw, 150px); max-width: 1100px; margin: 15px 0 100px; }
+.nf-landing .plans { display: flex; gap: 14px; align-items: stretch; }
+.nf-landing .plan {
+  position: relative;
+  flex: 1;
+  min-height: 600px;
+  border: 1px solid var(--line);
+  padding: 32px;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: flex .55s cubic-bezier(.2, .8, .2, 1), transform .4s;
+}
+.nf-landing .plan:hover { flex: 1.35; transform: translateY(-12px); }
+.nf-landing .plan:before {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  right: -55px;
+  top: -55px;
+  opacity: .18;
+}
+.nf-landing .plan:nth-child(2) { transform: translateY(38px); }
+.nf-landing .plan:nth-child(2):hover { transform: translateY(25px); }
+.nf-landing .plan.dark-card { background: #111; color: #fff; }
+.nf-landing .plan small { text-transform: uppercase; letter-spacing: .12em; }
+.nf-landing .plan h3 { font-size: clamp(40px, 4.5vw, 72px); line-height: 1; letter-spacing: -.05em; margin: 28px 0; }
+.nf-landing .price {
+  font-family: "Space Grotesk";
+  font-size: 18px;
+  margin-bottom: 34px;
+  border: 1px solid currentColor;
+  width: max-content;
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+.nf-landing .plan ul { list-style: none; padding: 0; margin: 0; line-height: 2; font-size: 14px; }
+.nf-landing .plan a {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid currentColor;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+/* Testimonial */
+.nf-landing .quote-grid { align-items: start; position: relative; }
+.nf-landing .quote-photo { grid-column: 1 / 4; height: 300px; width: 300px; border-radius: 50%; aspect-ratio: 1; overflow: hidden; }
+.nf-landing .quote { grid-column: 4 / 13; font-size: clamp(50px, 7vw, 116px); line-height: .92; margin: 0; position: relative; }
+.nf-landing .quote:before {
+  content: "\201C";
+  position: absolute;
+  font-size: 32vw;
+  line-height: .7;
+  left: 22%;
+  top: -18%;
+  opacity: .045;
+}
+.nf-landing .quote-author {
+  grid-column: 4 / 8;
+  margin-top: 48px;
+  font-size: 13px;
+  line-height: 1.7;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+.nf-landing .quote-metrics {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-top: 140px;
+}
+.nf-landing .metric { min-height: 270px; display: flex; flex-direction: column; justify-content: space-between; padding: 35px; border-right: 1px solid var(--line); }
+.nf-landing .metric:last-child { border-right: none; }
+.nf-landing .metric strong { display: block; font-size: clamp(64px, 8vw, 125px); font-family: "Space Grotesk"; letter-spacing: -.06em; }
+.nf-landing .metric span { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; }
+
 @media (max-width: 900px) {
   .nf-landing .nav { display: none; }
   .nf-landing .site-header { left: 12px; right: 12px; }
@@ -396,13 +484,17 @@
   .nf-landing .cap-row { grid-template-columns: 50px 1fr; }
   .nf-landing .cap-row p { grid-column: 2; justify-self: start; }
   .nf-landing .cap-row .image { display: none; }
+  .nf-landing .plans { flex-direction: column; }
+  .nf-landing .plan:nth-child(2) { transform: none; }
+  .nf-landing .plan:hover { transform: none; }
+  .nf-landing .quote-photo { width: 190px; height: 190px; }
 }
 @media (max-width: 640px) {
   .nf-landing { --pad: 16px; }
   .nf-landing .site-header { top: 9px; height: 54px; }
   .nf-landing .logo { font-size: 14px; }
   .nf-landing .header-cta { font-size: 8px; }
-  .nf-landing .hero-topcopy { top: 16vh; max-width: 270px; }
+  .nf-landing .hero-topcopy { top: 16vh; right: var(--pad); max-width: 270px; }
   .nf-landing .hero-word { font-size: 22vw; }
   .nf-landing .hero-markers { display: none; }
   .nf-landing .intro { padding: 110px 0; }
@@ -445,6 +537,14 @@
   .nf-landing .projects-head { position: relative; top: auto; color: #111; mix-blend-mode: normal; }
   .nf-landing .cap-statement span { padding-left: 0 !important; }
   .nf-landing .cap-row { min-height: 260px; }
+  .nf-landing .plan { min-height: 480px; }
+  .nf-landing .quote-photo,
+  .nf-landing .quote,
+  .nf-landing .quote-author { grid-column: auto; }
+  .nf-landing .quote { margin-top: 35px; }
+  .nf-landing .quote-photo { width: 130px; height: 130px; }
+  .nf-landing .quote-metrics { grid-template-columns: 1fr; }
+  .nf-landing .metric { border-right: 0; border-bottom: 1px solid var(--line); min-height: 200px; padding: 22px; }
   .nf-landing .cursor-label { display: none !important; }
 }
 @media (hover: none), (pointer: coarse) {

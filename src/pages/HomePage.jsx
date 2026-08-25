@@ -4,6 +4,8 @@ import Intro from "../components/landing/Intro";
 import Ticker from "../components/landing/Ticker";
 import Projects from "../components/landing/Projects";
 import Capabilities from "../components/landing/Capabilities";
+import Engagement from "../components/landing/Engagement";
+import Testimonial from "../components/landing/Testimonial";
 import CustomCursor from "../components/landing/CustomCursor";
 import Footer from "../components/Footer";
 import useLenis from "../components/landing/useLenis";
@@ -21,8 +23,10 @@ function HomePage() {
         <Ticker />
         <Projects />
         <Capabilities />
-        {/* Next sections (Engagement, Testimonial, ...) get added here,
-            one at a time. */}
+        <Engagement />
+        <Testimonial />
+        {/* Next sections (Archive, Cinematic, Big Stats, Journal) get
+            added here, one at a time. */}
       </main>
       <Footer />
       <CustomCursor />

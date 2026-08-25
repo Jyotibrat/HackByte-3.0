@@ -48,7 +48,11 @@
 .app-container {
   min-height: 100vh;
   transform-origin: center;
-  overflow-x: hidden; /* Prevent horizontal scrolling during transitions */
+  overflow-x: clip; /* was overflow-x: hidden — hidden creates a scroll
+    container that silently breaks position:sticky for every descendant
+    (this landing page's "Selected Work" heading, and the FAQ page's
+    sticky intro). clip gives the same horizontal-clipping behavior
+    without that side effect. */
   background: radial-gradient(circle at center, #0e9a9f 0%, #ffffff 100%);
   background-size: 200% 200%;
   animation: radialGradientAnimation 7s ease infinite alternate;
