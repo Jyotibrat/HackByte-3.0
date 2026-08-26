@@ -58,6 +58,11 @@ function LoginPage() {
             <button className="flanora-auth-submit" type="submit">Log in</button>
           </form>
 
+          <p className="flanora-auth-signup-nudge">
+            ✦ New here?{" "}
+            <Link to="/signup">Build your Flanora account →</Link>
+          </p>
+
           <p className="flanora-auth-legal">By continuing, you agree to the <Link to="/policies/terms-of-use">Terms of Use</Link> and <Link to="/policies/privacy-policy">Privacy Policy</Link>.</p>
         </div>
       </section>
