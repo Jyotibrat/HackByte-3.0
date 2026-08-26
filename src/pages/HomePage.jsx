@@ -10,13 +10,14 @@ import CustomCursor from "../components/landing/CustomCursor";
 import Footer from "../components/Footer";
 import useLenis from "../components/landing/useLenis";
 import "../components/landing/landing.css";
+import NavBar from "../components/NavBar";
 
 function HomePage() {
   useLenis();
 
   return (
     <div className="nf-landing" id="top">
-      <Header />
+      <NavBar />
       <main>
         <Hero />
         <Intro />
