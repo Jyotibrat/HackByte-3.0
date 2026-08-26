@@ -21,7 +21,7 @@ function ContactPage() {
         </form>
       </div>
       <aside className="flanora-contact-aside">
-        <div><span>Contact</span><a href="mailto:bjyotibrat@gmail.com">bjyotibrat@gmail.com</a></div>
+        <div><span>Contact</span><a href="mailto:contact@flanora-ai.becore.space">contact@flanora-ai.becore.space</a></div>
         <div className="flanora-contact-socials"><span>Follow us</span><a href="https://www.youtube.com/@bindupautrajyotibrat" target="_blank" rel="noreferrer" aria-label="Flanora AI on YouTube">▶</a><a href="https://x.com/B_Jyotibrat" target="_blank" rel="noreferrer" aria-label="Flanora AI on X">𝕏</a><span className="flanora-contact-instagram" aria-label="Instagram">◎</span></div>
       </aside>
     </section>
