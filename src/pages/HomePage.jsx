@@ -8,6 +8,8 @@ import Engagement from "../components/landing/Engagement";
 import Testimonial from "../components/landing/Testimonial";
 import Archive from "../components/landing/Archive";
 import Cinematic from "../components/landing/Cinematic";
+import BigStats from "../components/landing/BigStats";
+import Journal from "../components/landing/Journal";
 import CustomCursor from "../components/landing/CustomCursor";
 import ArchivePreview from "../components/landing/ArchivePreview";
 import Footer from "../components/Footer";
@@ -30,8 +32,8 @@ function HomePage() {
         <Testimonial />
         <Archive />
         <Cinematic />
-        {/* Next sections (Big Stats, Journal) get added here, one at a
-            time. */}
+        <BigStats />
+        <Journal />
       </main>
       <Footer />
       <CustomCursor />
