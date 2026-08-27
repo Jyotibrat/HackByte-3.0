@@ -1,0 +1,1502 @@
+﻿// ============================================================
+// App.scss — page & component styles for non-landing pages
+// ============================================================
+// Uses design tokens from _theme.scss.
+// Visual output is identical to the original App.css; only
+// hard-coded color literals have been replaced with variables.
+// ============================================================
+@use './styles/theme' as *;
+
+// =============================================================================
+// Navbar & Mega Menu
+// =============================================================================
+
+.flanora-navbar,
+.flanora-app-navbar {
+  background: rgba($bg-deeper, 0.9);
+  border-bottom: 1px solid rgba($white, 0.1);
+  color: $fg-primary;
+  font-family: "Martel Sans", sans-serif;
+}
+
+.flanora-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(16px);
+}
+
+.flanora-navbar-inner,
+.flanora-app-navbar {
+  align-items: center;
+  display: flex;
+  height: 72px;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 0 32px;
+}
+
+.flanora-wordmark,
+.flanora-app-wordmark {
+  color: $fg-primary;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+}
+
+.flanora-desktop-nav,
+.flanora-navbar-actions,
+.flanora-app-navbar nav {
+  align-items: center;
+  display: flex;
+  gap: 28px;
+}
+
+.flanora-desktop-nav > a,
+.flanora-login-link,
+.flanora-app-navbar nav a,
+.flanora-nav-menu button {
+  background: transparent;
+  border: 0;
+  color: rgba($fg-primary, 0.72);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.875rem;
+  padding: 8px 0;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.flanora-desktop-nav > a:hover,
+.flanora-desktop-nav > a:focus-visible,
+.flanora-login-link:hover,
+.flanora-login-link:focus-visible,
+.flanora-app-navbar nav a:hover,
+.flanora-app-navbar nav a:focus-visible,
+.flanora-nav-menu button:hover,
+.flanora-nav-menu button:focus-visible,
+.flanora-desktop-nav .is-active {
+  color: $fg-primary;
+}
+
+.flanora-nav-menu { position: relative; }
+
+.flanora-nav-menu button,
+.flanora-mobile-nav summary {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+}
+
+.flanora-nav-menu button svg,
+.flanora-mobile-nav summary svg {
+  height: 16px;
+  transition: transform 180ms ease;
+  width: 16px;
+}
+
+.flanora-nav-menu:focus-within > button svg,
+.flanora-nav-menu:hover > button svg,
+.flanora-mobile-nav details[open] summary svg {
+  transform: rotate(180deg);
+}
+
+.flanora-cta {
+  background: $fg-primary;
+  border-radius: 999px;
+  color: $bg-primary;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 11px 19px;
+  text-decoration: none;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.flanora-cta:hover,
+.flanora-cta:focus-visible {
+  background: $fg-bright;
+  transform: translateY(-1px);
+}
+
+.flanora-mega-menu {
+  background: rgba($bg-nav-dark, 0.92);
+  backdrop-filter: blur(18px) saturate(125%);
+  -webkit-backdrop-filter: blur(18px) saturate(125%);
+  border: 1px solid rgba($white, 0.13);
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba($black, 0.35);
+  display: grid;
+  gap: 28px;
+  left: -36px;
+  padding: 28px;
+  position: absolute;
+  top: 100%;
+  width: min(760px, calc(100vw - 48px));
+}
+
+.flanora-model-menu { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.flanora-research-menu {
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  width: 460px;
+}
+
+.flanora-menu-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flanora-menu-column p {
+  color: rgba($fg-primary, 0.5);
+  font-size: 0.75rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.flanora-menu-title {
+  color: $fg-primary;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.flanora-menu-title:hover,
+.flanora-menu-title:focus-visible { color: $accent-lime; }
+
+.flanora-menu-links { display: grid; gap: 8px; margin-top: 4px; }
+
+.flanora-menu-links a,
+.flanora-menu-column > a:not(.flanora-menu-title) {
+  color: rgba($fg-primary, 0.72);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.flanora-menu-links a:hover,
+.flanora-menu-links a:focus-visible,
+.flanora-menu-column > a:not(.flanora-menu-title):hover,
+.flanora-menu-column > a:not(.flanora-menu-title):focus-visible { color: $accent-lime; }
+
+.flanora-eyebrow {
+  color: rgba($fg-primary, 0.48) !important;
+  font-size: 0.68rem !important;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.flanora-coming-soon {
+  border-left: 1px solid rgba($white, 0.1);
+  padding-left: 28px;
+}
+
+.flanora-mobile-toggle,
+.flanora-mobile-nav { display: none; }
+
+.flanora-navbar a:focus-visible,
+.flanora-navbar button:focus-visible,
+.flanora-app-navbar a:focus-visible {
+  outline: 2px solid $accent-lime;
+  outline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .flanora-desktop-nav,
+  .flanora-navbar-actions { display: none; }
+
+  .flanora-mobile-toggle {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    display: grid;
+    gap: 5px;
+    padding: 12px 0 12px 12px;
+  }
+
+  .flanora-mobile-toggle span {
+    background: $fg-primary;
+    display: block;
+    height: 1px;
+    width: 22px;
+  }
+
+  .flanora-mobile-nav {
+    background: $bg-primary;
+    border-top: 1px solid rgba($white, 0.1);
+    display: grid;
+    padding: 16px 32px 24px;
+  }
+
+  .flanora-mobile-nav > a,
+  .flanora-mobile-nav summary {
+    color: rgba($fg-primary, 0.84);
+    cursor: pointer;
+    font-size: 0.95rem;
+    padding: 14px 0;
+    text-decoration: none;
+  }
+
+  .flanora-mobile-nav summary {
+    justify-content: space-between;
+    list-style: none;
+  }
+
+  .flanora-mobile-nav summary::-webkit-details-marker { display: none; }
+
+  .flanora-mobile-nav .flanora-mega-menu {
+    box-shadow: none;
+    display: grid;
+    left: auto;
+    margin: 0 0 12px;
+    position: static;
+    width: auto;
+  }
+
+  .flanora-mobile-nav .flanora-model-menu,
+  .flanora-mobile-nav .flanora-research-menu { grid-template-columns: 1fr; }
+
+  .flanora-coming-soon {
+    border-left: 0;
+    border-top: 1px solid rgba($white, 0.1);
+    padding-left: 0;
+    padding-top: 20px;
+  }
+
+  .flanora-mobile-nav .flanora-cta { margin-top: 12px; text-align: center; }
+
+  .flanora-model-menu .flanora-menu-column:not(.flanora-coming-soon) {
+    border-right: 0;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .flanora-navbar-inner,
+  .flanora-app-navbar { height: 64px; padding: 0 20px; }
+  .flanora-mobile-nav { padding-left: 20px; padding-right: 20px; }
+  .flanora-app-navbar nav { gap: 18px; }
+}
+
+.flanora-menu-section + .flanora-menu-section { margin-top: 6px; }
+
+.flanora-external-icon {
+  display: inline-block;
+  height: 12px;
+  margin-left: 5px;
+  vertical-align: -1px;
+  width: 12px;
+}
+
+.flanora-research-placeholder {
+  color: $fg-primary;
+  font-family: "Martel Sans", sans-serif;
+  margin: 0 auto;
+  max-width: 1200px;
+  min-height: 60vh;
+  padding: 96px 32px;
+}
+
+.flanora-research-placeholder p {
+  color: $accent-teal;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+}
+
+.flanora-research-placeholder h1 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: clamp(2.75rem, 7vw, 4rem);
+  margin: 0 0 16px;
+}
+
+.flanora-research-placeholder span { color: rgba($fg-primary, 0.72); }
+
+.flanora-research-menu {
+  grid-template-columns: minmax(0, 1fr);
+  width: 280px;
+}
+
+.flanora-model-menu .flanora-menu-column:not(.flanora-coming-soon) {
+  border-right: 1px solid rgba($white, 0.1);
+  padding-right: 16px;
+}
+
+.flanora-model-menu { gap: 16px; }
+
+.flanora-model-menu .flanora-coming-soon {
+  border-left: 0;
+  padding-left: 0;
+}
+
+// =============================================================================
+// Footer
+// =============================================================================
+
+.flanora-footer {
+  background: $bg-deeper;
+  border-top: 1px solid rgba($white, 0.1);
+  color: $fg-primary;
+  font-family: "Martel Sans", sans-serif;
+  overflow: hidden;
+  padding: 128px 0 48px;
+  position: relative;
+}
+
+.flanora-footer-glow {
+  background: rgba($accent-cyan, 0.13);
+  border-radius: 50%;
+  bottom: -240px;
+  filter: blur(120px);
+  height: 400px;
+  left: 50%;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-50%);
+  width: min(80%, 1100px);
+}
+
+.flanora-footer-content {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 0 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.flanora-footer-intro {
+  align-items: start;
+  display: grid;
+  gap: 80px;
+  grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.6fr);
+  margin-bottom: 104px;
+}
+
+.flanora-footer h2,
+.flanora-footer h3,
+.flanora-footer p { margin: 0; }
+
+.flanora-footer-intro h2 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  max-width: 700px;
+}
+
+.flanora-footer-intro > div > p {
+  color: rgba($fg-primary, 0.65);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-top: 24px;
+  max-width: 580px;
+}
+
+.flanora-footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.flanora-footer-actions a {
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 12px 20px;
+  text-decoration: none;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.flanora-footer-primary-action { background: $fg-primary; color: $bg-primary; }
+
+.flanora-footer-primary-action:hover,
+.flanora-footer-primary-action:focus-visible { background: $fg-bright; transform: translateY(-1px); }
+
+.flanora-footer-secondary-action {
+  background: rgba($white, 0.05);
+  border: 1px solid rgba($white, 0.12);
+  color: $fg-primary;
+}
+
+.flanora-footer-secondary-action:hover,
+.flanora-footer-secondary-action:focus-visible { background: rgba($white, 0.1); }
+
+.flanora-footer-brand {
+  align-items: end;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  text-align: right;
+}
+
+.flanora-footer-brand > a {
+  color: $fg-primary;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 650;
+  letter-spacing: -0.06em;
+  text-decoration: none;
+}
+
+.flanora-footer-brand div { max-width: 280px; }
+
+.flanora-footer-brand h3,
+.flanora-footer-links h3 { font-size: 0.875rem; font-weight: 700; }
+
+.flanora-footer-brand p {
+  color: rgba($fg-primary, 0.55);
+  font-size: 0.84rem;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.flanora-footer-links {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-bottom: 96px;
+}
+
+.flanora-footer-links h3 { margin-bottom: 20px; }
+
+.flanora-footer-links ul {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.flanora-footer-links a {
+  color: rgba($fg-primary, 0.58);
+  font-size: 0.84rem;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.flanora-footer-links a:hover,
+.flanora-footer-links a:focus-visible { color: $fg-primary; }
+
+.flanora-footer-bottom {
+  align-items: center;
+  color: rgba($fg-primary, 0.42);
+  display: flex;
+  font-size: 0.75rem;
+  justify-content: space-between;
+}
+
+.flanora-footer-wordmark {
+  bottom: -0.14em;
+  color: rgba($white, 0.04);
+  font-family: "Josefin Sans", sans-serif;
+  font-size: clamp(8rem, 17vw, 17rem);
+  font-weight: 700;
+  left: 0;
+  letter-spacing: -0.09em;
+  line-height: 0.8;
+  pointer-events: none;
+  position: absolute;
+  text-align: center;
+  user-select: none;
+  width: 100%;
+}
+
+.flanora-footer a:focus-visible { outline: 2px solid $accent-cyan; outline-offset: 4px; }
+
+@media (max-width: 900px) {
+  .flanora-footer { padding-top: 88px; }
+  .flanora-footer-intro { gap: 56px; grid-template-columns: 1fr; }
+  .flanora-footer-brand { align-items: start; flex-direction: row; justify-content: space-between; text-align: left; }
+  .flanora-footer-links { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .flanora-footer { padding: 72px 0 36px; }
+  .flanora-footer-content { padding: 0 20px; }
+  .flanora-footer-intro { gap: 40px; margin-bottom: 72px; }
+  .flanora-footer-brand { align-items: start; flex-direction: column; gap: 24px; }
+  .flanora-footer-links { gap: 40px 24px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 72px; }
+  .flanora-footer-bottom { align-items: start; flex-direction: column; gap: 10px; }
+}
+
+// =============================================================================
+// FAQ
+// =============================================================================
+
+.flanora-faq {
+  color: $fg-primary;
+  display: grid;
+  font-family: "Martel Sans", sans-serif;
+  gap: 64px;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+}
+
+.flanora-faq-intro { align-self: start; position: sticky; top: 112px; }
+
+.flanora-faq-intro p {
+  color: $accent-cyan;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+}
+
+.flanora-faq-intro h2 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  margin: 0 0 18px;
+}
+
+.flanora-faq-intro span {
+  color: rgba($fg-primary, 0.65);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.flanora-faq-list { border-top: 1px solid rgba($white, 0.16); }
+
+.flanora-faq-item {
+  border-bottom: 1px solid rgba($white, 0.16);
+  transition: border-color 180ms ease;
+}
+
+.flanora-faq-item[open] { border-color: rgba($accent-cyan, 0.5); }
+
+.flanora-faq-item summary {
+  align-items: center;
+  cursor: pointer;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 36px minmax(0, 1fr) 20px;
+  list-style: none;
+  padding: 25px 4px;
+}
+
+.flanora-faq-item summary::-webkit-details-marker { display: none; }
+
+.flanora-faq-number {
+  color: $accent-teal;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.flanora-faq-item summary > span:nth-child(2) {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.flanora-faq-item summary svg { height: 20px; justify-self: end; transition: transform 200ms ease; width: 20px; }
+
+.flanora-faq-item[open] summary svg { transform: rotate(45deg); }
+
+.flanora-faq-item > p {
+  color: rgba($fg-primary, 0.7);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+  padding: 0 40px 26px 52px;
+}
+
+.flanora-faq-item summary:hover > span:nth-child(2),
+.flanora-faq-item summary:focus-visible > span:nth-child(2) { color: $accent-cyan; }
+
+.flanora-faq-item summary:focus-visible { outline: 2px solid $accent-cyan; outline-offset: -2px; }
+
+@media (max-width: 760px) {
+  .flanora-faq { gap: 40px; grid-template-columns: 1fr; }
+  .flanora-faq-intro { position: static; }
+  .flanora-faq-intro span { display: block; max-width: 420px; }
+}
+
+// =============================================================================
+// Auth — Login & Sign Up
+// =============================================================================
+
+.flanora-auth-page {
+  background: $bg-primary;
+  color: $fg-primary;
+  display: grid;
+  font-family: "Martel Sans", sans-serif;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.flanora-auth-form-panel { display: flex; flex-direction: column; min-width: 0; padding: 40px; }
+
+.flanora-auth-wordmark {
+  color: $fg-primary;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.65rem;
+  font-weight: 650;
+  letter-spacing: -0.05em;
+  text-decoration: none;
+}
+
+.flanora-auth-form-wrap { margin: auto; max-width: 420px; padding: 72px 0; width: 100%; }
+
+.flanora-auth-heading { margin-bottom: 32px; }
+
+.flanora-auth-heading h1 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: clamp(2.35rem, 4vw, 3.5rem);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+  margin: 0;
+}
+
+.flanora-auth-heading em { color: $accent-teal; font-family: cursive; font-size: 1.08em; font-weight: 500; }
+
+.flanora-auth-heading p {
+  color: rgba($fg-primary, 0.62);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 16px 0 0;
+}
+
+.flanora-google-button,
+.flanora-auth-submit {
+  align-items: center;
+  border-radius: 999px;
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  justify-content: center;
+  width: 100%;
+}
+
+.flanora-google-button {
+  background: transparent;
+  border: 1px solid rgba($white, 0.2);
+  color: $fg-primary;
+  gap: 10px;
+  padding: 14px 20px;
+  transition: background 180ms ease;
+}
+
+.flanora-google-button:hover,
+.flanora-google-button:focus-visible { background: rgba($white, 0.08); }
+
+.flanora-google-button svg { height: 20px; width: 20px; }
+
+.flanora-auth-divider {
+  align-items: center;
+  color: rgba($fg-primary, 0.42);
+  display: flex;
+  font-size: 0.76rem;
+  gap: 14px;
+  margin: 24px 0;
+}
+
+.flanora-auth-divider::before,
+.flanora-auth-divider::after { background: rgba($white, 0.13); content: ""; height: 1px; flex: 1; }
+
+.flanora-auth-form { display: grid; gap: 17px; }
+
+.flanora-auth-form label {
+  color: rgba($fg-primary, 0.86);
+  display: grid;
+  font-size: 0.82rem;
+  font-weight: 700;
+  gap: 8px;
+}
+
+.flanora-auth-form input {
+  background: rgba($white, 0.05);
+  border: 1px solid rgba($white, 0.16);
+  border-radius: 999px;
+  color: $fg-primary;
+  font: inherit;
+  font-size: 0.9rem;
+  outline: 0;
+  padding: 14px 18px;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.flanora-auth-form input::placeholder { color: rgba($fg-primary, 0.35); }
+
+.flanora-auth-form input:focus {
+  background: rgba($white, 0.08);
+  border-color: $accent-cyan;
+  box-shadow: 0 0 0 3px rgba($accent-cyan, 0.15);
+}
+
+.flanora-auth-submit {
+  background: $fg-primary;
+  border: 0;
+  color: $bg-primary;
+  margin-top: 8px;
+  padding: 15px 20px;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.flanora-auth-submit:hover,
+.flanora-auth-submit:focus-visible { background: $fg-bright; transform: translateY(-1px); }
+
+.flanora-auth-message { color: $error-light; font-size: 0.82rem; margin: 0; }
+
+.flanora-auth-signup-nudge {
+  border-top: 1px solid rgba($white, 0.1);
+  color: rgba($fg-primary, 0.55);
+  font-size: 0.85rem;
+  margin: 24px 0 0;
+  padding-top: 20px;
+}
+
+.flanora-auth-signup-nudge a {
+  color: $accent-teal;
+  font-weight: 700;
+  text-decoration: none;
+  background-image: linear-gradient($accent-teal, $accent-teal);
+  background-size: 0 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: color 200ms ease, background-size 250ms ease;
+}
+
+.flanora-auth-signup-nudge a:hover,
+.flanora-auth-signup-nudge a:focus-visible { color: $accent-cyan-lt; background-size: 100% 1px; }
+
+.flanora-auth-legal { color: rgba($fg-primary, 0.46); font-size: 0.73rem; line-height: 1.6; margin: 16px 0 0; }
+
+.flanora-auth-legal a { color: $accent-cyan-lt; }
+
+.flanora-auth-visual {
+  background: linear-gradient(145deg, $bg-mid 0%, $bg-primary 60%, $bg-deeper 100%);
+  margin: 16px 16px 16px 0;
+  min-height: calc(100vh - 32px);
+  overflow: hidden;
+  position: relative;
+}
+
+.flanora-auth-grid {
+  background-image: linear-gradient(rgba($accent-teal, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($accent-teal, 0.12) 1px, transparent 1px);
+  background-size: 48px 48px;
+  inset: 0;
+  mask-image: radial-gradient(circle at 60% 42%, $black, transparent 68%);
+  opacity: 0.75;
+  position: absolute;
+}
+
+.flanora-auth-visual::after {
+  background: radial-gradient(circle at 60% 44%, rgba($accent-cyan, 0.22), transparent 30%);
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.flanora-auth-visual-content { bottom: 12%; left: 12%; max-width: 440px; position: absolute; z-index: 1; }
+
+.flanora-auth-visual-content span {
+  color: $accent-teal;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.flanora-auth-visual-content h2 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: clamp(2.5rem, 4vw, 4.75rem);
+  font-weight: 650;
+  letter-spacing: -0.05em;
+  line-height: 1.02;
+  margin: 18px 0;
+}
+
+.flanora-auth-visual-content p {
+  color: rgba($fg-primary, 0.7);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 380px;
+}
+
+.flanora-auth-page a:focus-visible,
+.flanora-auth-page button:focus-visible { outline: 2px solid $accent-cyan; outline-offset: 4px; }
+
+@media (max-width: 900px) {
+  .flanora-auth-page { grid-template-columns: 1fr; }
+  .flanora-auth-visual { display: none; }
+  .flanora-auth-form-panel { min-height: 100vh; }
+}
+
+@media (max-width: 560px) {
+  .flanora-auth-form-panel { padding: 24px; }
+  .flanora-auth-form-wrap { padding: 56px 0; }
+  .flanora-auth-heading h1 { font-size: 2.35rem; }
+}
+
+// Sign Up extensions
+.flanora-signup-wrap { max-width: 520px; }
+.flanora-signup-form { gap: 14px; }
+.flanora-signup-row { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+.flanora-auth-form input[type="date"] { color-scheme: dark; }
+.flanora-avatar-upload { align-items: center; display: flex; gap: 18px; margin-bottom: 28px; }
+
+.flanora-avatar-btn {
+  align-items: center;
+  background: rgba($white, 0.06);
+  border: 2px dashed rgba($white, 0.22);
+  border-radius: 50%;
+  color: rgba($fg-primary, 0.55);
+  cursor: pointer;
+  display: flex;
+  flex-shrink: 0;
+  height: 72px;
+  justify-content: center;
+  overflow: hidden;
+  transition: border-color 180ms, background 180ms;
+  width: 72px;
+}
+
+.flanora-avatar-btn:hover { background: rgba($white, 0.1); border-color: $accent-cyan; color: $fg-primary; }
+
+.flanora-avatar-btn svg { height: 26px; width: 26px; }
+
+.flanora-avatar-preview { height: 100%; object-fit: cover; width: 100%; }
+
+.flanora-avatar-label { display: flex; flex-direction: column; gap: 4px; }
+
+.flanora-avatar-label > span { color: rgba($fg-primary, 0.86); font-size: 0.82rem; font-weight: 700; }
+
+.flanora-avatar-change {
+  background: none;
+  border: none;
+  color: $accent-cyan;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  padding: 0;
+  text-align: left;
+  text-decoration: underline;
+  width: max-content;
+}
+
+.flanora-avatar-change:hover { color: $accent-cyan-lt; }
+
+.flanora-avatar-hint { color: rgba($fg-primary, 0.38); font-size: 0.72rem; }
+
+.flanora-avatar-input { display: none; }
+
+.flanora-tos-label {
+  align-items: flex-start;
+  color: rgba($fg-primary, 0.72);
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: 400;
+  gap: 10px;
+  line-height: 1.55;
+}
+
+.flanora-tos-label .flanora-tos-checkbox {
+  accent-color: $accent-cyan;
+  cursor: pointer;
+  flex-shrink: 0;
+  height: 16px;
+  margin-top: 2px;
+  width: 16px;
+}
+
+.flanora-tos-label a { color: $accent-cyan-lt; text-decoration: underline; }
+
+@media (max-width: 560px) {
+  .flanora-signup-row { grid-template-columns: 1fr; }
+  .flanora-signup-wrap { max-width: 100%; }
+}
+
+// =============================================================================
+// 404 Not Found
+// =============================================================================
+
+.flanora-not-found {
+  align-items: center;
+  background: $bg-primary;
+  color: $fg-primary;
+  display: flex;
+  font-family: "Martel Sans", sans-serif;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 48px 24px;
+  position: relative;
+  text-align: center;
+}
+
+.flanora-not-found::before {
+  background: radial-gradient(circle, rgba($accent-cyan, 0.17), transparent 55%);
+  content: "";
+  height: min(70vw, 700px);
+  position: absolute;
+  width: min(70vw, 700px);
+}
+
+.flanora-not-found-code {
+  color: rgba($fg-primary, 0.14);
+  max-width: 860px;
+  pointer-events: none;
+  position: absolute;
+  transform: translateY(-24px);
+  width: 100%;
+}
+
+.flanora-not-found-code text {
+  fill: transparent;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 20rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  stroke: currentColor;
+  stroke-dasharray: 12 9;
+  stroke-width: 2;
+}
+
+.flanora-not-found-content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 510px;
+  position: relative;
+  z-index: 1;
+}
+
+.flanora-not-found-content p {
+  color: $accent-teal;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.flanora-not-found-content h1 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  font-weight: 650;
+  letter-spacing: -0.05em;
+  line-height: 1.02;
+  margin: 0;
+}
+
+.flanora-not-found-content > span { color: rgba($fg-primary, 0.68); font-size: 0.95rem; line-height: 1.65; }
+
+.flanora-not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.flanora-not-found-actions a,
+.flanora-not-found-actions button {
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 13px 20px;
+  text-decoration: none;
+}
+
+.flanora-not-found-actions a { background: $fg-primary; color: $bg-primary; }
+
+.flanora-not-found-actions button {
+  background: rgba($white, 0.06);
+  border: 1px solid rgba($white, 0.18);
+  color: $fg-primary;
+}
+
+.flanora-not-found-actions a:hover,
+.flanora-not-found-actions button:hover { background: $fg-bright; color: $bg-primary; }
+
+.flanora-not-found-actions a:focus-visible,
+.flanora-not-found-actions button:focus-visible { outline: 2px solid $accent-cyan; outline-offset: 4px; }
+
+@media (max-width: 560px) {
+  .flanora-not-found-code text { font-size: 13rem; }
+  .flanora-not-found-content { gap: 16px; }
+}
+
+// =============================================================================
+// Team / Contributors
+// =============================================================================
+
+.flanora-team-page {
+  color: $fg-primary;
+  font-family: "Martel Sans", sans-serif;
+  margin: 0 auto;
+  max-width: 1120px;
+  padding: 112px 32px 128px;
+}
+
+.flanora-team-header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto 72px;
+  max-width: 800px;
+  text-align: center;
+}
+
+.flanora-team-header > p {
+  background: rgba($accent-cyan, 0.09);
+  border: 1px solid rgba($accent-cyan, 0.32);
+  border-radius: 999px;
+  color: $accent-cyan-lt;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0 0 22px;
+  padding: 7px 12px;
+  text-transform: uppercase;
+}
+
+.flanora-team-header h1 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 650;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  margin: 0;
+}
+
+.flanora-team-header h1 em { color: $accent-teal; font-family: cursive; font-size: 1.06em; font-weight: 500; }
+
+.flanora-team-header > span {
+  color: rgba($fg-primary, 0.68);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-top: 24px;
+  max-width: 640px;
+}
+
+.flanora-team-grid { display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.flanora-team-card {
+  aspect-ratio: 4 / 5;
+  border: 1px solid rgba($white, 0.12);
+  border-radius: 24px;
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+}
+
+.flanora-team-card > img {
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  position: absolute;
+  transition: transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  width: 100%;
+  z-index: -2;
+}
+
+.flanora-team-card-wash {
+  background: linear-gradient(to top, rgba($bg-deeper, 0.96) 4%, rgba($bg-deeper, 0.24) 48%, transparent 72%);
+  inset: 0;
+  position: absolute;
+  transition: background 300ms ease;
+  z-index: -1;
+}
+
+.flanora-team-card-content { bottom: 0; left: 0; padding: 22px; position: absolute; right: 0; }
+
+.flanora-team-card h2 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.flanora-team-card p {
+  color: rgba($fg-primary, 0.76);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin: 8px 0 0;
+}
+
+.flanora-team-socials {
+  display: flex;
+  gap: 10px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(12px);
+  transition: max-height 300ms ease, opacity 250ms ease, transform 300ms ease;
+}
+
+.flanora-team-socials a {
+  align-items: center;
+  background: rgba($fg-primary, 0.12);
+  border: 1px solid rgba($white, 0.16);
+  border-radius: 50%;
+  color: $fg-primary;
+  display: flex;
+  height: 34px;
+  justify-content: center;
+  margin-top: 14px;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+  width: 34px;
+}
+
+.flanora-team-socials a:hover,
+.flanora-team-socials a:focus-visible { background: $fg-primary; color: $bg-primary; transform: translateY(-2px); }
+
+.flanora-team-socials svg { height: 15px; width: 15px; }
+
+.flanora-team-card:hover > img,
+.flanora-team-card:focus > img,
+.flanora-team-card:focus-within > img { transform: scale(1.055); }
+
+.flanora-team-card:hover .flanora-team-card-wash,
+.flanora-team-card:focus .flanora-team-card-wash,
+.flanora-team-card:focus-within .flanora-team-card-wash {
+  background: linear-gradient(to top, rgba($bg-deeper, 0.98) 6%, rgba($bg-deeper, 0.4) 65%, transparent 100%);
+}
+
+.flanora-team-card:hover .flanora-team-socials,
+.flanora-team-card:focus .flanora-team-socials,
+.flanora-team-card:focus-within .flanora-team-socials { max-height: 60px; opacity: 1; transform: translateY(0); }
+
+.flanora-team-card:focus-visible { outline: 2px solid $accent-cyan; outline-offset: 4px; }
+
+@media (max-width: 860px) { .flanora-team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+@media (max-width: 640px) {
+  .flanora-team-page { padding: 80px 20px; }
+  .flanora-team-header { margin-bottom: 48px; }
+  .flanora-team-header > span { font-size: 0.95rem; }
+  .flanora-team-grid { grid-template-columns: 1fr; }
+  .flanora-team-card { aspect-ratio: 3 / 4; }
+  .flanora-team-card-content { padding: 22px; }
+  .flanora-team-socials { max-height: 60px; opacity: 1; transform: none; }
+}
+
+// =============================================================================
+// Policy Pages
+// =============================================================================
+
+.flanora-policy-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: clamp(7rem, 12vw, 10rem) 24px 6rem;
+  color: $policy-fg;
+}
+
+.flanora-policy-content {
+  max-width: 760px;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.94rem;
+  line-height: 1.9;
+}
+
+.flanora-policy-content h1,
+.flanora-policy-content h2,
+.flanora-policy-content h3,
+.flanora-policy-content h4 { color: $policy-heading; font-family: "Josefin Sans", sans-serif; line-height: 1.2; }
+
+.flanora-policy-content h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin: 0 0 0.5rem; }
+
+.flanora-policy-content h1 + p {
+  color: $policy-teal;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 2.7rem;
+}
+
+.flanora-policy-content h2 {
+  font-size: 1.7rem;
+  margin: 3.5rem 0 1.1rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid $policy-teal-dim;
+}
+
+.flanora-policy-content h3 { font-size: 1.25rem; margin: 2.25rem 0 0.7rem; }
+
+.flanora-policy-content h4 { font-size: 1rem; margin: 1.7rem 0 0.45rem; }
+
+.flanora-policy-content p { margin: 0 0 1.15rem; }
+
+.flanora-policy-content ul { margin: 0 0 1.25rem; padding-left: 1.4rem; }
+
+.flanora-policy-content li { margin: 0.4rem 0; }
+
+.flanora-policy-content li p { margin: 0.55rem 0; }
+
+.flanora-policy-content strong { color: $policy-strong; }
+
+.flanora-policy-content a { color: $policy-teal; text-underline-offset: 4px; }
+
+.flanora-policy-content a:hover { color: $policy-link-hover; }
+
+// =============================================================================
+// Embedded Landing Shell
+// =============================================================================
+
+.flanora-embedded-landing { border: 0; display: block; height: 100vh; min-height: 100svh; width: 100%; }
+
+// =============================================================================
+// Landing-page Navbar Overrides (floating pill style)
+// =============================================================================
+
+.flanora-navbar {
+  background: transparent;
+  border: 0;
+  left: clamp(18px, 2.25vw, 38px);
+  position: fixed !important;
+  right: clamp(18px, 2.25vw, 38px);
+  top: 14px;
+  transition: background 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 90;
+}
+
+.flanora-navbar.is-scrolled {
+  background: rgba($bg-nav-scroll, 0.72);
+  border: 1px solid rgba($white, 0.13);
+  border-radius: 999px;
+  box-shadow: 0 20px 60px rgba($black, 0.22);
+  backdrop-filter: blur(18px) saturate(125%);
+}
+
+.flanora-navbar-inner { height: 58px; max-width: 1720px; padding: 0 18px; }
+
+.flanora-wordmark {
+  font-family: "Martel Sans", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.flanora-wordmark i { font-style: normal; opacity: 0.62; padding: 0 5px; }
+
+.flanora-desktop-nav {
+  border: 1px solid rgba($white, 0.14);
+  border-radius: 999px;
+  gap: 0;
+  padding: 4px;
+}
+
+.flanora-desktop-nav > a,
+.flanora-nav-menu button {
+  border-radius: 999px;
+  color: $fg-primary;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 8px 11px;
+  text-transform: uppercase;
+}
+
+.flanora-desktop-nav > a:hover,
+.flanora-desktop-nav > a:focus-visible,
+.flanora-desktop-nav .is-active,
+.flanora-nav-menu button:hover,
+.flanora-nav-menu button:focus-visible { background: $fg-primary; color: $bg-primary; }
+
+.flanora-navbar-actions { gap: 16px; }
+
+.flanora-login-link {
+  color: $fg-primary;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.flanora-cta {
+  background: $fg-primary;
+  color: $bg-primary;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  padding: 11px 15px;
+  text-transform: uppercase;
+}
+
+.flanora-cta:hover,
+.flanora-cta:focus-visible { background: $accent-lime; color: $bg-primary; }
+
+.flanora-mega-menu { top: calc(100% + 12px); }
+
+@media (max-width: 900px) {
+  .flanora-navbar {
+    border: 1px solid rgba($white, 0.13);
+    border-radius: 999px;
+    background: rgba($bg-nav-scroll, 0.72);
+    backdrop-filter: blur(18px);
+  }
+  .flanora-navbar-inner { height: 58px; }
+  .flanora-mobile-nav { border-radius: 0 0 20px 20px; margin: 0 -1px; }
+  .flanora-mobile-toggle { padding-right: 4px; }
+}
+
+@media (max-width: 560px) {
+  .flanora-navbar { left: 18px; right: 18px; }
+  .flanora-navbar-inner { height: 56px; padding: 0 16px; }
+  .flanora-wordmark { font-size: 0.95rem; }
+}
+
+// =============================================================================
+// Contact Page
+// =============================================================================
+
+.flanora-contact-page {
+  background: $bg-primary;
+  color: $fg-primary;
+  display: grid;
+  font-family: "Martel Sans", sans-serif;
+  grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
+  min-height: 720px;
+  position: relative;
+}
+
+.flanora-contact-photo {
+  background: linear-gradient(135deg, rgba($bg-deeper, 0.28), rgba($bg-deeper, 0.86)),
+    url("/contact/contact-reference.png") center / cover;
+  min-height: 720px;
+}
+
+.flanora-contact-panel { align-self: center; padding: 80px clamp(32px, 7vw, 104px); }
+
+.flanora-contact-kicker,
+.flanora-contact-aside > div > span {
+  color: $accent-teal;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.flanora-contact-panel h1 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: clamp(3.2rem, 6vw, 5.5rem);
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+  margin: 18px 0;
+}
+
+.flanora-contact-panel > p {
+  color: rgba($fg-primary, 0.65);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 420px;
+}
+
+.flanora-contact-form { display: grid; gap: 22px; grid-template-columns: 1fr 1fr; margin-top: 42px; }
+
+.flanora-contact-form label {
+  color: rgba($fg-primary, 0.8);
+  display: grid;
+  font-size: 0.78rem;
+  font-weight: 700;
+  gap: 9px;
+}
+
+.flanora-contact-form input,
+.flanora-contact-form textarea {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba($fg-primary, 0.35);
+  border-radius: 0;
+  color: $fg-primary;
+  font: inherit;
+  outline: 0;
+  padding: 8px 0;
+  transition: border-color 0.18s ease;
+}
+
+.flanora-contact-form textarea { height: 74px; resize: vertical; }
+
+.flanora-contact-form input:focus,
+.flanora-contact-form textarea:focus { border-color: $accent-teal; }
+
+.flanora-contact-message,
+.flanora-contact-form button,
+.flanora-contact-status { grid-column: 1 / -1; }
+
+.flanora-contact-form button {
+  background: $accent-teal;
+  border: 0;
+  border-radius: 999px;
+  color: $bg-primary;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+  justify-self: start;
+  margin-top: 6px;
+  padding: 13px 22px;
+}
+
+.flanora-contact-form button span { font-size: 1.15rem; margin-left: 8px; }
+
+.flanora-contact-status { color: $accent-cyan-lt; font-size: 0.78rem; line-height: 1.5; margin: 0; }
+
+.flanora-contact-aside { align-items: end; bottom: 32px; display: flex; gap: 34px; position: absolute; right: 40px; }
+
+.flanora-contact-aside > div { display: grid; gap: 8px; }
+
+.flanora-contact-aside a { color: $fg-primary; font-size: 0.84rem; text-decoration: none; }
+
+.flanora-contact-socials { grid-template-columns: repeat(3, auto); align-items: center; }
+
+.flanora-contact-socials > span:first-child { grid-column: 1 / -1; }
+
+.flanora-contact-socials a,
+.flanora-contact-instagram {
+  align-items: center;
+  border: 1px solid rgba($fg-primary, 0.38);
+  border-radius: 50%;
+  display: inline-flex;
+  height: 30px;
+  justify-content: center;
+  width: 30px;
+}
+
+.flanora-contact-socials a:hover { background: $fg-primary; color: $bg-primary; }
+
+@media (max-width: 800px) {
+  .flanora-contact-page { grid-template-columns: 1fr; }
+  .flanora-contact-photo { display: none; }
+  .flanora-contact-panel { padding: 120px 24px 170px; }
+  .flanora-contact-aside { bottom: 42px; left: 24px; right: auto; }
+}
+
+@media (max-width: 460px) {
+  .flanora-contact-form { grid-template-columns: 1fr; }
+  .flanora-contact-aside { align-items: start; flex-direction: column; gap: 20px; }
+}

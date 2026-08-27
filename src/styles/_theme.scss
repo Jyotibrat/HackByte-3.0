@@ -1,0 +1,74 @@
+﻿// ============================================================
+// Flanora AI — Design Token Theme
+// ============================================================
+// Central repository of all reusable color values used across
+// the non-homepage pages and shared components.
+//
+// Usage in any .scss file:
+//   @use '../styles/theme' as *;
+//   color: $fg-primary;
+//   border: 1px solid rgba($white, 0.1);
+// ============================================================
+
+// --- Core Backgrounds ----------------------------------------
+
+/// Main page background — auth, 404, contact, team, FAQ
+$bg-primary:     #071314;
+
+/// Deepest background — footer, team card wash
+$bg-deeper:      #050b0c;
+
+/// Mid-dark — auth visual panel gradient start
+$bg-mid:         #0c2a2d;
+
+/// Navbar overlay dark base — mega-menu background
+$bg-nav-dark:    #0b0b0b;
+
+/// Scrolled-navbar pill background
+$bg-nav-scroll:  #0c0c0c;
+
+// --- Pure anchors -------------------------------------------
+$white:          #ffffff;
+$black:          #000000;
+
+// --- Foreground ----------------------------------------------
+
+/// Primary "off-white" foreground text used site-wide
+$fg-primary:     #f5ffff;
+
+/// CTA / submit button hover state (white with slight teal tint)
+$fg-bright:      #d9ffff;
+
+// --- Brand Accents -------------------------------------------
+
+/// Primary brand teal — kickers, labels, checkmarks, form accents
+$accent-teal:    #2dd4bf;
+
+/// Interactive cyan — focus rings, FAQ hover, active indicators
+$accent-cyan:    #22d3ee;
+
+/// Light cyan — badge text, auth link hover state
+$accent-cyan-lt: #9deff5;
+
+/// Acid lime — mega-menu hover highlight, landing-navbar hover/focus
+$accent-lime:    #d7ff45;
+
+// --- Status --------------------------------------------------
+
+/// Form validation error text
+$error-light:    #fecaca;
+
+// --- Policy Page Palette -------------------------------------
+// Slightly warmer teal-white palette, used only on policy pages.
+
+$policy-fg:         rgba(232, 245, 244, 0.76);
+$policy-heading:    #f4fbfb;
+$policy-teal:       #5bd7d1;
+$policy-teal-dim:   rgba(91, 215, 209, 0.18);
+$policy-strong:     #d9f4f1;
+$policy-link-hover: #e2ffff;
+
+// --- App-container Gradient Anchors -------------------------
+
+/// Animated background gradient — center teal burst
+$app-bg-teal:    #0e9a9f;
