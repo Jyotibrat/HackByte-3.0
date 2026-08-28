@@ -131,7 +131,7 @@ export default function SurveyPaper2025() {
             links={[
               { name: "Paper", url: "https://generativeaiandhci.github.io/papers/2025/genaichi2025_6.pdf", icon: "ri:file-pdf-2-line" },
               { name: "Code",  url: "https://github.com/Jyotibrat/A-State-of-Art-Survey-on-Generative-AI-Techniques-for-Floor-Planning", icon: "ri:github-line" },
-              { name: "Research Gate", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "academicons:arxiv" },
+              { name: "Research Gate", url: "https://www.researchgate.net/publication/404805940_A_State-of-Art_Survey_on_Generative_AI_Techniques_for_Floor_Planning", icon: "academicons:researchgate" },
             ]}
             background={
               <img
@@ -156,20 +156,7 @@ export default function SurveyPaper2025() {
           <HighlightedSection>
             <h2>Abstract</h2>
             <p>
-              This is a template you can use to create a professional-looking,
-              accessible, and performant project page for your research paper.{" "}
-              <a href="https://github.com/RomanHauksson/academic-project-astro-template">
-                See the code for the template and instructions on how to use it
-                yourself on GitHub
-              </a>
-              . It&apos;s made with the{" "}
-              <a href="https://astro.build/">Astro web framework</a> and styled
-              with <a href="https://tailwindcss.com/">Tailwind</a>. You write
-              the content in <a href="https://mdxjs.com/">MDX</a>, which enables
-              markdown formatting like <strong>bold</strong>,{" "}
-              <em>italics</em>, and{" "}
-              <del>strikethrough</del>, as well as custom components like{" "}
-              <SmallCaps>small caps.</SmallCaps>
+              In the recent years the integration of Generative Artificial Intelligence (GenAI) has reshaped the concept of the architectural design,particularly in floor planning domain. This study provides an in-depth review of GenAI techniques, highlighting their applications,evolution, and challenges. The paper highlights advanced generative models that can auto-design and enable one to have real-timecustomization to satisfy user-specific requirements, including GANs, Vision Transformers, and diffusion models. The paper identifiescritical research gaps, such as the lack of multi-objective optimization, dataset limitations, and the need for greater adaptability tocultural and contextual constraints. By analyzing contributions from 2020 to 2024, this review offers valuable insights in order to helppractitioners, researchers, and industries apply GenAI for advanced floor planning and eventually open up sustainable, inclusive,and effective architectural solutions. This paper draws together an overall table capturing the variety of technologies and strategiesemployed in the considered studies. Such technologies encompass cutting-edge tools and frameworks like diffusion models, BERT,dual attention mechanism, among others, as well as the architectures used in deep learning. This paper further critiques the datasetsupon which all these studies have been conducted to train their respective models. These datasets, among the most popular oneslike ECOBEE dataset, the Place Pulse 2.0 dataset, the Cityscapes dataset, and the HuMob Task 1 and 2 datasets, have been of utmostimportance in supporting behavioral and environmental research.
             </p>
           </HighlightedSection>
 
@@ -421,20 +408,6 @@ export default function SurveyPaper2025() {
           </div>
 
         </main>
-
-        {/* Footer */}
-        <footer className="mx-auto max-w-[50rem] px-6 text-center">
-          <p className="text-sm text-center text-zinc-500">
-            Built with{" "}
-            <a
-              href="https://research-template.roman.technology"
-              rel="nofollow"
-              className="text-blue-600 dark:text-blue-200"
-            >
-              Roman Hauksson-Neill&apos;s project page template
-            </a>
-          </p>
-        </footer>
       </div>
       
       {/* Global Flanora Footer */}

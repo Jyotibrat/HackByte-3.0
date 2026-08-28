@@ -15,13 +15,14 @@ import ArchivePreview from "../components/landing/ArchivePreview";
 import Footer from "../components/Footer";
 import useLenis from "../components/landing/useLenis";
 import "../components/landing/landing.css";
+import Navbar from "../components/NavBar";
 
 function HomePage() {
   useLenis();
 
   return (
     <div className="nf-landing" id="top">
-      <Header />
+      <Navbar />
       <main>
         <Hero />
         <Intro />

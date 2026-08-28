@@ -22,7 +22,7 @@
 .nf-landing * { box-sizing: border-box; }
 .nf-landing img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .nf-landing a { color: inherit; text-decoration: none; }
-.nf-landing button,
+.nf-landing button:not(.flanora-navbar button),
 .nf-landing input,
 .nf-landing textarea,
 .nf-landing select { font: inherit; }
