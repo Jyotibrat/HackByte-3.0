@@ -44,7 +44,7 @@
 .nf-landing .dark { background: var(--ink); color: #fff; }
 .nf-landing .eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: .16em; font-weight: 600; }
 .nf-landing .display { font-family: "Space Grotesk", sans-serif; font-weight: 600; letter-spacing: -.065em; line-height: .88; }
-.nf-landing .line-mask { overflow: hidden; }
+.nf-landing .line-mask { overflow: hidden; padding-bottom: 0.25em; margin-bottom: -0.25em; }
 .nf-landing .line-mask > span { display: block; }
 .nf-landing .cross { width: 14px; height: 14px; position: relative; display: inline-block; }
 .nf-landing .cross:before,
@@ -243,7 +243,7 @@
   background: var(--acid);
   color: #111;
 }
-.nf-landing .ticker-track { display: inline-flex; gap: 54px; padding: 14px 0; will-change: transform; }
+.nf-landing .ticker-track { display: inline-flex; gap: 54px; padding: 14px 54px 14px 0; will-change: transform; }
 .nf-landing .ticker span { font-family: "Space Grotesk"; font-size: clamp(20px, 2vw, 34px); letter-spacing: -.05em; text-transform: uppercase; }
 
 /* Projects */

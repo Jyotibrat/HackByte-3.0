@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Counter from "./Counter";
+import { Icon } from "@iconify/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,6 +11,51 @@ function Intro() {
   const portraitRef = useRef(null);
   const imgRef = useRef(null);
   const lowerRef = useRef(null);
+
+  const [hfDownloads, setHfDownloads] = useState(72);
+  const [githubStars, setGithubStars] = useState(11);
+
+  useEffect(() => {
+    async function fetchStats() {
+      // Hugging Face
+      try {
+        const [modelRes, datasetRes] = await Promise.all([
+          fetch("https://huggingface.co/api/models/BJyotibrat/Flanora-AI-v1?expand[]=downloadsAllTime"),
+          fetch("https://huggingface.co/api/datasets/BJyotibrat/ROBIN-ImagesGT-Merged-Flanora-AI-v1?expand[]=downloadsAllTime")
+        ]);
+        const modelData = await modelRes.json();
+        const datasetData = await datasetRes.json();
+        
+        const modelDls = modelData.downloadsAllTime || modelData.downloads || 0;
+        const datasetDls = datasetData.downloadsAllTime || datasetData.downloads || 0;
+        
+        setHfDownloads(modelDls + datasetDls);
+      } catch (e) {
+        console.error("Failed to fetch Hugging Face downloads:", e);
+      }
+
+      // GitHub
+      try {
+        const [repo1Res, repo2Res, repo3Res] = await Promise.all([
+          fetch("https://api.github.com/repos/Jyotibrat/Flanora-AI"),
+          fetch("https://api.github.com/repos/Jyotibrat/HackByte-3.0"),
+          fetch("https://api.github.com/repos/Auth0r-C0dez/Neurathon-25")
+        ]);
+        const repo1Data = await repo1Res.json();
+        const repo2Data = await repo2Res.json();
+        const repo3Data = await repo3Res.json();
+        
+        const stars1 = repo1Data.stargazers_count || 0;
+        const stars2 = repo2Data.stargazers_count || 0;
+        const stars3 = repo3Data.stargazers_count || 0;
+        
+        setGithubStars(stars1 + stars2 + stars3);
+      } catch (e) {
+        console.error("Failed to fetch GitHub stars:", e);
+      }
+    }
+    fetchStats();
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -78,36 +124,40 @@ function Intro() {
           />
         </div>
         <div className="keywords">
-          Direction
+          INTELLIGENCE
           <br />
-          Identity
+          INNOVATION
           <br />
-          Motion
+          RESEARCH
           <br />
-          Digital
+          DESIGN
+          <br />
+          VISION
         </div>
         <div className="intro-copy">
           <p>
-            We partner with ambitious teams to turn strategic thinking into
-            memorable visual systems.
+            Flanora explores how generative AI can reshape the way residential spaces are imagined and planned.
           </p>
           <p>
-            From the first idea to the final interaction, every detail is
-            built to communicate with precision.
+            We turn natural-language ideas into visual floor-plan concepts, giving architects and creators a new way to explore possibilities.
           </p>
         </div>
         <div className="stats-mini">
           <div>
-            <Counter value={84} />
-            <span>Projects delivered</span>
+            <Counter value={100} suffix=" +" />
+            <span>Generations</span>
           </div>
           <div>
-            <Counter value={11} />
-            <span>Countries reached</span>
+            <Counter value={githubStars} />
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              Stars on <Icon icon="mdi:github" style={{ fontSize: '1.2em' }} />
+            </span>
           </div>
           <div>
-            <Counter value={72} />
-            <span>Returning clients %</span>
+            <Counter value={hfDownloads} />
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              Downloads @ <Icon icon="devicon:huggingface" style={{ fontSize: '1.2em' }} />
+            </span>
           </div>
         </div>
       </div>
