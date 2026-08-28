@@ -1,7 +1,12 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-const NAMES = ["Kanto", "Axiom", "Lumen", "Vestra", "Monocle", "Terrain", "Noma", "Circa"];
+// const NAMES = ["Kanto", "Axiom", "Lumen", "Vestra", "Monocle", "Terrain", "Noma", "Circa"];
+const NAMES = ["GENERATIVE DESIGN", "RESIDENTIAL PLANNING", "AI × ARCHITECTURE", "", "", "", "", "ARCHITECTURAL IDEATION"];
+
+
+
+// FLANORA AI
 
 function Ticker() {
   const trackRef = useRef(null);

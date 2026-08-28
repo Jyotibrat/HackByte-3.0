@@ -70,9 +70,21 @@ function ResearchMenu() {
   return (
     <div className="flanora-mega-menu flanora-research-menu" id="research-menu">
       <section className="flanora-menu-column">
-        <Link to="/research/publications">Publications</Link>
-        <Link to="/research/articles">Articles</Link>
-        <Link to="/research/technical-reports">Technical Reports</Link>
+        <span className="flanora-eyebrow">Explore</span>
+        <div className="flanora-menu-links">
+          <Link to="/research/publications">Publications</Link>
+          <Link to="/research/articles">Articles</Link>
+          <Link to="/research/technical-reports">Technical Reports</Link>
+        </div>
+      </section>
+      <section className="flanora-menu-column">
+        <span className="flanora-eyebrow">
+          <Link to="/research/resources" style={{ color: 'inherit', textDecoration: 'none' }}>Resources</Link>
+        </span>
+        <div className="flanora-menu-links">
+          <Link to="/research/resources/presentations">Presentations</Link>
+          <Link to="/research/resources/datasets">Datasets</Link>
+        </div>
       </section>
     </div>
   );

@@ -45,6 +45,9 @@ function AnimatedRoutes() {
           <Route path="/research/publications" element={<ResearchPage />} />
           <Route path="/research/articles" element={<ResearchPage />} />
           <Route path="/research/technical-reports" element={<ResearchPage />} />
+          <Route path="/research/resources" element={<ResearchPage />} />
+          <Route path="/research/resources/presentations" element={<ResearchPage />} />
+          <Route path="/research/resources/datasets" element={<ResearchPage />} />
           <Route path="/policies" element={<PoliciesPage />} />
           <Route path="/policies/:policy" element={<PoliciesPage />} />
           <Route path="/contact" element={<ContactPage />} />

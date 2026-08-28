@@ -90,7 +90,16 @@ export default function SurveyPaper2025() {
           {/* ── HEADER ──────────────────────────────────────────────────── */}
           <Header
             title="A State-of-Art Survey on Generative AI Techniques for Floor Planning"
-            conference="GenAICHI 2025"
+            conference={
+              <a 
+                href="https://generativeaiandhci.github.io/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="not-prose text-blue-200 hover:text-blue-100 underline decoration-dashed underline-offset-4 hover:decoration-solid"
+              >
+                GenAICHI 2025
+              </a>
+            }
             authors={[
               {
                 name: "Dr. Ankur Jain",
@@ -123,10 +132,6 @@ export default function SurveyPaper2025() {
                 name: "Navjot Singh Gill", 
                 institution: "VIT Bhopal University" 
               },
-            ]}
-            notes={[
-              { symbol: "*", text: "author note one" },
-              { symbol: "†", text: "author note two" },
             ]}
             links={[
               { name: "Paper", url: "https://generativeaiandhci.github.io/papers/2025/genaichi2025_6.pdf", icon: "ri:file-pdf-2-line" },
