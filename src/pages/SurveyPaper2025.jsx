@@ -3,6 +3,8 @@ import "katex/dist/katex.min.css";
 import "../styles/research.css";
 
 // Components
+import Navbar from "../components/NavBar";
+import Footer from "../components/Footer";
 import Header from "../components/research/Header";
 import HighlightedSection from "../components/research/HighlightedSection";
 import Picture from "../components/research/Picture";
@@ -67,6 +69,8 @@ export default function SurveyPaper2025() {
       className="bg-white dark:bg-zinc-900"
       style={{ minHeight: "100vh" }}
     >
+      <Navbar variant="marketing" />
+      
       {/* Body prose styles matching index.astro's <body> classes */}
       <div
         className={[
@@ -85,28 +89,49 @@ export default function SurveyPaper2025() {
 
           {/* ── HEADER ──────────────────────────────────────────────────── */}
           <Header
-            title="Academic Project Page Template"
-            conference="Conference Name"
+            title="A State-of-Art Survey on Generative AI Techniques for Floor Planning"
+            conference="GenAICHI 2025"
             authors={[
               {
-                name: "Roman Hauksson",
-                url: "https://roman.technology",
-                institution: "University of Texas at Dallas",
+                name: "Dr. Ankur Jain",
+                url: "https://scholar.google.com/citations?user=pjUGa34AAAAJ&hl=en",
+                institution: "VIT Bhopal University",
                 notes: ["*", "†"],
               },
-              { name: "Author Two", institution: "Institution Two", notes: ["*", "†"] },
-              { name: "Author Three", institution: "Institution Three", notes: ["*"] },
-              { name: "Author Four", institution: "Institution Four" },
+              { 
+                name: "Bindupautra Jyotibrat",
+                url: "https://becore.space", 
+                institution: "VIT Bhopal University", 
+                notes: ["*", "†"] 
+              },
+              { 
+                name: "Arunim Gogoi", 
+                institution: "VIT Bhopal University", 
+                notes: ["*"] 
+              },
+              { 
+                name: "Rana Talukdar", 
+                url: "https://devwithrana.vercel.app/",
+                institution: "VIT Bhopal University" 
+              },
+              { 
+                name: "Avinash Kushwaha",
+                url: "https://www.avinashk47.me/", 
+                institution: "VIT Bhopal University" 
+              },
+              { 
+                name: "Navjot Singh Gill", 
+                institution: "VIT Bhopal University" 
+              },
             ]}
             notes={[
               { symbol: "*", text: "author note one" },
               { symbol: "†", text: "author note two" },
             ]}
             links={[
-              { name: "Paper", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "ri:file-pdf-2-line" },
-              { name: "Code",  url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "ri:github-line" },
-              { name: "arXiv", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "academicons:arxiv" },
-              { name: "Slides", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "ri:slideshow-2-line" },
+              { name: "Paper", url: "https://generativeaiandhci.github.io/papers/2025/genaichi2025_6.pdf", icon: "ri:file-pdf-2-line" },
+              { name: "Code",  url: "https://github.com/Jyotibrat/A-State-of-Art-Survey-on-Generative-AI-Techniques-for-Floor-Planning", icon: "ri:github-line" },
+              { name: "Research Gate", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "academicons:arxiv" },
             ]}
             background={
               <img
@@ -411,6 +436,9 @@ export default function SurveyPaper2025() {
           </p>
         </footer>
       </div>
+      
+      {/* Global Flanora Footer */}
+      <Footer />
     </div>
   );
 }

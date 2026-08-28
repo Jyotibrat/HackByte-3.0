@@ -57,6 +57,8 @@ export default function Header({ title, authors = [], conference, notes, links, 
                         ? "not-prose text-blue-200 hover:text-blue-100 underline decoration-dashed underline-offset-4 hover:decoration-solid"
                         : undefined
                     }
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     {author.name}
                   </a>
@@ -103,6 +105,8 @@ export default function Header({ title, authors = [], conference, notes, links, 
                     ? "bg-white hover:bg-zinc-200 text-zinc-800 shadow-[0_0_8px_rgba(0,0,0,0.6)]"
                     : "bg-zinc-800 text-white hover:bg-black dark:text-zinc-900 dark:hover:bg-zinc-50 dark:bg-zinc-200",
                 ].join(" ")}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 {link.icon && <Icon icon={link.icon} className="text-xl" />}
                 <span>{link.name}</span>

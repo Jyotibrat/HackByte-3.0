@@ -53,7 +53,7 @@ function AnimatedRoutes() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/chat" element={<ChatPage />} />
-        <Route path="/research/survey-paper-2025" element={<SurveyPaper2025 />} />
+        <Route path="/research/publications/survey-paper-2025" element={<SurveyPaper2025 />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </PageTransition>

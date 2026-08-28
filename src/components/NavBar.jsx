@@ -131,7 +131,7 @@ function Navbar({ variant = "marketing", scrollState }) {
           {primaryLinks.slice(0, 2).map((link) => <Link className={pathname === link.to ? "is-active" : ""} key={link.to} to={link.to}>{link.label}</Link>)}
           {[["models", "Models", "models-menu"], ["research", "Research", "research-menu"]].map(([key, label, menuId]) => (
             <div className="flanora-nav-menu" key={key} onMouseEnter={() => setOpenMenu(key)} onMouseLeave={() => setOpenMenu(null)} onFocus={() => setOpenMenu(key)} onBlur={closeWhenLeaving}>
-              <button type="button" aria-expanded={openMenu === key} aria-controls={menuId} onClick={() => setOpenMenu(openMenu === key ? null : key)} onKeyDown={(event) => event.key === "Escape" && setOpenMenu(null)}>{label}<Chevron /></button>
+              <button className={openMenu === key ? "is-active" : ""} type="button" aria-expanded={openMenu === key} aria-controls={menuId} onClick={() => setOpenMenu(openMenu === key ? null : key)} onKeyDown={(event) => event.key === "Escape" && setOpenMenu(null)}>{label}<Chevron /></button>
               {openMenu === key && menu}
             </div>
           ))}

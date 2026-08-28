@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 // App.scss — page & component styles for non-landing pages
 // ============================================================
 // Uses design tokens from _theme.scss.
@@ -135,6 +135,17 @@
   position: absolute;
   top: 100%;
   width: min(760px, calc(100vw - 48px));
+}
+
+// Bridge the hover gap between the navbar button and the dropdown
+.flanora-mega-menu::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: transparent;
 }
 
 .flanora-model-menu { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -1325,7 +1336,8 @@
 .flanora-desktop-nav > a:focus-visible,
 .flanora-desktop-nav .is-active,
 .flanora-nav-menu button:hover,
-.flanora-nav-menu button:focus-visible { background: $fg-primary; color: $bg-primary; }
+.flanora-nav-menu button:focus-visible,
+.flanora-nav-menu button.is-active { background: $fg-primary; color: $bg-primary; }
 
 .flanora-navbar-actions { gap: 16px; }
 
