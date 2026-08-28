@@ -387,24 +387,18 @@ export default function SurveyPaper2025() {
             easy to copy and paste.
           </p>
           <pre className="bg-zinc-200 dark:bg-zinc-800 rounded-lg p-4 overflow-x-auto text-sm">
-            <code>{`@misc{roman2024academic,
-  author = "{Roman Hauksson}",
-  title = "Academic Project Page Template",
-  year = "2024",
-  howpublished = "\\url{https://research-template.roman.technology}",
+            <code>{`@article{jain2025state,
+  title={A state-of-the-art survey on generative AI techniques for floor planning},
+  author={Jain, ANKUR and Jyotibrat, BINDUPAUTRA and Gogoi, ARUNIM and Talukdar, RANA and Kushwaha, AVINASH and Gill, NAVJOT SINGH},
+  journal={Survey paper},
+  year={2025}
 }`}</code>
           </pre>
 
           {/* ── BIBLIOGRAPHY ────────────────────────────────────────────── */}
           <h2>Bibliography</h2>
           <div className="csl-entry">
-            Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L.,
-            Gomez, A. N., Kaiser, Ł., &amp; Polosukhin, I. (2017).{" "}
-            <em>Attention is all you need.</em> Advances in Neural Information
-            Processing Systems, 30.{" "}
-            <a href="https://arxiv.org/abs/1706.03762">
-              https://arxiv.org/abs/1706.03762
-            </a>
+            Jain, A., Jyotibrat, B., Gogoi, A., Talukdar, R., Kushwaha, A., & Gill, N. (2025). A state-of-the-art survey on generative AI techniques for floor planning. Survey paper.
           </div>
 
         </main>
