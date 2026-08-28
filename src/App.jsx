@@ -18,6 +18,7 @@ import ContactPage from "./pages/ContactPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import SurveyPaper2025 from "./pages/SurveyPaper2025";
 import MarketingLayout from "./components/MarketingLayout";
 import LoadingScreen from "./components/LoadingScreen";
 import PageTransition from "./components/PageTransition";
@@ -52,6 +53,7 @@ function AnimatedRoutes() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/chat" element={<ChatPage />} />
+        <Route path="/research/survey-paper-2025" element={<SurveyPaper2025 />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </PageTransition>
