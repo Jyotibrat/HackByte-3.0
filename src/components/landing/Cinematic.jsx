@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,7 +81,7 @@ function Cinematic() {
       </div>
       <div className="cinematic-inner">
         <h2 className="display" ref={titleRef}>
-          We shape what comes next.
+          Imagine your next floor plan.
         </h2>
         <div className="cinematic-card" ref={cardRef}>
           <img
@@ -88,9 +89,9 @@ function Cinematic() {
             alt="Editorial portrait"
           />
         </div>
-        <a href="#contact" className="cinematic-cta" ref={ctaRef}>
-          Start a project ↗
-        </a>
+        <Link to="/chat" className="cinematic-cta" ref={ctaRef}>
+          Try Flanora Now ↗
+        </Link>
       </div>
     </section>
   );

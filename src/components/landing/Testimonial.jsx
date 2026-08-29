@@ -51,13 +51,12 @@ function Testimonial() {
           />
         </div>
         <blockquote className="quote display" ref={quoteRef}>
-          "NORTH/FORM gave us more than a visual identity. They gave the
-          entire team a clearer way to think, communicate and launch."
+          "Flanora is an exploration of intelligence applied to architectural planning."
         </blockquote>
         <div className="quote-author">
-          <strong>Mara Ellison</strong>
+          <strong>Bindupautra Jyotibrat</strong>
           <br />
-          Founder, Field Assembly
+          Creator, Flanora AI
         </div>
         <div className="quote-metrics">
           <div className="metric">
