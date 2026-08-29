@@ -6,35 +6,38 @@ gsap.registerPlugin(ScrollTrigger);
 
 const PLANS = [
   {
-    small: "01 / Sprint",
-    title: "Direction Sprint",
-    price: "$2,400",
-    items: ["Visual direction", "Moodboard system", "Two core concepts", "Final presentation"],
-    dark: false,
-  },
-  {
-    small: "02 / Identity",
-    title: "Identity System",
-    price: "$7,800",
+    small: "01 / GENERATE",
+    title: "Create With Flanora",
+    price: "Free To Explore",
     items: [
-      "Brand strategy",
-      "Identity design",
-      "Typography and color",
-      "Brand guidelines",
-      "Launch assets",
+      "Natural language prompts",
+      "Residential floor plans",
+      "Multiple model options",
+      "Four concepts per prompt"
     ],
     dark: false,
   },
   {
-    small: "03 / Full",
-    title: "Full Experience",
-    price: "From $14,500",
+    small: "02 / BUILD",
+    title: "Build With Flanora",
+    price: "Free To Explore",
     items: [
-      "Creative direction",
-      "Brand system",
-      "Campaign assets",
-      "Motion language",
-      "Website design",
+      "Open model weights",
+      "Curated datasets",
+      "Google Colab support",
+      "Local experimentation"
+    ],
+    dark: false,
+  },
+  {
+    small: "03 / EXPLORE",
+    title: "Explore Intelligence",
+    price: "Free To Explore",
+    items: [
+      "Research publications",
+      "Technical reports",
+      "Articles & insights",
+      "Flanora model ecosystem"
     ],
     dark: true,
   },
@@ -113,7 +116,7 @@ function Engagement() {
       <div className="container">
         <div className="eyebrow">03 / Engagement</div>
         <h2 className="section-title display" ref={titleRef}>
-          Ways to Work Together
+          Work With Flanora
         </h2>
         <div className="plans" ref={plansRef}>
           {PLANS.map((plan) => (

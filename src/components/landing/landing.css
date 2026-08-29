@@ -582,7 +582,7 @@
 .nf-landing .journal-item:nth-child(3) { grid-column: 1 / 8; }
 .nf-landing .journal-item:nth-child(4) { grid-column: 8 / 13; margin-top: -100px; }
 .nf-landing .journal-item:before {
-  content: "Read /";
+  content: attr(data-title);
   position: relative;
   z-index: 2;
   font-family: "Space Grotesk";

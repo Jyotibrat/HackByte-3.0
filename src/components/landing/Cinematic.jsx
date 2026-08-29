@@ -81,7 +81,9 @@ function Cinematic() {
       </div>
       <div className="cinematic-inner">
         <h2 className="display" ref={titleRef}>
-          Imagine your next floor plan.
+          Imagine your<br />
+          next floor<br />
+          plan.
         </h2>
         <div className="cinematic-card" ref={cardRef}>
           <img
