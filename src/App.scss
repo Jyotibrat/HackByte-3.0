@@ -499,6 +499,34 @@
   transition: color 180ms ease;
 }
 
+.flanora-footer-develop-link {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+}
+
+.flanora-footer-link-icon {
+  align-items: center;
+  color: $fg-primary;
+  display: inline-flex;
+  flex-shrink: 0;
+  height: 16px;
+  justify-content: center;
+  width: 16px;
+}
+
+.flanora-footer-link-icon svg {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.flanora-footer-external {
+  color: rgba($fg-primary, 0.5);
+  font-size: 0.75rem;
+  margin-left: 2px;
+}
+
 .flanora-footer-links a:hover,
 .flanora-footer-links a:focus-visible { color: $fg-primary; }
 
