@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const linkGroups = [
   { title: "Product", links: [["Features", "/features"], ["Models", "/models"], ["Showcase", "/showcase"], ["Try Flanora", "/chat"]] },
   { title: "Research", links: [["Research", "/research"], ["Articles", "/research/articles"], ["Publications", "/research/publications"], ["Technical Reports", "/research/technical-reports"]] },
-  { title: "Company", links: [["About", "/about"], ["Team", "/team"]] },
+  { title: "Company", links: [["About", "/about"], ["Team", "/team"], ["Status", "/status"]] },
   { title: "Legal", links: [["Terms of Use", "/policies/terms-of-use"], ["Privacy Policy", "/policies/privacy-policy"]] },
 ];
 

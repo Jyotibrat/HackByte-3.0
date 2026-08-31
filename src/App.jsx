@@ -15,6 +15,7 @@ import AboutPage from "./pages/AboutPage";
 import ResearchPage from "./pages/ResearchPage";
 import PoliciesPage from "./pages/PoliciesPage";
 import ContactPage from "./pages/ContactPage";
+import StatusPage from "./pages/StatusPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -51,6 +52,7 @@ function AnimatedRoutes() {
           <Route path="/policies" element={<PoliciesPage />} />
           <Route path="/policies/:policy" element={<PoliciesPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/status" element={<StatusPage />} />
         </Route>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
