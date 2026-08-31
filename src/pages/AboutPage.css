@@ -21,11 +21,16 @@
   margin: 0 auto;
 }
 
-.about-hero h1 {
-  font-size: clamp(2rem, 5vw, 4rem);
+.hero-overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
   line-height: 1.1;
-  margin-bottom: 20px;
+  margin: 0;
   color: #111;
+  width: 90%;
 }
 
 .about-hero-graphic {
@@ -411,7 +416,7 @@
 .about-footer {
   text-align: center;
   padding: 100px 20px;
-  background-image: url('https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/variants/520a171e-7d8c-49b9-af99-096a7a699892/320w.png');
+  background-image: url('../assets/about/about_cta_img.png');
   background-size: cover;
   background-position: center;
   position: relative;

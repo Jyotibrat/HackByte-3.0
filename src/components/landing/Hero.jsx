@@ -75,19 +75,12 @@ function Hero() {
       <div className="hero-topcopy" ref={topcopyRef}>
         <div className="line-mask">
           <span>
-            Independent creative studio shaping campaigns, identities, and
-            digital experiences for ambitious brands.
+            Generate residential floor-plan concepts from simple ideas and explore architectural possibilities with Flanora.
           </span>
         </div>
         <a className="hero-link" href="#work" ref={linkRef}>
-          View selected work
+          EXPLORE FLANORA
         </a>
-      </div>
-
-      <div className="hero-markers">
-        <span>Montréal, CA</span>
-        <span>45.5019° N</span>
-        <span className="cross" />
       </div>
 
       <div className="hero-word display line-mask" ref={wordRef}>

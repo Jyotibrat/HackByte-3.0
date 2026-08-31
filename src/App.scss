@@ -93,6 +93,8 @@
   align-items: center;
   display: flex;
   gap: 6px;
+  position: relative;
+  z-index: 2;
 }
 
 .flanora-nav-menu button svg,

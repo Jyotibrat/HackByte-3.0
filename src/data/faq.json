@@ -1,0 +1,22 @@
+[
+    {
+        "question": "Is Flanora free?",
+        "answer": "Yes, Flanora is free to use."
+    },
+    {
+        "question": "Who is Flanora AI for?",
+        "answer": "Flanora AI is for students, researchers, architects, and anyone exploring residential architecture with generative AI."
+    },
+    {
+        "question": "Is there a Flanora API?",
+        "answer": "The Flanora API is currently in development and will be available in the future."
+    },
+    {
+        "question": "What happens to my generated images?",
+        "answer": "Your generated images are available within Flanora for you to view and use as part of your creative exploration."
+    },
+    {
+        "question": "How many images can Flanora generate?",
+        "answer": "Flanora can generate up to 4 images from a single prompt."
+    }
+]
