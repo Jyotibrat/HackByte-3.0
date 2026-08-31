@@ -1,230 +1,186 @@
 import { Link } from "react-router-dom";
-
-const values = [
-  {
-    title: "Accessibility",
-    description:
-      "Professional floor planning should not require expensive software or years of training. We make it available to everyone.",
-  },
-  {
-    title: "Precision",
-    description:
-      "Our multi-model approach ensures you get the right output for your stage, whether that is a concept sketch or a technical plan.",
-  },
-  {
-    title: "Innovation",
-    description:
-      "We combine the latest advances in generative AI, computer vision, and natural language processing for architectural design.",
-  },
-];
+import "./AboutPage.css";
 
 const faqs = [
   {
-    question: "Who is Flanora AI for?",
-    answer: "Flanora is designed primarily for architects, architectural students, and residential-design professionals.",
+    question: "How does Flanora ensure structural integrity?",
+    answer: "Flanora focuses on conceptual architectural design. All generated plans must be reviewed and detailed by licensed professionals before construction.",
   },
   {
-    question: "What can I create with Flanora?",
-    answer: "You can generate conceptual floor plans for residential houses and apartments.",
+    question: "Can I use Flanora for commercial projects?",
+    answer: "Yes, Flanora can be used to ideate and conceptualize commercial spatial layouts.",
   },
   {
-    question: "How many images can Flanora generate?",
-    answer: "A generation request can produce up to four images, with Flanora-v2 generating exactly four.",
-  },
-  {
-    question: "Can I use a Flanora-generated floor plan for construction?",
-    answer: "No, Flanora results are conceptual and require professional evaluation before real-world use.",
-  },
-  {
-    question: "Is Flanora free?",
-    answer: "Yes, Flanora is currently planned as a completely free platform with no paid tier.",
-  },
-  {
-    question: "What happens to my generated images?",
-    answer: "Generated images are stored according to Flanora's data-handling and privacy policies.",
-  },
-  {
-    question: "Is there a Flanora API?",
-    answer: "Not yet, but an API is planned as a future capability.",
+    question: "What data is Flanora trained on?",
+    answer: "Flanora is trained on a proprietary dataset of diverse floor plans, emphasizing spatial logic and layout efficiency.",
   },
 ];
 
 function AboutPage() {
   return (
-    <div className="bg-gradient-animated">
-      <section className="container mx-auto px-4 py-20 md:py-28">
-        <div className="max-w-3xl">
-          <p
-            className="text-sm font-medium text-cyan-400 uppercase tracking-wider mb-4"
-            style={{ fontFamily: "Martel Sans, sans-serif" }}
-          >
-            About
-          </p>
-          <h1
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
-            style={{ fontFamily: "Josefin Sans, sans-serif" }}
-          >
-            Redefining how spaces are designed
-          </h1>
-          <p
-            className="text-lg text-white/70 leading-relaxed mb-6"
-            style={{ fontFamily: "Martel Sans, sans-serif" }}
-          >
-            Flanora AI was built at HackByte 3.0 with a simple mission: make
-            architectural floor planning as intuitive as having a conversation.
-            We believe the gap between an idea and a visual plan should be
-            measured in seconds, not days.
-          </p>
-          <p
-            className="text-lg text-white/70 leading-relaxed"
-            style={{ fontFamily: "Martel Sans, sans-serif" }}
-          >
-            Our platform integrates three specialized AI models behind a single
-            conversational interface. Users describe their requirements in
-            natural language, and the system generates professional floor plan
-            visualizations tailored to their needs.
-          </p>
+    <div className="about-page-wrapper">
+      {/* Hero Section */}
+      <section className="about-hero">
+        <h1>Flanora explores where artificial intelligence meets architectural thinking</h1>
+        <div className="about-hero-graphic">
+          <img 
+            src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/d1d195f0-17d7-4654-a1fc-c9e3192705c4_800w.webp" 
+            alt="Abstract architectural lines with glowing AI core" 
+            style={{ borderRadius: '12px', filter: 'hue-rotate(180deg) grayscale(0.5)' }}
+          />
         </div>
+        <p className="about-hero-subtext">An architectural AI research project.</p>
       </section>
 
-      <section className="container mx-auto px-4 pb-20">
-        <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl border border-white/10 p-8 md:p-10">
-          <p
-            className="text-sm font-medium text-cyan-400 uppercase tracking-wider mb-3"
-            style={{ fontFamily: "Martel Sans, sans-serif" }}
-          >
-            Publication
-          </p>
-          <h2
-            className="text-2xl md:text-3xl font-bold text-white mb-4"
-            style={{ fontFamily: "Josefin Sans, sans-serif" }}
-          >
-            A State-of-Art Survey on Generative AI Techniques for Floor Planning
-          </h2>
-          <p
-            className="text-white/70 leading-relaxed mb-6 max-w-3xl"
-            style={{ fontFamily: "Martel Sans, sans-serif" }}
-          >
-            Published at the Generative AI and HCI workshop at CHI 2025 in
-            Yokohama, Japan. The paper surveys generative AI approaches for
-            floor planning, including their applications, limitations, and
-            research opportunities.
-          </p>
-          <a
-            href="https://doi.org/10.13140/RG.2.2.22225.08807"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-sm font-medium border border-cyan-400/50 text-cyan-300 px-6 py-3 rounded-full hover:bg-cyan-400/10 transition-colors"
-            style={{ fontFamily: "Martel Sans, sans-serif" }}
-          >
-            View publication
-          </a>
-        </div>
-      </section>
-
-      <section className="container mx-auto px-4 pb-20">
-        <h2
-          className="text-3xl font-bold text-white mb-10"
-          style={{ fontFamily: "Josefin Sans, sans-serif" }}
-        >
-          What we stand for
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {values.map((value) => (
-            <div
-              key={value.title}
-              className="bg-gray-900/50 backdrop-blur-md rounded-xl border border-white/10 p-6"
-            >
-              <h3
-                className="text-lg font-semibold text-white mb-3"
-                style={{ fontFamily: "Josefin Sans, sans-serif" }}
-              >
-                {value.title}
-              </h3>
-              <p
-                className="text-sm text-white/70 leading-relaxed"
-                style={{ fontFamily: "Martel Sans, sans-serif" }}
-              >
-                {value.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="container mx-auto px-4 pb-20">
-        <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl border border-white/10 p-10 md:p-14">
-          <div className="max-w-2xl">
-            <h2
-              className="text-2xl md:text-3xl font-bold text-white mb-4"
-              style={{ fontFamily: "Josefin Sans, sans-serif" }}
-            >
-              The team behind Flanora AI
-            </h2>
-            <p
-              className="text-white/70 mb-8 leading-relaxed"
-              style={{ fontFamily: "Martel Sans, sans-serif" }}
-            >
-              We are a team of developers, designers, and ML engineers who came
-              together at HackByte 3.0 to solve a problem we had all experienced:
-              turning spatial ideas into shareable visual plans is too slow and
-              too expensive.
+      {/* Why Flanora Section */}
+      <section className="why-flanora">
+        <h2 className="why-flanora-title">Why Flanora</h2>
+        <div className="why-grid">
+          <div className="why-item">
+            <h3>Ideation</h3>
+            <p>
+              Flanora begins with exploration, turning abstract thoughts and
+              rough sketches into diverse conceptual possibilities. It
+              bridges the gap between inspiration and the first form.
             </p>
-            <Link
-              to="/team"
-              className="inline-block text-sm font-medium border border-white/20 text-white px-6 py-3 rounded-full hover:bg-white/5 transition-colors"
-              style={{ fontFamily: "Martel Sans, sans-serif" }}
-            >
-              Meet the team
-            </Link>
+          </div>
+          <div className="why-item">
+            <h3>Professional Planning</h3>
+            <p>
+              Going beyond concepts, Flanora refines and details, generating
+              precise, buildable architectural plans with professional
+              constraints and regulations in mind.
+            </p>
           </div>
         </div>
       </section>
 
-      <section className="container mx-auto px-4 pb-24">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2
-            className="text-2xl md:text-3xl font-bold text-white mb-4"
-            style={{ fontFamily: "Josefin Sans, sans-serif" }}
-          >
-            Start designing today
-          </h2>
-          <p
-            className="text-white/70 mb-8"
-            style={{ fontFamily: "Martel Sans, sans-serif" }}
-          >
-            Try Flanora AI for free and see how fast you can go from concept
-            to visualization.
-          </p>
-          <Link
-            to="/chat"
-            className="inline-block text-sm font-medium bg-white text-gray-900 px-8 py-3 rounded-full hover:bg-gray-100 transition-colors"
-            style={{ fontFamily: "Martel Sans, sans-serif" }}
-          >
-            Open the app
-          </Link>
+      {/* Language to Layout Section */}
+      <section className="language-layout">
+        <h2 className="language-layout-title">Language to Layout</h2>
+        <div className="flow-container">
+          <div className="flow-step">
+            <div className="flow-input">
+              A sunny villa with a central courtyard and two bedrooms
+            </div>
+          </div>
+          <div className="flow-step">
+            <div className="flow-core">
+              Flanora<br />Core
+            </div>
+          </div>
+          <div className="flow-step">
+            <div className="flow-output">
+              <img 
+                src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/variants/df48517c-b34b-4aa2-b653-96984538305d/3840w.jpg" 
+                alt="Generated floor plan layout" 
+                style={{ filter: 'grayscale(1)', opacity: 0.8 }}
+              />
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="flanora-faq container mx-auto px-4 pb-24" aria-labelledby="faq-heading">
-        <div className="flanora-faq-intro">
-          <p>FAQ</p>
-          <h2 id="faq-heading">Questions, answered.</h2>
-          <span>Everything you need to know before exploring Flanora.</span>
+      {/* Model Family Section */}
+      <section className="model-family">
+        <h2 className="model-family-title">Model Family</h2>
+        <div className="model-showcase">
+          <div className="model-card left">
+            <img 
+              src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=600&q=80" 
+              alt="Flanora v1 Concept" 
+            />
+            <div className="model-card-label">Flanora v1: Concept</div>
+          </div>
+          <div className="model-card center">
+            <img 
+              src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/611c8074-3c56-4810-a604-812a2791a1f9_800w.webp" 
+              alt="Flanora v2 Precision" 
+            />
+            <div className="model-card-label" style={{ fontSize: '1.3rem', padding: '20px' }}>Flanora v2: Precision</div>
+          </div>
+          <div className="model-card right">
+            <img 
+              src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80" 
+              alt="Flanora v3 In Development" 
+            />
+            <div className="model-card-glass">Coming soon</div>
+            <div className="model-card-label">Flanora v3: In Development</div>
+          </div>
         </div>
-        <div className="flanora-faq-list">
-          {faqs.map((faq, index) => (
-            <details className="flanora-faq-item" key={faq.question}>
-              <summary>
-                <span className="flanora-faq-number">{String(index + 1).padStart(2, "0")}</span>
-                <span>{faq.question}</span>
-                <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
-                  <path d="M4 10h12M10 4v12" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
-                </svg>
-              </summary>
-              <p>{faq.answer}</p>
-            </details>
-          ))}
+      </section>
+
+      {/* Research & People Section */}
+      <section className="research-people">
+        <div>
+          <h2 className="rp-title">Research</h2>
+          
+          <div className="paper-item">
+            <div className="paper-icon"></div>
+            <div className="paper-info">
+              <h4>Generative AI for Sustainable Architecture</h4>
+              <p>Exploring energy-efficient designs using deep learning.</p>
+            </div>
+          </div>
+          
+          <div className="paper-item">
+            <div className="paper-icon"></div>
+            <div className="paper-info">
+              <h4>Plan Synthesis from Natural Language Requests</h4>
+              <p>Bridging the gap between human intent and spatial configurations.</p>
+            </div>
+          </div>
+
+          <Link to="/research" className="btn-outline">
+            Explore Research ↗
+          </Link>
+        </div>
+
+        <div>
+          <h2 className="rp-title">People</h2>
+          
+          <div className="people-grid">
+            <div className="person">
+              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80" alt="Dr. Aris Thorne" />
+              <h4>Dr. Aris Thorne</h4>
+              <p>Founder & Lead Researcher</p>
+            </div>
+            <div className="person">
+              <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=200&q=80" alt="Elara Vance" />
+              <h4>Elara Vance</h4>
+              <p>Head of AI Strategy</p>
+            </div>
+            <div className="person">
+              <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=200&q=80" alt="Kaelen Reed" />
+              <h4>Kaelen Reed</h4>
+              <p>Architecture Design Lead</p>
+            </div>
+          </div>
+
+          <div className="about-faq">
+            <h3 style={{ fontSize: '1.8rem', marginBottom: '20px' }}>FAQ</h3>
+            {faqs.map((faq, index) => (
+              <details className="faq-item" key={index}>
+                <summary className="faq-summary">
+                  <span>{faq.question}</span>
+                  <span className="faq-icon">+</span>
+                </summary>
+                <div className="faq-content">
+                  {faq.answer}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer CTA */}
+      <section className="about-footer">
+        <div className="about-footer-content">
+          <h2>The next plan starts here</h2>
+          <Link to="/chat" className="btn-solid">
+            Start Generating Plans
+          </Link>
         </div>
       </section>
     </div>

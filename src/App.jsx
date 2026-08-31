@@ -34,8 +34,8 @@ function AnimatedRoutes() {
           <Route path="/features" element={<FeaturesPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/models" element={<KnowMorePage />} />
-          <Route path="/models/stable-diffusion" element={<StableDiffusionPage />} />
-          <Route path="/models/dall-e" element={<DallEPage />} />
+          <Route path="/models/flanora-v1" element={<StableDiffusionPage />} />
+          <Route path="/models/flanora-v2" element={<DallEPage />} />
           <Route path="/models/midjourney" element={<MidjourneyPage />} />
           <Route path="/team" element={<ContributorsPage />} />
           <Route path="/showcase" element={<ResultsPage />} />

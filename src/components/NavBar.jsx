@@ -10,6 +10,7 @@ const primaryLinks = [
 const modelGroups = [
   {
     name: "Flanora-v1",
+    path: "/models/flanora-v1",
     sections: [
       { label: "Explore", items: ["Architecture", "Capabilities", "Showcase"] },
       { label: "Use", items: ["Playground", { label: "Google Colab", external: "https://colab.research.google.com/github/Jyotibrat/Flanora-AI/blob/main/Notebooks/Flanora_AI_v1.ipynb" }] },
@@ -18,6 +19,7 @@ const modelGroups = [
   },
   {
     name: "Flanora-v2",
+    path: "/models/flanora-v2",
     sections: [
       { label: "Explore", items: ["Architecture", "Capabilities", "Showcase"] },
       { label: "Use", items: ["Playground", { label: "Google Colab", external: "https://colab.research.google.com/" }] },
@@ -39,7 +41,7 @@ function ModelMenu() {
     <div className="flanora-mega-menu flanora-model-menu" id="models-menu">
       {modelGroups.map((group) => (
         <section className="flanora-menu-column" key={group.name}>
-          <Link className="flanora-menu-title" to="/models">{group.name}</Link>
+          <Link className="flanora-menu-title" to={group.path || "/models"}>{group.name}</Link>
           {group.sections.map((section) => (
             <div className="flanora-menu-section" key={section.label}>
               <span className="flanora-eyebrow">{section.label}</span>
@@ -50,7 +52,7 @@ function ModelMenu() {
                     <a key={label} href={item.external} target="_blank" rel="noreferrer">
                       {label}<ExternalLinkIcon />
                     </a>
-                  ) : <Link key={label} to="/models">{label}</Link>;
+                  ) : <Link key={label} to={group.path || "/models"}>{label}</Link>;
                 })}
               </div>
             </div>
@@ -143,7 +145,7 @@ function Navbar({ variant = "marketing", scrollState }) {
           {primaryLinks.slice(0, 2).map((link) => <Link className={pathname === link.to ? "is-active" : ""} key={link.to} to={link.to}>{link.label}</Link>)}
           {[["models", "Models", "models-menu"], ["research", "Research", "research-menu"]].map(([key, label, menuId]) => (
             <div className="flanora-nav-menu" key={key} onMouseEnter={() => setOpenMenu(key)} onMouseLeave={() => setOpenMenu(null)} onFocus={() => setOpenMenu(key)} onBlur={closeWhenLeaving}>
-              <button className={openMenu === key ? "is-active" : ""} type="button" aria-expanded={openMenu === key} aria-controls={menuId} onClick={() => setOpenMenu(openMenu === key ? null : key)} onKeyDown={(event) => event.key === "Escape" && setOpenMenu(null)}>{label}<Chevron /></button>
+              <Link to={`/${key}`} className={openMenu === key ? "is-active" : ""} aria-expanded={openMenu === key} aria-controls={menuId} onKeyDown={(event) => event.key === "Escape" && setOpenMenu(null)}>{label}<Chevron /></Link>
               {openMenu === key && menu}
             </div>
           ))}

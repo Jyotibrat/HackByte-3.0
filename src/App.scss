@@ -58,7 +58,8 @@
 .flanora-desktop-nav > a,
 .flanora-login-link,
 .flanora-app-navbar nav a,
-.flanora-nav-menu button {
+.flanora-nav-menu button,
+.flanora-nav-menu > a {
   background: transparent;
   border: 0;
   color: rgba($fg-primary, 0.72);
@@ -78,6 +79,8 @@
 .flanora-app-navbar nav a:focus-visible,
 .flanora-nav-menu button:hover,
 .flanora-nav-menu button:focus-visible,
+.flanora-nav-menu > a:hover,
+.flanora-nav-menu > a:focus-visible,
 .flanora-desktop-nav .is-active {
   color: $fg-primary;
 }
@@ -85,6 +88,7 @@
 .flanora-nav-menu { position: relative; }
 
 .flanora-nav-menu button,
+.flanora-nav-menu > a,
 .flanora-mobile-nav summary {
   align-items: center;
   display: flex;
@@ -92,6 +96,7 @@
 }
 
 .flanora-nav-menu button svg,
+.flanora-nav-menu > a svg,
 .flanora-mobile-nav summary svg {
   height: 16px;
   transition: transform 180ms ease;
@@ -99,6 +104,7 @@
 }
 
 .flanora-nav-menu:focus-within > button svg,
+.flanora-nav-menu:focus-within > a svg,
 .flanora-nav-menu:hover > button svg,
 .flanora-mobile-nav details[open] summary svg {
   transform: rotate(180deg);
@@ -1350,7 +1356,8 @@
 }
 
 .flanora-desktop-nav > a,
-.flanora-navbar .flanora-nav-menu button {
+.flanora-navbar .flanora-nav-menu button,
+.flanora-navbar .flanora-nav-menu > a {
   border-radius: 999px;
   color: $fg-primary;
   font-size: 0.67rem;
@@ -1365,7 +1372,10 @@
 .flanora-desktop-nav .is-active,
 .flanora-nav-menu button:hover,
 .flanora-nav-menu button:focus-visible,
-.flanora-nav-menu button.is-active { background: $fg-primary; color: $bg-primary; }
+.flanora-nav-menu button.is-active,
+.flanora-nav-menu > a:hover,
+.flanora-nav-menu > a:focus-visible,
+.flanora-nav-menu > a.is-active { background: $fg-primary; color: $bg-primary; }
 
 .flanora-navbar-actions { gap: 16px; }
 
