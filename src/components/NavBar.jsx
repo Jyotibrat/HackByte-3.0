@@ -134,7 +134,7 @@ function Navbar({ variant = "marketing", scrollState }) {
     );
   }
 
-  const lightThemePaths = ["/about", "/research/publications/survey-paper-2025"];
+  const lightThemePaths = ["/about", "/features", "/research/publications/survey-paper-2025"];
   const isLightTheme = lightThemePaths.includes(pathname);
   const menu = openMenu === "models" ? <ModelMenu /> : <ResearchMenu />;
 
