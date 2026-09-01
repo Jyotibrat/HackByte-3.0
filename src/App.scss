@@ -1401,6 +1401,49 @@
 .flanora-cta:hover,
 .flanora-cta:focus-visible { background: $accent-lime; color: $bg-primary; }
 
+.flanora-navbar-light {
+  .flanora-wordmark,
+  .flanora-desktop-nav > a,
+  .flanora-nav-menu button,
+  .flanora-nav-menu > a,
+  .flanora-login-link {
+    color: #111;
+  }
+
+  .flanora-desktop-nav {
+    border-color: rgba(0, 0, 0, 0.14);
+  }
+
+  .flanora-desktop-nav > a:hover,
+  .flanora-desktop-nav > a:focus-visible,
+  .flanora-desktop-nav .is-active,
+  .flanora-nav-menu button:hover,
+  .flanora-nav-menu button:focus-visible,
+  .flanora-nav-menu button.is-active,
+  .flanora-nav-menu > a:hover,
+  .flanora-nav-menu > a:focus-visible,
+  .flanora-nav-menu > a.is-active {
+    background: #111;
+    color: white;
+  }
+
+  .flanora-cta {
+    background: #111;
+    color: white;
+  }
+
+  .flanora-cta:hover,
+  .flanora-cta:focus-visible {
+    background: #333;
+    color: white;
+  }
+  
+  &.is-scrolled {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+}
+
 .flanora-mega-menu { top: calc(100% + 12px); }
 
 @media (max-width: 900px) {

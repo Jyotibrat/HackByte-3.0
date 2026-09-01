@@ -33,6 +33,16 @@
   width: 90%;
 }
 
+.hero-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero-char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
 .about-hero-graphic {
   position: relative;
   width: 100%;
@@ -493,8 +503,8 @@ html.lenis {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(248, 247, 242, 0.85);
-  /* Matches body bg but translucent */
+  background: rgba(248, 247, 242, 0.65);
+  backdrop-filter: contrast(1.2) saturate(1.2);
 }
 
 .about-footer-content {
@@ -515,8 +525,10 @@ html.lenis {
   padding: 15px 40px;
   font-size: 1rem;
   transition: all 0.2s;
+  border: 1px solid #111;
 }
 
 .btn-solid:hover {
-  background: #333;
+  background: transparent;
+  color: #111;
 }

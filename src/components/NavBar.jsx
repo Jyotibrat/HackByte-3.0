@@ -134,11 +134,14 @@ function Navbar({ variant = "marketing", scrollState }) {
     );
   }
 
+  const lightThemePaths = ["/about", "/research/publications/survey-paper-2025"];
+  const isLightTheme = lightThemePaths.includes(pathname);
   const menu = openMenu === "models" ? <ModelMenu /> : <ResearchMenu />;
+
   return (
     <>
       <div ref={progressRef} className="scroll-progress" aria-hidden="true" />
-      <header className={`flanora-navbar ${isScrolled ? "is-scrolled" : ""}`}>
+      <header className={`flanora-navbar ${isScrolled ? "is-scrolled" : ""} ${isLightTheme ? "flanora-navbar-light" : ""}`}>
       <div className="flanora-navbar-inner">
         <Link to="/" className="flanora-wordmark" onClick={() => setMobileOpen(false)}><b>Flanora</b> <b>AI</b></Link>
         <nav className="flanora-desktop-nav" aria-label="Primary navigation">
