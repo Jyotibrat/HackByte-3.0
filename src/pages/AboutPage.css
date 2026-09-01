@@ -318,6 +318,7 @@
   background: white;
   border: 1px solid #ddd;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05);
+  object-fit: cover;
 }
 
 .paper-info h4 {

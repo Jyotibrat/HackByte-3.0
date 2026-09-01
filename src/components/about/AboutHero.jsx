@@ -1,4 +1,4 @@
-import heroImg from "../../assets/about/about_hero_img_2.png";
+import heroImg from "../../assets/about/about_hero_img.png";
 
 function AboutHero() {
   return (
@@ -11,7 +11,6 @@ function AboutHero() {
         />
         <h1 className="hero-overlay-text">Architecture Begins With an Idea</h1>
       </div>
-      {/* <p className="about-hero-subtext">An architectural AI research project.</p> */}
     </section>
   );
 }

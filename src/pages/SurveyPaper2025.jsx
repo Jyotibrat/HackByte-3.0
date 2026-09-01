@@ -47,39 +47,21 @@ function BlockMath({ tex }) {
   );
 }
 
-export default function SurveyPaper2025() {
-  // Apply data-theme to <html> so dark-mode CSS custom variant works
-  useEffect(() => {
-    const prev = document.documentElement.dataset.theme;
-    document.documentElement.dataset.theme = "device";
-    document.documentElement.classList.add("bg-white", "dark:bg-zinc-900");
-    return () => {
-      // Restore previous state on unmount
-      if (prev) {
-        document.documentElement.dataset.theme = prev;
-      } else {
-        delete document.documentElement.dataset.theme;
-      }
-      document.documentElement.classList.remove("bg-white", "dark:bg-zinc-900");
-    };
-  }, []);
+import "./AboutPage.css";
 
+export default function SurveyPaper2025() {
   return (
-    <div
-      className="bg-white dark:bg-zinc-900"
-      style={{ minHeight: "100vh" }}
-    >
+    <div className="about-page-wrapper">
       <Navbar variant="marketing" />
       
       {/* Body prose styles matching index.astro's <body> classes */}
       <div
         className={[
-          "prose prose-lg prose-zinc dark:prose-invert",
+          "prose prose-lg",
           "prose-a:text-blue-600 prose-a:hover:text-blue-900",
-          "dark:prose-a:text-blue-200 dark:prose-a:hover:text-blue-100",
           "prose-a:underline prose-a:decoration-dashed prose-a:underline-offset-4 prose-a:hover:decoration-solid prose-a:font-normal",
-          "prose-code:bg-zinc-200 dark:prose-code:bg-zinc-800",
-          "prose-code:text-zinc-800 dark:prose-code:text-zinc-200",
+          "prose-code:bg-zinc-200",
+          "prose-code:text-zinc-800",
           "prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-medium",
           "prose-code:before:content-none prose-code:after:content-none",
           "max-w-none pt-16 pb-6 font-sans",

@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import paperImg from "../../assets/about/about_paper_img.png";
+import reportImg from "../../assets/about/about_report_img.png";
 
 function AboutResearchPeople() {
   return (
@@ -7,14 +9,14 @@ function AboutResearchPeople() {
         <h2 className="rp-title">Research</h2>
         
         <div className="paper-item">
-          <div className="paper-icon"></div>
+          <img src={paperImg} alt="Survey Paper" className="paper-icon" />
           <div className="paper-info">
             <h4>A State-of-Art Survey on Generative AI Techniques for Floor Planning</h4>
             <p>Exploring generative AI approaches for intelligent floor-plan generation.</p>
           </div>
         </div>
         <div className="paper-item">
-          <div className="paper-icon"></div>
+          <img src={reportImg} alt="Project Report" className="paper-icon" />
           <div className="paper-info">
             <h4>Floor Planning Using Generative Artificial Intelligence Project Report</h4>
             <p>Documenting the development and evaluation of Flanora AI.</p>
