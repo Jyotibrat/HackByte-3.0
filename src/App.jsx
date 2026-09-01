@@ -65,6 +65,8 @@ function AnimatedRoutes() {
   );
 }
 
+import ScrollToTop from "./components/ScrollToTop";
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
@@ -104,6 +106,7 @@ function App() {
   return (
     <div className={`app-container ${transitionClasses}`}>
       <BrowserRouter>
+        <ScrollToTop />
         <AnimatedRoutes />
       </BrowserRouter>
     </div>
