@@ -1401,7 +1401,7 @@
 .flanora-cta:hover,
 .flanora-cta:focus-visible { background: $accent-lime; color: $bg-primary; }
 
-.flanora-navbar-light {
+.flanora-navbar-light:not(.is-scrolled) {
   .flanora-wordmark,
   .flanora-desktop-nav > a,
   .flanora-nav-menu button,
@@ -1436,11 +1436,6 @@
   .flanora-cta:focus-visible {
     background: #333;
     color: white;
-  }
-  
-  &.is-scrolled {
-    background: rgba(255, 255, 255, 0.85);
-    border-color: rgba(0, 0, 0, 0.08);
   }
 }
 
