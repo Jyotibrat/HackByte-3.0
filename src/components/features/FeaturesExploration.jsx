@@ -1,4 +1,5 @@
 import React from 'react';
+import possibilitiesImg from '../../assets/features/features_Possibilities_img.png';
 
 function FeaturesExploration() {
   return (
@@ -6,7 +7,7 @@ function FeaturesExploration() {
       <div className="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-inner-gap items-center">
         <div className="order-2 lg:order-1 fade-in-up">
           <div className="bg-surface-container-lowest p-4 rounded-xl border border-hairline-border shadow-sm mix-blend-multiply">
-            <img alt="Floor plan variations" className="w-full h-auto rounded-lg mix-blend-multiply object-cover" data-alt="A clean, technical four-panel grid showing different architectural floor plan variations derived from the same initial prompt." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC50kJpNnei55Lv7B-wX7TCAeS0vCEbgHkEWIr0wbiMMBAhlLP0Igwzuz3qsWIg2Oeqn3nUZ7OG9rhjeKtrTNF1hk5farlhh_3oaOfiJCNgjijbYuJlhUicMOkVkq8MdFLlhSgGVrHvNeHKiXRNeITt9enDqGv1pn95MgtDXZbe4kGt70rBHa3LIsbsG_zuofuPdlWl0YzuMy6-DsFe_UuTEQUVLeQ2OxazSaKX2yvpcNv5yxudgJZD"/>
+            <img alt="Floor plan variations" className="w-full h-auto rounded-lg mix-blend-multiply object-cover" data-alt="A clean, technical four-panel grid showing different architectural floor plan variations derived from the same initial prompt." src={possibilitiesImg}/>
           </div>
         </div>
         <div className="order-1 lg:order-2 lg:pl-12 fade-in-up stagger-1">

@@ -155,7 +155,7 @@
 @media (min-width: 768px) {
   .flanora-features-page .models-inner {
     grid-template-columns: 1fr 1fr;
-    align-items: end;   /* left col anchors to bottom of the grid row */
+    align-items: start;
     gap: 80px;
     padding-top: 160px;
     padding-bottom: 160px;
@@ -172,8 +172,9 @@
 @media (min-width: 768px) {
   .flanora-features-page .model-col-left {
     position: sticky;
-    bottom: 60px;        /* how far from viewport bottom it rests */
-    align-self: end;
+    top: 50%;
+    transform: translateY(-50%);
+    align-self: start;
   }
 }
 

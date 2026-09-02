@@ -1,4 +1,5 @@
 import React from 'react';
+import workspaceImg from '../../assets/features/features_workspace_img.png';
 
 function FeaturesWorkspace() {
   return (
@@ -12,7 +13,7 @@ function FeaturesWorkspace() {
         </div>
         <div className="relative fade-in-up stagger-1 mx-auto max-w-5xl">
           <div className="bg-surface-container-lowest p-2 rounded-xl border border-hairline-border shadow-lg">
-            <img alt="Flanora Workspace UI" className="w-full h-auto rounded-lg object-cover border border-hairline-border" data-alt="A screenshot of the Flanora AI web interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGP9XbJs_I3cFP23RU7CmxGKnLwpLXEIa8oyBfi8Quz4i6uWEtilOiVXEgyQVbGlF8fY70qh-bwBVbF4M9NuiD_tfkWWO22zI7yV0LUFhWwi-WieNx_zwWSVW-I7rWSpUWtYqHXXmdaSEV-dLhtzqbG5JErcW_K7-ekBO_gwBcpEzfEZyVyT1LFdSWc3ewKa2qTNJRtGk2rGiYt3qDthowjHI5nsq6wSnHdC-NimkfJ4DuRTqFlZDc"/>
+            <img alt="Flanora Workspace UI" className="w-full h-auto rounded-lg object-cover border border-hairline-border" data-alt="A screenshot of the Flanora AI web interface." src={workspaceImg}/>
           </div>
           <div className="absolute -right-8 top-1/4 p-4 bg-surface-container-lowest border border-hairline-border shadow-md rounded-lg hidden lg:block fade-in-up stagger-2">
             <span className="font-label-caps text-label-caps text-outline block mb-2">Active Parameter</span>
