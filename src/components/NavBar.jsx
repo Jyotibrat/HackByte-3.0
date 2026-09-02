@@ -142,30 +142,30 @@ function Navbar({ variant = "marketing", scrollState }) {
     <>
       <div ref={progressRef} className="scroll-progress" aria-hidden="true" />
       <header className={`flanora-navbar ${isScrolled ? "is-scrolled" : ""} ${isLightTheme ? "flanora-navbar-light" : ""}`}>
-      <div className="flanora-navbar-inner">
-        <Link to="/" className="flanora-wordmark" onClick={() => setMobileOpen(false)}><b>Flanora</b> <b>AI</b></Link>
-        <nav className="flanora-desktop-nav" aria-label="Primary navigation">
-          {primaryLinks.slice(0, 2).map((link) => <Link className={pathname === link.to ? "is-active" : ""} key={link.to} to={link.to}>{link.label}</Link>)}
-          {[["models", "Models", "models-menu"], ["research", "Research", "research-menu"]].map(([key, label, menuId]) => (
-            <div className="flanora-nav-menu" key={key} onMouseEnter={() => setOpenMenu(key)} onMouseLeave={() => setOpenMenu(null)} onFocus={() => setOpenMenu(key)} onBlur={closeWhenLeaving}>
-              <Link to={`/${key}`} className={openMenu === key ? "is-active" : ""} aria-expanded={openMenu === key} aria-controls={menuId} onKeyDown={(event) => event.key === "Escape" && setOpenMenu(null)}>{label}<Chevron /></Link>
-              {openMenu === key && menu}
-            </div>
-          ))}
-          <Link className={pathname.startsWith("/showcase") ? "is-active" : ""} to="/showcase">Showcase</Link>
-        </nav>
-        <div className="flanora-navbar-actions"><Link className="flanora-login-link" to="/login">Log in</Link><Link className="flanora-cta" to="/chat">Try Flanora ↗</Link></div>
-        <button type="button" className="flanora-mobile-toggle" aria-expanded={mobileOpen} aria-controls="mobile-navigation" aria-label={mobileOpen ? "Close navigation" : "Open navigation"} onClick={() => setMobileOpen(!mobileOpen)}><span /><span /></button>
-      </div>
-      {mobileOpen && (
-        <nav className="flanora-mobile-nav" id="mobile-navigation" aria-label="Mobile navigation">
-          {primaryLinks.map((link) => <Link key={link.to} to={link.to} onClick={() => setMobileOpen(false)}>{link.label}</Link>)}
-          <details><summary>Models<Chevron /></summary><ModelMenu /></details>
-          <details><summary>Research<Chevron /></summary><ResearchMenu /></details>
-          <Link to="/login" onClick={() => setMobileOpen(false)}>Log in</Link>
-          <Link className="flanora-cta" to="/chat" onClick={() => setMobileOpen(false)}>Try Flanora</Link>
-        </nav>
-      )}
+        <div className="flanora-navbar-inner">
+          <Link to="/" className="flanora-wordmark" onClick={() => setMobileOpen(false)}><b>Flanora</b> <b>AI</b></Link>
+          <nav className="flanora-desktop-nav" aria-label="Primary navigation">
+            {primaryLinks.slice(0, 2).map((link) => <Link className={pathname === link.to ? "is-active" : ""} key={link.to} to={link.to}>{link.label}</Link>)}
+            {[["models", "Models", "models-menu"], ["research", "Research", "research-menu"]].map(([key, label, menuId]) => (
+              <div className="flanora-nav-menu" key={key} onMouseEnter={() => setOpenMenu(key)} onMouseLeave={() => setOpenMenu(null)} onFocus={() => setOpenMenu(key)} onBlur={closeWhenLeaving}>
+                <Link to={`/${key}`} className={openMenu === key ? "is-active" : ""} aria-expanded={openMenu === key} aria-controls={menuId} onKeyDown={(event) => event.key === "Escape" && setOpenMenu(null)}>{label}<Chevron /></Link>
+                {openMenu === key && menu}
+              </div>
+            ))}
+            <Link className={pathname.startsWith("/showcase") ? "is-active" : ""} to="/showcase">Showcase</Link>
+          </nav>
+          <div className="flanora-navbar-actions"><Link className="flanora-login-link" to="/login">Log in</Link><Link className="flanora-cta" to="/chat">Try Flanora ↗</Link></div>
+          <button type="button" className="flanora-mobile-toggle" aria-expanded={mobileOpen} aria-controls="mobile-navigation" aria-label={mobileOpen ? "Close navigation" : "Open navigation"} onClick={() => setMobileOpen(!mobileOpen)}><span /><span /></button>
+        </div>
+        {mobileOpen && (
+          <nav className="flanora-mobile-nav" id="mobile-navigation" aria-label="Mobile navigation">
+            {primaryLinks.map((link) => <Link key={link.to} to={link.to} onClick={() => setMobileOpen(false)}>{link.label}</Link>)}
+            <details><summary>Models<Chevron /></summary><ModelMenu /></details>
+            <details><summary>Research<Chevron /></summary><ResearchMenu /></details>
+            <Link to="/login" onClick={() => setMobileOpen(false)}>Log in</Link>
+            <Link className="flanora-cta" to="/chat" onClick={() => setMobileOpen(false)}>Try Flanora</Link>
+          </nav>
+        )}
       </header>
     </>
   );

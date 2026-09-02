@@ -11,7 +11,7 @@ function FeaturesExploration() {
         </div>
         <div className="order-1 lg:order-2 lg:pl-12 fade-in-up stagger-1">
           <h2 className="font-headline-lg text-headline-lg text-ink-text mb-6">Explore <br/>Possibilities.</h2>
-          <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">
+          <p className="font-body-lg text-body-lg text-on-surface-variant mb-8" style={{ fontFamily: "'Martel Sans', sans-serif" }}>
             Architecture is iterative. Generate up to 4 distinct conceptual directions per prompt, allowing for rapid exploration of spatial typologies and structural arrangements before committing to a final path.
           </p>
           <ul className="space-y-4 font-body-md text-body-md text-ink-text border-t border-hairline-border pt-8">

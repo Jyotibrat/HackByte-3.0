@@ -6,7 +6,7 @@ function FeaturesWorkspace() {
       <div className="max-w-container-max mx-auto">
         <div className="text-center mb-16 md:mb-24 fade-in-up">
           <h2 className="font-headline-lg text-headline-lg text-ink-text mb-6">The Workspace.</h2>
-          <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+          <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto" style={{ fontFamily: "'Martel Sans', sans-serif" }}>
             A seamless interface where conversation dictates form. Iterate on designs through natural dialogue, keeping a complete history of your architectural evolution.
           </p>
         </div>

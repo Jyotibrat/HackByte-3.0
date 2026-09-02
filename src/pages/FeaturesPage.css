@@ -14,6 +14,12 @@
     font-family: 'Inter', sans-serif;
 }
 
+/* overflow-x: clip clips without creating a scroll container,
+   so position: sticky works through it (unlike overflow-x: hidden) */
+.features-clip-x {
+  overflow-x: clip;
+}
+
 /* Backgrounds */
 .flanora-features-page .bg-paper-bg { background-color: var(--paper-bg); }
 .flanora-features-page .bg-surface-container-lowest { background-color: var(--surface-container-lowest); }
@@ -31,6 +37,11 @@
 .flanora-features-page .border-hairline-border { border-color: var(--hairline-border); }
 .flanora-features-page .border-ink-text { border-color: var(--ink-text); }
 .flanora-features-page .border-outline { border-color: var(--outline); }
+
+/* Hover States for custom colors */
+.flanora-features-page .hover\:text-ink-text:hover { color: var(--ink-text); }
+.flanora-features-page .hover\:border-ink-text:hover { border-color: var(--ink-text); }
+
 
 /* Spacing & Sizes */
 .flanora-features-page .pt-section-gap-mobile { padding-top: 96px; }
@@ -94,24 +105,81 @@
   align-items: center;
 }
 
-.flanora-features-page .typing-effect {
-  display: inline-block;
+.flanora-features-page .typing-effect-line1,
+.flanora-features-page .typing-effect-line2 {
+  display: block;
   overflow: hidden;
   white-space: nowrap;
-  border-right: 2px solid var(--ink-text);
   width: 0ch;
+}
+
+.flanora-features-page .typing-effect-line1 {
+  border-right: 2px solid transparent;
   animation:
-    flanora-typing-reveal 2.5s steps(44, end) forwards,
-    flanora-typing-cursor 0.75s step-end infinite;
+    flanora-typing-reveal-22 1.25s steps(22, end) forwards,
+    flanora-typing-cursor 0.5s step-end 3;
   animation-delay: 0.3s;
 }
 
-@keyframes flanora-typing-reveal {
+.flanora-features-page .typing-effect-line2 {
+  border-right: 2px solid transparent;
+  animation:
+    flanora-typing-reveal-22 1.25s steps(22, end) forwards,
+    flanora-typing-cursor 0.75s step-end 4 forwards;
+  animation-delay: 1.8s; /* 0.3s + 1.5s duration of line1 */
+}
+
+@keyframes flanora-typing-reveal-22 {
   from { width: 0ch; }
-  to { width: 44ch; }
+  to { width: 22ch; }
 }
 
 @keyframes flanora-typing-cursor {
   from, to { border-color: transparent; }
   50% { border-color: var(--ink-text); }
+}
+
+/* ── Model Architecture: GSAP-pinned left + scrolling right ── */
+.flanora-features-page .models-section {
+  /* padding handled inside models-inner */
+}
+
+.flanora-features-page .models-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+@media (min-width: 768px) {
+  .flanora-features-page .models-inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: end;   /* left col anchors to bottom of the grid row */
+    gap: 80px;
+    padding-top: 160px;
+    padding-bottom: 160px;
+  }
+}
+
+/* Left column — sticky at the bottom of the viewport */
+.flanora-features-page .model-col-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .flanora-features-page .model-col-left {
+    position: sticky;
+    bottom: 60px;        /* how far from viewport bottom it rests */
+    align-self: end;
+  }
+}
+
+/* Right column: cards stack with gap */
+.flanora-features-page .model-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }

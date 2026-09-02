@@ -10,7 +10,7 @@ function FeaturesHero() {
           <h1 className="font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl text-ink-text leading-tight">
             Language <br/>to Layout.
           </h1>
-          <p className="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+          <p className="font-body-lg text-body-lg text-on-surface-variant max-w-md" style={{ fontFamily: "'Martel Sans', sans-serif" }}>
             Transform natural-language requirements directly into functional, sophisticated architectural floor plans. The intelligence of structural synthesis, powered by Flanora.
           </p>
           <a className="inline-flex items-center gap-2 font-label-caps text-label-caps text-ink-text border-b border-ink-text pb-1 hover:text-outline hover:border-outline transition-colors duration-300 group" href="#">
@@ -32,13 +32,20 @@ function FeaturesHero() {
           </a>
         </div>
         <div className="lg:col-span-7 fade-in-up stagger-1 relative">
-          <div className="bg-surface-container-lowest p-4 rounded-xl border border-hairline-border shadow-sm mix-blend-multiply relative">
+          <div className="bg-surface-container-lowest p-6 rounded-xl border border-hairline-border shadow-sm mix-blend-multiply relative flex flex-col xl:flex-row items-center gap-6 overflow-hidden">
             <div className="absolute -top-4 -left-4 w-24 h-24 bg-ai-glow blur-2xl rounded-full opacity-50 z-0 pointer-events-none"></div>
-            <img alt="Architectural sketch" className="w-full h-auto rounded-lg relative z-10 object-cover" data-alt="A high-resolution isometric architectural sketch of a modern three-bedroom villa with an open central courtyard." src={heroImg}/>
+            
+            <div className="z-10 shrink-0 xl:w-[45%]">
+              <p className="typing-caption font-body-md text-on-surface-variant flex flex-col items-start gap-1">
+                <span className="typing-effect-line1">A three bedroom villa </span>
+                <span className="typing-effect-line2">with an open courtyard</span>
+              </p>
+            </div>
+            
+            <div className="z-10 relative xl:w-[55%] flex justify-end">
+              <img alt="Architectural sketch" className="w-full max-w-[400px] h-auto rounded-lg object-cover shadow-sm border border-hairline-border" src={heroImg}/>
+            </div>
           </div>
-          <p className="typing-caption font-body-md text-on-surface-variant mt-4">
-            <span className="typing-effect">A three bedroom villa with an open courtyard</span>
-          </p>
         </div>
       </div>
     </section>

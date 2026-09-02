@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function FeaturesOpenResearch() {
   return (
@@ -8,18 +9,18 @@ function FeaturesOpenResearch() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start relative z-10">
           <div className="lg:col-span-5 fade-in-up">
             <h2 className="font-headline-lg text-headline-lg text-ink-text mb-6">Open Research.</h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">
+            <p className="font-body-lg text-body-lg text-on-surface-variant mb-8" style={{ fontFamily: "'Martel Sans', sans-serif" }}>
               We believe in the democratization of architectural intelligence. Access our open weights, specialized datasets, and foundational research papers.
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
-              <a className="inline-flex items-center gap-2 font-label-caps text-label-caps text-ink-text border-b border-ink-text pb-1 hover:text-outline hover:border-outline transition-colors duration-300 group" href="#">
+              <Link className="inline-flex items-center gap-2 font-label-caps text-label-caps text-ink-text border-b border-ink-text pb-1 hover:text-outline hover:border-outline transition-colors duration-300 group" to="/models">
                 EXPLORE MODELS
-                <span className="material-symbols-outlined text-[14px] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" data-icon="arrow_outward">arrow_outward</span>
-              </a>
-              <a className="inline-flex items-center gap-2 font-label-caps text-label-caps text-outline border-b border-transparent pb-1 hover:text-ink-text transition-colors duration-300 group" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+              </Link>
+              <Link className="inline-flex items-center gap-2 font-label-caps text-label-caps text-outline border-b border-transparent pb-1 hover:text-ink-text hover:border-ink-text transition-colors duration-300 group" to="/research">
                 EXPLORE RESOURCES
-                <span className="material-symbols-outlined text-[14px] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" data-icon="arrow_outward">arrow_outward</span>
-              </a>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+              </Link>
             </div>
           </div>
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
