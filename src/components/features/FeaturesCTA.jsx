@@ -24,7 +24,7 @@ function FeaturesCTA() {
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1px] h-32 bg-outline opacity-20"></div>
       <div className="max-w-3xl mx-auto relative z-10 fade-in-up text-ink-text">
         <h2 className="font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl mb-12">
-          The next plan starts here.
+          See what Flanora can create.
         </h2>
         <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
           <Link to="/models" className="inline-block w-60 text-center border border-black text-black py-[15px] text-[1rem] transition-all duration-200 hover:bg-black hover:text-white">

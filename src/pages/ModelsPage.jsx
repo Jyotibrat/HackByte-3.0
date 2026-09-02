@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ModelsHero from "../components/models/ModelsHero";
 import ModelsFamily from "../components/models/ModelsFamily";
-import ModelsEvolution from "../components/models/ModelsEvolution";
 import ModelsChoose from "../components/models/ModelsChoose";
 import ModelsCTA from "../components/models/ModelsCTA";
 
@@ -51,7 +50,6 @@ function ModelsPage() {
       <main>
         <ModelsHero />
         <ModelsFamily />
-        <ModelsEvolution />
         <ModelsChoose />
         <ModelsCTA />
       </main>

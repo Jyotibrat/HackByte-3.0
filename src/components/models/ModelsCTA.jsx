@@ -14,7 +14,7 @@ function ModelsCTA() {
         }}
       />
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-        <h2 className="font-playfair text-5xl md:text-7xl mb-8 text-[#f8f7f5]">The next plan starts here.</h2>
+        <h2 className="font-playfair text-5xl md:text-7xl mb-8 text-[#f8f7f5]">Find the model for your next idea.</h2>
         <p className="font-martel text-xl text-outline mb-12 font-light max-w-2xl mx-auto">
           Explore the Flanora model family or start generating your own floor-plan concepts today.
         </p>
