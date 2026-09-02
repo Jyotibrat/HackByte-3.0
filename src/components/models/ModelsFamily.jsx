@@ -55,12 +55,7 @@ function ModelsFamily() {
         const newYear = section.dataset.year;
         const bgColor = section.dataset.color || '#F8F7F5';
         const bgLayer = section.querySelector('.year-bg-layer');
-        const intro = section.querySelector('.intro');
         const items = section.querySelectorAll('.media-item');
-
-        const split = new SplitText(intro, { type: 'words' });
-        splits.push(split);
-        gsap.set(split.words, { opacity: 0.15 });
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -89,12 +84,28 @@ function ModelsFamily() {
           },
         });
 
-        tl.to(split.words, {
-          opacity: 1,
-          stagger: 0.05,
-          duration: 0.6,
-          ease: 'power2.out',
-        });
+        if (newYear === '2025') {
+          // Ghost/mask text reveal for Flanora-v2
+          const masked = section.querySelector('.intro-masked');
+          if (masked) {
+            tl.to(
+              masked,
+              { maskSize: '100% 100%', ease: 'sine.inOut', duration: 1 },
+              0
+            );
+          }
+        } else {
+          const intro = section.querySelector('.intro');
+          const split = new SplitText(intro, { type: 'words' });
+          splits.push(split);
+          gsap.set(split.words, { opacity: 0.15 });
+          tl.to(split.words, {
+            opacity: 1,
+            stagger: 0.05,
+            duration: 0.6,
+            ease: 'power2.out',
+          });
+        }
 
         items.forEach((item, i) => {
           gsap.set(item, {
@@ -181,9 +192,14 @@ function ModelsFamily() {
               <p className="font-martel text-sm tracking-widest uppercase mb-6 text-charcoal font-semibold border border-charcoal inline-block px-3 py-1">
                 Multi-Model Generation
               </p>
-              <p className="intro font-martel text-lg text-charcoal-light leading-relaxed mb-8 max-w-[40ch]">
-                Introducing divergent exploration. V2 generates multiple conceptual variations from a single prompt, allowing architects to quickly explore different spatial typologies and structural organizations.
-              </p>
+              <div className="text-mask-wrapper mb-8">
+                <p className="intro-ghost font-martel text-lg text-outline opacity-50 leading-relaxed max-w-[40ch]" aria-hidden="true">
+                  Introducing divergent exploration. V2 generates multiple conceptual variations from a single prompt, allowing architects to quickly explore different spatial typologies and structural organizations.
+                </p>
+                <p className="intro-masked font-martel text-lg text-charcoal-light leading-relaxed max-w-[40ch]">
+                  Introducing divergent exploration. V2 generates multiple conceptual variations from a single prompt, allowing architects to quickly explore different spatial typologies and structural organizations.
+                </p>
+              </div>
               <Link className="link-arrow" to="/models/flanora-v2">
                 Explore model
                 <svg fill="none" height="12" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" width="12">
