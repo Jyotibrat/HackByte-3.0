@@ -74,3 +74,44 @@
   color: var(--flanora-lime);
   border-color: var(--flanora-lime);
 }
+
+.timeline {
+  position: relative;
+}
+
+.year-number {
+  margin: 0;
+  padding: 0;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  line-height: 1;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  color: var(--charcoal);
+  pointer-events: none;
+}
+
+.digit {
+  display: inline-block;
+  overflow: hidden;
+  line-height: 90%;
+  width: 0.875ch;
+  position: relative;
+}
+
+.year-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.year-bg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.media-item {
+  will-change: transform, opacity;
+}

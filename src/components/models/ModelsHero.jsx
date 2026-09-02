@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import modelsHeroImg from '../../assets/models/models_hero_img.png';
 
 function ModelsHero() {
   const heroRef = useRef(null);
@@ -31,7 +32,7 @@ function ModelsHero() {
         <img 
           alt="Premium minimalist architectural hero visual" 
           className="w-full h-full object-cover hero-img" 
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPoeTxTphkfT7byK-9JGkApUscNHLe1HkTK3DYIiSL25bR0Usb8A5WLlDwIrH2hLNIgGY9PFfBRwX7udBNeWPP525oQ4jqLTNQWzbAlAiX1wTuMtzxdg2o2Wv5JfhpYLkFt6YRafBo71Rdfj5H6qw5q--0PDlkcZ4cK_Uqx1nRFJ8rfza_k3O5-rVFWu05-IUPQFlAfLVIvJPl2I3OccgfLGACwdefU3r-Jzlqb_zUxv4v6bOupS6y"
+          src={modelsHeroImg}
         />
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
