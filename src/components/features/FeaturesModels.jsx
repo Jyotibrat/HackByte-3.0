@@ -9,7 +9,7 @@ function FeaturesModels() {
         {/* Left col — sticky bottom via CSS */}
         <div className="model-col-left fade-in-up">
           <h2 className="font-headline-md text-headline-md text-ink-text">Model Architecture</h2>
-          <p className="font-body-md text-body-md text-on-surface-variant mt-2">
+          <p className="font-body-md text-body-md text-on-surface-variant mt-2" style={{ fontFamily: "'Martel Sans', sans-serif" }}>
             The engines powering structural synthesis.
           </p>
           <Link
@@ -28,7 +28,7 @@ function FeaturesModels() {
             <div className="flex justify-between items-start mb-6">
               <h3 className="font-headline-md text-headline-md text-ink-text">Flanora-v1</h3>
             </div>
-            <p className="font-body-md text-body-md text-on-surface-variant mb-8">
+            <p className="font-body-md text-body-md text-on-surface-variant mb-8" style={{ fontFamily: "'Martel Sans', sans-serif" }}>
               Our foundational model, optimized for speed and conceptual massing studies. Best for early-stage exploration.
             </p>
             <div className="pt-4 border-t border-hairline-border font-caption text-caption text-outline">
@@ -41,7 +41,7 @@ function FeaturesModels() {
             <div className="flex justify-between items-start mb-6 relative z-10">
               <h3 className="font-headline-md text-headline-md text-ink-text">Flanora-v2</h3>
             </div>
-            <p className="font-body-md text-body-md text-on-surface-variant mb-8 relative z-10">
+            <p className="font-body-md text-body-md text-on-surface-variant mb-8 relative z-10" style={{ fontFamily: "'Martel Sans', sans-serif" }}>
               Precision rendering and advanced spatial logic. Handles complex multi-story structures and intricate lighting requirements.
             </p>
             <div className="pt-4 border-t border-hairline-border font-caption text-caption text-outline relative z-10">
@@ -54,7 +54,7 @@ function FeaturesModels() {
               <h3 className="font-headline-md text-outline">Flanora-v3</h3>
               <span className="font-label-caps text-label-caps px-2 py-1 border border-hairline-border text-outline rounded">Coming Soon</span>
             </div>
-            <p className="font-body-md text-body-md text-outline mb-8">
+            <p className="font-body-md text-body-md text-outline mb-8" style={{ fontFamily: "'Martel Sans', sans-serif" }}>
               Next-generation synthesis incorporating structural engineering constraints and localized building codes.
             </p>
             <div className="pt-4 border-t border-hairline-border font-caption text-caption text-outline">

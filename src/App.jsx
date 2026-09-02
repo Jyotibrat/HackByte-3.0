@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import HomePage from "./pages/HomePage";
 import ChatPage from "./pages/ChatPage";
+import ModelsPage from "./pages/ModelsPage";
 import KnowMorePage from "./pages/KnowMorePage";
 import ContributorsPage from "./pages/ContributorsPage";
 import ResultsPage from "./pages/ResultsPage";
@@ -33,7 +34,7 @@ function AnimatedRoutes() {
         <Route element={<MarketingLayout />}>
           <Route path="/features" element={<FeaturesPage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/models" element={<KnowMorePage />} />
+          <Route path="/models" element={<ModelsPage />} />
           <Route path="/models/flanora-v1" element={<StableDiffusionPage />} />
           <Route path="/models/flanora-v2" element={<DallEPage />} />
           <Route path="/models/midjourney" element={<MidjourneyPage />} />

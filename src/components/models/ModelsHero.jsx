@@ -1,0 +1,52 @@
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+
+function ModelsHero() {
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Fade in text elements
+      gsap.fromTo(
+        '.hero-text',
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: 'power3.out', delay: 0.2 }
+      );
+      
+      // Subtle zoom on the background image
+      gsap.fromTo(
+        '.hero-img',
+        { scale: 1.05 },
+        { scale: 1, duration: 2, ease: 'power2.out' }
+      );
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section ref={heroRef} className="relative min-h-screen flex items-center pt-24 overflow-hidden border-b border-hairline">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <img 
+          alt="Premium minimalist architectural hero visual" 
+          className="w-full h-full object-cover hero-img" 
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPoeTxTphkfT7byK-9JGkApUscNHLe1HkTK3DYIiSL25bR0Usb8A5WLlDwIrH2hLNIgGY9PFfBRwX7udBNeWPP525oQ4jqLTNQWzbAlAiX1wTuMtzxdg2o2Wv5JfhpYLkFt6YRafBo71Rdfj5H6qw5q--0PDlkcZ4cK_Uqx1nRFJ8rfza_k3O5-rVFWu05-IUPQFlAfLVIvJPl2I3OccgfLGACwdefU3r-Jzlqb_zUxv4v6bOupS6y"
+        />
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div className="max-w-3xl">
+          <p className="font-martel text-sm tracking-[0.2em] text-outline mb-6 uppercase hero-text">Models / 01</p>
+          <h1 className="font-playfair text-6xl md:text-8xl leading-tight mb-8 hero-text text-charcoal">
+            The Flanora<br />Model Family
+          </h1>
+          <p className="font-martel text-lg text-charcoal-light leading-relaxed max-w-xl hero-text">
+            A suite of purpose-built generative models designed specifically for architectural spatial synthesis. From rapid conceptual ideation to high-fidelity structural rendering.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default ModelsHero;

@@ -1,0 +1,76 @@
+/* src/pages/ModelsPage.css */
+.flanora-models-page {
+  /* Colors */
+  --paper-bg: #f8f7f5;
+  --charcoal: #1a1a1a;
+  --charcoal-light: #2a2a2a;
+  --outline: #747878;
+  --hairline-border: rgba(26, 26, 26, 0.15);
+  --flanora-lime: #c6ff00;
+  
+  background-color: var(--paper-bg);
+  color: var(--charcoal);
+  font-family: 'Martel Sans', sans-serif;
+}
+
+/* Typography Classes */
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-martel {
+  font-family: 'Martel Sans', sans-serif;
+}
+
+/* Backgrounds & Text */
+.bg-paper-bg { background-color: var(--paper-bg); }
+.bg-charcoal { background-color: var(--charcoal); }
+.bg-charcoal-light { background-color: var(--charcoal-light); }
+.text-charcoal { color: var(--charcoal); }
+.text-flanora-lime { color: var(--flanora-lime); }
+.text-outline { color: var(--outline); }
+.border-hairline { border-color: var(--hairline-border); }
+
+/* GSAP Reveal Animations */
+.reveal-text {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.reveal-image-container {
+  overflow: hidden;
+}
+
+/* Utility / Buttons */
+.btn-primary {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: var(--charcoal);
+  color: #ffffff;
+  font-family: 'Martel Sans', sans-serif;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--flanora-lime);
+  color: var(--charcoal);
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Martel Sans', sans-serif;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.link-arrow:hover {
+  color: var(--flanora-lime);
+  border-color: var(--flanora-lime);
+}
