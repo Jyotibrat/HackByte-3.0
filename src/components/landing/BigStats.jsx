@@ -3,7 +3,7 @@ import gsap from "gsap";
 import Counter from "./Counter";
 
 const STATS = [
-  { value: 2.4, suffix: "M", text: "Total audience reach across campaigns and digital launches" },
+  { value: 361, suffix: "M", text: "Parameters powering the Flanora-v1 architectural foundation model" },
   { value: 118, suffix: "K", text: "Creative assets delivered across identity, motion and web" },
   { value: 93, suffix: "+", text: "Brand launches shaped from strategy to final experience" },
   { value: 21, suffix: "", text: "Countries reached through international collaborations" },

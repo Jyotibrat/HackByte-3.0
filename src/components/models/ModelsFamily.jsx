@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import flanoraV1Img from '../../assets/models/flanora_v1.png';
 import flanoraV2Img from '../../assets/models/flanora_v2.png';
 import flanoraV3Img from '../../assets/models/flanora_v3.png';
 import gsap from 'gsap';
@@ -176,7 +177,7 @@ function ModelsFamily() {
             <img
               className="media-item max-h-[80%] max-w-[80%] object-contain border border-hairline shadow-sm"
               alt="Flanora-v1 Floor Plan"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU1BBrSM8aLSqPSZXcWgyxfAaZ8DwsVgaF_KxB8syOEuvRKtLMTgb2AQEESXq_wdAZT-O5Tt1-J4jwewUQ45EpxnsFKoPrh541OK8gcMHsvCWfSFxbfpbhJ-uKJ_SBGHwxUBoRsL5EiHlHK_vY57lGBQrRV0-kATYUssy4vVlMjtl8H-84Z54dE9msQKLEtQUXNoLZebR72YX0rCSIEnbZAmz3czIL21O6BVVR71n7jkcvlNBigtyi"
+              src={flanoraV1Img}
             />
           </div>
           <div className="order-2 md:order-1 flex flex-col justify-end md:justify-center">
