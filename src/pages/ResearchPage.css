@@ -1,0 +1,102 @@
+/* src/pages/ResearchPage.css */
+
+.flanora-research-page {
+  /* Colors from Stitch Design */
+  --paper-bg: #f8f7f5;
+  --inverse-surface: #2d3131;
+  --surface-tint: #5f5e5e;
+  --hairline-border: #e5e5e5;
+  --surface-variant: #e0e3e3;
+  --ink-text: #1a1a1a;
+  --surface-container-lowest: #ffffff;
+  --ai-glow: rgba(59, 130, 246, 0.3);
+  --background: #f7fafa;
+  --on-primary: #ffffff;
+  --surface-bright: #f7fafa;
+  --blueprint-grid: rgba(26, 26, 26, 0.03);
+  --surface-container-low: #f1f4f4;
+  --surface-container: #ebeeee;
+  --on-surface-variant: #444748;
+  --outline: #747878;
+  --surface-container-highest: #e0e3e3;
+  --on-surface: #181c1d;
+  --surface: #f7fafa;
+  --accent-lime: #c6ff00;
+  --charcoal-plate: #111111;
+  --primary: #000000;
+  --secondary: #085ac0;
+
+  background-color: var(--paper-bg);
+  color: var(--ink-text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Typography Overrides */
+.flanora-research-page .font-body-lg { font-family: 'Inter', sans-serif; font-size: 20px; line-height: 1.6; font-weight: 400; }
+.flanora-research-page .font-display-xl { font-family: 'Playfair Display', serif; font-size: 72px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 400; }
+.flanora-research-page .font-caption { font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.4; font-weight: 400; }
+.flanora-research-page .font-headline-lg { font-family: 'Playfair Display', serif; font-size: 48px; line-height: 1.2; font-weight: 400; }
+.flanora-research-page .font-body-md { font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; font-weight: 400; }
+.flanora-research-page .font-label-caps { font-family: 'Inter', sans-serif; font-size: 12px; line-height: 1; letter-spacing: 0.15em; font-weight: 600; }
+.flanora-research-page .font-headline-md { font-family: 'Playfair Display', serif; font-size: 32px; line-height: 1.3; font-weight: 400; }
+.flanora-research-page .font-martel { font-family: 'Martel Sans', sans-serif; }
+.flanora-research-page .font-mono { font-family: 'Space Mono', monospace; }
+
+/* Colors Mappings to Tailwind Classes (since they were defined in tailwind.config in the HTML) */
+.flanora-research-page .bg-paper-bg { background-color: var(--paper-bg); }
+.flanora-research-page .text-ink-text { color: var(--ink-text); }
+.flanora-research-page .bg-accent-lime { background-color: var(--accent-lime); }
+.flanora-research-page .text-primary { color: var(--primary); }
+.flanora-research-page .border-hairline-border { border-color: var(--hairline-border); }
+.flanora-research-page .text-on-surface-variant { color: var(--on-surface-variant); }
+.flanora-research-page .bg-surface-container-lowest { background-color: var(--surface-container-lowest); }
+.flanora-research-page .text-accent-lime { color: var(--accent-lime); }
+.flanora-research-page .bg-charcoal-plate { background-color: var(--charcoal-plate); }
+.flanora-research-page .bg-primary { background-color: var(--primary); }
+.flanora-research-page .text-on-primary { color: var(--on-primary); }
+.flanora-research-page .border-primary { border-color: var(--primary); }
+.flanora-research-page .group-hover\:text-primary:hover { color: var(--primary); }
+.flanora-research-page .hover\:text-secondary:hover { color: var(--secondary); }
+.flanora-research-page .group-hover\/btn\:border-secondary:hover { border-color: var(--secondary); }
+
+/* Icons */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle Blueprint Architectural Grid Pattern */
+.flanora-research-page.blueprint-bg {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(26, 26, 26, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(26, 26, 26, 0.035) 1px, transparent 1px);
+}
+
+.flanora-research-page .dark-grid-bg {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+/* Architectural precision crosshairs */
+.crosshair-corner::before,
+.crosshair-corner::after {
+  content: '';
+  position: absolute;
+  background-color: #1a1a1a;
+  opacity: 0.3;
+}
