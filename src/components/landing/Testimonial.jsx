@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Counter from "./Counter";
@@ -10,7 +10,27 @@ function Testimonial() {
   const photoRef = useRef(null);
   const quoteRef = useRef(null);
 
+  const [githubRepos, setGithubRepos] = useState(3); // default from current
+  const [hfRepos, setHfRepos] = useState(2); // default from current
+
   useEffect(() => {
+    // Fetch dynamic counts
+    // /api/github-list is proxied by Vite dev server → github.com/stars/Jyotibrat/lists/flanora-ai
+    fetch('/api/github-list')
+      .then(res => res.text())
+      .then(html => {
+        const match = html.match(/(\d+)\s*repositor/i);
+        if (match) setGithubRepos(parseInt(match[1], 10));
+      })
+      .catch(console.error);
+
+    fetch('https://huggingface.co/api/collections/BJyotibrat/flanora-ai')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.items) setHfRepos(data.items.length);
+      })
+      .catch(console.error);
+
     const ctx = gsap.context(() => {
       gsap.from(photoRef.current, {
         clipPath: "inset(50% 50% 50% 50%)",
@@ -46,7 +66,7 @@ function Testimonial() {
       <div className="container grid12 quote-grid">
         <div className="quote-photo" ref={photoRef}>
           <img
-            src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/95a6559d-388d-45c7-9ed3-b3d3fe4efa9a_800w.webp"
+            src="/profilePhotos/bindupautra.jpg"
             alt="Client portrait"
           />
         </div>
@@ -60,12 +80,12 @@ function Testimonial() {
         </div>
         <div className="quote-metrics">
           <div className="metric">
-            <Counter value={84} />
-            <span>Launches</span>
+            <Counter value={githubRepos} />
+            <span>GitHub Repositories</span>
           </div>
           <div className="metric">
-            <Counter value={96} />
-            <span>Client retention %</span>
+            <Counter value={hfRepos} />
+            <span>Hugging Face Repositories</span>
           </div>
           <div className="metric">
             <Counter value={14} />

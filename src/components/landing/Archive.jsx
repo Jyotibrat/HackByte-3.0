@@ -7,46 +7,25 @@ gsap.registerPlugin(ScrollTrigger);
 const ROWS = [
   {
     year: "2026",
-    name: "Axiom",
+    name: "Rana Talukdar",
     role: "Campaign Direction",
-    thumb: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/cdb06f1d-ba81-4122-995e-6f03d6cfbea8_320w.webp",
-    preview: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=85",
+    thumb: "/profilePhotos/rana-talukdar.jpg",
+    preview: "/profilePhotos/rana-talukdar.jpg",
   },
   {
     year: "2026",
-    name: "Noma",
+    name: "Ansh",
     role: "Digital Launch",
-    thumb: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/68393d27-4c21-415a-aafc-cf5a31b57682_320w.webp",
-    preview: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=85",
+    thumb: "/profilePhotos/ansh.jpeg",
+    preview: "/profilePhotos/ansh.jpeg",
   },
   {
     year: "2025",
-    name: "Terrain",
+    name: "Arunim",
     role: "Identity System",
-    thumb: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a41d3a65-8d6a-4d01-9658-ed45cbcdcce6_320w.webp",
-    preview: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    year: "2025",
-    name: "Mono",
-    role: "Brand Film",
-    thumb: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/variants/0a4aa3d6-d721-49ae-8f1d-fae6a49994ee/320w.png",
-    preview: "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    year: "2024",
-    name: "Circa",
-    role: "Editorial Platform",
-    thumb: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=400&q=75",
-    preview: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    year: "2024",
-    name: "Vestra",
-    role: "Art Direction",
-    thumb: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=75",
-    preview: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=85",
-  },
+    thumb: "/profilePhotos/arunim.jpg",
+    preview: "/profilePhotos/arunim.jpg",
+  }
 ];
 
 function Archive() {
