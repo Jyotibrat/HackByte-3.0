@@ -134,8 +134,8 @@ function Navbar({ variant = "marketing", scrollState }) {
     );
   }
 
-  const lightThemePaths = ["/about", "/features", "/models", "/research/publications/survey-paper-2025"];
-  const isLightTheme = lightThemePaths.includes(pathname);
+  const lightThemePaths = ["/about", "/features", "/models"];
+  const isLightTheme = lightThemePaths.includes(pathname) || pathname.startsWith("/research");
   const menu = openMenu === "models" ? <ModelMenu /> : <ResearchMenu />;
 
   return (

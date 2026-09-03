@@ -21,6 +21,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SurveyPaper2025 from "./pages/SurveyPaper2025";
+import ResearchCategoryPage from "./pages/ResearchCategoryPage";
 import MarketingLayout from "./components/MarketingLayout";
 import LoadingScreen from "./components/LoadingScreen";
 import PageTransition from "./components/PageTransition";
@@ -44,12 +45,12 @@ function AnimatedRoutes() {
           <Route path="/showcase/flanora-v2" element={<ResultsPage />} />
           <Route path="/showcase/flanora-v3" element={<ResultsPage />} />
           <Route path="/research" element={<ResearchPage />} />
-          <Route path="/research/publications" element={<ResearchPage />} />
-          <Route path="/research/articles" element={<ResearchPage />} />
-          <Route path="/research/technical-reports" element={<ResearchPage />} />
-          <Route path="/research/resources" element={<ResearchPage />} />
-          <Route path="/research/resources/presentations" element={<ResearchPage />} />
-          <Route path="/research/resources/datasets" element={<ResearchPage />} />
+          <Route path="/research/publications" element={<ResearchCategoryPage />} />
+          <Route path="/research/articles" element={<ResearchCategoryPage />} />
+          <Route path="/research/technical-reports" element={<ResearchCategoryPage />} />
+          <Route path="/research/resources" element={<ResearchCategoryPage />} />
+          <Route path="/research/resources/presentations" element={<ResearchCategoryPage />} />
+          <Route path="/research/resources/datasets" element={<ResearchCategoryPage />} />
           <Route path="/policies" element={<PoliciesPage />} />
           <Route path="/policies/:policy" element={<PoliciesPage />} />
           <Route path="/contact" element={<ContactPage />} />
