@@ -4,13 +4,20 @@ import modelsCtaImg from '../../assets/models/models_cta_img.png';
 
 function ModelsCTA() {
   return (
-    <section className="py-32 relative overflow-hidden">
+    <section 
+      className="py-32 relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${modelsCtaImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
       <div 
-        className="absolute inset-0 z-0 opacity-15"
+        className="absolute inset-0 z-0"
         style={{
-          backgroundImage: `url(${modelsCtaImg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          background: 'rgba(248, 247, 242, 0.65)',
+          backdropFilter: 'contrast(1.2) saturate(1.2)',
+          WebkitBackdropFilter: 'contrast(1.2) saturate(1.2)',
         }}
       />
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">

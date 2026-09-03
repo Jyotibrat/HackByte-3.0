@@ -71,8 +71,8 @@
 }
 
 .link-arrow:hover {
-  color: var(--flanora-lime);
-  border-color: var(--flanora-lime);
+  color: #22d3ee;
+  border-color: #22d3ee;
 }
 
 .timeline {

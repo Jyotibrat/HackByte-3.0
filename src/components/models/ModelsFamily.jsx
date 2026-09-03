@@ -57,6 +57,11 @@ function ModelsFamily() {
         const bgLayer = section.querySelector('.year-bg-layer');
         const items = section.querySelectorAll('.media-item');
 
+        const prevColor = index > 0 ? yearSections[index - 1].dataset.color : bgColor;
+        if (bgLayer) {
+          gsap.set(bgLayer, { backgroundColor: prevColor });
+        }
+
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: section,
@@ -67,24 +72,35 @@ function ModelsFamily() {
             onEnter: () => {
               animateYearRoll(currentYearRef.current, newYear);
               currentYearRef.current = newYear;
-              gsap.to(bgLayer, { backgroundColor: bgColor, duration: 0.6, ease: 'power2.out' });
             },
             onLeaveBack: () => {
               const prev = yearSections[index - 1];
               const prevYear = prev?.dataset.year || START_YEAR;
-              const prevColor = prev?.dataset.color || '#F8F7F5';
-              const prevBgLayer = prev?.querySelector('.year-bg-layer');
-
               animateYearRoll(currentYearRef.current, prevYear);
               currentYearRef.current = prevYear;
-              if (prevBgLayer) {
-                gsap.to(prevBgLayer, { backgroundColor: prevColor, duration: 0.6, ease: 'power2.out' });
-              }
             },
           },
         });
 
+        if (bgLayer) {
+          tl.to(bgLayer, { backgroundColor: bgColor, duration: 0.8, ease: 'power1.inOut' }, 0);
+        }
+
         if (newYear === '2025') {
+          // Animate text color from dark → light in sync with the dark bg
+          const textContainer = section.querySelector('.v2-text-container');
+          if (textContainer) {
+            gsap.set(textContainer, { color: '#1a1a1a' });
+            tl.to(textContainer, { color: '#F8F7F5', duration: 0.8, ease: 'power1.inOut' }, 0);
+          }
+          // Animate year display dark → light
+          tl.to('#year-display', { color: '#F8F7F5', duration: 0.8, ease: 'power1.inOut' }, 0);
+          // Animate the badge border+text from charcoal → flanora-lime
+          const badge = section.querySelector('.v2-badge');
+          if (badge) {
+            gsap.set(badge, { color: '#1a1a1a', borderColor: '#1a1a1a' });
+            tl.to(badge, { color: '#D7FF5E', borderColor: '#D7FF5E', duration: 0.8, ease: 'power1.inOut' }, 0);
+          }
           // Ghost/mask text reveal for Flanora-v2
           const masked = section.querySelector('.intro-masked');
           if (masked) {
@@ -94,7 +110,21 @@ function ModelsFamily() {
               0
             );
           }
-        } else {
+        } else if (newYear === '2026') {
+          // Animate text color from light → dark in sync with the light bg (reverse of v2)
+          const textContainer = section.querySelector('.v3-text-container');
+          if (textContainer) {
+            gsap.set(textContainer, { color: '#F8F7F5' });
+            tl.to(textContainer, { color: '#1a1a1a', duration: 0.8, ease: 'power1.inOut' }, 0);
+          }
+          // Animate year display light → dark
+          tl.to('#year-display', { color: '#1a1a1a', duration: 0.8, ease: 'power1.inOut' }, 0);
+          // Animate badge from flanora-lime → charcoal
+          const badge = section.querySelector('.v3-badge');
+          if (badge) {
+            gsap.set(badge, { color: '#D7FF5E', borderColor: '#D7FF5E' });
+            tl.to(badge, { color: '#1a1a1a', borderColor: '#1a1a1a', duration: 0.8, ease: 'power1.inOut' }, 0);
+          }
           const intro = section.querySelector('.intro');
           const split = new SplitText(intro, { type: 'words' });
           splits.push(split);
@@ -130,7 +160,7 @@ function ModelsFamily() {
 
   return (
     <div ref={sectionRef} className="timeline relative">
-      <div id="year-display" className="year-number sticky top-[2vh] z-20 flex justify-center items-center">
+      <div id="year-display" className="year-number sticky top-[calc(72px+1.5vh)] z-10 flex justify-center items-center">
         {START_YEAR.split('').map((digit, i) => (
           <span key={i} className="digit" ref={(el) => (digitsRef.current[i] = el)}>
             {digit}
@@ -140,7 +170,7 @@ function ModelsFamily() {
 
       {/* 2024 — Flanora-v1 */}
       <section className="year-section" data-year="2024" data-color="#F8F7F5">
-        <div className="year-bg-layer" style={{ backgroundColor: '#F8F7F5' }}></div>
+        <div className="year-bg-layer"></div>
         <div className="grid grid-rows-[1fr_auto] md:grid-rows-1 md:grid-cols-2 gap-8 w-full h-full relative z-10 px-8 py-12 md:py-4 max-w-7xl mx-auto">
           <div className="media-stack relative w-full h-full flex items-center justify-center p-4 md:p-12 order-1 md:order-2">
             <img
@@ -173,8 +203,8 @@ function ModelsFamily() {
       </section>
 
       {/* 2025 — Flanora-v2 */}
-      <section className="year-section" data-year="2025" data-color="#EAF7D9">
-        <div className="year-bg-layer" style={{ backgroundColor: '#EAF7D9' }}></div>
+      <section className="year-section" data-year="2025" data-color="#1a1a1a">
+        <div className="year-bg-layer"></div>
         <div className="grid grid-rows-[1fr_auto] md:grid-rows-1 md:grid-cols-2 gap-8 w-full h-full relative z-10 px-8 py-12 md:py-4 max-w-7xl mx-auto">
           <div className="media-stack relative w-full h-full flex items-center justify-center p-4 md:p-12 order-1 md:order-2">
             <img
@@ -184,19 +214,19 @@ function ModelsFamily() {
             />
           </div>
           <div className="order-2 md:order-1 flex flex-col justify-end md:justify-center">
-            <div className="text-left">
+            <div className="v2-text-container text-left">
               <div className="flex items-center gap-4 mb-4">
-                <span className="font-martel text-sm tracking-widest text-outline">02</span>
+                <span className="font-martel text-sm tracking-widest opacity-60">02</span>
                 <h2 className="font-playfair text-4xl md:text-5xl">Flanora-v2</h2>
               </div>
-              <p className="font-martel text-sm tracking-widest uppercase mb-6 text-charcoal font-semibold border border-charcoal inline-block px-3 py-1">
+              <p className="v2-badge font-martel text-sm tracking-widest uppercase mb-6 font-semibold border inline-block px-3 py-1">
                 Multi-Model Generation
               </p>
               <div className="text-mask-wrapper mb-8">
-                <p className="intro-ghost font-martel text-lg text-outline opacity-50 leading-relaxed max-w-[40ch]" aria-hidden="true">
+                <p className="intro-ghost font-martel text-lg opacity-20 leading-relaxed max-w-[40ch]" aria-hidden="true">
                   Introducing divergent exploration. V2 generates multiple conceptual variations from a single prompt, allowing architects to quickly explore different spatial typologies and structural organizations.
                 </p>
-                <p className="intro-masked font-martel text-lg text-charcoal-light leading-relaxed max-w-[40ch]">
+                <p className="intro-masked font-martel text-lg leading-relaxed max-w-[40ch]">
                   Introducing divergent exploration. V2 generates multiple conceptual variations from a single prompt, allowing architects to quickly explore different spatial typologies and structural organizations.
                 </p>
               </div>
@@ -212,8 +242,8 @@ function ModelsFamily() {
       </section>
 
       {/* 2026 — Flanora-v3 */}
-      <section className="year-section" data-year="2026" data-color="#F0F0EF">
-        <div className="year-bg-layer" style={{ backgroundColor: '#F0F0EF' }}></div>
+      <section className="year-section" data-year="2026" data-color="#F8F7F5">
+        <div className="year-bg-layer"></div>
         <div className="grid grid-rows-[1fr_auto] md:grid-rows-1 md:grid-cols-2 gap-8 w-full h-full relative z-10 px-8 py-12 md:py-4 max-w-7xl mx-auto">
           <div className="media-stack relative w-full h-full flex items-center justify-center p-4 md:p-12 order-1 md:order-2 opacity-70">
             <img
@@ -223,20 +253,20 @@ function ModelsFamily() {
             />
           </div>
           <div className="order-2 md:order-1 flex flex-col justify-end md:justify-center">
-            <div className="text-left">
+            <div className="v3-text-container text-left">
               <div className="flex items-center gap-4 mb-4">
-                <span className="font-martel text-sm tracking-widest text-outline">03</span>
-                <h2 className="font-playfair text-4xl md:text-5xl text-outline">Flanora-v3</h2>
+                <span className="font-martel text-sm tracking-widest opacity-60">03</span>
+                <h2 className="font-playfair text-4xl md:text-5xl">Flanora-v3</h2>
               </div>
               <div className="flex items-center gap-3 mb-6">
-                <p className="font-martel text-sm tracking-widest uppercase text-outline font-semibold border border-outline inline-block px-3 py-1 m-0">
+                <p className="v3-badge font-martel text-sm tracking-widest uppercase font-semibold border inline-block px-3 py-1 m-0">
                   Next Generation
                 </p>
-                <span className="inline-block bg-charcoal/5 text-outline text-xs px-2 py-1 uppercase tracking-wider">
+                <span className="inline-block text-xs px-2 py-1 uppercase tracking-wider opacity-60">
                   Coming Soon
                 </span>
               </div>
-              <p className="intro font-martel text-lg text-outline leading-relaxed mb-8 max-w-[40ch]">
+              <p className="intro font-martel text-lg leading-relaxed mb-8 max-w-[40ch]">
                 The frontier of architectural intelligence. V3 integrates deeper contextual understanding and dynamic structural adaptation, moving beyond discrete plans into fluid spatial intelligence.
               </p>
             </div>
