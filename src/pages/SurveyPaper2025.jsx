@@ -24,10 +24,10 @@ import TabsTrigger from "../components/research/tabs/TabsTrigger";
 import TabsContent from "../components/research/tabs/TabsContent";
 
 // Assets
-import dogsDiffc from "../assets/research/dogs-diffc.png";
-import dogsTrue from "../assets/research/dogs-true.png";
-import dogsMsillm from "../assets/research/dogs-msillm.jpg";
-import outsideVideo from "../assets/research/outside.mp4";
+import dogsDiffc from "../assets/research/publications/survey paper 2025/dogs-diffc.png";
+import dogsTrue from "../assets/research/publications/survey paper 2025/dogs-true.png";
+import dogsMsillm from "../assets/research/publications/survey paper 2025/dogs-msillm.jpg";
+import outsideVideo from "../assets/research/publications/survey paper 2025/outside.mp4";
 
 // Inline KaTeX rendering helper
 import { renderToString } from "katex";

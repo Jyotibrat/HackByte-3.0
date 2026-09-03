@@ -2,9 +2,9 @@ import { useEffect, useId, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import trueImg from '../../../assets/research/dogs-true.png';
-import diffcImg from '../../../assets/research/dogs-diffc.png';
-import msillmImg from '../../../assets/research/dogs-msillm.jpg';
+import trueImg from '../../../assets/research/publications/survey paper 2025/dogs-true.png';
+import diffcImg from '../../../assets/research/publications/survey paper 2025/dogs-diffc.png';
+import msillmImg from '../../../assets/research/publications/survey paper 2025/dogs-msillm.jpg';
 
 import './ResearchShowcase.css';
 
