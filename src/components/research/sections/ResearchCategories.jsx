@@ -4,6 +4,10 @@
 // To ADD A NEW ITEM: duplicate one <article> block below and update the fields
 // To REORDER items: move the <article> blocks up or down in the JSX
 
+import publicationsImg from '../../../assets/research/Publications_img.png';
+import articlesImg from '../../../assets/research/Articles_img.png';
+import technicalReportsImg from '../../../assets/research/Technical_Reports_img.png';
+
 const CATEGORIES = [
   {
     number: "01",
@@ -14,8 +18,7 @@ const CATEGORIES = [
     linkLabel: "EXPLORE PUBLICATIONS",
     href: "#publications",
     imageAlt: "Publications Architectural Diagram",
-    imageSrc:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCQR4Bt7q2pV77k63rAELU73NnNXdjWmnA7OUOrv9ZSHY2BEHZzeEqYFbjnuiOAe_laj-q4fbRuuNC6DoicVaORMcokiQRvV-sHFF_3LcpCZXNKNDDMZAVLusvp_7gDEjHAy8sDdqvLddyUOWkCY6A0WC7yDRmet6f0IJwtyL-2DygraVJ6kOu6fBmJlZuKYCNBnJhZQnMXiMHYo61mfALmhZMKbNusm-XaF5uuSebhn4UOC32-ys1Q",
+    imageSrc: publicationsImg,
     plateLabel: "PLATE 01.A — PLANAR TOPOLOGY MAPPING",
     plateRef: "SYNTHESIS #71",
     // imageRight: true means image is on the right, text on the left
@@ -30,8 +33,7 @@ const CATEGORIES = [
     linkLabel: "READ ARTICLES",
     href: "#articles",
     imageAlt: "Articles Spatial Essay Figure",
-    imageSrc:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAC9BAzAQU83cYLC7DYpBxb8SIGCqjQi_C1Q0G1fyRbKMB3cApyEgkYdKF7rIztLKADlMlebeXOoXbl01gFIN6GCjXn8Tu_0x9Y49jhIVzPlfPVl8u8dL8h-c3aF5hsfuXAwBCnvYcd0b7_vG9lnDBfNpy0FcsPvseoOf-tLVYE1HRzmq-t46JAkNeMqXK1HlUNP4nnExD08I2YJcKDIkjqaUKzK9HY1h96jq56TQkpT-V_nnnJKuvo",
+    imageSrc: articlesImg,
     plateLabel: "PLATE 02.C — HUMAN-MODEL VOLUMETRIC COLLABORATION",
     plateRef: "ESSAY #74",
     imageRight: false,
@@ -45,8 +47,7 @@ const CATEGORIES = [
     linkLabel: "VIEW REPORTS",
     href: "#reports",
     imageAlt: "Technical Report Geometry Model",
-    imageSrc:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAem8jPkCI99TospKS5FnmZwfEdlpDqGRgmmN3rQfmfrgyVeSavIut-wiJ4eSwiFgJvwuhLFMvR6RS6wlStNltOYlC63E74I1xC-UU5REhiRUET97ome2b_sjRtlJyYPGnpMdmsN9onR9TWU719lzXV0YXNaHyhaxCh0HZhByYtwtV_qRNgjqBflo5Uy-cy98WLBflxJ2TPJFTPkcG3hztSdP3UkBwMVA7ripey5zADUehYFC-44LVh",
+    imageSrc: technicalReportsImg,
     plateLabel: "PLATE 03.B — VOLUMETRIC EVALUATION & LATENT RECONSTRUCTION",
     plateRef: "EXP #72",
     imageRight: true,
@@ -84,10 +85,6 @@ function CategoryArticle({ item }) {
         </span>
       </div>
       <div className={textColClass}>
-        <div className="inline-flex items-center gap-2">
-          <span className="w-1.5 h-1.5 bg-accent-lime"></span>
-          <span className="font-label-caps text-label-caps text-primary tracking-widest uppercase">{item.tag}</span>
-        </div>
         <h3 className="font-headline-md text-2xl md:text-3xl text-ink-text group-hover:underline underline-offset-4 decoration-1">
           {item.title}
         </h3>
@@ -98,9 +95,10 @@ function CategoryArticle({ item }) {
             href={item.href}
           >
             <span className="border-b border-primary pb-0.5 group-hover/btn:border-secondary">{item.linkLabel}</span>
-            <span className="material-symbols-outlined text-[16px] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200">
-              arrow_outward
-            </span>
+            <svg className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M7 17L17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </a>
         </div>
       </div>
@@ -109,7 +107,7 @@ function CategoryArticle({ item }) {
           <div className="aspect-[16/10] overflow-hidden bg-stone-100 relative">
             <img
               alt={item.imageAlt}
-              className="w-full h-full object-cover grayscale contrast-105 group-hover:scale-105 transition-transform duration-500 ease-out"
+              className="w-full h-full object-cover grayscale contrast-105 transition-transform duration-500 ease-out"
               src={item.imageSrc}
             />
           </div>

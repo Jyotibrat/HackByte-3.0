@@ -1,0 +1,105 @@
+.research-showcase-stage {
+  height: 500vh;
+  position: relative;
+  background-color: #000;
+}
+
+.research-showcase-layers {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.research-showcase-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.research-showcase-layer image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.8);
+}
+
+.research-showcase-texts {
+  padding: 3vw;
+}
+
+.research-showcase-txt {
+  position: absolute;
+  width: 100%;
+  color: #fff;
+  text-transform: uppercase;
+  clip-path: inset(100% 0 0 0);
+  transform: translateY(40px);
+}
+
+.research-showcase-txt h2 {
+  margin: 10vh 0 0;
+  font-size: clamp(3rem, 6vw, 8rem);
+  letter-spacing: -0.025em;
+  line-height: 0.9;
+  font-weight: 400;
+}
+
+.research-showcase-txt h3 {
+  margin: 2vw 0 0;
+  font-size: clamp(1.1rem, 1vw, 1.5rem);
+  letter-spacing: 0.2em;
+  font-weight: 400;
+}
+
+.research-showcase-txt span {
+  display: block;
+  font-size: clamp(1rem, 0.8vw, 1.15rem);
+  width: 30%;
+  min-width: 220px;
+  margin-top: 24px;
+  line-height: 1.7;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.research-showcase-progress {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  z-index: 20;
+}
+
+.research-showcase-segment {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+.research-showcase-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: #fff;
+}
+
+@media screen and (max-width: 1024px) {
+  .research-showcase-txt span {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .research-showcase-txt span {
+    width: 60%;
+  }
+}

@@ -49,7 +49,7 @@ function ResearchHero() {
         <div className="overflow-hidden relative aspect-[21/9] bg-neutral-100 flex items-center justify-center">
           <img
             alt="Flanora Architectural hero blueprint"
-            className="w-full h-full object-cover object-center filter grayscale contrast-[1.05] brightness-95 group-hover:scale-[1.015] transition-transform duration-700 ease-out"
+            className="w-full h-full object-cover object-center filter grayscale contrast-[1.05] brightness-95 transition-transform duration-700 ease-out"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCluYKBJ-zU7TTwFpWjeBGvZ_MyvFGJp95oa34-WGnS205LAqT1Q944lBKrd_bH7JvKckSCnikmDB2Ay0zoyJqvE_xz2917VsebH1Gvrh_r7sE1aSTQs_r4kZsrJqs0Lau9CAhyk802MeNcmsnZNLnnDwV6xCnI5jt36StzWtrJqOJ8JtBFGGhzlzM4-0DCcXaNYIMrSEkgl14SHPubvcqM-T1wU2t4Pa-ESPkSH2COpX_IorRbpo3D"
           />
           <div className="absolute inset-0 bg-primary/5 pointer-events-none"></div>

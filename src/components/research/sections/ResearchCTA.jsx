@@ -4,6 +4,8 @@
 // To UPDATE METRICS: edit the METRICS array below
 // To ADD/REMOVE CTA BUTTONS: edit the BUTTONS array below
 
+import { Link } from 'react-router-dom';
+
 const METRICS = [
   { label: "PUBLISHED PAPERS", value: "18", highlight: false },
   { label: "OPEN DATASETS", value: "4.2 TB", highlight: false },
@@ -14,17 +16,17 @@ const METRICS = [
 const BUTTONS = [
   {
     label: "EXPLORE PUBLICATIONS",
-    href: "#publications",
+    href: "/research/publications",
     style: "primary", // lime background
   },
   {
     label: "EXPLORE RESOURCES",
-    href: "#resources",
+    href: "/research/resources",
     style: "outline", // white outline
   },
   {
     label: "TRY FLANORA",
-    href: "#try",
+    href: "/chat",
     style: "ghost", // muted text
   },
 ];
@@ -52,37 +54,46 @@ function ResearchCTA() {
               {BUTTONS.map((btn) => {
                 if (btn.style === "primary") {
                   return (
-                    <a
+                    <Link
                       key={btn.href}
-                      href={btn.href}
+                      to={btn.href}
                       className="bg-accent-lime text-primary hover:bg-[#b0e600] px-6 py-3 font-label-caps text-label-caps tracking-widest font-semibold flex items-center gap-2 transition-transform duration-150 active:scale-95"
                     >
                       <span>{btn.label}</span>
-                      <span className="material-symbols-outlined text-[16px]">arrow_outward</span>
-                    </a>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M7 17L17 7" />
+                        <path d="M7 7h10v10" />
+                      </svg>
+                    </Link>
                   );
                 }
                 if (btn.style === "outline") {
                   return (
-                    <a
+                    <Link
                       key={btn.href}
-                      href={btn.href}
+                      to={btn.href}
                       className="border border-neutral-600 hover:border-white text-white px-6 py-3 font-label-caps text-label-caps tracking-widest flex items-center gap-2 transition-colors duration-150"
                     >
                       <span>{btn.label}</span>
-                      <span className="material-symbols-outlined text-[16px]">arrow_outward</span>
-                    </a>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M7 17L17 7" />
+                        <path d="M7 7h10v10" />
+                      </svg>
+                    </Link>
                   );
                 }
                 return (
-                  <a
+                  <Link
                     key={btn.href}
-                    href={btn.href}
+                    to={btn.href}
                     className="text-neutral-400 hover:text-white px-4 py-3 font-label-caps text-label-caps tracking-widest flex items-center gap-1.5 transition-colors duration-150 ml-2"
                   >
                     <span>{btn.label}</span>
-                    <span className="material-symbols-outlined text-[14px]">arrow_outward</span>
-                  </a>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7" />
+                      <path d="M7 7h10v10" />
+                    </svg>
+                  </Link>
                 );
               })}
             </div>
