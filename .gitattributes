@@ -10,9 +10,4 @@
 *.ipynb diff=jupyternotebook
 
 Notebooks/*.ipynb linguist-documentation
-Notebooks/**/*.ipynb linguist-documentation
-
-skills-lock.json
-
-.agents/
-.claude/
+Notebooks/**/*.ipynb linguist-documentation

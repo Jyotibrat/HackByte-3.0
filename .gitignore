@@ -5,3 +5,7 @@ node_modules
 AGENTS.md
 docs
 dist
+
+skills-lock.json
+.agents/
+.claude/
