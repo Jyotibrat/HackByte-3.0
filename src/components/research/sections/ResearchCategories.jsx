@@ -97,9 +97,6 @@ function CategoryArticle({ item }) {
   const numberColor = hasBg ? "text-stone-400 group-hover:text-white" : "text-stone-400 group-hover:text-black";
   const descColor = hasBg ? "text-white/80" : "text-stone-600";
   const linkColor = hasBg ? "text-white group/btn" : "text-primary hover:text-secondary group/btn";
-  const linkBorderColor = hasBg
-    ? "border-white/60 pb-0.5 group-hover/btn:border-white"
-    : "border-primary pb-0.5 group-hover/btn:border-secondary";
   const borderColor = hasBg ? "border-white/20" : "border-hairline-border";
   const imageBorderColor = hasBg
     ? "border-white/20 group-hover:border-white/40"
@@ -124,10 +121,16 @@ function CategoryArticle({ item }) {
           <a
             className={`inline-flex items-center gap-2 font-label-caps text-label-caps tracking-widest transition-colors ${linkColor}`}
             href={item.href}
+            style={{
+              '--default-color': hasBg ? 'rgba(255,255,255,0.7)' : '#000',
+              '--hover-color': hasBg ? '#fff' : '#085ac0',
+              '--default-border': hasBg ? 'rgba(255,255,255,0.4)' : '#000',
+              '--hover-border': hasBg ? '#fff' : '#085ac0',
+            }}
           >
-            <span className={`border-b ${linkBorderColor}`}>{item.linkLabel}</span>
+            <span className="btn-text-reveal btn-border-reveal pb-0.5 relative">{item.linkLabel}</span>
             <svg
-              className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200"
+              className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200 group-hover/btn:delay-300"
               width="16" height="16" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" strokeWidth="2"
               strokeLinecap="round" strokeLinejoin="round"

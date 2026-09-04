@@ -247,10 +247,9 @@ function MaskRevealSection({ bgSrc, bgAlt = '', variant, overlayDark = true, chi
       master = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          // Fire as soon as the section enters the bottom of the viewport.
-          start: 'top 90%',
-          toggleActions: 'play none none none',
-          once: true,
+          start: 'top 85%',
+          end: 'top 15%',
+          scrub: 1.5,
           invalidateOnRefresh: true,
         },
       });

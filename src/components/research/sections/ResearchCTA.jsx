@@ -5,6 +5,7 @@
 // To ADD/REMOVE CTA BUTTONS: edit the BUTTONS array below
 
 import { Link } from 'react-router-dom';
+import ctaBg from '../../../assets/research/features_cta_img.png';
 
 const METRICS = [
   { label: "PUBLISHED PAPERS", value: "18", highlight: false },
@@ -33,7 +34,15 @@ const BUTTONS = [
 
 function ResearchCTA() {
   return (
-    <section className="bg-charcoal-plate text-white py-24 md:py-36 relative overflow-hidden dark-grid-bg">
+    <section className="bg-charcoal-plate text-white py-24 md:py-36 relative overflow-hidden dark-grid-bg bg-[#1a1a1a]">
+      <div 
+        className="absolute inset-0 z-0 opacity-40"
+        style={{
+          backgroundImage: `url(${ctaBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      ></div>
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
           {/* Left: Headline & Actions */}
