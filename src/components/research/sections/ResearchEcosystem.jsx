@@ -40,7 +40,7 @@ function ResearchEcosystem() {
           <h2 className="font-headline-lg text-3xl md:text-headline-lg text-ink-text leading-tight">
             Research in <br /><span className="italic font-light">the Open</span>
           </h2>
-          <p className="font-martel text-stone-600 text-body-md leading-relaxed pt-2">
+          <p className="font-['Martel_Sans'] text-stone-600 text-body-md leading-relaxed pt-2">
             Flanora operates as an open inquiry into spatial intelligence. Each stream of research feeds directly
             into our generational model family and architectural toolsets.
           </p>
@@ -68,7 +68,7 @@ function ResearchEcosystem() {
                   <span className={`w-1.5 h-1.5 rounded-full ${node.accentColor}`}></span>
                 </div>
                 <h4 className="font-headline-md text-lg text-ink-text mb-1">{node.title}</h4>
-                <p className="font-martel text-xs text-stone-500">{node.description}</p>
+                <p className="font-['Martel_Sans'] text-xs text-stone-500">{node.description}</p>
               </div>
             ))}
           </div>

@@ -24,7 +24,7 @@ const horizontalBlinds = {
     let currentY = 0;
 
     for (let i = 0; i < BLIND_COUNT; i++) {
-      const centerY = vbHeight - (currentY + h / 2);
+      const centerY = currentY + h / 2;
       const rectTop = document.createElementNS(svgNS, 'rect');
       const rectBottom = document.createElementNS(svgNS, 'rect');
 

@@ -92,10 +92,9 @@ function CategoryArticle({ item }) {
   const hasBg = !!item.bgSrc;
 
   // Adaptive styles based on whether the section has a background image
-  const numberColor = hasBg
-    ? "text-white/30 group-hover:text-white/60"
-    : "text-neutral-300 group-hover:text-primary";
   const titleColor = hasBg ? "text-white" : "text-ink-text";
+  // We increase brightness (to white on dark bg, to black on light bg) when the article is hovered.
+  const numberColor = hasBg ? "text-stone-400 group-hover:text-white" : "text-stone-400 group-hover:text-black";
   const descColor = hasBg ? "text-white/80" : "text-stone-600";
   const linkColor = hasBg ? "text-white group/btn" : "text-primary hover:text-secondary group/btn";
   const linkBorderColor = hasBg
@@ -117,10 +116,10 @@ function CategoryArticle({ item }) {
         </span>
       </div>
       <div className={textColClass}>
-        <h3 className={`font-headline-md text-2xl md:text-3xl group-hover:underline underline-offset-4 decoration-1 ${titleColor}`}>
-          {item.title}
+        <h3 className={`font-headline-md text-2xl md:text-3xl ${titleColor}`}>
+          <span className="animated-underline">{item.title}</span>
         </h3>
-        <p className={`font-martel text-base leading-relaxed ${descColor}`}>{item.description}</p>
+        <p className={`font-['Martel_Sans'] text-base leading-relaxed ${descColor}`}>{item.description}</p>
         <div className="pt-2">
           <a
             className={`inline-flex items-center gap-2 font-label-caps text-label-caps tracking-widest transition-colors ${linkColor}`}
@@ -187,7 +186,7 @@ function ResearchCategories() {
             </div>
             <h2 className="font-headline-md text-headline-md text-ink-text">Research Disciplines &amp; Tracks</h2>
           </div>
-          <p className="font-martel text-sm text-stone-500 max-w-sm">
+          <p className="font-['Martel_Sans'] text-sm text-stone-500 max-w-sm">
             Curated nodes representing mathematical papers, conceptual dialogues, model metrics, and publicly released toolsets.
           </p>
         </div>

@@ -46,7 +46,7 @@ function ResearchCTA() {
             <h2 className="font-headline-lg text-4xl md:text-6xl text-white font-light leading-tight">
               Explore the Work <br /><span className="italic font-normal">Behind Flanora.</span>
             </h2>
-            <p className="font-martel text-neutral-300 text-lg md:text-xl max-w-xl leading-relaxed">
+            <p className="font-['Martel_Sans'] text-neutral-300 text-lg md:text-xl max-w-xl leading-relaxed">
               Read the research, explore the experiments, and discover the resources shaping Flanora.
               Built for architects, researchers, and engineers.
             </p>

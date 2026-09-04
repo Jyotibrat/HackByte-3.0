@@ -27,7 +27,7 @@ function ResearchHero() {
           </h1>
         </div>
         <div className="md:col-span-4 md:pt-4">
-          <p className="font-martel text-base md:text-body-md text-stone-600 leading-relaxed">
+          <p className="font-['Martel_Sans'] text-base md:text-body-md text-stone-600 leading-relaxed">
             Explore the research, publications, experiments, and resources behind Flanora AI.
             An open inquiry into spatial intelligence, algorithmic synthesis, and generative architectural forms.
           </p>

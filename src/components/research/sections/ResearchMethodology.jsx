@@ -43,7 +43,7 @@ function ResearchMethodology() {
         <h2 className="font-headline-lg text-3xl md:text-headline-lg text-ink-text leading-tight mt-2 mb-4">
           Exploring Generative <br /><span className="italic font-light">Architecture</span>
         </h2>
-        <p className="font-martel text-stone-600 text-body-md leading-relaxed">
+        <p className="font-['Martel_Sans'] text-stone-600 text-body-md leading-relaxed">
           Our research addresses structural dilemmas where computational efficiency intersects with habitable human dignity.
           We investigate how spatial grammar models can understand daylight, structural sheer, and domestic circulation
           without manual drafting constraints.
@@ -59,7 +59,7 @@ function ResearchMethodology() {
             <div>
               <span className="font-mono text-xs text-neutral-400 block mb-4">[{theme.id}]</span>
               <h3 className="font-headline-md text-xl text-ink-text mb-3">{theme.title}</h3>
-              <p className="font-martel text-xs text-stone-600 leading-relaxed">{theme.description}</p>
+              <p className="font-['Martel_Sans'] text-xs text-stone-600 leading-relaxed">{theme.description}</p>
             </div>
             <div className="pt-6 mt-6 border-t border-hairline-border/60 text-[11px] font-mono text-neutral-400">
               STATUS: {theme.status}
