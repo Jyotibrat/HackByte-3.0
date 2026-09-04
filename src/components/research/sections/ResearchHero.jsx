@@ -42,8 +42,6 @@ function ResearchHero() {
 
       {/* Architectural Hero Visual Container (Matted Frame) */}
       <div className="relative bg-surface-container-lowest p-3 sm:p-4 border border-hairline-border shadow-sm group">
-        <div className="absolute top-2 left-2 font-mono text-[10px] text-neutral-400 select-none">T:01/H</div>
-        <div className="absolute top-2 right-2 font-mono text-[10px] text-neutral-400 select-none">AXIS_PLN</div>
         <div className="absolute bottom-2 left-2 font-mono text-[10px] text-neutral-400 select-none">SCALE 1:50</div>
         <div className="absolute bottom-2 right-2 font-mono text-[10px] text-neutral-400 select-none">GEN.MOD-073</div>
         <div className="overflow-hidden relative aspect-[21/9] bg-neutral-100 flex items-center justify-center">

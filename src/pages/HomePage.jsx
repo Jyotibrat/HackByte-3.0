@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import Header from "../components/landing/Header";
 import Hero from "../components/landing/Hero";
 import Intro from "../components/landing/Intro";
@@ -19,6 +20,10 @@ import Navbar from "../components/NavBar";
 
 function HomePage() {
   useLenis();
+
+  useEffect(() => {
+    document.title = "Flanora AI";
+  }, []);
 
   return (
     <div className="nf-landing" id="top">

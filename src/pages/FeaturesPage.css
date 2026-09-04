@@ -139,6 +139,24 @@
   50% { border-color: var(--ink-text); }
 }
 
+.flanora-features-page .hero-img-reveal {
+  opacity: 0;
+  transform: scale(0.95);
+  animation: flanora-hero-img-fade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 3.2s;
+}
+
+@keyframes flanora-hero-img-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 /* ── Model Architecture: GSAP-pinned left + scrolling right ── */
 .flanora-features-page .models-section {
   /* padding handled inside models-inner */

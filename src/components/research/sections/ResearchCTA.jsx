@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 import ctaBg from '../../../assets/research/features_cta_img.png';
 
 const METRICS = [
-  { label: "PUBLISHED PAPERS", value: "18", highlight: false },
-  { label: "OPEN DATASETS", value: "4.2 TB", highlight: false },
+  { label: "PUBLISHED PAPERS", value: "1", highlight: false },
+  { label: "OPEN DATASETS", value: "50.8 MB", highlight: false },
   { label: "INTERNAL REPS", value: "42", highlight: false },
   { label: "COMMUNITY CITATIONS", value: "1,820+", highlight: true },
 ];
@@ -47,11 +47,7 @@ function ResearchCTA() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
           {/* Left: Headline & Actions */}
           <div className="md:col-span-8 space-y-6">
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-xs text-neutral-400">[INVITATION]</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime"></span>
-              <span className="font-label-caps text-label-caps text-neutral-300 tracking-widest uppercase">LAB ACCESS</span>
-            </div>
+
             <h2 className="font-headline-lg text-4xl md:text-6xl text-white font-light leading-tight">
               Explore the Work <br /><span className="italic font-normal">Behind Flanora.</span>
             </h2>
@@ -108,10 +104,9 @@ function ResearchCTA() {
             </div>
           </div>
 
-          {/* Right: Metrics Panel */}
           <div className="md:col-span-4 border border-neutral-800 p-6 bg-neutral-900/50 backdrop-blur-sm">
             <div className="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-4 border-b border-neutral-800 pb-2">
-              RESEARCH METRICS // 2025
+              RESEARCH METRICS // PRESENT
             </div>
             <div className="space-y-4 font-mono text-sm">
               {METRICS.map((m) => (
@@ -124,7 +119,7 @@ function ResearchCTA() {
               ))}
             </div>
             <div className="mt-6 pt-4 border-t border-neutral-800 text-[11px] font-mono text-neutral-400 leading-tight">
-              All algorithms, documentation, and mathematical models are subject to Flanora Open Laboratory Ethics.
+              All algorithms, documentation, and mathematical models are subject to Flanora AI Ethics.
             </div>
           </div>
         </div>

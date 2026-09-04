@@ -43,7 +43,7 @@ function FeaturesHero() {
             </div>
             
             <div className="z-10 relative xl:w-[55%] flex justify-end">
-              <img alt="Architectural sketch" className="w-full max-w-[400px] h-auto rounded-lg object-cover shadow-sm border border-hairline-border" src={heroImg}/>
+              <img alt="Architectural sketch" className="hero-img-reveal w-full max-w-[400px] h-auto rounded-lg object-cover shadow-sm border border-hairline-border" src={heroImg}/>
             </div>
           </div>
         </div>

@@ -35,6 +35,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 function ResearchPage() {
   useEffect(() => {
+    document.title = "Flanora AI | Research";
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 

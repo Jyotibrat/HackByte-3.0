@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 // Sample results data - in a real app, these would come from an API
 const resultsData = [
@@ -6,7 +7,7 @@ const resultsData = [
     id: 1,
     title: "Modern Minimalist Living Space",
     description: "Open concept with natural lighting and sustainable materials",
-    model: "StableDiffusion",
+    model: "Flanora v1",
     imageUrl: "https://placehold.co/600x400/222/fff?text=Modern+Living+Space",
     date: "2023-10-15",
   },
@@ -14,7 +15,7 @@ const resultsData = [
     id: 2,
     title: "Industrial Loft Office",
     description: "Converted warehouse with exposed brick and high ceilings",
-    model: "DALL-E",
+    model: "Flanora v2",
     imageUrl: "https://placehold.co/600x400/222/fff?text=Industrial+Office",
     date: "2023-09-28",
   },
@@ -22,7 +23,7 @@ const resultsData = [
     id: 3,
     title: "Cozy Suburban Home",
     description: "Family-focused design with 3 bedrooms and spacious backyard",
-    model: "Midjourney",
+    model: "Flanora v3",
     imageUrl: "https://placehold.co/600x400/222/fff?text=Suburban+Home",
     date: "2023-11-05",
   },
@@ -30,7 +31,7 @@ const resultsData = [
     id: 4,
     title: "Urban Micro Apartment",
     description: "Efficient use of space in 500sqft downtown unit",
-    model: "Architectural GPT",
+    model: "Flanora v1",
     imageUrl: "https://placehold.co/600x400/222/fff?text=Micro+Apartment",
     date: "2023-10-02",
   },
@@ -39,7 +40,7 @@ const resultsData = [
     title: "Coastal Vacation Home",
     description:
       "Beachfront property with panoramic ocean views and outdoor living",
-    model: "StableDiffusion",
+    model: "Flanora v2",
     imageUrl: "https://placehold.co/600x400/222/fff?text=Coastal+Home",
     date: "2023-08-17",
   },
@@ -47,14 +48,34 @@ const resultsData = [
     id: 6,
     title: "Sustainable Green Office",
     description: "Net-zero energy commercial space with biophilic design",
-    model: "DALL-E",
+    model: "Flanora v3",
     imageUrl: "https://placehold.co/600x400/222/fff?text=Green+Office",
     date: "2023-11-12",
   },
 ];
 
 function ResultsPage() {
-  const [filterModel, setFilterModel] = useState("All");
+  const location = useLocation();
+  const path = location.pathname;
+
+  let defaultFilter = "All";
+  if (path === "/showcase/flanora-v1") defaultFilter = "Flanora v1";
+  else if (path === "/showcase/flanora-v2") defaultFilter = "Flanora v2";
+  else if (path === "/showcase/flanora-v3") defaultFilter = "Flanora v3";
+
+  const [filterModel, setFilterModel] = useState(defaultFilter);
+
+  // Sync state if URL changes while component is mounted
+  useEffect(() => {
+    if (path === "/showcase/flanora-v1") setFilterModel("Flanora v1");
+    else if (path === "/showcase/flanora-v2") setFilterModel("Flanora v2");
+    else if (path === "/showcase/flanora-v3") setFilterModel("Flanora v3");
+    else if (path === "/showcase") setFilterModel("All");
+  }, [path]);
+
+  useEffect(() => {
+    document.title = "Flanora AI | Showcase";
+  }, []);
 
   // Filter results based on selected model
   const filteredResults =
@@ -86,10 +107,9 @@ function ResultsPage() {
               onChange={(e) => setFilterModel(e.target.value)}
             >
               <option value="All">All Models</option>
-              <option value="StableDiffusion">StableDiffusion</option>
-              <option value="DALL-E">DALL-E</option>
-              <option value="Midjourney">Midjourney</option>
-              <option value="Architectural GPT">Architectural GPT</option>
+              <option value="Flanora v1">Flanora v1</option>
+              <option value="Flanora v2">Flanora v2</option>
+              <option value="Flanora v3">Flanora v3</option>
             </select>
           </div>
         </div>

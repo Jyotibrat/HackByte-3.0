@@ -55,7 +55,7 @@ function ResearchEcosystem() {
         <div className="md:col-span-7 bg-surface-container-lowest border border-hairline-border p-6 md:p-8 relative">
           <div className="text-xs font-mono text-neutral-400 border-b border-hairline-border pb-3 mb-6 flex justify-between">
             <span>SCHEMA: GENERATIVE CIRCULATION</span>
-            <span>VER 4.2</span>
+            <span>VER 1.0</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
             {FLOW_NODES.map((node) => (
@@ -73,11 +73,7 @@ function ResearchEcosystem() {
             ))}
           </div>
           <div className="mt-6 pt-4 border-t border-hairline-border flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs font-mono text-neutral-500 gap-2">
-            <span>INTEGRATION: FLANORA BASE MODEL 2.5</span>
-            <span className="flex items-center gap-1 text-primary font-semibold">
-              <span>FULL TOPOLOGY SYNCHRONIZED</span>
-              <span className="material-symbols-outlined text-[14px]">check</span>
-            </span>
+            <span>INTEGRATION: FLANORA BASE MODEL v1.0</span>
           </div>
         </div>
       </div>

@@ -18,6 +18,7 @@ function FeaturesPage() {
   useIntersectionObserver();
 
   useEffect(() => {
+    document.title = "Flanora AI | Features";
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) return;
 

@@ -16,6 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
 function AboutPage() {
   // AboutPage.jsx
   useEffect(() => {
+    document.title = "Flanora AI | About";
     const lenis = new Lenis({ smoothWheel: true, duration: 1.2 });
     lenis.on('scroll', ScrollTrigger.update);
 

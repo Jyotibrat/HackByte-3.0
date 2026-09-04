@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 function ModelsPage() {
   useEffect(() => {
+    document.title = "Flanora AI | Models";
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) return;
 

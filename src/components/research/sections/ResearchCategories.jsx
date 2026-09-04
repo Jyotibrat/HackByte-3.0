@@ -29,8 +29,8 @@ const CATEGORIES = [
     imageSrc: publicationsImg,
     bgSrc: publicationsBg,
     maskVariant: "horizontal-blinds",
-    plateLabel: "PLATE 01.A — PLANAR TOPOLOGY MAPPING",
-    plateRef: "SYNTHESIS #71",
+    plateLabel: "SEC 01.A — RESEARCH THAT SHAPES IDEAS",
+    plateRef: "STUDY #1",
     imageRight: true,
   },
   {
@@ -44,8 +44,8 @@ const CATEGORIES = [
     imageSrc: articlesImg,
     bgSrc: articlesBg,
     maskVariant: "random-grid",
-    plateLabel: "PLATE 02.C — HUMAN-MODEL VOLUMETRIC COLLABORATION",
-    plateRef: "ESSAY #74",
+    plateLabel: "SEC 02.B — THOUGHTS IN MOTION",
+    plateRef: "FEATURE #1",
     imageRight: false,
   },
   {
@@ -59,8 +59,8 @@ const CATEGORIES = [
     imageSrc: technicalReportsImg,
     bgSrc: technicalReportsBg,
     maskVariant: "vertical-blinds",
-    plateLabel: "PLATE 03.B — VOLUMETRIC EVALUATION & LATENT RECONSTRUCTION",
-    plateRef: "EXP #72",
+    plateLabel: "SEC 03.C — BEHIND THE EXPERIMENTS",
+    plateRef: "DOCS #2",
     imageRight: true,
   },
   {
@@ -75,8 +75,8 @@ const CATEGORIES = [
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAXbchDKk9T28mg1ARJMdtDcALO9BNT_ts7JS09LfuRgQD8ss-QspsHhpfp63fxHnYFEdsWRKwz49jj0uQdelPT8B-k9T-FK7MuvU3-810rtMbIcYG2GYaTaXLtixeEqm0AmHidKOBaEyltyRk3FKVPVMVy7Ri1tOh1owuBA5qGH6_zZNK6LbRHXY7Isr7o8ttItQDmcEcPvnWBrThlWUFJk861JaF5fcHl-fbr9nrjWGhTQICDuOYv",
     bgSrc: null,
     maskVariant: null,
-    plateLabel: "PLATE 04.D — COMPONENT VOCABULARY CORPUS",
-    plateRef: "DATASET #76",
+    plateLabel: "SEC 04.D — TOOLS TO EXPLORE FURTHER",
+    plateRef: "DATASET #1",
     imageRight: false,
   },
 ];
@@ -101,7 +101,7 @@ function CategoryArticle({ item }) {
   const imageBorderColor = hasBg
     ? "border-white/20 group-hover:border-white/40"
     : "border-hairline-border group-hover:border-neutral-400";
-  const captionColor = hasBg ? "text-white/50" : "text-neutral-400";
+  const captionColor = "text-neutral-500";
 
   const articleInner = (
     <article
