@@ -3,6 +3,8 @@
 // To REMOVE: delete this file and its import in ResearchPage.jsx
 // To ADD A NEW ITEM: add an entry to the CATEGORIES array below and supply an imageSrc.
 // To add a background image to a section: set bgSrc to an imported image.
+// To change a section's scroll-mask transition: set maskVariant to
+//   'horizontal-blinds' | 'random-grid' | 'vertical-blinds' (only used when bgSrc is set).
 // To REORDER items: move the entries in the CATEGORIES array.
 
 import publicationsImg from '../../../assets/research/Publications_img.png';
@@ -12,6 +14,8 @@ import technicalReportsImg from '../../../assets/research/Technical_Reports_img.
 import publicationsBg from '../../../assets/research/Publications_bg_img.png';
 import articlesBg from '../../../assets/research/Articles_bg_img.png';
 import technicalReportsBg from '../../../assets/research/Technical_Reports_bg_img.png';
+
+import MaskRevealSection from '../MaskRevealSection';
 
 const CATEGORIES = [
   {
@@ -24,6 +28,7 @@ const CATEGORIES = [
     imageAlt: "Publications Architectural Diagram",
     imageSrc: publicationsImg,
     bgSrc: publicationsBg,
+    maskVariant: "horizontal-blinds",
     plateLabel: "PLATE 01.A — PLANAR TOPOLOGY MAPPING",
     plateRef: "SYNTHESIS #71",
     imageRight: true,
@@ -38,6 +43,7 @@ const CATEGORIES = [
     imageAlt: "Articles Spatial Essay Figure",
     imageSrc: articlesImg,
     bgSrc: articlesBg,
+    maskVariant: "random-grid",
     plateLabel: "PLATE 02.C — HUMAN-MODEL VOLUMETRIC COLLABORATION",
     plateRef: "ESSAY #74",
     imageRight: false,
@@ -52,6 +58,7 @@ const CATEGORIES = [
     imageAlt: "Technical Report Geometry Model",
     imageSrc: technicalReportsImg,
     bgSrc: technicalReportsBg,
+    maskVariant: "vertical-blinds",
     plateLabel: "PLATE 03.B — VOLUMETRIC EVALUATION & LATENT RECONSTRUCTION",
     plateRef: "EXP #72",
     imageRight: true,
@@ -67,6 +74,7 @@ const CATEGORIES = [
     imageSrc:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAXbchDKk9T28mg1ARJMdtDcALO9BNT_ts7JS09LfuRgQD8ss-QspsHhpfp63fxHnYFEdsWRKwz49jj0uQdelPT8B-k9T-FK7MuvU3-810rtMbIcYG2GYaTaXLtixeEqm0AmHidKOBaEyltyRk3FKVPVMVy7Ri1tOh1owuBA5qGH6_zZNK6LbRHXY7Isr7o8ttItQDmcEcPvnWBrThlWUFJk861JaF5fcHl-fbr9nrjWGhTQICDuOYv",
     bgSrc: null,
+    maskVariant: null,
     plateLabel: "PLATE 04.D — COMPONENT VOCABULARY CORPUS",
     plateRef: "DATASET #76",
     imageRight: false,
@@ -151,20 +159,11 @@ function CategoryArticle({ item }) {
 
   if (hasBg) {
     return (
-      <div
-        className="relative overflow-hidden w-full"
-        style={{
-          backgroundImage: `url(${item.bgSrc})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        {/* Semi-transparent overlay to ensure text legibility */}
-        <div className="absolute inset-0 bg-black/55 pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
+      <MaskRevealSection bgSrc={item.bgSrc} bgAlt={item.imageAlt} variant={item.maskVariant}>
+        <div className="max-w-7xl mx-auto px-6">
           {articleInner}
         </div>
-      </div>
+      </MaskRevealSection>
     );
   }
 
@@ -194,7 +193,7 @@ function ResearchCategories() {
         </div>
       </div>
 
-      {/* Category rows — bg-image rows are full-bleed; Resources stays plain */}
+      {/* Category rows — bg-image rows are full-bleed pinned mask reveals; Resources stays plain */}
       <div>
         {CATEGORIES.map((item) => (
           <CategoryArticle key={item.number} item={item} />
