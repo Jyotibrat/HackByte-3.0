@@ -9,9 +9,10 @@
 
 *.ipynb diff=jupyternotebook
 
-# Default: exclude all Jupyter notebooks
-*.ipynb linguist-documentation
+Notebooks/*.ipynb linguist-documentation
+Notebooks/**/*.ipynb linguist-documentation
 
-# Then specifically include notebooks from backend folder
-Notebooks/*.ipynb -linguist-documentation
-Notebooks/**/*.ipynb -linguist-documentation
+skills-lock.json
+
+.agents/
+.claude/
