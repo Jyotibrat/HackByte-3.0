@@ -50,39 +50,15 @@
   pointer-events: none;
 }
 
-/* ── Text ────────────────────────────────────────────────────────────────────── */
-.cube-text-stack {
+/* ── Global Odometer Title ─────────────────────────────────────────────────────── */
+.cube-global-title {
   position: absolute;
   inset: 0;
   z-index: 20;
   display: flex;
   align-items: center;
-  padding-left: 8vw;
+  justify-content: center;
   pointer-events: none;
-}
-
-.cube-text-item {
-  position: absolute;
-  left: 8vw;
-  max-width: 42vw;
-}
-
-.cube-model-badge {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(6px);
-  padding: 4px 12px;
-  border-radius: 999px;
-  margin-bottom: 20px;
-}
-
-.cube-title {
   font-family: 'Josefin Sans', sans-serif;
   font-size: clamp(2.5rem, 7vw, 7rem);
   font-weight: 700;
@@ -90,60 +66,34 @@
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  margin: 0 0 24px;
-  will-change: transform, opacity;
 }
 
-.cube-subtitle {
-  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.6;
-  max-width: 420px;
-  will-change: transform, opacity;
+.cube-title-static {
+  margin-right: 0.1em;
 }
 
-/* ── Slide dots ──────────────────────────────────────────────────────────────── */
-.cube-slide-count {
-  position: absolute;
-  bottom: 32px;
-  left: 8vw;
-  z-index: 30;
-  display: flex;
-  gap: 8px;
+.cube-title-odometer {
+  height: 1em;
+  overflow: hidden;
+  display: inline-flex;
+  flex-direction: column;
 }
 
-.cube-dot {
-  display: block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-/* ── Scroll hint ─────────────────────────────────────────────────────────────── */
-.cube-scroll-hint {
-  position: absolute;
-  bottom: 30px;
-  right: 6vw;
-  z-index: 30;
+.cube-title-track {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  will-change: transform;
+}
+
+.cube-title-track div {
+  height: 1em;
+  line-height: 1;
 }
 
 /* ── 3D Scene ────────────────────────────────────────────────────────────────── */
 .cube-scene {
   position: absolute;
-  /* Vertically centered slightly above middle to feel editorial */
-  top: 50%;
-  left: 0;
-  transform: translateY(-55%);
+  inset: 0;
   z-index: 25;
   perspective: 900px;
   perspective-origin: 50% 50%;
@@ -152,11 +102,13 @@
 
 /* ── Cube object — GSAP moves this element horizontally & rotates it ─────────── */
 .cube-object {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 260px;
   height: 260px;
   transform-style: preserve-3d;
-  /* initial x set via GSAP */
+  /* initial x/y set via GSAP */
   will-change: transform;
 }
 
@@ -173,18 +125,6 @@
   overflow: hidden;
 }
 
-/* Top face */
-.cube-face--top {
-  background: rgba(255, 255, 255, 0.06);
-  transform: rotateX(90deg) translateZ(130px);
-}
-
-/* Bottom face */
-.cube-face--bottom {
-  background: rgba(0, 0, 0, 0.3);
-  transform: rotateX(-90deg) translateZ(130px);
-}
-
 /* ── Responsive tweaks ───────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .cube-object {
@@ -195,22 +135,11 @@
     width: 160px;
     height: 160px;
   }
-  .cube-face {
-    /* recalculate translateZ = half of width */
-    transform: rotateY(0deg) translateZ(80px);
-  }
-  /* Override individual face transforms */
-  .cube-face:nth-child(1) { transform: rotateY(0deg)   translateZ(80px); }
-  .cube-face:nth-child(2) { transform: rotateY(90deg)  translateZ(80px); }
-  .cube-face:nth-child(3) { transform: rotateY(180deg) translateZ(80px); }
-  .cube-face:nth-child(4) { transform: rotateY(270deg) translateZ(80px); }
-  .cube-face--top    { transform: rotateX(90deg)  translateZ(80px); }
-  .cube-face--bottom { transform: rotateX(-90deg) translateZ(80px); }
-
-  .cube-text-item {
-    max-width: 90vw;
-    left: 5vw;
-  }
-  .cube-slide-count,
-  .cube-scroll-hint { left: 5vw; }
+  /* Override individual face transforms for hexagon */
+  .cube-face:nth-child(1) { transform: rotateY(0deg)   translateZ(139px) !important; }
+  .cube-face:nth-child(2) { transform: rotateY(60deg)  translateZ(139px) !important; }
+  .cube-face:nth-child(3) { transform: rotateY(120deg) translateZ(139px) !important; }
+  .cube-face:nth-child(4) { transform: rotateY(180deg) translateZ(139px) !important; }
+  .cube-face:nth-child(5) { transform: rotateY(240deg) translateZ(139px) !important; }
+  .cube-face:nth-child(6) { transform: rotateY(300deg) translateZ(139px) !important; }
 }
