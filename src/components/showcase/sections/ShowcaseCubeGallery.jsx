@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './ShowcasePage.css';
@@ -46,10 +47,12 @@ const pathCoordinates = [
 ];
 
 const ShowcaseCubeGallery = ({ results }) => {
-  const sectionRef   = useRef(null); // the tall scrollable section
-  const stickyRef    = useRef(null); // the sticky viewport-height child
-  const cubeRef      = useRef(null); // the 3D cube element
-  const bgRefs       = useRef([]);   // one per slide
+  const navigate       = useNavigate();
+  const sectionRef     = useRef(null);
+  const stickyRef      = useRef(null);
+  const wrapperRef     = useRef(null); // animates x/y (moves the perspective origin)
+  const cubeRef        = useRef(null); // animates rotate (spins the cube)
+  const bgRefs         = useRef([]);
   const numberTrackRef = useRef(null);
   const faceRefs       = useRef([]);
 
@@ -70,8 +73,14 @@ const ShowcaseCubeGallery = ({ results }) => {
     //  front=slide0, right=slide1, back=slide2, bottom=slide3
     //  left/top unused; right & front will be swapped dynamically for slides 4 & 5
     const initImages = { 0: slides[0]?.imageUrl, 1: slides[1]?.imageUrl, 2: slides[2]?.imageUrl, 5: slides[3]?.imageUrl };
+    const getLink = (slide) => slide ? `/showcase/${slide.title.toLowerCase().replace(/ /g, '-')}` : null;
+    const initLinks = { 0: getLink(slides[0]), 1: getLink(slides[1]), 2: getLink(slides[2]), 5: getLink(slides[3]) };
+
     faceRefs.current.forEach((face, i) => {
-      if (initImages[i]) face.style.backgroundImage = `url(${initImages[i]})`;
+      if (initImages[i]) {
+        face.style.backgroundImage = `url(${initImages[i]})`;
+        face.dataset.link = initLinks[i];
+      }
     });
 
     let prevNearest = 0;
@@ -80,8 +89,8 @@ const ShowcaseCubeGallery = ({ results }) => {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: 'top top',
-        end: () => `+=${count * 100}vh`,
-        scrub: 1.2,
+        end: () => `+=${count * 250}vh`,
+        scrub: 2.5,
         pin: stickyRef.current,
         pinSpacing: true,
         anticipatePin: 1,
@@ -93,34 +102,52 @@ const ShowcaseCubeGallery = ({ results }) => {
           const dir = self.direction;
           const face = faceRefs.current;
           if (dir === 1) {
-            if (nearest === 4 && face[1] && slides[4]) face[1].style.backgroundImage = `url(${slides[4].imageUrl})`;
-            if (nearest === 5 && face[0] && slides[5]) face[0].style.backgroundImage = `url(${slides[5].imageUrl})`;
+            if (nearest === 4 && face[1] && slides[4]) {
+              face[1].style.backgroundImage = `url(${slides[4].imageUrl})`;
+              face[1].dataset.link = getLink(slides[4]);
+            }
+            if (nearest === 5 && face[0] && slides[5]) {
+              face[0].style.backgroundImage = `url(${slides[5].imageUrl})`;
+              face[0].dataset.link = getLink(slides[5]);
+            }
           } else {
-            if (nearest === 3 && face[1] && slides[1]) face[1].style.backgroundImage = `url(${slides[1].imageUrl})`;
-            if (nearest === 4 && face[0] && slides[0]) face[0].style.backgroundImage = `url(${slides[0].imageUrl})`;
+            if (nearest === 3 && face[1] && slides[1]) {
+              face[1].style.backgroundImage = `url(${slides[1].imageUrl})`;
+              face[1].dataset.link = getLink(slides[1]);
+            }
+            if (nearest === 4 && face[0] && slides[0]) {
+              face[0].style.backgroundImage = `url(${slides[0].imageUrl})`;
+              face[0].dataset.link = getLink(slides[0]);
+            }
           }
           prevNearest = nearest;
         },
       },
     });
 
-    // Set initial cube position and rotation
-    gsap.set(cubeRef.current, {
+    // Set initial wrapper position and cube rotation
+    gsap.set(wrapperRef.current, {
       x: pathCoordinates[0].x,
       y: pathCoordinates[0].y,
       xPercent: -50,
       yPercent: -50,
+    });
+    gsap.set(cubeRef.current, {
       rotateY: 0,
       rotateX: 0,
     });
 
-    // Animate cube path + per-transition rotation
+    // Animate wrapper path + cube per-transition rotation
     for (let i = 1; i < count; i++) {
       const coord = pathCoordinates[i];
       const state = ROTATION_STATES[i];
-      tl.to(cubeRef.current, {
+      tl.to(wrapperRef.current, {
         x: coord.x,
         y: coord.y,
+        ease: 'none',
+        duration: 1,
+      }, i - 1);
+      tl.to(cubeRef.current, {
         rotateY: state.rotateY,
         rotateX: state.rotateX,
         ease: 'none',
@@ -164,6 +191,13 @@ const ShowcaseCubeGallery = ({ results }) => {
     );
   }
 
+  const handleFaceClick = (e) => {
+    const link = e.currentTarget.dataset.link;
+    if (link) {
+      navigate(link);
+    }
+  };
+
   return (
     <section ref={sectionRef} className="cube-scroll-section">
       <div ref={stickyRef} className="cube-sticky">
@@ -192,14 +226,15 @@ const ShowcaseCubeGallery = ({ results }) => {
           </div>
         </div>
 
-        <div className="cube-scene">
+        <div className="cube-scene" ref={wrapperRef}>
           <div ref={cubeRef} className="cube-object">
             {FACE_TRANSFORMS.map((transform, i) => (
               <div
                 key={`face-${i}`}
                 ref={addFace}
                 className="cube-face"
-                style={{ transform }}
+                style={{ transform, cursor: 'pointer' }}
+                onClick={handleFaceClick}
               />
             ))}
           </div>

@@ -22,6 +22,8 @@ import SignUpPage from "./pages/SignUpPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SurveyPaper2025 from "./pages/SurveyPaper2025";
 import ResearchCategoryPage from "./pages/ResearchCategoryPage";
+import ShowcaseFlanoraV1 from "./pages/ShowcaseFlanoraV1";
+import ShowcaseFlanoraV2 from "./pages/ShowcaseFlanoraV2";
 import MarketingLayout from "./components/MarketingLayout";
 import LoadingScreen from "./components/LoadingScreen";
 import PageTransition from "./components/PageTransition";
@@ -41,8 +43,8 @@ function AnimatedRoutes() {
           <Route path="/models/midjourney" element={<MidjourneyPage />} />
           <Route path="/team" element={<ContributorsPage />} />
           <Route path="/showcase" element={<ResultsPage />} />
-          <Route path="/showcase/flanora-v1" element={<ResultsPage />} />
-          <Route path="/showcase/flanora-v2" element={<ResultsPage />} />
+          <Route path="/showcase/flanora-v1" element={<ShowcaseFlanoraV1 />} />
+          <Route path="/showcase/flanora-v2" element={<ShowcaseFlanoraV2 />} />
           <Route path="/showcase/flanora-v3" element={<ResultsPage />} />
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/research/publications" element={<ResearchCategoryPage />} />
