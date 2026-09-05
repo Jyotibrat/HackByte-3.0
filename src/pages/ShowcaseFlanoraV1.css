@@ -115,23 +115,23 @@
 
 /* We will assign stagger dynamically in JS to scale up for N images, 
    but here are some default CSS ones just in case */
-.gallery__slide:nth-child(1) { --stagger: -24vw; --img-w: 290px; }
-.gallery__slide:nth-child(2) { --stagger: 14vw; --img-w: 330px; }
-.gallery__slide:nth-child(3) { --stagger: -18vw; --img-w: 270px; }
-.gallery__slide:nth-child(4) { --stagger: 22vw; --img-w: 450px; }
-.gallery__slide:nth-child(5) { --stagger: -26vw; --img-w: 300px; }
-.gallery__slide:nth-child(6) { --stagger: 28vw; --img-w: 150px; }
-.gallery__slide:nth-child(7) { --stagger: -20vw; --img-w: 230px; }
-.gallery__slide:nth-child(8) { --stagger: 8vw; --img-w: 460px; }
-.gallery__slide:nth-child(9) { --stagger: -12vw; --img-w: 270px; }
-.gallery__slide:nth-child(10) { --stagger: 15vw; --img-w: 250px; }
-.gallery__slide:nth-child(11) { --stagger: -24vw; --img-w: 390px; }
-.gallery__slide:nth-child(12) { --stagger: 26vw; --img-w: 160px; }
-.gallery__slide:nth-child(13) { --stagger: -16vw; --img-w: 210px; }
-.gallery__slide:nth-child(14) { --stagger: 24vw; --img-w: 280px; }
-.gallery__slide:nth-child(15) { --stagger: -28vw; --img-w: 175px; }
-.gallery__slide:nth-child(16) { --stagger: 18vw; --img-w: 240px; }
-.gallery__slide:nth-child(17) { --stagger: -10vw; --img-w: 310px; }
+.gallery__slide:nth-child(1) { --stagger: -24vw; --img-w: 20vw; }
+.gallery__slide:nth-child(2) { --stagger: 14vw; --img-w: 10vw; }
+.gallery__slide:nth-child(3) { --stagger: -18vw; --img-w: 23vw; }
+.gallery__slide:nth-child(4) { --stagger: 22vw; --img-w: 18vw; }
+.gallery__slide:nth-child(5) { --stagger: -26vw; --img-w: 25vw; }
+.gallery__slide:nth-child(6) { --stagger: 28vw; --img-w: 28vw; }
+.gallery__slide:nth-child(7) { --stagger: -20vw; --img-w: 16vw; }
+.gallery__slide:nth-child(8) { --stagger: 8vw; --img-w: 30vw; }
+.gallery__slide:nth-child(9) { --stagger: -12vw; --img-w: 15vw; }
+.gallery__slide:nth-child(10) { --stagger: 15vw; --img-w: 23vw; }
+.gallery__slide:nth-child(11) { --stagger: -24vw; --img-w: 24vw; }
+.gallery__slide:nth-child(12) { --stagger: 26vw; --img-w: 14vw; }
+.gallery__slide:nth-child(13) { --stagger: -16vw; --img-w: 18vw; }
+.gallery__slide:nth-child(14) { --stagger: 24vw; --img-w: 21vw; }
+.gallery__slide:nth-child(15) { --stagger: -28vw; --img-w: 12vw; }
+.gallery__slide:nth-child(16) { --stagger: 18vw; --img-w: 16vw; }
+.gallery__slide:nth-child(17) { --stagger: -10vw; --img-w: 20vw; }
 
 .gallery__slide figcaption {
   display: block;
@@ -212,6 +212,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-top: auto;
 }
 
 .content__group {

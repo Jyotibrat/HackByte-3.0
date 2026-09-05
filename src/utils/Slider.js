@@ -70,7 +70,7 @@ export default class Slider {
 
       // Check visibility from the final position
       const top = loopTop + item.offset;
-      const visible = top < window.innerHeight && top + rect.height > 0;
+      const visible = top < window.innerHeight + 500 && top + rect.height > -500;
 
       // Collect the slides that entered or left
       if (visible !== item.visible) {
