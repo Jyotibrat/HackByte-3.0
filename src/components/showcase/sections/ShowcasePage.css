@@ -105,8 +105,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 260px;
-  height: 260px;
+  width: 160px;
+  height: 160px;
   transform-style: preserve-3d;
   /* initial x/y set via GSAP */
   will-change: transform;
@@ -115,8 +115,8 @@
 /* ── Individual faces ────────────────────────────────────────────────────────── */
 .cube-face {
   position: absolute;
-  width: 260px;
-  height: 260px;
+  width: 160px;
+  height: 160px;
   background-size: cover;
   background-position: center;
   border: 1px solid rgba(255, 255, 255, 0.15);

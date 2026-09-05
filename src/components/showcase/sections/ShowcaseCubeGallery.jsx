@@ -7,9 +7,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 // 6-sided prism (hexagon) -> 60deg per rotation step
 const CUBE_FACES = 6;
-const FACE_WIDTH = 260;
+const FACE_WIDTH = 160;
 // Radius = (width / 2) / Math.tan(Math.PI / CUBE_FACES)
-const TZ = Math.round((FACE_WIDTH / 2) / Math.tan(Math.PI / CUBE_FACES)); // ~225
+const TZ = Math.round((FACE_WIDTH / 2) / Math.tan(Math.PI / CUBE_FACES)); // ~139
 
 const pathCoordinates = [
   { x: '15vw', y: '50vh' }, // 0: Middle Left
