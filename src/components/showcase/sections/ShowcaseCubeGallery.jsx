@@ -5,11 +5,36 @@ import './ShowcasePage.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// 6-sided prism (hexagon) -> 60deg per rotation step
-const CUBE_FACES = 6;
-const FACE_WIDTH = 160;
-// Radius = (width / 2) / Math.tan(Math.PI / CUBE_FACES)
-const TZ = Math.round((FACE_WIDTH / 2) / Math.tan(Math.PI / CUBE_FACES)); // ~139
+// Standard 6-face cube — 160px faces, TZ = half face size = 80px
+const FACE_SIZE = 160;
+const TZ = FACE_SIZE / 2; // 80px
+
+// Cube rotation state at each of the 6 slides.
+// Transitions:
+//  0->1: rotateY -90  (left-to-right)  + diagonal move
+//  1->2: rotateY -90  (left-to-right)  + sideways move
+//  2->3: rotateX -90  (bottom-to-up)   + diagonal move
+//  3->4: rotateY +90, rotateX back->0  (right-to-left) + diagonal move
+//  4->5: rotateY +90  (right-to-left)  + sideways move
+const ROTATION_STATES = [
+  { rotateY: 0,    rotateX: 0   }, // slide 0 -> front face
+  { rotateY: -90,  rotateX: 0   }, // slide 1 -> right face
+  { rotateY: -180, rotateX: 0   }, // slide 2 -> back face
+  { rotateY: -180, rotateX: -90 }, // slide 3 -> bottom face
+  { rotateY: -90,  rotateX: 0   }, // slide 4 -> right face (image swapped)
+  { rotateY: 0,    rotateX: 0   }, // slide 5 -> front face (image swapped)
+];
+
+// CSS transform for each of the 6 cube faces
+// indices: 0=front, 1=right, 2=back, 3=left, 4=top, 5=bottom
+const FACE_TRANSFORMS = [
+  `rotateY(0deg)   translateZ(${TZ}px)`,
+  `rotateY(90deg)  translateZ(${TZ}px)`,
+  `rotateY(180deg) translateZ(${TZ}px)`,
+  `rotateY(-90deg) translateZ(${TZ}px)`,
+  `rotateX(-90deg) translateZ(${TZ}px)`,
+  `rotateX(90deg)  translateZ(${TZ}px)`,
+];
 
 const pathCoordinates = [
   { x: '15vw', y: '50vh' }, // 0: Middle Left
@@ -26,9 +51,12 @@ const ShowcaseCubeGallery = ({ results }) => {
   const cubeRef      = useRef(null); // the 3D cube element
   const bgRefs       = useRef([]);   // one per slide
   const numberTrackRef = useRef(null);
+  const faceRefs       = useRef([]);
 
-  bgRefs.current = [];
-  const addBg = el => el && bgRefs.current.push(el);
+  bgRefs.current   = [];
+  faceRefs.current = [];
+  const addBg   = el => el && bgRefs.current.push(el);
+  const addFace = el => el && faceRefs.current.push(el);
 
   const slides = results;
   const count  = slides.length;
@@ -37,6 +65,16 @@ const ShowcaseCubeGallery = ({ results }) => {
     if (!sectionRef.current || !stickyRef.current || !cubeRef.current || count === 0) return;
 
     ScrollTrigger.getAll().forEach(t => t.kill());
+
+    // Assign initial face images:
+    //  front=slide0, right=slide1, back=slide2, bottom=slide3
+    //  left/top unused; right & front will be swapped dynamically for slides 4 & 5
+    const initImages = { 0: slides[0]?.imageUrl, 1: slides[1]?.imageUrl, 2: slides[2]?.imageUrl, 5: slides[3]?.imageUrl };
+    faceRefs.current.forEach((face, i) => {
+      if (initImages[i]) face.style.backgroundImage = `url(${initImages[i]})`;
+    });
+
+    let prevNearest = 0;
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -47,65 +85,65 @@ const ShowcaseCubeGallery = ({ results }) => {
         pin: stickyRef.current,
         pinSpacing: true,
         anticipatePin: 1,
+        onUpdate: (self) => {
+          // Dynamically swap images on right & front faces for slides 4 & 5
+          const pos = self.progress * (count - 1);
+          const nearest = Math.min(Math.round(pos), count - 1);
+          if (nearest === prevNearest) return;
+          const dir = self.direction;
+          const face = faceRefs.current;
+          if (dir === 1) {
+            if (nearest === 4 && face[1] && slides[4]) face[1].style.backgroundImage = `url(${slides[4].imageUrl})`;
+            if (nearest === 5 && face[0] && slides[5]) face[0].style.backgroundImage = `url(${slides[5].imageUrl})`;
+          } else {
+            if (nearest === 3 && face[1] && slides[1]) face[1].style.backgroundImage = `url(${slides[1].imageUrl})`;
+            if (nearest === 4 && face[0] && slides[0]) face[0].style.backgroundImage = `url(${slides[0].imageUrl})`;
+          }
+          prevNearest = nearest;
+        },
       },
     });
 
-    // 1. Move cube along the specific 6-step path
-    gsap.set(cubeRef.current, { 
-      x: pathCoordinates[0].x, 
+    // Set initial cube position and rotation
+    gsap.set(cubeRef.current, {
+      x: pathCoordinates[0].x,
       y: pathCoordinates[0].y,
       xPercent: -50,
       yPercent: -50,
-      rotateY: 0
+      rotateY: 0,
+      rotateX: 0,
     });
 
+    // Animate cube path + per-transition rotation
     for (let i = 1; i < count; i++) {
-      const coord = pathCoordinates[i % pathCoordinates.length];
-      tl.to(
-        cubeRef.current,
-        { x: coord.x, y: coord.y, ease: 'none', duration: 1 },
-        i - 1
-      );
+      const coord = pathCoordinates[i];
+      const state = ROTATION_STATES[i];
+      tl.to(cubeRef.current, {
+        x: coord.x,
+        y: coord.y,
+        rotateY: state.rotateY,
+        rotateX: state.rotateX,
+        ease: 'none',
+        duration: 1,
+      }, i - 1);
     }
-
-    // 2. Rotate cube continuously (6 faces -> 60deg per slide)
-    const totalRotation = (count - 1) * 60;
-    tl.fromTo(
-      cubeRef.current,
-      { rotateY: 0 },
-      { rotateY: -totalRotation, ease: 'none', duration: count - 1 },
-      0
-    );
 
     // Initialize odometer track
-    if (numberTrackRef.current) {
-      gsap.set(numberTrackRef.current, { y: '0em' });
-    }
+    if (numberTrackRef.current) gsap.set(numberTrackRef.current, { y: '0em' });
 
-    // 3. Per-slide fading and odometer animation
-    slides.forEach((slide, i) => {
+    // Per-slide background fade + odometer tick
+    slides.forEach((_, i) => {
       const bg = bgRefs.current[i];
       if (!bg) return;
-
-      // Fade-in bg
       if (i === 0) {
         gsap.set(bg, { opacity: 1, zIndex: 1 });
       } else {
         gsap.set(bg, { opacity: 0, zIndex: i + 1 });
         tl.to(bg, { opacity: 1, duration: 0.4, ease: 'power1.inOut' }, i - 0.45);
       }
-      if (i < count - 1) {
-        tl.to(bg, { opacity: 0, duration: 0.25, ease: 'power1.in' }, i + 0.55);
-      }
-
-      // Animate Odometer Number
+      if (i < count - 1) tl.to(bg, { opacity: 0, duration: 0.25, ease: 'power1.in' }, i + 0.55);
       if (i > 0 && numberTrackRef.current) {
-        // Transition exactly between slide times
-        tl.to(numberTrackRef.current, {
-          y: `-${i}em`,
-          duration: 1,
-          ease: 'power2.inOut'
-        }, i - 1);
+        tl.to(numberTrackRef.current, { y: `-${i}em`, duration: 1, ease: 'power2.inOut' }, i - 1);
       }
     });
 
@@ -156,14 +194,12 @@ const ShowcaseCubeGallery = ({ results }) => {
 
         <div className="cube-scene">
           <div ref={cubeRef} className="cube-object">
-            {slides.slice(0, CUBE_FACES).map((slide, i) => (
+            {FACE_TRANSFORMS.map((transform, i) => (
               <div
-                key={`face-${slide.id}`}
+                key={`face-${i}`}
+                ref={addFace}
                 className="cube-face"
-                style={{
-                  backgroundImage: `url(${slide.imageUrl})`,
-                  transform: `rotateY(${i * 60}deg) translateZ(${TZ}px)`,
-                }}
+                style={{ transform }}
               />
             ))}
           </div>

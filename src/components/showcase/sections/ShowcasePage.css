@@ -135,11 +135,11 @@
     width: 160px;
     height: 160px;
   }
-  /* Override individual face transforms for hexagon */
-  .cube-face:nth-child(1) { transform: rotateY(0deg)   translateZ(139px) !important; }
-  .cube-face:nth-child(2) { transform: rotateY(60deg)  translateZ(139px) !important; }
-  .cube-face:nth-child(3) { transform: rotateY(120deg) translateZ(139px) !important; }
-  .cube-face:nth-child(4) { transform: rotateY(180deg) translateZ(139px) !important; }
-  .cube-face:nth-child(5) { transform: rotateY(240deg) translateZ(139px) !important; }
-  .cube-face:nth-child(6) { transform: rotateY(300deg) translateZ(139px) !important; }
+  /* Override face transforms for smaller cube on mobile */
+  .cube-face:nth-child(1) { transform: rotateY(0deg)    translateZ(80px) !important; }
+  .cube-face:nth-child(2) { transform: rotateY(90deg)   translateZ(80px) !important; }
+  .cube-face:nth-child(3) { transform: rotateY(180deg)  translateZ(80px) !important; }
+  .cube-face:nth-child(4) { transform: rotateY(-90deg)  translateZ(80px) !important; }
+  .cube-face:nth-child(5) { transform: rotateX(-90deg)  translateZ(80px) !important; }
+  .cube-face:nth-child(6) { transform: rotateX(90deg)   translateZ(80px) !important; }
 }
