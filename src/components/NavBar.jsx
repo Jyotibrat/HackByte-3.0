@@ -134,7 +134,7 @@ function Navbar({ variant = "marketing", scrollState }) {
     );
   }
 
-  const lightThemePaths = ["/about", "/features", "/models"];
+  const lightThemePaths = ["/about", "/features", "/models", "/showcase/flanora-v1"];
   const isLightTheme = lightThemePaths.includes(pathname) || pathname.startsWith("/research");
   const menu = openMenu === "models" ? <ModelMenu /> : <ResearchMenu />;
 
