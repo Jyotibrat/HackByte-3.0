@@ -1,36 +1,66 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { InfiniteCanvas } from '../components/showcase-v2/InfiniteCanvas.jsx';
+
+const imageModules = import.meta.glob('../assets/showcase/flanora-v2/*.png', { eager: true });
+
+const getImageUrl = (name) => {
+  const path = `../assets/showcase/flanora-v2/${name}`;
+  return imageModules[path]?.default || imageModules[path];
+};
 
 const ShowcaseFlanoraV2 = () => {
+  const [media, setMedia] = useState([]);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    // Generate media array from the imports
+    const mediaItems = [];
+    for (let i = 0; i <= 66; i++) {
+      const idx = i.toString().padStart(4, '0');
+      const url = getImageUrl(`test_${idx}.png`);
+      if (url) {
+        mediaItems.push({
+          id: `item_${i}`,
+          url: url,
+          title: `Item ${i}`,
+        });
+      }
+    }
+    setMedia(mediaItems);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-8 relative overflow-hidden">
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 to-black z-0 pointer-events-none" />
+    <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden', backgroundColor: '#f8f7f5' }}>
       
-      <div className="z-10 bg-white/5 backdrop-blur-xl border border-white/10 p-12 rounded-3xl max-w-2xl text-center shadow-2xl relative overflow-hidden">
-        {/* Top Accent Line */}
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-500" />
-        
-        <div className="w-16 h-16 mx-auto mb-8 rounded-2xl bg-gradient-to-tr from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 flex items-center justify-center">
-          <span className="text-2xl font-bold text-cyan-200">v2</span>
+      {progress < 100 && (
+        <div className="fixed inset-0 z-[10000] bg-[#f8f7f5] flex flex-col items-center justify-center">
+          <div className="text-xl font-light mb-4 text-black">Loading Textures... {progress}%</div>
+          <div className="w-[100px] h-[1px] bg-[#9b9b9b] origin-left animate-[loaderAnim_1.5s_ease-in-out_infinite_alternate_forwards]" />
         </div>
+      )}
 
-        <h1 className="text-5xl font-light tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
-          Flanora v2 Showcase
-        </h1>
-        
-        <p className="text-xl text-white/50 mb-10 font-light leading-relaxed">
-          Welcome to the dedicated showcase page for Flanora v2. This placeholder will soon be replaced with detailed generative capabilities, model parameters, and high-resolution examples.
-        </p>
-
+      {media.length > 0 && (
+        <InfiniteCanvas 
+          media={media} 
+          showControls={true} 
+          backgroundColor="#f8f7f5" 
+          fogColor="#f8f7f5"
+          onTextureProgress={(p) => setProgress(p)}
+        />
+      )}
+      
+      {/* Back button fixed at the bottom right */}
+      <div style={{ position: 'absolute', bottom: '24px', right: '24px', zIndex: 100 }}>
         <Link 
-          to="/showcase" 
-          className="inline-flex items-center px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 transition-all duration-300 text-sm tracking-wide group"
+          to="/showcase"
+          className="flex items-center gap-2 bg-[#1a1a1a] text-white px-5 py-3 rounded-full hover:bg-black transition-colors"
+          style={{ fontFamily: 'inherit' }}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
           </svg>
-          Back to Main Showcase
+          Back
         </Link>
       </div>
     </div>
