@@ -31,10 +31,10 @@ function LoginPage() {
   return (
     <main className="flanora-auth-page">
       <section className="flanora-auth-form-panel">
-        <Link className="flanora-auth-wordmark" to="/">Flanora</Link>
+        <Link className="flanora-auth-wordmark" to="/" style={{ fontFamily: "'Playfair Display', serif" }}>Flanora</Link>
         <div className="flanora-auth-form-wrap">
           <div className="flanora-auth-heading">
-            <h1>Continue exploring with <em>Flanora.</em></h1>
+            <h1>Continue exploring with <em style={{ fontFamily: "'Playfair Display', serif" }}>Flanora.</em></h1>
             <p>Sign in to continue creating residential floor-plan concepts.</p>
           </div>
 

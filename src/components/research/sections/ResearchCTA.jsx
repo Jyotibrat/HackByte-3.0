@@ -1,17 +1,18 @@
 // src/components/research/sections/ResearchCTA.jsx
 // Section 5: Final high-contrast CTA — "Explore the Work Behind Flanora"
 // To REMOVE: delete this file and its import in ResearchPage.jsx
-// To UPDATE METRICS: edit the METRICS array below
+// To UPDATE METRICS: edit the INITIAL_METRICS array below
 // To ADD/REMOVE CTA BUTTONS: edit the BUTTONS array below
 
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import ctaBg from '../../../assets/research/features_cta_img.png';
 
-const METRICS = [
-  { label: "PUBLISHED PAPERS", value: "1", highlight: false },
-  { label: "OPEN DATASETS", value: "50.8 MB", highlight: false },
-  { label: "INTERNAL REPS", value: "42", highlight: false },
-  { label: "COMMUNITY CITATIONS", value: "1,820+", highlight: true },
+const INITIAL_METRICS = [
+  { label: "PUBLISHED PAPERS", value: "1", highlight: false, id: "papers" },
+  { label: "OPEN DATASETS", value: "50.8 MB", highlight: false, id: "datasets" },
+  { label: "INTERNAL REPS", value: "42", highlight: false, id: "reps" },
+  { label: "COMMUNITY CITATIONS", value: "Loading...", highlight: true, id: "citations" },
 ];
 
 const BUTTONS = [
@@ -33,6 +34,69 @@ const BUTTONS = [
 ];
 
 function ResearchCTA() {
+  const [metrics, setMetrics] = useState(INITIAL_METRICS);
+
+  useEffect(() => {
+    let active = true;
+
+    const fetchCitations = async () => {
+      try {
+        const targetUrl = 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=sXfCf4QAAAAJ&citation_for_view=sXfCf4QAAAAJ:9yKSN-GCB0IC';
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
+        
+        const response = await fetch(proxyUrl);
+        const data = await response.json();
+        
+        if (!active) return;
+        
+        let citationCount = null;
+        
+        if (data && data.contents) {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(data.contents, 'text/html');
+          
+          const metaDesc = doc.querySelector('meta[property="og:description"]');
+          if (metaDesc) {
+            const content = metaDesc.getAttribute('content');
+            const match = content.match(/Cited by (\d+)/);
+            if (match && match[1]) {
+              citationCount = match[1];
+            }
+          }
+          
+          if (!citationCount) {
+             const citeLinks = Array.from(doc.querySelectorAll('a')).filter(a => a.textContent.includes('Cited by'));
+             if (citeLinks.length > 0) {
+                const match = citeLinks[0].textContent.match(/Cited by (\d+)/);
+                if (match && match[1]) citationCount = match[1];
+             }
+          }
+        }
+        
+        if (citationCount) {
+          setMetrics(prev => prev.map(m => 
+            m.id === "citations" ? { ...m, value: citationCount } : m
+          ));
+        } else {
+          setMetrics(prev => prev.map(m => 
+            m.id === "citations" && m.value === "Loading..." ? { ...m, value: "2" } : m
+          ));
+        }
+        
+      } catch (error) {
+        if (active) {
+          setMetrics(prev => prev.map(m => 
+            m.id === "citations" && m.value === "Loading..." ? { ...m, value: "2" } : m
+          ));
+        }
+      }
+    };
+    
+    fetchCitations();
+
+    return () => { active = false; };
+  }, []);
+
   return (
     <section className="bg-charcoal-plate text-white py-24 md:py-36 relative overflow-hidden dark-grid-bg bg-[#1a1a1a]">
       <div 
@@ -109,7 +173,7 @@ function ResearchCTA() {
               RESEARCH METRICS // PRESENT
             </div>
             <div className="space-y-4 font-mono text-sm">
-              {METRICS.map((m) => (
+              {metrics.map((m) => (
                 <div key={m.label} className="flex justify-between">
                   <span className="text-neutral-400">{m.label}</span>
                   <span className={m.highlight ? "text-accent-lime font-bold" : "text-white font-bold"}>
