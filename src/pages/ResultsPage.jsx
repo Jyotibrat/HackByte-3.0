@@ -63,7 +63,6 @@ function ResultsPage() {
   let defaultFilter = "All";
   if (path === "/showcase/flanora-v1") defaultFilter = "Flanora v1";
   else if (path === "/showcase/flanora-v2") defaultFilter = "Flanora v2";
-  else if (path === "/showcase/flanora-v3") defaultFilter = "Flanora v3";
 
   const [filterModel, setFilterModel] = useState(defaultFilter);
 
@@ -71,7 +70,6 @@ function ResultsPage() {
   useEffect(() => {
     if (path === "/showcase/flanora-v1") setFilterModel("Flanora v1");
     else if (path === "/showcase/flanora-v2") setFilterModel("Flanora v2");
-    else if (path === "/showcase/flanora-v3") setFilterModel("Flanora v3");
     else if (path === "/showcase") setFilterModel("All");
   }, [path]);
 

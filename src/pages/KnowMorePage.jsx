@@ -33,21 +33,6 @@ function KnowMorePage() {
       path: "/models/dall-e",
       image: "/logos/multi modal logo.jpeg",
     },
-    {
-      id: "midjourney",
-      name: "Gemini with Matplotlib Floor Planner",
-      description:
-        "Google's Gemini model combined with Matplotlib to create programmatically precise 2D floor plans with exact measurements.",
-      features: [
-        "Highly aesthetic visual representations",
-        "Excellent lighting and atmospheric quality",
-        "Creative interpretation of spaces",
-      ],
-      bestFor: "Artistic visualizations",
-      path: "/models/midjourney",
-      image:
-        "/logos/gemini matplotlib model logo.jpeg",
-    },
   ];
 
   return (

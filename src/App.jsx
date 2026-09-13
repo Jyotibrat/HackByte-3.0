@@ -10,7 +10,6 @@ import ContributorsPage from "./pages/ContributorsPage";
 import ResultsPage from "./pages/ResultsPage";
 import StableDiffusionPage from "./pages/StableDiffusionPage";
 import DallEPage from "./pages/DallEPage";
-import MidjourneyPage from "./pages/MidjourneyPage";
 import FeaturesPage from "./pages/FeaturesPage";
 import AboutPage from "./pages/AboutPage";
 import ResearchPage from "./pages/ResearchPage";
@@ -27,6 +26,7 @@ import ShowcaseFlanoraV2 from "./pages/ShowcaseFlanoraV2";
 import MarketingLayout from "./components/MarketingLayout";
 import LoadingScreen from "./components/LoadingScreen";
 import PageTransition from "./components/PageTransition";
+import TestPage from "./pages/TestPage";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -40,12 +40,10 @@ function AnimatedRoutes() {
           <Route path="/models" element={<ModelsPage />} />
           <Route path="/models/flanora-v1" element={<StableDiffusionPage />} />
           <Route path="/models/flanora-v2" element={<DallEPage />} />
-          <Route path="/models/midjourney" element={<MidjourneyPage />} />
           <Route path="/team" element={<ContributorsPage />} />
           <Route path="/showcase" element={<ResultsPage />} />
           <Route path="/showcase/flanora-v1" element={<ShowcaseFlanoraV1 />} />
           <Route path="/showcase/flanora-v2" element={<ShowcaseFlanoraV2 />} />
-          <Route path="/showcase/flanora-v3" element={<ResultsPage />} />
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/research/publications" element={<ResearchCategoryPage />} />
           <Route path="/research/articles" element={<ResearchCategoryPage />} />
@@ -63,6 +61,7 @@ function AnimatedRoutes() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/research/publications/survey-paper-2025" element={<SurveyPaper2025 />} />
+        <Route path="/test" element={<TestPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </PageTransition>

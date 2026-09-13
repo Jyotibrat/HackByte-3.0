@@ -12,7 +12,7 @@ const modelGroups = [
     name: "Flanora-v1",
     path: "/models/flanora-v1",
     sections: [
-      { label: "Explore", items: ["Architecture", "Capabilities", "Showcase"] },
+      { label: "Explore", items: ["Architecture", "Capabilities", { label: "Showcase", to: "/showcase/flanora-v1" }] },
       { label: "Use", items: ["Playground", { label: "Google Colab", external: "https://colab.research.google.com/github/Jyotibrat/Flanora-AI/blob/main/Notebooks/Flanora_AI_v1.ipynb" }] },
       { label: "Develop", items: ["Documentation", "Local Development", { label: "Hugging Face", external: "https://huggingface.co/BJyotibrat/Flanora-AI-v1" }] },
     ],
@@ -21,7 +21,7 @@ const modelGroups = [
     name: "Flanora-v2",
     path: "/models/flanora-v2",
     sections: [
-      { label: "Explore", items: ["Architecture", "Capabilities", "Showcase"] },
+      { label: "Explore", items: ["Architecture", "Capabilities", { label: "Showcase", to: "/showcase/flanora-v2" }] },
       { label: "Use", items: ["Playground", { label: "Google Colab", external: "https://colab.research.google.com/" }] },
       { label: "Develop", items: ["Documentation", "Local Development", { label: "Hugging Face", external: "https://huggingface.co/" }] },
     ],
@@ -52,7 +52,7 @@ function ModelMenu() {
                     <a key={label} href={item.external} target="_blank" rel="noreferrer">
                       {label}<ExternalLinkIcon />
                     </a>
-                  ) : <Link key={label} to={group.path || "/models"}>{label}</Link>;
+                  ) : <Link key={label} to={item.to || group.path || "/models"}>{label}</Link>;
                 })}
               </div>
             </div>
