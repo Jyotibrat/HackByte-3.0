@@ -174,7 +174,22 @@ function Navbar({ variant = "marketing", scrollState }) {
             ))}
             <Link className={pathname.startsWith("/showcase") ? "is-active" : ""} to="/showcase">Showcase</Link>
           </nav>
-          <div className="flanora-navbar-actions"><Link className="flanora-login-link" to="/login">Log in</Link><Link className="flanora-cta" to="/chat">Try Flanora ↗</Link></div>
+          <div className="flanora-navbar-actions">
+            {!isAuthenticated && (
+              <Link className="flanora-login-link" to="/login">Log in</Link>
+            )}
+            <Link className="flanora-cta" to="/chat">Try Flanora ↗</Link>
+            {isAuthenticated && (
+              <Link
+                to="/profile"
+                className="flanora-nav-avatar"
+                aria-label="Your profile"
+                title={`${user?.first_name ?? "Profile"}`}
+              >
+                {[user?.first_name?.[0], user?.last_name?.[0]].filter(Boolean).join("").toUpperCase() || "?"}
+              </Link>
+            )}
+          </div>
           <button type="button" className="flanora-mobile-toggle" aria-expanded={mobileOpen} aria-controls="mobile-navigation" aria-label={mobileOpen ? "Close navigation" : "Open navigation"} onClick={() => setMobileOpen(!mobileOpen)}><span /><span /></button>
         </div>
         {mobileOpen && (
@@ -182,7 +197,11 @@ function Navbar({ variant = "marketing", scrollState }) {
             {primaryLinks.map((link) => <Link key={link.to} to={link.to} onClick={() => setMobileOpen(false)}>{link.label}</Link>)}
             <details><summary>Models<Chevron /></summary><ModelMenu /></details>
             <details><summary>Research<Chevron /></summary><ResearchMenu /></details>
-            <Link to="/login" onClick={() => setMobileOpen(false)}>Log in</Link>
+            {isAuthenticated ? (
+              <Link to="/profile" onClick={() => setMobileOpen(false)}>My Profile</Link>
+            ) : (
+              <Link to="/login" onClick={() => setMobileOpen(false)}>Log in</Link>
+            )}
             <Link className="flanora-cta" to="/chat" onClick={() => setMobileOpen(false)}>Try Flanora</Link>
           </nav>
         )}

@@ -1822,6 +1822,31 @@
   color: $bg-primary;
 }
 
+.flanora-nav-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $accent-teal 0%, #0e6e72 100%);
+  color: #071314;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  border: 2px solid transparent;
+  transition: border-color 180ms ease, opacity 180ms ease, transform 180ms ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: $accent-teal;
+    opacity: 0.88;
+    transform: scale(1.06);
+  }
+}
+
 .flanora-navbar-light:not(.is-scrolled) {
 
   .flanora-wordmark,

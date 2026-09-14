@@ -1,0 +1,501 @@
+// ============================================================
+// Profile Page — component styles
+// ============================================================
+@use '../../styles/theme' as *;
+@use 'sass:color';
+
+// ----------------------------------------------------------------
+// Page shell
+// ----------------------------------------------------------------
+
+.profile-page {
+  display: flex;
+  min-height: 100vh;
+  background: $bg-primary;
+  color: $fg-primary;
+  font-family: "Martel Sans", sans-serif;
+}
+
+// ----------------------------------------------------------------
+// Sidebar
+// ----------------------------------------------------------------
+
+.profile-sidebar {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  height: 100vh;
+  width: 240px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba($bg-deeper, 0.92);
+  border-right: 1px solid rgba($white, 0.07);
+  padding: 40px 16px 24px;
+  gap: 4px;
+  overflow-y: auto;
+}
+
+.profile-sidebar__heading {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba($fg-primary, 0.38);
+  padding: 0 12px;
+  margin: 0 0 10px;
+}
+
+.profile-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.profile-sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: rgba($fg-primary, 0.65);
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-align: left;
+  transition: background 150ms ease, color 150ms ease;
+
+  &:hover {
+    background: rgba($white, 0.05);
+    color: $fg-primary;
+  }
+
+  &.is-active {
+    background: rgba($accent-teal, 0.12);
+    color: $accent-teal;
+  }
+}
+
+.profile-sidebar__icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+.profile-sidebar__footer {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba($white, 0.07);
+}
+
+.profile-sidebar__back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba($fg-primary, 0.45);
+  font-size: 0.8rem;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: color 150ms ease, background 150ms ease;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    color: $fg-primary;
+    background: rgba($white, 0.05);
+  }
+}
+
+// ----------------------------------------------------------------
+// Main content area
+// ----------------------------------------------------------------
+
+.profile-main {
+  flex: 1;
+  padding: 56px 64px;
+  max-width: 760px;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+// ----------------------------------------------------------------
+// Hero
+// ----------------------------------------------------------------
+
+.profile-hero {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba($white, 0.07);
+}
+
+.profile-hero__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-hero__name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: $fg-primary;
+}
+
+.profile-hero__email {
+  font-size: 0.9rem;
+  color: rgba($fg-primary, 0.55);
+  margin: 0;
+}
+
+.profile-hero__joined {
+  font-size: 0.8rem;
+  color: rgba($fg-primary, 0.38);
+  margin: 4px 0 0;
+}
+
+// ----------------------------------------------------------------
+// Avatar
+// ----------------------------------------------------------------
+
+.profile-avatar {
+  border-radius: 50%;
+  background: linear-gradient(135deg, $accent-teal 0%, color.adjust($accent-teal, $lightness: -18%) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 700;
+  color: #0a2a2d;
+  letter-spacing: -0.02em;
+  user-select: none;
+
+  &--sm  { width: 32px;  height: 32px;  font-size: 0.75rem; }
+  &--md  { width: 44px;  height: 44px;  font-size: 0.95rem; }
+  &--lg  { width: 64px;  height: 64px;  font-size: 1.4rem;  }
+  &--xl  { width: 88px;  height: 88px;  font-size: 2rem;    }
+}
+
+// ----------------------------------------------------------------
+// Section heading (Security / Activity tabs)
+// ----------------------------------------------------------------
+
+.profile-section__heading {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 32px;
+  color: $fg-primary;
+}
+
+// ----------------------------------------------------------------
+// Cards
+// ----------------------------------------------------------------
+
+.profile-card {
+  background: rgba($white, 0.025);
+  border: 1px solid rgba($white, 0.07);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.profile-card__title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba($fg-primary, 0.38);
+  padding: 16px 20px 12px;
+  margin: 0;
+  border-bottom: 1px solid rgba($white, 0.06);
+}
+
+.profile-card__body {
+  padding: 4px 0;
+}
+
+// ----------------------------------------------------------------
+// Fields
+// ----------------------------------------------------------------
+
+.profile-field {
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba($white, 0.05);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.profile-field__label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba($fg-primary, 0.38);
+  margin-bottom: 4px;
+}
+
+.profile-field__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-field__value {
+  font-size: 0.9rem;
+  color: $fg-primary;
+}
+
+.profile-field__empty {
+  color: rgba($fg-primary, 0.3);
+  font-style: italic;
+}
+
+.profile-field__hint {
+  font-size: 0.78rem;
+  color: rgba($fg-primary, 0.38);
+  margin: 4px 0 0;
+}
+
+// ----------------------------------------------------------------
+// Badges
+// ----------------------------------------------------------------
+
+.profile-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+
+  &--verified   { background: rgba($accent-teal, 0.12); color: $accent-teal; }
+  &--unverified { background: rgba(#f97316, 0.12);       color: #f97316;      }
+  &--email      { background: rgba($white, 0.07);         color: rgba($fg-primary, 0.6); }
+  &--google     {
+    background: rgba(66, 133, 244, 0.1);
+    color: #4285f4;
+    svg { width: 12px; height: 12px; }
+  }
+}
+
+// ----------------------------------------------------------------
+// Action buttons
+// ----------------------------------------------------------------
+
+.profile-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 20px 14px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba($white, 0.1);
+  background: rgba($white, 0.04);
+  color: rgba($fg-primary, 0.75);
+  font: inherit;
+  font-size: 0.83rem;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+
+  &:hover {
+    background: rgba($white, 0.08);
+    color: $fg-primary;
+    border-color: rgba($white, 0.18);
+  }
+}
+
+.profile-submit-btn {
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: none;
+  background: $accent-teal;
+  color: #071314;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+
+  &:hover { opacity: 0.88; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+.profile-cancel-btn {
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba($white, 0.1);
+  background: transparent;
+  color: rgba($fg-primary, 0.65);
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+
+  &:hover { background: rgba($white, 0.05); color: $fg-primary; }
+}
+
+.profile-danger-btn {
+  margin: 8px 20px 14px;
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(#ef4444, 0.25);
+  background: rgba(#ef4444, 0.06);
+  color: #f87171;
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease;
+
+  &:hover {
+    background: rgba(#ef4444, 0.12);
+    border-color: rgba(#ef4444, 0.4);
+  }
+}
+
+// ----------------------------------------------------------------
+// Inline form (change password)
+// ----------------------------------------------------------------
+
+.profile-inline-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 20px 20px;
+}
+
+.profile-inline-form__label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba($fg-primary, 0.55);
+
+  input {
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba($white, 0.1);
+    background: rgba($white, 0.03);
+    color: $fg-primary;
+    font: inherit;
+    font-size: 0.9rem;
+    transition: border-color 150ms ease;
+
+    &:focus {
+      outline: none;
+      border-color: $accent-teal;
+    }
+  }
+}
+
+.profile-inline-form__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+// ----------------------------------------------------------------
+// Status messages
+// ----------------------------------------------------------------
+
+.profile-status {
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+
+  &--ok    { background: rgba($accent-teal, 0.1); color: $accent-teal;  border: 1px solid rgba($accent-teal, 0.2); }
+  &--error { background: rgba(#ef4444, 0.08);    color: #f87171;       border: 1px solid rgba(#ef4444, 0.2);     }
+}
+
+// ----------------------------------------------------------------
+// Empty state (Activity)
+// ----------------------------------------------------------------
+
+.profile-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 36px 20px;
+  text-align: center;
+
+  svg {
+    width: 48px;
+    height: 48px;
+    color: rgba($fg-primary, 0.25);
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: rgba($fg-primary, 0.38);
+    max-width: 300px;
+    margin: 0;
+    line-height: 1.6;
+  }
+}
+
+// ----------------------------------------------------------------
+// Responsive
+// ----------------------------------------------------------------
+
+@media (max-width: 768px) {
+  .profile-page {
+    flex-direction: column;
+  }
+
+  .profile-sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 16px;
+    gap: 8px;
+    border-right: none;
+    border-bottom: 1px solid rgba($white, 0.07);
+  }
+
+  .profile-sidebar__heading,
+  .profile-sidebar__footer { display: none; }
+
+  .profile-sidebar__nav {
+    flex-direction: row;
+    gap: 4px;
+  }
+
+  .profile-main {
+    padding: 32px 20px;
+    max-width: 100%;
+  }
+
+  .profile-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}

@@ -31,6 +31,7 @@ import { AuthProvider } from "./context/AuthContext";
 import VerifyEmailPage from "./pages/VerifyEmailPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import TestPage from "./pages/TestPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -61,6 +62,7 @@ function AnimatedRoutes() {
           <Route path="/status" element={<StatusPage />} />
         </Route>
         <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/verify-email" element={<VerifyEmailPage />} />
@@ -75,6 +77,14 @@ function AnimatedRoutes() {
         />
         <Route path="/research/publications/survey-paper-2025" element={<SurveyPaper2025 />} />
         <Route path="/test" element={<TestPage />} />
+        <Route
+          path="/profile"
+          element={
+            <RequireAuth>
+              <ProfilePage />
+            </RequireAuth>
+          }
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </PageTransition>
