@@ -180,14 +180,41 @@ function Navbar({ variant = "marketing", scrollState }) {
             )}
             <Link className="flanora-cta" to="/chat">Try Flanora ↗</Link>
             {isAuthenticated && (
-              <Link
-                to="/profile"
-                className="flanora-nav-avatar"
-                aria-label="Your profile"
-                title={`${user?.first_name ?? "Profile"}`}
+              <div
+                className="flanora-nav-profile-container"
+                onMouseEnter={() => setOpenMenu("profile")}
+                onMouseLeave={() => setOpenMenu(null)}
+                onFocus={() => setOpenMenu("profile")}
+                onBlur={closeWhenLeaving}
               >
-                {[user?.first_name?.[0], user?.last_name?.[0]].filter(Boolean).join("").toUpperCase() || "?"}
-              </Link>
+                <button
+                  type="button"
+                  className={`flanora-nav-avatar ${openMenu === "profile" ? "is-active" : ""}`}
+                  aria-label="Your profile"
+                  aria-expanded={openMenu === "profile"}
+                  aria-controls="profile-menu"
+                  title={`${user?.first_name ?? "Profile"}`}
+                >
+                  {user?.picture ? (
+                    <img src={user.picture} alt="" style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }} referrerPolicy="no-referrer" />
+                  ) : (
+                    [user?.first_name?.[0], user?.last_name?.[0]].filter(Boolean).join("").toUpperCase() || "?"
+                  )}
+                </button>
+                
+                {openMenu === "profile" && (
+                  <div className="flanora-profile-dropdown" id="profile-menu">
+                    <div className="flanora-profile-header">
+                      <span className="flanora-profile-name">{user?.first_name} {user?.last_name}</span>
+                      <span className="flanora-profile-email">{user?.email}</span>
+                    </div>
+                    <div className="flanora-profile-actions">
+                      <Link to="/profile" onClick={() => setOpenMenu(null)}>Profile</Link>
+                      <button type="button" onClick={handleLogout}>Log out</button>
+                    </div>
+                  </div>
+                )}
+              </div>
             )}
           </div>
           <button type="button" className="flanora-mobile-toggle" aria-expanded={mobileOpen} aria-controls="mobile-navigation" aria-label={mobileOpen ? "Close navigation" : "Open navigation"} onClick={() => setMobileOpen(!mobileOpen)}><span /><span /></button>

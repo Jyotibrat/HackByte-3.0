@@ -118,7 +118,22 @@ export function useGoogleAuth(onSuccess, onError) {
           return;
         }
         try {
+          // Extract picture from the JWT
+          const base64Url = response.credential.split(".")[1];
+          const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+          const jsonPayload = decodeURIComponent(
+            atob(base64)
+              .split("")
+              .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+              .join("")
+          );
+          const { picture } = JSON.parse(jsonPayload);
+
           const data = await googleLogin(response.credential);
+          if (picture) {
+            localStorage.setItem(`flanora_pic_${data.user.email}`, picture);
+            data.user.picture = picture;
+          }
           onSuccess(data.user);
         } catch (err) {
           onError(extractErrorMessage(err));

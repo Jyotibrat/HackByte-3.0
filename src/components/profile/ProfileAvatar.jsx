@@ -17,7 +17,11 @@ export function ProfileAvatar({ user, size = "md", className = "" }) {
 
   return (
     <div className={`profile-avatar ${sizeMap[size]} ${className}`} aria-label={`Avatar for ${user?.first_name}`}>
-      <span>{initials}</span>
+      {user?.picture ? (
+        <img src={user.picture} alt="" className="profile-avatar__img" referrerPolicy="no-referrer" />
+      ) : (
+        <span>{initials}</span>
+      )}
     </div>
   );
 }

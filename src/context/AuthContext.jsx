@@ -23,7 +23,11 @@ export function AuthProvider({ children }) {
     }
     fetchCurrentUser()
       .then((data) => {
-        if (!cancelled) setUser(data);
+        if (!cancelled) {
+          const cachedPic = localStorage.getItem(`flanora_pic_${data.email}`);
+          if (cachedPic) data.picture = cachedPic;
+          setUser(data);
+        }
       })
       .catch(() => {
         if (!cancelled) {
@@ -49,6 +53,8 @@ export function AuthProvider({ children }) {
 
   const login = useCallback(async (email, password) => {
     const data = await loginUser(email, password);
+    const cachedPic = localStorage.getItem(`flanora_pic_${data.user.email}`);
+    if (cachedPic) data.user.picture = cachedPic;
     setUser(data.user);
     return data;
   }, []);

@@ -1822,6 +1822,14 @@
   color: $bg-primary;
 }
 
+.flanora-nav-profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+  margin-bottom: -20px;
+}
+
 .flanora-nav-avatar {
   width: 36px;
   height: 36px;
@@ -1838,12 +1846,119 @@
   flex-shrink: 0;
   border: 2px solid transparent;
   transition: border-color 180ms ease, opacity 180ms ease, transform 180ms ease;
+  cursor: pointer;
+  padding: 0;
 
   &:hover,
-  &:focus-visible {
+  &:focus-visible,
+  &.is-active {
     border-color: $accent-teal;
     opacity: 0.88;
     transform: scale(1.06);
+  }
+}
+
+.flanora-profile-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 220px;
+  background: rgba($bg-nav-dark, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba($white, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  animation: dropdown-in 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: top right;
+
+  /* Bridge the gap so hover doesn't drop when moving from avatar to menu */
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    width: 100%;
+    height: 12px;
+  }
+}
+
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.flanora-profile-header {
+  padding: 16px;
+  border-bottom: 1px solid rgba($white, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.flanora-profile-name {
+  color: $fg-primary;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.flanora-profile-email {
+  color: rgba($fg-primary, 0.5);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.flanora-profile-actions {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+
+  a, button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 12px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: rgba($fg-primary, 0.8);
+    font-size: 0.85rem;
+    font-family: inherit;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 150ms ease, color 150ms ease;
+
+    &:hover,
+    &:focus-visible {
+      background: rgba($white, 0.06);
+      color: $fg-primary;
+    }
+  }
+
+  button {
+    color: #f87171;
+    margin-top: 4px;
+    
+    &:hover,
+    &:focus-visible {
+      background: rgba(#ef4444, 0.08);
+      color: #fca5a5;
+    }
   }
 }
 
