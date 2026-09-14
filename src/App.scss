@@ -89,6 +89,40 @@
   position: relative;
 }
 
+// App-shell session area (authenticated email + log out)
+.flanora-app-navbar-session {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+}
+
+.flanora-app-session-email {
+  color: rgba($fg-primary, 0.72);
+  font-size: 0.8125rem;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flanora-app-logout {
+  background: transparent;
+  border: 1px solid rgba($white, 0.18);
+  border-radius: 999px;
+  color: $fg-primary;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8125rem;
+  padding: 6px 16px;
+  transition: border-color 180ms ease, color 180ms ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: rgba($white, 0.4);
+    color: $fg-bright;
+  }
+}
+
 .flanora-nav-menu button,
 .flanora-nav-menu>a,
 .flanora-mobile-nav summary {

@@ -26,6 +26,10 @@ import ShowcaseFlanoraV2 from "./pages/ShowcaseFlanoraV2";
 import MarketingLayout from "./components/MarketingLayout";
 import LoadingScreen from "./components/LoadingScreen";
 import PageTransition from "./components/PageTransition";
+import RequireAuth from "./components/RequireAuth";
+import { AuthProvider } from "./context/AuthContext";
+import VerifyEmailPage from "./pages/VerifyEmailPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 import TestPage from "./pages/TestPage";
 
 function AnimatedRoutes() {
@@ -59,7 +63,16 @@ function AnimatedRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/chat" element={<ChatPage />} />
+        <Route path="/verify-email" element={<VerifyEmailPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route
+          path="/chat"
+          element={
+            <RequireAuth>
+              <ChatPage />
+            </RequireAuth>
+          }
+        />
         <Route path="/research/publications/survey-paper-2025" element={<SurveyPaper2025 />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="*" element={<NotFoundPage />} />
@@ -108,10 +121,12 @@ function App() {
 
   return (
     <div className={`app-container ${transitionClasses}`}>
-      <BrowserRouter>
-        <ScrollToTop />
-        <AnimatedRoutes />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <AnimatedRoutes />
+        </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }

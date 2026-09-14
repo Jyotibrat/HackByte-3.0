@@ -1,5 +1,6 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 const primaryLinks = [
   { label: "About", to: "/about" },
@@ -94,10 +95,17 @@ function ResearchMenu() {
 
 function Navbar({ variant = "marketing", scrollState }) {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { isAuthenticated, user, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const progressRef = useRef(null);
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
+  };
 
   useEffect(() => {
     if (typeof scrollState === "boolean") {
@@ -130,6 +138,18 @@ function Navbar({ variant = "marketing", scrollState }) {
       <header className="flanora-app-navbar">
         <Link to="/" className="flanora-app-wordmark">Flanora</Link>
         <nav aria-label="Application navigation"><Link to="/">Home</Link><Link to="/models">Models</Link></nav>
+        <div className="flanora-app-navbar-session" aria-label="Session">
+          {isAuthenticated ? (
+            <>
+              <span className="flanora-app-session-email" title={user.email}>{user.email}</span>
+              <button type="button" className="flanora-app-logout" onClick={handleLogout}>
+                Log out
+              </button>
+            </>
+          ) : (
+            <Link className="flanora-login-link" to="/login">Log in</Link>
+          )}
+        </div>
       </header>
     );
   }

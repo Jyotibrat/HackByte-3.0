@@ -1,5 +1,8 @@
-import { Link } from "react-router-dom";
-import { useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useRef, useCallback } from "react";
+import { useAuth } from "../context/AuthContext";
+import { extractErrorMessage } from "../services/authApiService";
+import { useGoogleAuth } from "../hooks/useGoogleAuth";
 
 function GoogleIcon() {
   return (
@@ -21,10 +24,55 @@ function CameraIcon() {
   );
 }
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_PATTERN = /^\+?[0-9][0-9\s\-()]{5,19}$/;
+
+function validateRegistration(form) {
+  const password = String(form.get("password") || "");
+
+  if (!EMAIL_PATTERN.test(String(form.get("email") || ""))) {
+    return "Please enter a valid email address.";
+  }
+  if (password.length < 8) {
+    return "Password must be at least 8 characters.";
+  }
+  if (!/[a-z]/.test(password) || !/[A-Z]/.test(password)) {
+    return "Password must contain both uppercase and lowercase letters.";
+  }
+  if (!/[^A-Za-z0-9]/.test(password)) {
+    return "Password must contain at least one special character.";
+  }
+  if (password !== form.get("rePassword")) {
+    return "Passwords do not match.";
+  }
+  const phone = String(form.get("phone") || "").trim();
+  if (phone && !PHONE_PATTERN.test(phone)) {
+    return "Please enter a valid phone number.";
+  }
+  const dob = form.get("dob");
+  if (dob && new Date(dob) > new Date()) {
+    return "Date of birth cannot be in the future.";
+  }
+  return "";
+}
+
 function SignUpPage() {
+  const { signup, setUser } = useAuth();
+  const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [createdEmail, setCreatedEmail] = useState("");
   const [avatarPreview, setAvatarPreview] = useState(null);
   const avatarInputRef = useRef(null);
+
+  const handleGoogleSuccess = useCallback((user) => {
+    setUser(user);
+    navigate("/chat", { replace: true });
+  }, [setUser, navigate]);
+
+  const handleGoogleError = useCallback((msg) => setError(msg), []);
+
+  const signInWithGoogle = useGoogleAuth(handleGoogleSuccess, handleGoogleError);
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
@@ -32,24 +80,78 @@ function SignUpPage() {
     setAvatarPreview(URL.createObjectURL(file));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const password = form.get("password");
-    const rePassword = form.get("rePassword");
 
-    if (password !== rePassword) {
-      setError("Passwords do not match.");
+    const validationError = validateRegistration(form);
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
-    if (password.length < 8) {
-      setError("Password must be at least 8 characters.");
-      return;
+    setError("");
+    setIsSubmitting(true);
+    try {
+      await signup({
+        first_name: String(form.get("firstName") || "").trim(),
+        last_name: String(form.get("lastName") || "").trim(),
+        email: String(form.get("email") || "").trim().toLowerCase(),
+        phone_number: String(form.get("phone") || "").trim(),
+        date_of_birth: String(form.get("dob") || ""),
+        password: String(form.get("password") || ""),
+        confirm_password: String(form.get("rePassword") || ""),
+        accept_terms: form.get("tos") === "on",
+        accept_privacy_policy: form.get("tos") === "on",
+      });
+      setCreatedEmail(String(form.get("email") || "").trim().toLowerCase());
+    } catch (submitError) {
+      setError(extractErrorMessage(submitError));
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setError("Sign up is not connected to the authentication service yet.");
   };
+
+  if (createdEmail) {
+    return (
+      <main className="flanora-auth-page">
+        <section className="flanora-auth-form-panel">
+          <Link className="flanora-auth-wordmark" to="/">Flanora</Link>
+          <div className="flanora-auth-form-wrap">
+            <div className="flanora-auth-heading">
+              <h1>Welcome to <em>Flanora.</em></h1>
+              <p>Your account has been created.</p>
+            </div>
+            <p className="flanora-auth-message" role="status">
+              We've sent a verification link to {createdEmail}. You can start
+              exploring right away — just verify your email later to keep full
+              access.
+            </p>
+            <button
+              className="flanora-auth-submit"
+              type="button"
+              onClick={() => navigate("/chat", { replace: true })}
+            >
+              Continue to Flanora →
+            </button>
+            <p className="flanora-auth-legal">
+              Didn't get the email?{" "}
+              <Link to="/verify-email">Verify your email here</Link>
+            </p>
+          </div>
+        </section>
+
+        <aside className="flanora-auth-visual" aria-label="Flanora AI sign-up preview">
+          <div className="flanora-auth-grid" aria-hidden="true" />
+          <div className="flanora-auth-visual-content">
+            <span>Flanora AI</span>
+            <h2>Design the space you've always imagined.</h2>
+            <p>Describe your vision and watch AI bring your floor plan to life in moments.</p>
+          </div>
+        </aside>
+      </main>
+    );
+  }
 
   return (
     <main className="flanora-auth-page">
@@ -79,7 +181,7 @@ function SignUpPage() {
               <button type="button" className="flanora-avatar-change" onClick={() => avatarInputRef.current?.click()}>
                 {avatarPreview ? "Change photo" : "Upload photo"}
               </button>
-              <span className="flanora-avatar-hint">Optional � JPG, PNG, WEBP up to 5 MB</span>
+              <span className="flanora-avatar-hint">Optional · JPG, PNG, WEBP up to 5 MB</span>
             </div>
             <input
               ref={avatarInputRef}
@@ -91,9 +193,11 @@ function SignUpPage() {
             />
           </div>
 
-          <button className="flanora-google-button" type="button">
+          <button className="flanora-google-button" type="button" onClick={signInWithGoogle}>
             <GoogleIcon /> Continue with Google
           </button>
+          {/* Fallback render target for Google's button if One Tap is suppressed */}
+          <div id="google-signin-fallback" style={{ display: "none" }} />
 
           <div className="flanora-auth-divider"><span>or sign up with email</span></div>
 
@@ -106,10 +210,6 @@ function SignUpPage() {
                 <input id="lastName" name="lastName" type="text" autoComplete="family-name" placeholder="Lovelace" required />
               </label>
             </div>
-
-            <label htmlFor="username">Username
-              <input id="username" name="username" type="text" autoComplete="username" placeholder="ada_lovelace (optional)" />
-            </label>
 
             <div className="flanora-signup-row">
               <label htmlFor="dob">Date of birth *
@@ -125,7 +225,7 @@ function SignUpPage() {
             </label>
 
             <label htmlFor="password">Password *
-              <input id="password" name="password" type="password" autoComplete="new-password" placeholder="At least 8 characters" minLength="8" required />
+              <input id="password" name="password" type="password" autoComplete="new-password" placeholder="8+ characters, upper &amp; lower case, a special character" minLength="8" required />
             </label>
 
             <label htmlFor="rePassword">Re-enter password *
@@ -144,7 +244,9 @@ function SignUpPage() {
 
             {error && <p className="flanora-auth-message" role="alert">{error}</p>}
 
-            <button className="flanora-auth-submit" type="submit">Create account</button>
+            <button className="flanora-auth-submit" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Creating account…" : "Create account"}
+            </button>
           </form>
 
           <p className="flanora-auth-legal">

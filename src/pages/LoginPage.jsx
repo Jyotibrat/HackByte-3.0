@@ -1,5 +1,8 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState, useCallback } from "react";
+import { useAuth } from "../context/AuthContext";
+import { extractErrorMessage } from "../services/authApiService";
+import { useGoogleAuth } from "../hooks/useGoogleAuth";
 
 function GoogleIcon() {
   return (
@@ -13,19 +16,44 @@ function GoogleIcon() {
 }
 
 function LoginPage() {
+  const { login, setUser } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleGoogleSuccess = useCallback((user) => {
+    setUser(user);
+    const destination = location.state?.from || "/chat";
+    navigate(destination, { replace: true });
+  }, [setUser, navigate, location]);
+
+  const handleGoogleError = useCallback((msg) => setError(msg), []);
+
+  const signInWithGoogle = useGoogleAuth(handleGoogleSuccess, handleGoogleError);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const password = form.get("password");
+    const email = String(form.get("email") || "").trim();
+    const password = String(form.get("password") || "");
 
-    if (password !== form.get("confirmPassword")) {
-      setError("Passwords do not match.");
+    if (!email || !password) {
+      setError("Please enter your email and password.");
       return;
     }
 
-    setError("Login is not connected to the authentication service yet.");
+    setError("");
+    setIsSubmitting(true);
+    try {
+      await login(email, password);
+      const destination = location.state?.from || "/chat";
+      navigate(destination, { replace: true });
+    } catch (submitError) {
+      setError(extractErrorMessage(submitError));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -38,9 +66,11 @@ function LoginPage() {
             <p>Sign in to continue creating residential floor-plan concepts.</p>
           </div>
 
-          <button className="flanora-google-button" type="button">
+          <button className="flanora-google-button" type="button" onClick={signInWithGoogle}>
             <GoogleIcon /> Continue with Google
           </button>
+          {/* Fallback render target for Google's button if One Tap is suppressed */}
+          <div id="google-signin-fallback" style={{ display: "none" }} />
 
           <div className="flanora-auth-divider"><span>or continue with email</span></div>
 
@@ -51,11 +81,10 @@ function LoginPage() {
             <label htmlFor="password">Password
               <input id="password" name="password" type="password" autoComplete="current-password" placeholder="Enter your password" minLength="8" required />
             </label>
-            <label htmlFor="confirmPassword">Confirm password
-              <input id="confirmPassword" name="confirmPassword" type="password" autoComplete="current-password" placeholder="Enter your password again" minLength="8" required />
-            </label>
             {error && <p className="flanora-auth-message" role="alert">{error}</p>}
-            <button className="flanora-auth-submit" type="submit">Log in</button>
+            <button className="flanora-auth-submit" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Signing in…" : "Log in"}
+            </button>
           </form>
 
           <p className="flanora-auth-signup-nudge">
