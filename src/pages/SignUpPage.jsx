@@ -3,6 +3,13 @@ import { useState, useRef, useCallback } from "react";
 import { useAuth } from "../context/AuthContext";
 import { extractErrorMessage } from "../services/authApiService";
 import { useGoogleAuth } from "../hooks/useGoogleAuth";
+import { Checkbox } from "@/components/animate-ui/components/radix/checkbox";
+import {
+  PreviewLinkCard,
+  PreviewLinkCardTrigger,
+  PreviewLinkCardContent,
+  PreviewLinkCardImage
+} from "@/components/animate-ui/components/radix/preview-link-card";
 
 function GoogleIcon() {
   return (
@@ -233,12 +240,26 @@ function SignUpPage() {
             </label>
 
             <label className="flanora-tos-label" htmlFor="tos">
-              <input id="tos" name="tos" type="checkbox" required className="flanora-tos-checkbox" />
+              <Checkbox id="tos" name="tos" required className="flanora-tos-checkbox" />
               <span>
                 I agree to the{" "}
-                <Link to="/policies/terms-of-use">Terms of Service</Link>
+                <PreviewLinkCard>
+                  <PreviewLinkCardTrigger asChild>
+                    <a href="https://flanora-ai.becore.space/policies/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+                  </PreviewLinkCardTrigger>
+                  <PreviewLinkCardContent>
+                    <PreviewLinkCardImage src="https://placehold.co/600x400/18181b/ffffff?text=Terms+of+Service" alt="Terms of Service Preview" />
+                  </PreviewLinkCardContent>
+                </PreviewLinkCard>
                 {" "}and{" "}
-                <Link to="/policies/privacy-policy">Privacy Policy</Link>
+                <PreviewLinkCard>
+                  <PreviewLinkCardTrigger asChild>
+                    <a href="https://flanora-ai.becore.space/policies/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                  </PreviewLinkCardTrigger>
+                  <PreviewLinkCardContent>
+                    <PreviewLinkCardImage src="https://placehold.co/600x400/18181b/ffffff?text=Privacy+Policy" alt="Privacy Policy Preview" />
+                  </PreviewLinkCardContent>
+                </PreviewLinkCard>
               </span>
             </label>
 
