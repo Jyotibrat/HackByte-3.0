@@ -14,16 +14,15 @@ function PoliciesPage() {
   const { policy } = useParams();
   const title = titles[policy] ?? "Policies";
 
-  if (policy === "privacy-policy") {
+  if (policy === "privacy-policy" || policy === "terms-of-use") {
+    const markup = policy === "privacy-policy" ? privacyPolicyMarkup : termsOfUseMarkup;
     return (
-      <section className="flanora-policy-page">
-        <article className="flanora-policy-content" dangerouslySetInnerHTML={{ __html: privacyPolicyMarkup }} />
-      </section>
+      <div className="flanora-research-page blueprint-bg min-h-screen flex flex-col pb-[150px]">
+        <section className="flanora-policy-page">
+          <article className="flanora-policy-content" dangerouslySetInnerHTML={{ __html: markup }} />
+        </section>
+      </div>
     );
-  }
-
-  if (policy === "terms-of-use") {
-    return <section className="flanora-policy-page"><article className="flanora-policy-content" dangerouslySetInnerHTML={{ __html: termsOfUseMarkup }} /></section>;
   }
 
   return (

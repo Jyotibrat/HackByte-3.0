@@ -153,3 +153,23 @@
 .group\/btn:hover .btn-border-reveal::before {
   width: 100%;
 }
+
+/* Policy Content Overrides */
+.flanora-research-page .flanora-policy-page {
+  color: var(--ink-text);
+}
+
+.flanora-research-page .flanora-policy-content h1,
+.flanora-research-page .flanora-policy-content h2,
+.flanora-research-page .flanora-policy-content h3,
+.flanora-research-page .flanora-policy-content h4 {
+  color: var(--ink-text);
+}
+
+.flanora-research-page .flanora-policy-content h1+p {
+  color: var(--secondary);
+}
+
+.flanora-research-page .flanora-policy-content a {
+  color: var(--secondary);
+}
