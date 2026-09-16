@@ -127,7 +127,7 @@ function Navbar({ variant = "marketing", scrollState }) {
     updateNavbar();
     window.addEventListener("scroll", updateNavbar, { passive: true });
     return () => window.removeEventListener("scroll", updateNavbar);
-  }, [scrollState]);
+  }, [scrollState, pathname]);
 
   const closeWhenLeaving = (event) => {
     if (!event.currentTarget.contains(event.relatedTarget)) setOpenMenu(null);
@@ -155,7 +155,7 @@ function Navbar({ variant = "marketing", scrollState }) {
   }
 
   const lightThemePaths = ["/about", "/features", "/models", "/showcase/flanora-v1", "/showcase/flanora-v2"];
-  const isLightTheme = lightThemePaths.includes(pathname) || pathname.startsWith("/research");
+  const isLightTheme = lightThemePaths.includes(pathname) || pathname.startsWith("/research") || pathname.startsWith("/policies");
   const menu = openMenu === "models" ? <ModelMenu /> : <ResearchMenu />;
 
   const allowedScrollProgressPaths = [
@@ -166,10 +166,8 @@ function Navbar({ variant = "marketing", scrollState }) {
     "/research",
     "/showcase",
     "/research/publications/survey-paper-2025",
-    "/policies/privacy-policy",
-    "/policies/terms-of-use",
   ];
-  const showScrollProgress = allowedScrollProgressPaths.includes(pathname);
+  const showScrollProgress = allowedScrollProgressPaths.includes(pathname) || pathname.startsWith("/policies");
 
   return (
     <>
