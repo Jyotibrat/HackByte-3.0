@@ -158,9 +158,22 @@ function Navbar({ variant = "marketing", scrollState }) {
   const isLightTheme = lightThemePaths.includes(pathname) || pathname.startsWith("/research");
   const menu = openMenu === "models" ? <ModelMenu /> : <ResearchMenu />;
 
+  const allowedScrollProgressPaths = [
+    "/",
+    "/about",
+    "/features",
+    "/models",
+    "/research",
+    "/showcase",
+    "/research/publications/survey-paper-2025",
+    "/policies/privacy-policy",
+    "/policies/terms-of-use",
+  ];
+  const showScrollProgress = allowedScrollProgressPaths.includes(pathname);
+
   return (
     <>
-      <div ref={progressRef} className="scroll-progress" aria-hidden="true" />
+      {showScrollProgress && <div ref={progressRef} className="scroll-progress" aria-hidden="true" />}
       <header className={`flanora-navbar ${isScrolled ? "is-scrolled" : ""} ${isLightTheme ? "flanora-navbar-light" : ""}`}>
         <div className="flanora-navbar-inner">
           <Link to="/" className="flanora-wordmark" onClick={() => setMobileOpen(false)}><b>Flanora</b> <b>AI</b></Link>

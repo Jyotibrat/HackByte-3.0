@@ -52,18 +52,7 @@
 .nf-landing .cross:before { width: 14px; height: 1px; }
 .nf-landing .cross:after { width: 1px; height: 14px; }
 
-/* Scroll progress bar */
-.nf-landing .scroll-progress {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 3px;
-  z-index: 1001;
-  transform-origin: left;
-  background: var(--accent);
-  transform: scaleX(0);
-}
+
 
 /* Header */
 .nf-landing .site-header {
