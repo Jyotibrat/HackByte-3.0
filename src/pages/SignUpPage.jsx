@@ -263,6 +263,13 @@ function SignUpPage() {
               </span>
             </label>
 
+            <label className="flanora-tos-label" htmlFor="newsletter">
+              <Checkbox id="newsletter" name="newsletter" className="flanora-tos-checkbox" />
+              <span>
+                I’d like to receive occasional newsletters and updates from Flanora AI.
+              </span>
+            </label>
+
             {error && <p className="flanora-auth-message" role="alert">{error}</p>}
 
             <button className="flanora-auth-submit" type="submit" disabled={isSubmitting}>

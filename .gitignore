@@ -8,4 +8,9 @@ dist
 
 temp_clone/
 
-backend/
+# Backend services are not tracked in the main repository, with one exception:
+# the standalone newsletter service is deployed from source control (its own
+# .gitignore keeps secrets out), so it must remain committable.
+# Note: the negation only works because the parent is matched with `backend/*`
+# rather than `backend/` - git cannot re-include inside an excluded directory.
+backend/*
