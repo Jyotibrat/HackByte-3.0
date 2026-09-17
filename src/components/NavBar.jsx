@@ -163,6 +163,7 @@ function Navbar({ variant = "marketing", scrollState }) {
     "/about",
     "/features",
     "/models",
+    "/models/flanora-v2",
     "/research",
     "/showcase",
     "/research/publications/survey-paper-2025",

@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { extractErrorMessage } from "../services/authApiService";
 import { useGoogleAuth } from "../hooks/useGoogleAuth";
@@ -22,11 +22,18 @@ function GoogleIcon() {
 }
 
 function LoginPage() {
-  const { login, setUser } = useAuth();
+  const { user, login, setUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      const destination = location.state?.from || "/chat";
+      navigate(destination, { replace: true });
+    }
+  }, [user, navigate, location]);
 
   const handleGoogleSuccess = useCallback((user) => {
     setUser(user);
@@ -36,7 +43,9 @@ function LoginPage() {
 
   const handleGoogleError = useCallback((msg) => setError(msg), []);
 
-  const signInWithGoogle = useGoogleAuth(handleGoogleSuccess, handleGoogleError);
+  const googleBtnRef = useRef(null);
+
+  useGoogleAuth(handleGoogleSuccess, handleGoogleError, googleBtnRef);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -72,11 +81,7 @@ function LoginPage() {
             <p>Sign in to continue creating residential floor-plan concepts.</p>
           </div>
 
-          <button className="flanora-google-button" type="button" onClick={signInWithGoogle}>
-            <GoogleIcon /> Continue with Google
-          </button>
-          {/* Fallback render target for Google's button if One Tap is suppressed */}
-          <div id="google-signin-fallback" style={{ display: "none" }} />
+          <div ref={googleBtnRef} className="flanora-google-button-container" style={{ display: "flex", justifyContent: "center" }}></div>
 
           <div className="flanora-auth-divider"><span>or continue with email</span></div>
 
