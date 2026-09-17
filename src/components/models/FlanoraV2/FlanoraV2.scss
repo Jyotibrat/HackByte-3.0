@@ -1,5 +1,4 @@
 .flanora-v2-container {
-  background: #1f1f1f;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   height: 100vh;
   width: 100vw;
@@ -75,7 +74,7 @@ $vertPad: 80px;
     top: 0;
     width: $elW;
     height: 100%;
-    background: #252525;
+    background: transparent;
     transition: transform $moveAT $expandAT, width $expandAT, opacity $moveAT $expandAT, z-index 0s $moveAT + $expandAT;
     will-change: transform, width, opacity;
 
@@ -138,9 +137,9 @@ $vertPad: 80px;
         top: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0,0,0,0.3);
-        opacity: 0;
-        transition: opacity $opacityAT;
+        background: transparent;
+        border-right: 1px solid rgba(0,0,0,0.05);
+        opacity: 1;
         
         @include contElActive {
           transition: opacity $opacityAT $fullExpandAT;
@@ -174,7 +173,7 @@ $vertPad: 80px;
     }
     
     &__heading {
-      color: #fff;
+      color: #1a1a1a;
       text-transform: uppercase;
       font-size: 18px;
     }
@@ -202,7 +201,7 @@ $vertPad: 80px;
     &__text {
       text-transform: uppercase;
       font-size: 40px;
-      color: #fff;
+      color: #1a1a1a;
     }
     
     &__close-btn {
@@ -358,18 +357,12 @@ $vertPad: 80px;
 
           &:before {
             transition-delay: 0.1s * $i;
-            background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-#{$i + 3}.jpg');
           }
         }
       }
     }
     
-    &:hover {
-      
-      .el__bg:after {
-        opacity: 0;
-      }
-    }
+
 
     &.s--active {
       z-index: 1;

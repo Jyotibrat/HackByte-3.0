@@ -4,11 +4,11 @@ import FlanoraV2Section from './FlanoraV2Section';
 import './FlanoraV2.scss';
 
 const sectionsData = [
-  { id: 1, title: 'Section 1', content: 'Whatever' },
-  { id: 2, title: 'Section 2', content: 'Whatever' },
-  { id: 3, title: 'Section 3', content: 'Whatever' },
-  { id: 4, title: 'Section 4', content: 'Whatever' },
-  { id: 5, title: 'Section 5', content: 'Whatever' },
+  { id: 1, title: 'The Beginning', content: 'The Beginning' },
+  { id: 2, title: 'Inside the Architecture', content: 'Inside the Architecture' },
+  { id: 3, title: 'From Input to Inference', content: 'From Input to Inference' },
+  { id: 4, title: 'A Measure of Architecture', content: 'A Measure of Architecture' },
+  { id: 5, title: 'Explore Further', content: 'Explore Further' },
 ];
 
 const FlanoraV2Layout = () => {
@@ -33,7 +33,7 @@ const FlanoraV2Layout = () => {
   };
 
   return (
-    <div className="flanora-v2-container">
+    <div className="flanora-v2-container blueprint-bg flanora-research-page">
       <div
         className={`cont ${isInactive ? 's--inactive' : ''} ${
           activeSection !== null ? 's--el-active' : ''
