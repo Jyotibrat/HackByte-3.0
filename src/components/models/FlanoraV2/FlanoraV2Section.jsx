@@ -4,6 +4,8 @@ const FlanoraV2Section = ({
   index,
   title,
   content,
+  bgImage,
+  frontImage,
   isActive,
   onClick,
   onClose,
@@ -12,7 +14,12 @@ const FlanoraV2Section = ({
     <div className={`el ${isActive ? 's--active' : ''}`} onClick={onClick}>
       <div className="el__overflow">
         <div className="el__inner">
-          <div className="el__bg"></div>
+          <div className="el__bg">
+            <div className="el__bg-image-back" style={{ backgroundImage: `url(${bgImage})` }}></div>
+            <div className="el__bg-image-front">
+              <img src={frontImage} alt="front" />
+            </div>
+          </div>
           <div className="el__preview-cont">
             <h2 className="el__heading">{title}</h2>
           </div>
