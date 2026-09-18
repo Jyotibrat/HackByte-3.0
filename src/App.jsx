@@ -31,7 +31,6 @@ import RequireAuth from "./components/RequireAuth";
 import { AuthProvider } from "./context/AuthContext";
 import VerifyEmailPage from "./pages/VerifyEmailPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
-import TestPage from "./pages/TestPage";
 import ProfilePage from "./pages/ProfilePage";
 
 function AnimatedRoutes() {
@@ -78,7 +77,6 @@ function AnimatedRoutes() {
           }
         />
         <Route path="/research/publications/survey-paper-2025" element={<SurveyPaper2025 />} />
-        <Route path="/test" element={<TestPage />} />
         <Route
           path="/profile"
           element={
