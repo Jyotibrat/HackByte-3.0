@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .flanora-v2-container {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   height: 100vh;
@@ -18,7 +20,7 @@ $vertPad: 80px;
   $expandAT: 0.7s;
   $expandDelay: 0.1s;
   $bgScaleAT: 0.8s;
-  $fadeoutAT: $moveAT + $expandAT/2;
+  $fadeoutAT: $moveAT + math.div($expandAT, 2);
   $indexHoverAT: 0.5s;
   $closeBtnAT: 0.3s;
   $closeBtnLineDelay: 0.15s;
@@ -66,8 +68,8 @@ $vertPad: 80px;
   }
 
   .el {
-    $elW: (100% - $elMrg * ($numOfEls - 1)) / $numOfEls;
-    $elMrgRel: percentage($elMrg / $elW);
+    $elW: math.div(100% - $elMrg * ($numOfEls - 1), $numOfEls);
+    $elMrgRel: math.percentage(math.div($elMrg, $elW));
     
     position: absolute;
     left: 0;
@@ -306,11 +308,11 @@ $vertPad: 80px;
       height: 100%;
       min-height: 250px;
       text-align: center;
-      font-size: 100vw / $numOfEls;
+      font-size: calc(100vw / #{$numOfEls});
       line-height: 0.85;
       font-weight: bold;
       color: #fff;
-      transition: transform $indexHoverAT, opacity $moveAT/2 $expandAT + $expandDelay + $moveAT;
+      transition: transform $indexHoverAT, opacity math.div($moveAT, 2) $expandAT + $expandDelay + $moveAT;
       transform: translate3d(0,1vw,0);
       
       @include elHover {
@@ -318,7 +320,7 @@ $vertPad: 80px;
       }
       
       @include contElActive {
-        transition: transform $indexHoverAT, opacity $moveAT/2;
+        transition: transform $indexHoverAT, opacity math.div($moveAT, 2);
         opacity: 0;
       }
       
@@ -333,10 +335,10 @@ $vertPad: 80px;
       &-back {
         color: #fff;
         opacity: 0;
-        transition: opacity $indexHoverAT/2 $indexHoverAT/2;
+        transition: opacity math.div($indexHoverAT, 2) math.div($indexHoverAT, 2);
         
         @include elHover {
-          transition: opacity $indexHoverAT/2;
+          transition: opacity math.div($indexHoverAT, 2);
           opacity: 1;
         }
       }
