@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./AboutPage.scss"; // Using AboutPage styles temporarily or creating a generic one
 
 const DocsPage = () => {
   useEffect(() => {
