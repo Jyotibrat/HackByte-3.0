@@ -172,13 +172,12 @@
   font-weight: 700;
   padding: 11px 19px;
   text-decoration: none;
-  transition: background 180ms ease, transform 180ms ease;
+  transition: background 180ms ease;
 }
 
 .flanora-cta:hover,
 .flanora-cta:focus-visible {
   background: $fg-bright;
-  transform: translateY(-1px);
 }
 
 .flanora-mega-menu {
@@ -587,6 +586,51 @@
   font-size: 0.84rem;
   line-height: 1.6;
   margin-top: 10px;
+}
+
+.flanora-footer-newsletter {
+  margin-top: 16px;
+  max-width: 280px;
+
+  h3 {
+    margin-bottom: 12px;
+  }
+
+  form {
+    display: flex;
+    gap: 8px;
+
+    input {
+      background: rgba($white, 0.05);
+      border: 1px solid rgba($white, 0.15);
+      border-radius: 999px;
+      color: $fg-primary;
+      flex: 1;
+      font-size: 0.8rem;
+      padding: 10px 16px;
+
+      &:focus {
+        border-color: $accent-lime;
+        outline: none;
+      }
+    }
+
+    button {
+      background: $fg-primary;
+      border: none;
+      border-radius: 999px;
+      color: $bg-nav-dark;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 10px 18px;
+      transition: background 180ms ease;
+
+      &:hover {
+        background: $accent-lime;
+      }
+    }
+  }
 }
 
 .flanora-footer-links {
@@ -1747,7 +1791,8 @@
   top: 14px;
   transition: background 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
     border-color 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-radius 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
   z-index: 90;
 }
 
@@ -1757,6 +1802,21 @@
   border-radius: 999px;
   box-shadow: 0 20px 60px rgba($black, 0.22);
   backdrop-filter: blur(18px) saturate(125%);
+}
+
+.flanora-navbar.mega-panel-open.is-scrolled {
+  border-radius: 29px 29px 0 0;
+  border-bottom: 1px solid transparent; // seamlessly connect with panel
+  
+  .mega-panel {
+    background: rgba($bg-nav-scroll, 0.72);
+    backdrop-filter: blur(18px) saturate(125%);
+  }
+}
+
+.flanora-navbar.mega-panel-open:not(.is-scrolled) {
+  background: rgba($bg-nav-dark, 0.97);
+  border-radius: 29px 29px 0 0;
 }
 
 .flanora-navbar-inner {
@@ -1798,15 +1858,15 @@
   text-transform: uppercase;
 }
 
-.flanora-desktop-nav>a:hover,
-.flanora-desktop-nav>a:focus-visible,
-.flanora-desktop-nav .is-active,
-.flanora-nav-menu button:hover,
-.flanora-nav-menu button:focus-visible,
-.flanora-nav-menu button.is-active,
-.flanora-nav-menu>a:hover,
-.flanora-nav-menu>a:focus-visible,
-.flanora-nav-menu>a.is-active {
+.flanora-navbar .flanora-desktop-nav>a:hover,
+.flanora-navbar .flanora-desktop-nav>a:focus-visible,
+.flanora-navbar .flanora-desktop-nav .is-active,
+.flanora-navbar .flanora-nav-menu button:hover,
+.flanora-navbar .flanora-nav-menu button:focus-visible,
+.flanora-navbar .flanora-nav-menu button.is-active,
+.flanora-navbar .flanora-nav-menu>a:hover,
+.flanora-navbar .flanora-nav-menu>a:focus-visible,
+.flanora-navbar .flanora-nav-menu>a.is-active {
   background: $fg-primary;
   color: $bg-primary;
 }
@@ -1816,11 +1876,21 @@
 }
 
 .flanora-login-link {
+  border-radius: 999px;
   color: $fg-primary;
   font-size: 0.67rem;
   font-weight: 700;
   letter-spacing: 0.1em;
+  padding: 8px 11px;
+  text-decoration: none;
   text-transform: uppercase;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.flanora-navbar .flanora-login-link:hover,
+.flanora-navbar .flanora-login-link:focus-visible {
+  background: $fg-primary;
+  color: $bg-primary;
 }
 
 .flanora-cta {
@@ -1978,7 +2048,7 @@
   }
 }
 
-.flanora-navbar-light:not(.is-scrolled) {
+.flanora-navbar-light:not(.is-scrolled):not(.mega-panel-open) {
 
   .flanora-wordmark,
   .flanora-desktop-nav>a,
@@ -2019,6 +2089,343 @@
 
 .flanora-mega-menu {
   top: calc(100% + 12px);
+}
+
+// =============================================================================
+// Full-width Mega Panel (Chesapeake-style)
+// =============================================================================
+
+// Dim overlay — sits between page content and the panel
+.mega-panel-overlay {
+  background: rgba($black, 0.35);
+  inset: 0;
+  position: fixed;
+  z-index: 48;
+  pointer-events: auto;
+  animation: megaOverlayIn 250ms ease forwards;
+}
+
+@keyframes megaOverlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+// The panel itself
+.mega-panel {
+  background: rgba($bg-nav-dark, 0.97);
+  border-top: 1px solid rgba($white, 0.08);
+  border-radius: 0 0 29px 29px;
+  box-shadow: 0 32px 64px rgba($black, 0.5);
+  color: $fg-primary;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 100%;  // flush against the bottom of the sticky <header>
+  z-index: 49;
+
+  // Fade + slide-in
+  animation: megaPanelIn 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes megaPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mega-panel__inner {
+  display: grid;
+  grid-template-columns: 30fr 40fr 30fr;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+  min-height: 400px;
+}
+
+// Each column
+.mega-panel__col {
+  padding: 48px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  // Stagger columns in
+  &:nth-child(1) { animation: megaColIn 260ms 60ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+  &:nth-child(2) { animation: megaColIn 260ms 100ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+  &:nth-child(3) { animation: megaColIn 260ms 140ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+
+  // Vertical dividers between columns
+  &--mid {
+    border-left: 1px solid rgba($white, 0.10);
+    border-right: 1px solid rgba($white, 0.10);
+  }
+}
+
+@keyframes megaColIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// Column 1 & 3 headings
+.mega-col-heading {
+  color: $fg-primary;
+  font-family: "Martel Sans", sans-serif;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  margin: 0;
+  text-transform: uppercase;
+
+  &--featured {
+    font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  }
+}
+
+.mega-col-desc {
+  color: rgba($fg-primary, 0.58);
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.865rem;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 340px;
+}
+
+// EXPLORE button
+.mega-explore-btn {
+  align-items: center;
+  background: $fg-primary;
+  border: 0;
+  border-radius: 999px;
+  color: $bg-nav-dark;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  gap: 8px;
+  letter-spacing: 0.1em;
+  margin-top: auto;
+  padding: 11px 19px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 180ms ease, color 180ms ease;
+  width: fit-content;
+
+  &:hover,
+  &:focus-visible {
+    background: $fg-bright;
+    outline: 2px solid $accent-lime;
+    outline-offset: 2px;
+  }
+  &--disabled {
+    background: rgba($white, 0.12);
+    color: rgba($fg-primary, 0.35);
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+.mega-external-icon {
+  flex-shrink: 0;
+  height: 11px;
+  width: 11px;
+}
+
+// Column 2 — numbered list items
+.mega-item {
+  align-items: center;
+  border-bottom: 1px solid rgba($white, 0.06);
+  color: rgba($fg-primary, 0.88);
+  display: flex;
+  gap: 20px;
+  padding: 16px 0;
+  text-decoration: none;
+  transition: color 160ms ease;
+
+  &:first-child { padding-top: 0; }
+  &:last-child  { border-bottom: 0; padding-bottom: 0; }
+
+  &:hover,
+  &:focus-visible {
+    color: $fg-bright;
+    outline: none;
+
+    .mega-item-label { letter-spacing: 0.12em; }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $accent-lime;
+    outline-offset: 2px;
+  }
+
+  &--disabled {
+    color: rgba($fg-primary, 0.28);
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+.mega-item-num {
+  color: rgba($fg-primary, 0.28);
+  flex-shrink: 0;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  width: 24px;
+}
+
+.mega-item-label {
+  font-family: "Martel Sans", sans-serif;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: letter-spacing 200ms ease;
+}
+
+// Nav trigger button — same shape as existing `a` in flanora-nav-menu
+.flanora-nav-menu button {
+  background: transparent;
+  border: 0;
+  color: rgba($fg-primary, 0.72);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.875rem;
+  padding: 8px 0;
+  transition: color 180ms ease;
+
+  svg {
+    height: 16px;
+    width: 16px;
+    vertical-align: middle;
+  }
+
+  &.is-active,
+  &:hover,
+  &:focus-visible {
+    color: $fg-primary;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $accent-lime;
+    outline-offset: 4px;
+  }
+}
+
+// Light-theme override for trigger buttons
+.flanora-navbar-light:not(.is-scrolled):not(.mega-panel-open) .flanora-nav-menu button {
+  color: #111;
+
+  &.is-active,
+  &:hover,
+  &:focus-visible {
+    background: #111;
+    color: white;
+  }
+}
+
+// Mobile mega accordion
+.mega-mobile-details {
+  border-bottom: 1px solid rgba($white, 0.1);
+}
+
+.mega-mobile-summary {
+  align-items: center;
+  color: rgba($fg-primary, 0.84);
+  cursor: pointer;
+  display: flex;
+  font-size: 0.95rem;
+  justify-content: space-between;
+  list-style: none;
+  padding: 14px 0;
+  user-select: none;
+
+  &::-webkit-details-marker { display: none; }
+
+  svg {
+    height: 16px;
+    width: 16px;
+    transition: transform 180ms ease;
+  }
+}
+
+.mega-mobile-details[open] .mega-mobile-summary svg {
+  transform: rotate(180deg);
+}
+
+.mega-mobile-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 0 20px;
+}
+
+.mega-mobile-heading {
+  color: $fg-primary;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.mega-mobile-desc {
+  color: rgba($fg-primary, 0.55);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.mega-mobile-list {
+  display: grid;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.mega-mobile-item {
+  color: rgba($fg-primary, 0.78);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 8px 0;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &--disabled {
+    color: rgba($fg-primary, 0.28);
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &:hover { color: $fg-primary; }
+}
+
+.mega-mobile-explore {
+  align-self: flex-start;
+  color: $accent-lime;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &:hover { text-decoration: underline; }
 }
 
 @media (max-width: 900px) {

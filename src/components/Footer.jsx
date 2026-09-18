@@ -58,6 +58,13 @@ function Footer() {
               <h3>Built for ideation</h3>
               <p>Generate concepts, compare models, and develop architectural ideas with confidence.</p>
             </div>
+            <div className="flanora-footer-newsletter">
+              <h3>Stay updated</h3>
+              <form onSubmit={(e) => e.preventDefault()} className="newsletter-form">
+                <input type="email" placeholder="Enter your email" required />
+                <button type="submit">Subscribe</button>
+              </form>
+            </div>
           </div>
         </section>
 
