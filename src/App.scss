@@ -1468,8 +1468,18 @@
 // Team / Contributors
 // =============================================================================
 
+.flanora-team-wrapper {
+  background-color: #f8f7f5;
+  background-image: 
+    linear-gradient(to right, rgba(26, 26, 26, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(26, 26, 26, 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+  min-height: 100vh;
+  width: 100%;
+}
+
 .flanora-team-page {
-  color: $fg-primary;
+  color: #111;
   font-family: "Martel Sans", sans-serif;
   margin: 0 auto;
   max-width: 1120px;
@@ -1515,7 +1525,7 @@
 }
 
 .flanora-team-header>span {
-  color: rgba($fg-primary, 0.68);
+  color: rgba(0, 0, 0, 0.68);
   font-size: 1.05rem;
   line-height: 1.7;
   margin-top: 24px;
@@ -1530,8 +1540,9 @@
 
 .flanora-team-card {
   aspect-ratio: 4 / 5;
-  border: 1px solid rgba($white, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 24px;
+  color: #fff;
   isolation: isolate;
   overflow: hidden;
   position: relative;
@@ -1573,7 +1584,7 @@
 }
 
 .flanora-team-card p {
-  color: rgba($fg-primary, 0.76);
+  color: rgba(255, 255, 255, 0.76);
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -1592,10 +1603,10 @@
 
 .flanora-team-socials a {
   align-items: center;
-  background: rgba($fg-primary, 0.12);
-  border: 1px solid rgba($white, 0.16);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 50%;
-  color: $fg-primary;
+  color: #fff;
   display: flex;
   height: 34px;
   justify-content: center;
@@ -1606,8 +1617,8 @@
 
 .flanora-team-socials a:hover,
 .flanora-team-socials a:focus-visible {
-  background: $fg-primary;
-  color: $bg-primary;
+  background: #fff;
+  color: #111;
   transform: translateY(-2px);
 }
 

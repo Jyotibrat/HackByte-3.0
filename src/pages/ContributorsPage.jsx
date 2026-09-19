@@ -10,35 +10,37 @@ function LinkedInIcon() {
 
 function ContributorsPage() {
   return (
-    <main className="flanora-team-page">
-      <section className="flanora-team-header">
-        <p>Our team</p>
-        <h1>Meet the minds building <em>Flanora.</em></h1>
-        <span>Developers, designers, and researchers working to make architectural ideation more accessible.</span>
-      </section>
+    <div className="flanora-team-wrapper">
+      <main className="flanora-team-page">
+        <section className="flanora-team-header">
+          <p>Our team</p>
+          <h1>Meet the minds building <em>Flanora.</em></h1>
+          <span>Developers, designers, and researchers working to make architectural ideation more accessible.</span>
+        </section>
 
-      <section className="flanora-team-grid" aria-label="Flanora AI team">
-        {contributors.map((contributor) => (
-          <article className="flanora-team-card" key={contributor.id} tabIndex="0">
-            <img
-              src={contributor.profileImage || "https://placehold.co/800x1000/102326/f5ffff?text=Flanora"}
-              alt={`${contributor.name}'s profile`}
-              loading="lazy"
-              onError={(event) => { event.currentTarget.src = "https://placehold.co/800x1000/102326/f5ffff?text=Flanora"; }}
-            />
-            <div className="flanora-team-card-wash" aria-hidden="true" />
-            <div className="flanora-team-card-content">
-              <h2>{contributor.name}</h2>
-              <p>{contributor.role}</p>
-              <div className="flanora-team-socials">
-                <a href={contributor.github} target="_blank" rel="noreferrer" aria-label={`Visit ${contributor.name}'s GitHub profile`}><GitHubIcon /></a>
-                <a href={contributor.linkedin} target="_blank" rel="noreferrer" aria-label={`Visit ${contributor.name}'s LinkedIn profile`}><LinkedInIcon /></a>
+        <section className="flanora-team-grid" aria-label="Flanora AI team">
+          {contributors.map((contributor) => (
+            <article className="flanora-team-card" key={contributor.id} tabIndex="0">
+              <img
+                src={contributor.profileImage || "https://placehold.co/800x1000/102326/f5ffff?text=Flanora"}
+                alt={`${contributor.name}'s profile`}
+                loading="lazy"
+                onError={(event) => { event.currentTarget.src = "https://placehold.co/800x1000/102326/f5ffff?text=Flanora"; }}
+              />
+              <div className="flanora-team-card-wash" aria-hidden="true" />
+              <div className="flanora-team-card-content">
+                <h2>{contributor.name}</h2>
+                <p>{contributor.role}</p>
+                <div className="flanora-team-socials">
+                  <a href={contributor.github} target="_blank" rel="noreferrer" aria-label={`Visit ${contributor.name}'s GitHub profile`}><GitHubIcon /></a>
+                  <a href={contributor.linkedin} target="_blank" rel="noreferrer" aria-label={`Visit ${contributor.name}'s LinkedIn profile`}><LinkedInIcon /></a>
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
-      </section>
-    </main>
+            </article>
+          ))}
+        </section>
+      </main>
+    </div>
   );
 }
 
