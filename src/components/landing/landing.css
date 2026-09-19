@@ -203,8 +203,10 @@
 .nf-landing .intro-portrait {
   grid-column: 1 / 5;
   height: 62vh;
-  overflow: hidden;
   border-radius: 2px;
+  position: relative;
+}
+.nf-landing .intro-portrait img {
   clip-path: polygon(0 0, 88% 0, 100% 100%, 10% 100%);
 }
 .nf-landing .keywords {
@@ -412,6 +414,22 @@
   width: max-content;
   padding: 8px 12px;
   border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 400ms ease, color 400ms ease;
+}
+
+.nf-landing .plan:not(.dark-card) .price:hover,
+.nf-landing .plan:not(.dark-card) .price:focus-visible {
+  background-color: #111;
+  color: #fff;
+}
+
+.nf-landing .plan.dark-card .price:hover,
+.nf-landing .plan.dark-card .price:focus-visible {
+  background-color: #fff;
+  color: #111;
 }
 .nf-landing .plan ul { list-style: none; padding: 0; margin: 0; line-height: 2; font-size: 14px; }
 .nf-landing .plan a {
@@ -638,7 +656,9 @@
   .nf-landing .intro { padding: 110px 0; }
   .nf-landing .intro-title .line-mask { padding-left: 0; }
   .nf-landing .intro-lower { display: block; }
-  .nf-landing .intro-portrait { width: 78%; height: 55vh; margin-bottom: 45px; clip-path: none; }
+  .nf-landing .intro-portrait { width: 78%; height: 55vh; margin-bottom: 45px; }
+  .nf-landing .intro-portrait img { clip-path: none; border: 1px solid #111; }
+  .nf-landing .intro-portrait svg { display: none; }
   .nf-landing .keywords,
   .nf-landing .intro-copy,
   .nf-landing .stats-mini { grid-column: auto; padding-top: 0; margin-top: 24px; }

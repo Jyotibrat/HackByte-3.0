@@ -37,7 +37,7 @@ function ModelsHero() {
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
         <div className="max-w-3xl">
-          <p className="font-martel text-sm tracking-[0.2em] text-outline mb-6 uppercase hero-text">Models / 01</p>
+          <p className="font-martel text-sm tracking-[0.2em] text-outline mb-6 uppercase hero-text">Models / 03</p>
           <h1 className="font-playfair text-6xl md:text-8xl leading-tight mb-8 hero-text text-charcoal">
             The Flanora<br />Model Family
           </h1>

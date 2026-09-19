@@ -3,7 +3,7 @@
 // To REMOVE: delete this file and its import in ResearchPage.jsx
 // To REPLACE: swap out this file's JSX with your new hero design
 
-import heroVideo from "../../../assets/research/Floor_plan_transforms_into_house_20260916033141.mp4";
+import heroVideo from "../../../assets/research/Research_Pg_Hero_Section_Video.mp4";
 
 function ResearchHero() {
   return (
@@ -11,9 +11,7 @@ function ResearchHero() {
       {/* Editorial Plate Header Metadata */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-hairline-border/80 gap-4">
         <div className="flex items-center gap-3">
-          <span className="font-mono text-xs text-on-surface-variant tracking-wider">[REF-ARCH-2025.04]</span>
-          <span className="h-3 w-[1px] bg-hairline-border border-hairline-border border-r block"></span>
-          <span className="font-label-caps text-label-caps text-primary tracking-widest uppercase">RESEARCH / 01</span>
+          <span className="font-label-caps text-label-caps text-primary tracking-widest uppercase">RESEARCH / 04</span>
         </div>
       </div>
 

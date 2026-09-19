@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import visionImg from "../../assets/home/vision_sec_img.png";
 import Counter from "./Counter";
 import { Icon } from "@iconify/react";
 
@@ -104,8 +105,8 @@ function Intro() {
     <section className="intro paper diagonal-top" id="studio" ref={rootRef}>
       <div className="container grid12">
         <div className="intro-meta eyebrow">
-          <span>01 / Studio</span>
-          <span>© 2026</span>
+          <span>01 / VISION</span>
+          <span>© {new Date().getFullYear()}</span>
         </div>
         <h1 className="intro-title display">
           <div className="line-mask"><span>Where artificial intelligence</span></div>
@@ -119,9 +120,22 @@ function Intro() {
         <div className="intro-portrait" ref={portraitRef}>
           <img
             ref={imgRef}
-            src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/1cad46d6-7825-49c7-aa11-2764c150eb8c_800w.webp"
+            src={visionImg}
             alt="Creative portrait"
           />
+          <svg 
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 10 }}
+            viewBox="0 0 100 100" 
+            preserveAspectRatio="none"
+          >
+            <polygon 
+              points="0,0 88,0 100,100 10,100" 
+              fill="none" 
+              stroke="#111" 
+              strokeWidth="1.5" 
+              vectorEffect="non-scaling-stroke" 
+            />
+          </svg>
         </div>
         <div className="keywords">
           INTELLIGENCE

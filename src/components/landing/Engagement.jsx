@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -6,9 +7,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 const PLANS = [
   {
-    small: "01 / GENERATE",
+    small: "01 / CREATE",
     title: "Create With Flanora",
     price: "Free To Explore",
+    link: "/chat",
     items: [
       "Natural language prompts",
       "Residential floor plans",
@@ -21,6 +23,7 @@ const PLANS = [
     small: "02 / BUILD",
     title: "Build With Flanora",
     price: "Free To Explore",
+    link: "/models",
     items: [
       "Open model weights",
       "Curated datasets",
@@ -30,9 +33,10 @@ const PLANS = [
     dark: false,
   },
   {
-    small: "03 / EXPLORE",
-    title: "Explore Intelligence",
+    small: "03 / LEARN",
+    title: "Learn With Flanora",
     price: "Free To Explore",
+    link: "/research",
     items: [
       "Research publications",
       "Technical reports",
@@ -44,6 +48,7 @@ const PLANS = [
 ];
 
 function Engagement() {
+  const navigate = useNavigate();
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const plansRef = useRef(null);
@@ -127,13 +132,13 @@ function Engagement() {
             >
               <small>{plan.small}</small>
               <h3>{plan.title}</h3>
-              <div className="price">{plan.price}</div>
+              <button type="button" className="price" onClick={() => navigate(plan.link)}>{plan.price}</button>
               <ul>
                 {plan.items.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              <a href="#contact">
+              <a href="/chat" onClick={(e) => { e.preventDefault(); navigate('/chat'); }}>
                 <span>Begin project</span>
                 <span>↗</span>
               </a>
