@@ -1867,6 +1867,7 @@
   letter-spacing: 0.1em;
   padding: 8px 11px;
   text-transform: uppercase;
+  transition: background 400ms ease, color 400ms ease;
 }
 
 .flanora-navbar .flanora-desktop-nav>a:hover,
@@ -2218,10 +2219,10 @@
 // EXPLORE button
 .mega-explore-btn {
   align-items: center;
-  background: $fg-primary;
-  border: 0;
+  background: transparent;
+  border: 1px solid $white;
   border-radius: 999px;
-  color: $bg-nav-dark;
+  color: $white;
   cursor: pointer;
   display: inline-flex;
   font-family: "Martel Sans", sans-serif;
@@ -2233,14 +2234,13 @@
   padding: 11px 19px;
   text-decoration: none;
   text-transform: uppercase;
-  transition: background 180ms ease, color 180ms ease;
+  transition: background 400ms ease, color 400ms ease;
   width: fit-content;
 
   &:hover,
   &:focus-visible {
-    background: $fg-bright;
-    outline: 2px solid $accent-lime;
-    outline-offset: 2px;
+    background: $white;
+    color: #000000;
   }
   &--disabled {
     background: rgba($white, 0.12);

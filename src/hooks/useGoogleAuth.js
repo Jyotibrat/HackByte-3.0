@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { googleLogin, extractErrorMessage } from "../services/authApiService";
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
@@ -8,15 +8,22 @@ const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
  * button directly into the provided DOM ref, bypassing any modal overlay.
  */
 export function useGoogleAuth(onSuccess, onError, buttonRef) {
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+
   useEffect(() => {
     if (!GOOGLE_CLIENT_ID || !buttonRef.current) return;
+
+    let focusListener = null;
+    let isHandlingCallback = false;
 
     const initializeGoogle = () => {
       window.google.accounts.id.initialize({
         client_id: GOOGLE_CLIENT_ID,
         callback: async (response) => {
+          isHandlingCallback = true;
           if (!response.credential) {
             onError("Google sign-in was cancelled.");
+            setIsGoogleLoading(false);
             return;
           }
           try {
@@ -39,6 +46,7 @@ export function useGoogleAuth(onSuccess, onError, buttonRef) {
             onSuccess(data.user);
           } catch (err) {
             onError(extractErrorMessage(err));
+            setIsGoogleLoading(false);
           }
         },
       });
@@ -49,6 +57,25 @@ export function useGoogleAuth(onSuccess, onError, buttonRef) {
         width: 420,
         text: "continue_with",
         shape: "pill",
+        click_listener: () => {
+          setIsGoogleLoading(true);
+          isHandlingCallback = false;
+
+          // Google popup causes window to lose focus. When it regains focus,
+          // the user either completed the flow or closed the popup.
+          setTimeout(() => {
+            focusListener = () => {
+              // Add a small buffer in case the callback is about to fire
+              setTimeout(() => {
+                if (!isHandlingCallback) {
+                  setIsGoogleLoading(false);
+                }
+              }, 1000);
+              window.removeEventListener('focus', focusListener);
+            };
+            window.addEventListener('focus', focusListener);
+          }, 500);
+        }
       });
     };
 
@@ -62,5 +89,12 @@ export function useGoogleAuth(onSuccess, onError, buttonRef) {
       script.onload = initializeGoogle;
       document.body.appendChild(script);
     }
+
+    return () => {
+      if (focusListener) window.removeEventListener('focus', focusListener);
+    };
   }, [onSuccess, onError, buttonRef]);
+
+  return { isGoogleLoading };
 }
+
