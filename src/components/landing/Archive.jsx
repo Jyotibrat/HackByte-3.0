@@ -8,21 +8,21 @@ const ROWS = [
   {
     year: "2026",
     name: "Rana Talukdar",
-    role: "Campaign Direction",
+    role: "AI Model Research",
     thumb: "/profilePhotos/rana-talukdar.jpg",
     preview: "/profilePhotos/rana-talukdar.jpg",
   },
   {
     year: "2026",
-    name: "Ansh",
-    role: "Digital Launch",
+    name: "Ansh Gaur",
+    role: "AI Systems & Model Development",
     thumb: "/profilePhotos/ansh.jpeg",
     preview: "/profilePhotos/ansh.jpeg",
   },
   {
     year: "2025",
-    name: "Arunim",
-    role: "Identity System",
+    name: "Arunim Gogoi",
+    role: "Research & Survey Development",
     thumb: "/profilePhotos/arunim.jpg",
     preview: "/profilePhotos/arunim.jpg",
   }
@@ -66,7 +66,7 @@ function Archive() {
   return (
     <section className="archive paper">
       <div className="container">
-        <h2 className="display">Archive / Selected Collaborations</h2>
+        <h2 className="display">Contributors & Collaborators</h2>
         <div className="archive-list" ref={listRef}>
           {ROWS.map((row, i) => (
             <div

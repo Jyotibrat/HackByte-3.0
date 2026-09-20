@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import useAuraVideo from "./useAuraVideo";
 import useHoverMedia from "./useHoverMedia";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,9 +50,16 @@ function ProjectCard({ project }) {
   const titleRef = useRef(null);
   const copyPRef = useRef(null);
   const sideRef = useRef(null);
+  const dummyRef = useRef(null);
+  const navigate = useNavigate();
 
   useAuraVideo(mediaInnerRef, "loop-in-view");
-  useHoverMedia(mediaRef);
+  useHoverMedia(project.title !== "Flanora-v3" ? mediaRef : dummyRef);
+
+  const handleClick = () => {
+    if (project.title === "Flanora-v1") navigate("/models/flanora-v1");
+    if (project.title === "Flanora-v2") navigate("/models/flanora-v2");
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -116,7 +124,12 @@ function ProjectCard({ project }) {
   }, []);
 
   return (
-    <article className="project" ref={articleRef}>
+    <article 
+      className="project" 
+      ref={articleRef}
+      onClick={handleClick}
+      style={{ cursor: project.title !== "Flanora-v3" ? "pointer" : "default" }}
+    >
       <div className="project-copy">
         <h3 className="display line-mask">
           <span ref={titleRef}>{project.title}</span>

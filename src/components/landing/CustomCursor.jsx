@@ -41,7 +41,7 @@ function CustomCursor() {
     <div className="cursor-label" ref={cursorRef}>
       View
       <br />
-      Case ↗
+      Model ↗
     </div>
   );
 }

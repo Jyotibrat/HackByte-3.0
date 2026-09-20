@@ -44,7 +44,7 @@
 .nf-landing .dark { background: var(--ink); color: #fff; }
 .nf-landing .eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: .16em; font-weight: 600; }
 .nf-landing .display { font-family: "Space Grotesk", sans-serif; font-weight: 600; letter-spacing: -.065em; line-height: .88; }
-.nf-landing .line-mask { overflow: hidden; padding-bottom: 0.25em; margin-bottom: -0.25em; }
+.nf-landing .line-mask { overflow: hidden; padding-bottom: 0.25em; margin-bottom: -0.25em; padding-right: 0.1em; margin-right: -0.1em; }
 .nf-landing .line-mask > span { display: block; }
 .nf-landing .cross { width: 14px; height: 14px; position: relative; display: inline-block; }
 .nf-landing .cross:before,
@@ -206,8 +206,20 @@
   border-radius: 2px;
   position: relative;
 }
-.nf-landing .intro-portrait img {
+.nf-landing .intro-portrait-inner {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   clip-path: polygon(0 0, 88% 0, 100% 100%, 10% 100%);
+  position: relative;
+}
+.nf-landing .intro-portrait-inner img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 115%;
+  object-fit: cover;
 }
 .nf-landing .keywords {
   grid-column: 5 / 7;
@@ -557,7 +569,13 @@
   border-radius: 999px;
   background: #fff;
   color: #111;
-  border: 0;
+  border: 1px solid transparent;
+  transition: all 400ms ease;
+}
+.nf-landing .cinematic-cta:hover {
+  background: #111;
+  color: #fff;
+  border-color: #fff;
 }
 
 /* Big Stats */
