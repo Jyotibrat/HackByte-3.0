@@ -1,30 +1,18 @@
 import { useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
 import Lenis from "lenis";
 import TechnicalReportCard from "../components/research/TechnicalReportCard";
+
+import flanoraV1Img from "../assets/models/flanora_v1.png";
+import flanoraV2Img from "../assets/models/flanora_v2.png";
 
 import { ShaderGradientCanvas, ShaderGradient } from 'shadergradient'
 import * as reactSpring from '@react-spring/three'
 import * as drei from '@react-three/drei'
 import * as fiber from '@react-three/fiber'
 
-function formatPathname(pathname) {
-  const parts = pathname.split('/').filter(Boolean);
-  if (parts.length === 0) return "Research";
-  
-  const lastPart = parts[parts.length - 1];
-  return lastPart
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-}
-
-export default function ResearchCategoryPage() {
-  const location = useLocation();
-  const title = formatPathname(location.pathname);
-
+export default function TechnicalReportsPage() {
   useEffect(() => {
-    document.title = `Flanora AI | ${title}`;
+    document.title = "Flanora AI | Technical Reports";
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
@@ -46,7 +34,7 @@ export default function ResearchCategoryPage() {
       cancelAnimationFrame(animationFrameId);
       lenis.destroy();
     };
-  }, [title]);
+  }, []);
 
   return (
     <main className="blueprint-bg flanora-research-page min-h-screen pt-32 pb-24 text-black font-sans">
@@ -54,20 +42,20 @@ export default function ResearchCategoryPage() {
         {/* Header Section */}
         <header className="mb-12">
           <h1 className="text-4xl md:text-5xl lg:text-[56px] font-medium tracking-tight mb-12">
-            {title}
+            Technical Reports
           </h1>
           
           {/* Sub Navigation Row */}
           <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-neutral-300 pb-4 gap-4">
             <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-neutral-600 font-medium">
-              <Link to="#" className="hover:text-black transition-colors">Company</Link>
-              <Link to="/research/technical-reports" className="hover:text-black transition-colors text-black">Research</Link>
-              <Link to="#" className="hover:text-black transition-colors">Product</Link>
-              <Link to="#" className="hover:text-black transition-colors">Safety</Link>
-              <Link to="#" className="hover:text-black transition-colors">Engineering</Link>
-              <Link to="#" className="hover:text-black transition-colors">Security</Link>
-              <Link to="#" className="hover:text-black transition-colors">Intelligence Age</Link>
-              <Link to="#" className="hover:text-black transition-colors">Global Affairs</Link>
+              <a href="#" className="hover:text-black transition-colors">Company</a>
+              <a href="#" className="hover:text-black transition-colors text-black">Research</a>
+              <a href="#" className="hover:text-black transition-colors">Product</a>
+              <a href="#" className="hover:text-black transition-colors">Safety</a>
+              <a href="#" className="hover:text-black transition-colors">Engineering</a>
+              <a href="#" className="hover:text-black transition-colors">Security</a>
+              <a href="#" className="hover:text-black transition-colors">Intelligence Age</a>
+              <a href="#" className="hover:text-black transition-colors">Global Affairs</a>
             </nav>
 
             <div className="flex items-center gap-6 text-sm text-black font-medium">
@@ -99,15 +87,15 @@ export default function ResearchCategoryPage() {
           </div>
         </header>
 
-        {/* Reports Layout Placeholder */}
+        {/* Reports Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
           
-          {/* Placeholder Report 1 */}
+          {/* Report 1 - Flanora v2 */}
           <TechnicalReportCard
-            title={`Upcoming ${title}`}
-            date="Coming Soon"
+            title="Introducing Flanora-v2: Multi-room Spatial Reasoning"
+            date="Sep 18, 2026"
             category="Research"
-            href="#"
+            href="/models/flanora-v2"
             customGraphic={
               <div className="absolute inset-0">
                 <ShaderGradientCanvas
@@ -155,6 +143,68 @@ export default function ResearchCategoryPage() {
                     uFrequency={5.5}
                     uSpeed={0.4}
                     uStrength={4}
+                    uTime={0}
+                    wireframe={false}
+                    zoomOut={false}
+                  />
+                </ShaderGradientCanvas>
+              </div>
+            }
+          />
+
+          {/* Report 2 - Flanora v1 */}
+          <TechnicalReportCard
+            title="Flanora-v1: Foundational Floor-Plan Synthesis"
+            date="Sep 17, 2026"
+            category="Research"
+            href="/models/flanora-v1"
+            customGraphic={
+              <div className="absolute inset-0">
+                <ShaderGradientCanvas
+                  importedFiber={{ ...fiber, ...drei, ...reactSpring }}
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
+                >
+                  <ShaderGradient
+                    animate="on"
+                    axesHelper="off"
+                    brightness={1.5}
+                    cAzimuthAngle={250}
+                    cDistance={1.51}
+                    cPolarAngle={140}
+                    cameraZoom={12.48}
+                    color1="#809bd6"
+                    color2="#ff57f7"
+                    color3="#9cfdff"
+                    destination="onCanvas"
+                    embedMode="off"
+                    envPreset="city"
+                    format="gif"
+                    fov={45}
+                    frameRate={10}
+                    gizmoHelper="hide"
+                    grain="on"
+                    lightType="3d"
+                    loop="on"
+                    loopDuration={10}
+                    pixelDensity={1}
+                    positionX={0}
+                    positionY={0}
+                    positionZ={0}
+                    range="enabled"
+                    rangeEnd={40}
+                    rangeStart={0}
+                    reflection={0.5}
+                    rotationX={0}
+                    rotationY={0}
+                    rotationZ={140}
+                    shader="defaults"
+                    toggleAxis={false}
+                    type="sphere"
+                    uAmplitude={7}
+                    uDensity={0.8}
+                    uFrequency={5.5}
+                    uSpeed={0.4}
+                    uStrength={0.4}
                     uTime={0}
                     wireframe={false}
                     zoomOut={false}

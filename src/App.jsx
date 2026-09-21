@@ -33,6 +33,7 @@ import VerifyEmailPage from "./pages/VerifyEmailPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ProfilePage from "./pages/ProfilePage";
 import DonatePage from "./pages/DonatePage";
+import TechnicalReportsPage from "./pages/TechnicalReportsPage";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -54,7 +55,7 @@ function AnimatedRoutes() {
           <Route path="/docs" element={<DocsPage />} />
           <Route path="/research/publications" element={<ResearchCategoryPage />} />
           <Route path="/research/articles" element={<ResearchCategoryPage />} />
-          <Route path="/research/technical-reports" element={<ResearchCategoryPage />} />
+          <Route path="/research/technical-reports" element={<TechnicalReportsPage />} />
           <Route path="/research/resources" element={<ResearchCategoryPage />} />
           <Route path="/research/resources/presentations" element={<ResearchCategoryPage />} />
           <Route path="/research/resources/datasets" element={<ResearchCategoryPage />} />
