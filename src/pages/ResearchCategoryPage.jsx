@@ -48,6 +48,32 @@ export default function ResearchCategoryPage() {
     };
   }, [title]);
 
+  const isPublications = location.pathname === "/research/publications";
+  const isArticles = location.pathname === "/research/articles";
+
+  let cardTitle = `Upcoming ${title}`;
+  let cardDate = "Coming Soon";
+  let cardHref = "#";
+  let gradientColor1 = "#ff5005";
+  let gradientColor2 = "#dbba95";
+  let gradientColor3 = "#d0bce1";
+
+  if (isPublications) {
+    cardTitle = "A State-of-Art Survey on Generative AI Techniques for Floor Planning";
+    cardDate = "April 27, 2025";
+    cardHref = "/research/publications/survey-paper-2025";
+    gradientColor1 = "#96ffd7";
+    gradientColor2 = "#dbd9c5";
+    gradientColor3 = "#dce1a2";
+  } else if (isArticles) {
+    cardTitle = "Building an AI Floor Planner with Google Gemini and Matplotlib";
+    cardDate = "Mar 4, 2026";
+    cardHref = "https://dev.to/bindupautra_jyotibrat/building-an-ai-floor-planner-with-google-gemini-and-matplotlib-5c5d";
+    gradientColor1 = "#6bb0ff";
+    gradientColor2 = "#7adb53";
+    gradientColor3 = "#a2e1c2";
+  }
+
   return (
     <main className="blueprint-bg flanora-research-page min-h-screen pt-32 pb-24 text-black font-sans">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
@@ -104,10 +130,10 @@ export default function ResearchCategoryPage() {
           
           {/* Placeholder Report 1 */}
           <TechnicalReportCard
-            title={`Upcoming ${title}`}
-            date="Coming Soon"
+            title={cardTitle}
+            date={cardDate}
             category="Research"
-            href="#"
+            href={cardHref}
             customGraphic={
               <div className="absolute inset-0">
                 <ShaderGradientCanvas
@@ -122,9 +148,9 @@ export default function ResearchCategoryPage() {
                     cDistance={3.6}
                     cPolarAngle={90}
                     cameraZoom={1}
-                    color1="#ff5005"
-                    color2="#dbba95"
-                    color3="#d0bce1"
+                    color1={gradientColor1}
+                    color2={gradientColor2}
+                    color3={gradientColor3}
                     destination="onCanvas"
                     embedMode="off"
                     envPreset="city"

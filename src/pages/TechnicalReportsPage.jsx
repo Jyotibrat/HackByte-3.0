@@ -167,14 +167,14 @@ export default function TechnicalReportsPage() {
                   <ShaderGradient
                     animate="on"
                     axesHelper="off"
-                    brightness={1.5}
-                    cAzimuthAngle={250}
-                    cDistance={1.51}
-                    cPolarAngle={140}
-                    cameraZoom={12.48}
-                    color1="#809bd6"
-                    color2="#ff57f7"
-                    color3="#9cfdff"
+                    brightness={1.2}
+                    cAzimuthAngle={180}
+                    cDistance={3.6}
+                    cPolarAngle={90}
+                    cameraZoom={1}
+                    color1="#52ffcb"
+                    color2="#db7bdb"
+                    color3="#e19bdb"
                     destination="onCanvas"
                     embedMode="off"
                     envPreset="city"
@@ -187,27 +187,25 @@ export default function TechnicalReportsPage() {
                     loop="on"
                     loopDuration={10}
                     pixelDensity={1}
-                    positionX={0}
+                    positionX={-1.4}
                     positionY={0}
                     positionZ={0}
                     range="enabled"
-                    rangeEnd={40}
+                    rangeEnd={10}
                     rangeStart={0}
-                    reflection={0.5}
+                    reflection={0.1}
                     rotationX={0}
-                    rotationY={0}
-                    rotationZ={140}
+                    rotationY={10}
+                    rotationZ={50}
                     shader="defaults"
-                    toggleAxis={false}
-                    type="sphere"
-                    uAmplitude={7}
-                    uDensity={0.8}
+                    type="plane"
+                    uAmplitude={1}
+                    uDensity={1.3}
                     uFrequency={5.5}
                     uSpeed={0.4}
-                    uStrength={0.4}
+                    uStrength={4}
                     uTime={0}
                     wireframe={false}
-                    zoomOut={false}
                   />
                 </ShaderGradientCanvas>
               </div>
