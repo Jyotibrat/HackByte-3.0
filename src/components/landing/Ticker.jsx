@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 // const NAMES = ["Kanto", "Axiom", "Lumen", "Vestra", "Monocle", "Terrain", "Noma", "Circa"];
-const NAMES = ["GENERATIVE DESIGN", "RESIDENTIAL PLANNING", "AI × ARCHITECTURE", "", "", "", "", "ARCHITECTURAL IDEATION"];
+const NAMES = ["GENERATIVE DESIGN", "RESIDENTIAL PLANNING", "AI × ARCHITECTURE", "ARCHITECTURAL IDEATION"];
 
 
 
@@ -21,8 +21,8 @@ function Ticker() {
     return () => tween.kill();
   }, []);
 
-  // Rendered twice back-to-back so the -50% xPercent loop is seamless.
-  const items = [...NAMES, ...NAMES];
+  // Rendered 4 times back-to-back so the -50% xPercent loop is seamless and covers ultra-wide screens.
+  const items = [...NAMES, ...NAMES, ...NAMES, ...NAMES];
 
   return (
     <div className="ticker paper">

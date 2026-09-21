@@ -32,6 +32,7 @@ import { AuthProvider } from "./context/AuthContext";
 import VerifyEmailPage from "./pages/VerifyEmailPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ProfilePage from "./pages/ProfilePage";
+import DonatePage from "./pages/DonatePage";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -61,6 +62,7 @@ function AnimatedRoutes() {
           <Route path="/policies/:policy" element={<PoliciesPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/status" element={<StatusPage />} />
+          <Route path="/donate" element={<DonatePage />} />
         </Route>
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
