@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const linkGroups = [
-  { title: "Product", links: [["Features", "/features"], ["Models", "/models"], ["Showcase", "/showcase"], ["Try Flanora", "/chat"]] },
-  { title: "Research", links: [["Research", "/research"], ["Articles", "/research/articles"], ["Publications", "/research/publications"], ["Technical Reports", "/research/technical-reports"]] },
-  { title: "Company", links: [["About", "/about"], ["Team", "/team"], ["Status", "/status"]] },
-  { title: "Legal", links: [["Terms of Use", "/policies/terms-of-use"], ["Privacy Policy", "/policies/privacy-policy"]] },
+  { title: "Product", headerTo: "/", links: [["Models", "/models"], ["Features", "/features"], ["Showcase", "/showcase"], ["Try Flanora", "/chat"]] },
+  { title: "Research", headerTo: "/research", links: [["Articles", "/research/articles"], ["Resources", "/research/resources"], ["Publications", "/research/publications"], ["Technical Reports", "/research/technical-reports"]] },
+  { title: "Company", headerTo: "/about", links: [["About", "/about"], ["Team", "/team"], ["Status", "/status"]] },
+  { title: "Legal", headerTo: "/policies", links: [["Terms of Use", "/policies/terms-of-use"], ["Privacy Policy", "/policies/privacy-policy"]] },
 ];
 
 const developLinks = [
@@ -39,6 +39,17 @@ function PlatformIcon({ type }) {
 }
 
 function Footer() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleHeaderClick = (path) => {
+    if (location.pathname === path) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate(path);
+    }
+  };
+
   return (
     <footer className="flanora-footer">
       <div className="flanora-footer-glow" aria-hidden="true" />
@@ -48,7 +59,7 @@ function Footer() {
             <h2>Ready to explore your next space?</h2>
             <p>Turn residential ideas into floor-plan concepts with Flanora AI.</p>
             <div className="flanora-footer-actions">
-              <Link className="flanora-footer-secondary-action" to="/models">Explore models</Link>
+              <Link className="flanora-footer-secondary-action" to="/models">Explore Models</Link>
               <Link className="flanora-footer-primary-action" to="/chat">Try Flanora</Link>
             </div>
           </div>
@@ -61,7 +72,7 @@ function Footer() {
             <div className="flanora-footer-newsletter">
               <h3>Stay updated</h3>
               <form onSubmit={(e) => e.preventDefault()} className="newsletter-form">
-                <input type="email" placeholder="Enter your email" required />
+                <input type="email" placeholder="Enter your Email" required />
                 <button type="submit">Subscribe</button>
               </form>
             </div>
@@ -71,12 +82,22 @@ function Footer() {
         <section className="flanora-footer-links" aria-label="Footer navigation">
           {linkGroups.map((group) => (
             <div key={group.title}>
-              <h3>{group.title}</h3>
+              <h3 
+                className="flanora-footer-header-clickable"
+                onClick={() => handleHeaderClick(group.headerTo)}
+              >
+                {group.title}
+              </h3>
               <ul>{group.links.map(([label, to]) => <li key={to}><Link to={to}>{label}</Link></li>)}</ul>
             </div>
           ))}
           <div>
-            <h3>Develop</h3>
+            <h3 
+              className="flanora-footer-header-clickable"
+              onClick={() => handleHeaderClick("/docs")}
+            >
+              Develop
+            </h3>
             <ul>
               {developLinks.map(({ label, href, type }) => (
                 <li key={label}>
@@ -94,7 +115,7 @@ function Footer() {
         </section>
 
         <div className="flanora-footer-bottom">
-          <p>© 2024-{new Date().getFullYear()} Flanora AI. All rights reserved.</p>
+          <p>© 2024-{new Date().getFullYear()} Flanora AI. All Rights Reserved.</p>
         </div>
       </div>
       <div className="flanora-footer-wordmark" aria-hidden="true">FLANORA</div>

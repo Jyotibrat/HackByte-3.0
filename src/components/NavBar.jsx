@@ -255,13 +255,11 @@ function Navbar({ variant = "marketing", scrollState }) {
           <Link to="/models">Models</Link>
         </nav>
         <div className="flanora-app-navbar-session" aria-label="Session">
-          {isAuthenticated ? (
+          {isAuthenticated && (
             <>
               <span className="flanora-app-session-email" title={user.email}>{user.email}</span>
               <button type="button" className="flanora-app-logout" onClick={handleLogout}>Log out</button>
             </>
-          ) : (
-            <Link className="flanora-login-link" to="/login">Log in</Link>
           )}
         </div>
       </header>
@@ -334,9 +332,6 @@ function Navbar({ variant = "marketing", scrollState }) {
 
           {/* Actions */}
           <div className="flanora-navbar-actions">
-            {!isAuthenticated && (
-              <Link className="flanora-login-link" to="/login">Log in</Link>
-            )}
             <Link className="flanora-cta" to="/chat">Try Flanora ↗</Link>
             {isAuthenticated && (
               <div
@@ -409,10 +404,8 @@ function Navbar({ variant = "marketing", scrollState }) {
             ))}
             <MobileMenuSection label="Models" menuKey="models" onLinkClick={() => setMobileOpen(false)} />
             <MobileMenuSection label="Research" menuKey="research" onLinkClick={() => setMobileOpen(false)} />
-            {isAuthenticated ? (
+            {isAuthenticated && (
               <Link to="/profile" onClick={() => setMobileOpen(false)}>My Profile</Link>
-            ) : (
-              <Link to="/login" onClick={() => setMobileOpen(false)}>Log in</Link>
             )}
             <Link className="flanora-cta" to="/chat" onClick={() => setMobileOpen(false)}>Try Flanora</Link>
           </nav>

@@ -76,7 +76,7 @@ export default function ResearchCategoryPage() {
       title: "A State-of-Art Survey on Generative AI Techniques for Floor Planning",
       date: "April 27, 2025",
       year: "2025",
-      category: "Research",
+      category: "GenAICHI 2025",
       href: "/research/publications/survey-paper-2025",
       description: "A comprehensive overview of state-of-the-art generative AI techniques for automated floor planning and architectural design.",
       gradient: { color1: "#96ffd7", color2: "#dbd9c5", color3: "#dce1a2" }
@@ -87,7 +87,7 @@ export default function ResearchCategoryPage() {
       title: "Building an AI Floor Planner with Google Gemini and Matplotlib",
       date: "Mar 4, 2026",
       year: "2026",
-      category: "Research",
+      category: "Built with Google Gemini: Writing Challenge - dev.to",
       href: "https://dev.to/bindupautra_jyotibrat/building-an-ai-floor-planner-with-google-gemini-and-matplotlib-5c5d",
       description: "Learn how to build a basic AI-powered floor planner using Google's Gemini models and Matplotlib in this step-by-step tutorial.",
       gradient: { color1: "#6bb0ff", color2: "#7adb53", color3: "#a2e1c2" }

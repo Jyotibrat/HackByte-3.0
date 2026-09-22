@@ -24,6 +24,7 @@ import ResearchCategoryPage from "./pages/ResearchCategoryPage";
 import ShowcaseFlanoraV1 from "./pages/ShowcaseFlanoraV1";
 import ShowcaseFlanoraV2 from "./pages/ShowcaseFlanoraV2";
 import DocsPage from "./pages/DocsPage";
+import DownloadPage from "./pages/DownloadPage";
 import MarketingLayout from "./components/MarketingLayout";
 import LoadingScreen from "./components/LoadingScreen";
 import PageTransition from "./components/PageTransition";
@@ -53,6 +54,7 @@ function AnimatedRoutes() {
           <Route path="/showcase/flanora-v2" element={<ShowcaseFlanoraV2 />} />
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/docs" element={<DocsPage />} />
+          <Route path="/download" element={<DownloadPage />} />
           <Route path="/research/publications" element={<ResearchCategoryPage />} />
           <Route path="/research/articles" element={<ResearchCategoryPage />} />
           <Route path="/research/technical-reports" element={<TechnicalReportsPage />} />
