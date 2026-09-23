@@ -225,7 +225,6 @@ export default function DonateHero() {
 
           <div className="hero-field" aria-hidden="true" ref={wrapRef}>
             <canvas id="field" ref={canvasRef}></canvas>
-            <span className="field-fig">Fig. 01 — Response field</span>
             <span className="field-hint">Move · Click — the field responds</span>
           </div>
         </div>
@@ -254,9 +253,51 @@ export default function DonateHero() {
             <span className="tk-sep"></span>
             <span className="tk-item">Future Releases</span>
             <span className="tk-sep"></span>
+            {/* Repeated to ensure it is wider than the viewport */}
+            <span className="tk-item">Inference &amp; Infrastructure</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Model Development</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Datasets &amp; Research</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Hosting &amp; Product</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Future Releases</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Inference &amp; Infrastructure</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Model Development</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Datasets &amp; Research</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Hosting &amp; Product</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Future Releases</span>
+            <span className="tk-sep"></span>
           </div>
           {/* Duplicated for seamless marquee */}
           <div className="tk-group" aria-hidden="true">
+            <span className="tk-item">Inference &amp; Infrastructure</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Model Development</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Datasets &amp; Research</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Hosting &amp; Product</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Future Releases</span>
+            <span className="tk-sep"></span>
+            {/* Repeated to ensure it is wider than the viewport */}
+            <span className="tk-item">Inference &amp; Infrastructure</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Model Development</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Datasets &amp; Research</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Hosting &amp; Product</span>
+            <span className="tk-sep"></span>
+            <span className="tk-item">Future Releases</span>
+            <span className="tk-sep"></span>
             <span className="tk-item">Inference &amp; Infrastructure</span>
             <span className="tk-sep"></span>
             <span className="tk-item">Model Development</span>

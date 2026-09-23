@@ -64,9 +64,9 @@
   .btn .btn-arrow { transition: transform .35s var(--ease); }
   .btn:hover .btn-arrow { transform: translateX(5px); }
   .btn-solid { background: var(--ink); color: var(--paper); }
-  .btn-solid:hover { background: var(--accent); color: var(--paper); transform: translateY(-2px); }
+  .btn-solid:hover { background: var(--accent); color: var(--paper); }
   .btn-line { border: 1px solid var(--ink); background: transparent; color: var(--ink); }
-  .btn-line:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
+  .btn-line:hover { background: var(--ink); color: var(--paper); }
 
   /* ---------- Hero ---------- */
   .hero { padding-top: var(--header-h); }
@@ -76,8 +76,7 @@
     min-height: calc(100svh - var(--header-h) - 57px);
   }
   .hero-copy { display: flex; flex-direction: column; padding: clamp(2.5rem,5vh,4.5rem) clamp(2rem,4vw,5rem) clamp(2rem,4vh,3.5rem) 0; }
-  .hero-eyebrow { display: flex; align-items: center; gap: 14px; color: var(--ink-2); }
-  .hero-eyebrow::before { content: ""; width: 8px; height: 8px; background: var(--accent); }
+  .hero-eyebrow { display: flex; align-items: center; color: var(--ink-2); }
   .hero-title {
     font-family: var(--font-serif); font-optical-sizing: auto;
     font-size: clamp(3.1rem, 9vw, 7.4rem);
@@ -138,7 +137,7 @@
     font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em;
     text-transform: uppercase; color: var(--ink-2); padding-inline: 1.4rem; white-space: nowrap;
   }
-  .tk-sep { width: 6px; height: 6px; background: var(--accent); opacity: .8; }
+  .tk-sep { width: 6px; height: 6px; background: var(--accent); opacity: .8; flex-shrink: 0; }
 
   /* ---------- Sections (shared) ---------- */
   .section { padding-block: clamp(5.5rem, 11vw, 9.5rem); }
@@ -217,11 +216,11 @@
   .alloc-row:hover .ar-tag { color: var(--accent-deep); border-color: var(--accent); }
 
   /* ---------- 04 · Support options ---------- */
-  .filter { display: flex; flex-wrap: wrap; margin-top: 2.2rem; }
+  .filter { display: flex; flex-direction: column; margin-top: 2.2rem; align-items: flex-start; }
   .filter button {
     font-family: var(--font-mono); font-size: 10px; letter-spacing: .16em;
-    text-transform: uppercase; padding: 10px 16px;
-    border: 1px solid var(--line); margin: -1px 0 0 -1px; color: var(--ink-2);
+    text-transform: uppercase; padding: 12px 16px; text-align: left; width: 100%; max-width: 160px;
+    border: 1px solid var(--line); margin-top: -1px; color: var(--ink-2);
     transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
   }
   .filter button:hover { color: var(--ink); border-color: var(--line-strong); position: relative; z-index: 1; }
