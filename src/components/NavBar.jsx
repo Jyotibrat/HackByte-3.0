@@ -234,7 +234,7 @@ function Navbar({ variant = "marketing", scrollState }) {
   };
 
   // ── Derived state ──────────────────────────────────────────────────────────
-  const lightThemePaths = ["/about", "/features", "/models", "/models/flanora-v2", "/showcase/flanora-v1", "/showcase/flanora-v2", "/team", "/download"];
+  const lightThemePaths = ["/about", "/features", "/models", "/models/flanora-v2", "/showcase/flanora-v1", "/showcase/flanora-v2", "/team", "/download", "/donate"];
   const isLightTheme = lightThemePaths.includes(pathname) || pathname.startsWith("/research") || pathname.startsWith("/policies");
 
   const allowedScrollProgressPaths = [
