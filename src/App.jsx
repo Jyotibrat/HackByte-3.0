@@ -3,7 +3,6 @@ import "./App.scss";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import HomePage from "./pages/HomePage";
-import ChatPage from "./pages/ChatPage";
 import ModelsPage from "./pages/ModelsPage";
 import KnowMorePage from "./pages/KnowMorePage";
 import ContributorsPage from "./pages/ContributorsPage";
@@ -16,8 +15,6 @@ import ResearchPage from "./pages/ResearchPage";
 import PoliciesPage from "./pages/PoliciesPage";
 import ContactPage from "./pages/ContactPage";
 import StatusPage from "./pages/StatusPage";
-import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SurveyPaper2025 from "./pages/SurveyPaper2025";
 import ResearchCategoryPage from "./pages/ResearchCategoryPage";
@@ -69,18 +66,9 @@ function AnimatedRoutes() {
         </Route>
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
         <Route path="/verify-email" element={<VerifyEmailPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route
-          path="/chat"
-          element={
-            <RequireAuth>
-              <ChatPage />
-            </RequireAuth>
-          }
-        />
+
         <Route path="/research/publications/survey-paper-2025" element={<SurveyPaper2025 />} />
         <Route
           path="/profile"

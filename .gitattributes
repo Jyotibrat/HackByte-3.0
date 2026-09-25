@@ -10,4 +10,4 @@
 *.ipynb diff=jupyternotebook
 
 Notebooks/*.ipynb linguist-documentation
-Notebooks/**/*.ipynb linguist-documentation
+Notebooks/**/*.ipynb linguist-documentation

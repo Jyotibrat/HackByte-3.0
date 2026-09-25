@@ -14,3 +14,5 @@ temp_clone/
 # Note: the negation only works because the parent is matched with `backend/*`
 # rather than `backend/` - git cannot re-include inside an excluded directory.
 backend/*
+
+temporary/
