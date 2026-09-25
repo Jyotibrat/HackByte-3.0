@@ -1,0 +1,248 @@
+@use './styles/theme' as *;
+
+// =============================================================================
+// Auth — Login & Sign Up
+// =============================================================================
+
+.flanora-auth-page {
+  background: $bg-primary;
+  color: $fg-primary;
+  display: grid;
+  font-family: 'Martel Sans', sans-serif;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.flanora-auth-form-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 40px;
+}
+
+.flanora-auth-wordmark {
+  color: $fg-primary;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.65rem;
+  font-weight: 650;
+  letter-spacing: -0.05em;
+  text-decoration: none;
+}
+
+.flanora-auth-form-wrap {
+  margin: auto;
+  max-width: 420px;
+  padding: 72px 0;
+  width: 100%;
+}
+
+.flanora-auth-heading { margin-bottom: 32px; }
+
+.flanora-auth-heading h1 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(2.35rem, 4vw, 3.5rem);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+  margin: 0;
+}
+
+.flanora-auth-heading em {
+  color: $accent-teal;
+  font-family: cursive;
+  font-size: 1.08em;
+  font-weight: 500;
+}
+
+.flanora-auth-heading p {
+  color: rgba($fg-primary, 0.62);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 16px 0 0;
+}
+
+.flanora-google-button,
+.flanora-auth-submit {
+  align-items: center;
+  border-radius: 999px;
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  justify-content: center;
+  width: 100%;
+}
+
+.flanora-google-button {
+  background: transparent;
+  border: 1px solid rgba($white, 0.2);
+  color: $fg-primary;
+  gap: 10px;
+  padding: 14px 20px;
+  transition: background 180ms ease;
+}
+
+.flanora-google-button:hover,
+.flanora-google-button:focus-visible { background: rgba($white, 0.08); }
+
+.flanora-google-button svg { height: 20px; width: 20px; }
+
+.flanora-auth-divider {
+  align-items: center;
+  color: rgba($fg-primary, 0.42);
+  display: flex;
+  font-size: 0.76rem;
+  gap: 14px;
+  margin: 24px 0;
+}
+
+.flanora-auth-divider::before,
+.flanora-auth-divider::after {
+  background: rgba($white, 0.13);
+  content: '';
+  height: 1px;
+  flex: 1;
+}
+
+.flanora-auth-form { display: grid; gap: 17px; }
+
+.flanora-auth-form label {
+  color: rgba($fg-primary, 0.86);
+  display: grid;
+  font-size: 0.82rem;
+  font-weight: 700;
+  gap: 8px;
+}
+
+.flanora-auth-form input {
+  background: rgba($white, 0.05);
+  border: 1px solid rgba($white, 0.16);
+  border-radius: 999px;
+  color: $fg-primary;
+  font: inherit;
+  font-size: 0.9rem;
+  outline: 0;
+  padding: 14px 18px;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.flanora-auth-form input::placeholder { color: rgba($fg-primary, 0.35); }
+
+.flanora-auth-form input:focus {
+  background: rgba($white, 0.08);
+  border-color: $accent-cyan;
+  box-shadow: 0 0 0 3px rgba($accent-cyan, 0.15);
+}
+
+.flanora-auth-submit {
+  background: $fg-primary;
+  border: 0;
+  color: $bg-primary;
+  margin-top: 8px;
+  padding: 15px 20px;
+  transition: background 180ms ease;
+}
+
+.flanora-auth-submit:hover,
+.flanora-auth-submit:focus-visible { background: $fg-bright; }
+
+.flanora-auth-message {
+  color: $error-light;
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+.flanora-auth-signup-nudge {
+  border-top: 1px solid rgba($white, 0.1);
+  color: rgba($fg-primary, 0.55);
+  font-size: 0.85rem;
+  margin: 24px 0 0;
+  padding-top: 20px;
+}
+
+.flanora-auth-signup-nudge a {
+  color: $accent-teal;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.flanora-auth-legal {
+  color: rgba($fg-primary, 0.46);
+  font-size: 0.73rem;
+  line-height: 1.6;
+  margin: 16px 0 0;
+}
+
+.flanora-auth-legal a { color: $accent-cyan-lt; }
+
+.flanora-auth-visual {
+  background: linear-gradient(145deg, $bg-mid 0%, $bg-primary 60%, $bg-deeper 100%);
+  border-radius: 20px;
+  margin: 16px 16px 16px 0;
+  min-height: calc(100vh - 32px);
+  overflow: hidden;
+  position: relative;
+}
+
+.flanora-auth-grid {
+  background-image:
+    linear-gradient(rgba($accent-teal, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($accent-teal, 0.12) 1px, transparent 1px);
+  background-size: 48px 48px;
+  inset: 0;
+  mask-image: radial-gradient(circle at 60% 42%, black, transparent 68%);
+  opacity: 0.75;
+  position: absolute;
+}
+
+.flanora-auth-visual::after {
+  background: radial-gradient(circle at 60% 44%, rgba($accent-cyan, 0.22), transparent 30%);
+  content: '';
+  inset: 0;
+  position: absolute;
+}
+
+.flanora-auth-visual-content {
+  bottom: 12%;
+  left: 12%;
+  max-width: 440px;
+  position: absolute;
+  z-index: 1;
+}
+
+.flanora-auth-visual-content span {
+  color: $accent-teal;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.flanora-auth-visual-content h2 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(2.5rem, 4vw, 4.75rem);
+  font-weight: 650;
+  letter-spacing: -0.05em;
+  line-height: 1.02;
+  margin: 18px 0;
+}
+
+.flanora-auth-visual-content p {
+  color: rgba($fg-primary, 0.7);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 380px;
+}
+
+.flanora-auth-page a:focus-visible,
+.flanora-auth-page button:focus-visible {
+  outline: 2px solid $accent-cyan;
+  outline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .flanora-auth-page { grid-template-columns: 1fr; }
+  .flanora-auth-visual { display: none; }
+}

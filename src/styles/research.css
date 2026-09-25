@@ -1,0 +1,152 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ─── Dark-mode: driven by data-theme on <html> ──────────────────────────── */
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  &:where([data-theme="device"], [data-theme="device"] *) {
+    @media (prefers-color-scheme: dark) {
+      @slot;
+    }
+  }
+}
+
+/* ─── Layout custom properties ───────────────────────────────────────────── */
+html {
+  container-type: inline-size; /* enables cqw units inside main */
+}
+
+:root {
+  --maximum-text-width: 50rem;
+  --minimum-inline-margin: 1.5rem;
+  --actual-inline-margin: max(
+    var(--minimum-inline-margin),
+    (100cqw - var(--maximum-text-width)) / 2
+  );
+  --actual-text-width: calc(100cqw - 2 * var(--actual-inline-margin));
+  --slide-gap: 1rem;
+}
+
+/* ─── Content column ─────────────────────────────────────────────────────── */
+.rp-main {
+  margin-inline: var(--actual-inline-margin);
+}
+
+/* ─── Full-bleed helper ──────────────────────────────────────────────────── */
+.rp-full-bleed {
+  margin-inline: calc(var(--actual-inline-margin) * -1);
+}
+
+/* ─── KaTeX math ─────────────────────────────────────────────────────────── */
+.katex-display {
+  overflow: auto hidden;
+  margin-inline: calc(var(--actual-inline-margin) * -1);
+}
+
+.katex-display > .katex > .katex-html {
+  padding-inline: 1.5rem;
+  width: max-content;
+  margin-inline: auto;
+}
+
+/* ─── Bibliography ───────────────────────────────────────────────────────── */
+.csl-entry {
+  margin-block: 1.5rem;
+  text-indent: -2rem;
+  margin-left: 2rem;
+}
+
+/* ─── Expressive code width fix ──────────────────────────────────────────── */
+.expressive-code {
+  width: 100%;
+}
+
+/* ─── Carousel: hide navigation on pure touch devices ────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+  .rp-carousel-nav-btn {
+    display: none;
+  }
+}
+
+/* ─── Carousel dot active state ──────────────────────────────────────────── */
+.rp-carousel-dot-btn.active > div {
+  scale: 1.4;
+  background-color: oklch(62.8% 0.2578 22.68); /* orange-600 */
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme="device"] .rp-carousel-dot-btn.active > div {
+    background-color: oklch(82.8% 0.189 84.43); /* orange-300 */
+  }
+}
+
+[data-theme="dark"] .rp-carousel-dot-btn.active > div {
+  background-color: oklch(82.8% 0.189 84.43);
+}
+
+/* ─── Starwind design tokens (light) ─────────────────────────────────────── */
+:root {
+  --background: #ffffff;
+  --foreground: #09090b;
+  --card: #ffffff;
+  --card-foreground: #09090b;
+  --popover: #ffffff;
+  --popover-foreground: #09090b;
+  --primary: #1d4ed8;
+  --primary-foreground: #fafafa;
+  --secondary: #a21caf;
+  --secondary-foreground: #fafafa;
+  --muted: #f4f4f5;
+  --muted-foreground: #52525b;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --outline: #a1a1aa;
+  --radius: 0.625rem;
+}
+
+/* ─── Starwind design tokens (dark) ──────────────────────────────────────── */
+[data-theme="dark"] {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: #18181b;
+  --card-foreground: #fafafa;
+  --popover: #27272a;
+  --popover-foreground: #fafafa;
+  --primary: #1d4ed8;
+  --primary-foreground: #fafafa;
+  --secondary: #a21caf;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #3f3f46;
+  --accent-foreground: #f4f4f5;
+  --border: rgba(250, 250, 250, 0.1);
+  --input: rgba(250, 250, 250, 0.15);
+  --outline: #71717a;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme="device"] {
+    --background: #09090b;
+    --foreground: #fafafa;
+    --card: #18181b;
+    --card-foreground: #fafafa;
+    --popover: #27272a;
+    --popover-foreground: #fafafa;
+    --primary: #1d4ed8;
+    --primary-foreground: #fafafa;
+    --secondary: #a21caf;
+    --secondary-foreground: #fafafa;
+    --muted: #27272a;
+    --muted-foreground: #a1a1aa;
+    --accent: #3f3f46;
+    --accent-foreground: #f4f4f5;
+    --border: rgba(250, 250, 250, 0.1);
+    --input: rgba(250, 250, 250, 0.15);
+    --outline: #71717a;
+  }
+}

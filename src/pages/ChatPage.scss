@@ -1,0 +1,1064 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// ChatPage.scss — All styles for the /chat workspace
+// Scoped to .flanora-chat-* — no global style leakage.
+// ─────────────────────────────────────────────────────────────────────────────
+@use '../styles/theme' as *;
+
+// ─────────────────────────────────────────────────
+// Workspace Root
+// ─────────────────────────────────────────────────
+
+.flanora-chat-workspace {
+  background: #f8f7f5;
+  color: #1a1a1a;
+  display: flex;
+  font-family: "Martel Sans", sans-serif;
+  height: 100dvh;
+  overflow: hidden;
+  position: relative;
+}
+
+// ─────────────────────────────────────────────────
+// Sidebar
+// ─────────────────────────────────────────────────
+
+.flanora-chat-sidebar {
+  background: #0f0f0f;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  color: #f5f5f4;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: 100%;
+  overflow: hidden;
+  transition: width 260ms cubic-bezier(0.4, 0, 0.2, 1);
+  width: 260px;
+
+  // ── Mini / icon-only rail ─────────────────────────────
+  &.is-mini {
+    width: 52px;
+
+    // Hide all text labels
+    .flanora-sidebar-text {
+      display: none;
+    }
+
+    // Hide history completely
+    .flanora-sidebar-history {
+      display: none;
+    }
+
+    // Centre the header items
+    .flanora-sidebar-header {
+      padding: 14px 6px 10px;
+    }
+
+    .flanora-sidebar-wordmark {
+      justify-content: center;
+      margin-bottom: 10px;
+      padding: 6px;
+    }
+
+    .flanora-sidebar-new-chat {
+      border-radius: 10px;
+      justify-content: center;
+      padding: 9px;
+    }
+
+    // Centre nav items
+    .flanora-sidebar-nav {
+      padding: 6px 6px;
+    }
+
+    .flanora-sidebar-nav-item {
+      justify-content: center;
+      padding: 9px;
+
+      svg {
+        height: 17px;
+        opacity: 0.7;
+        width: 17px;
+      }
+
+      &:hover svg,
+      &.is-active svg { opacity: 1; }
+    }
+
+    // Collapse user section to avatar only
+    .flanora-sidebar-user {
+      padding: 8px 6px;
+    }
+
+    .flanora-sidebar-user-card {
+      justify-content: center;
+      padding: 8px;
+    }
+
+    .flanora-sidebar-user-info,
+    .flanora-sidebar-user-chevron {
+      display: none;
+    }
+  }
+}
+
+
+// Mobile overlay sidebar
+@media (max-width: 768px) {
+  .flanora-chat-sidebar {
+    left: 0;
+    position: fixed;
+    top: 0;
+    transform: translateX(-100%);
+    transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    width: 260px;
+    z-index: 40;
+
+    &.is-mobile-open {
+      transform: translateX(0);
+    }
+  }
+}
+
+// ── Sidebar Header ────────────────────────────────
+
+.flanora-sidebar-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  padding: 18px 14px 14px;
+}
+
+.flanora-sidebar-wordmark {
+  align-items: center;
+  color: #f5f5f4;
+  display: flex;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  gap: 8px;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+  text-decoration: none;
+  transition: color 140ms ease;
+
+  &:hover {
+    color: #fff;
+  }
+
+  svg {
+    color: $accent-teal;
+    flex-shrink: 0;
+    height: 18px;
+    width: 18px;
+  }
+}
+
+.flanora-sidebar-new-chat {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #f5f5f4;
+  cursor: pointer;
+  display: flex;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  gap: 8px;
+  justify-content: center;
+  padding: 9px 14px;
+  transition: background 150ms ease, border-color 150ms ease;
+  width: 100%;
+
+  svg {
+    flex-shrink: 0;
+    height: 15px;
+    width: 15px;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  &:active {
+    background: rgba(255, 255, 255, 0.16);
+  }
+}
+
+// ── Sidebar Navigation ────────────────────────────
+
+.flanora-sidebar-nav {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+  padding: 8px 6px;
+}
+
+.flanora-sidebar-nav-item {
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: rgba(245, 245, 244, 0.6);
+  cursor: pointer;
+  display: flex;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.83rem;
+  gap: 9px;
+  padding: 7px 10px;
+  text-decoration: none;
+  transition: background 130ms ease, color 130ms ease;
+  width: 100%;
+
+  svg {
+    flex-shrink: 0;
+    height: 15px;
+    opacity: 0.65;
+    width: 15px;
+    transition: opacity 130ms ease;
+  }
+
+  &:hover,
+  &.is-active {
+    background: rgba(255, 255, 255, 0.08);
+    color: #f5f5f4;
+
+    svg { opacity: 1; }
+  }
+
+  &.is-active {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// ── Sidebar History ───────────────────────────────
+
+.flanora-sidebar-history {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 6px;
+  scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+  scrollbar-width: thin;
+}
+
+.flanora-sidebar-history-label {
+  color: rgba(245, 245, 244, 0.35);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+  padding: 0 10px;
+  text-transform: uppercase;
+}
+
+.flanora-sidebar-history-empty {
+  color: rgba(245, 245, 244, 0.3);
+  font-size: 0.79rem;
+  line-height: 1.5;
+  padding: 6px 10px;
+}
+
+.flanora-sidebar-history-item {
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: rgba(245, 245, 244, 0.6);
+  cursor: pointer;
+  display: flex;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.8rem;
+  gap: 8px;
+  overflow: hidden;
+  padding: 7px 10px;
+  text-align: left;
+  transition: background 130ms ease, color 130ms ease;
+  width: 100%;
+
+  svg {
+    flex-shrink: 0;
+    height: 13px;
+    opacity: 0.4;
+    transition: opacity 130ms ease;
+    width: 13px;
+  }
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #f5f5f4;
+
+    svg { opacity: 0.8; }
+  }
+
+  &.is-active {
+    background: rgba(255, 255, 255, 0.1);
+    color: #f5f5f4;
+
+    svg { opacity: 1; }
+  }
+}
+
+// ── Sidebar User ──────────────────────────────────
+
+.flanora-sidebar-user {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  margin-top: auto;
+  padding: 10px 6px;
+}
+
+.flanora-sidebar-user-card {
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  padding: 8px 10px;
+  text-align: left;
+  text-decoration: none;
+  transition: background 140ms ease;
+  width: 100%;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.07);
+  }
+}
+
+.flanora-sidebar-user-avatar {
+  align-items: center;
+  background: rgba($accent-teal, 0.18);
+  border: 1px solid rgba($accent-teal, 0.28);
+  border-radius: 50%;
+  color: $accent-teal;
+  display: flex;
+  flex-shrink: 0;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  height: 32px;
+  justify-content: center;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  width: 32px;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+}
+
+.flanora-sidebar-user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.flanora-sidebar-user-name {
+  color: #f5f5f4;
+  font-size: 0.8rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flanora-sidebar-user-plan {
+  color: rgba(245, 245, 244, 0.38);
+  font-size: 0.68rem;
+  margin-top: 1px;
+}
+
+.flanora-sidebar-user-chevron {
+  color: rgba(245, 245, 244, 0.3);
+  flex-shrink: 0;
+  height: 14px;
+  width: 14px;
+}
+
+// ─────────────────────────────────────────────────
+// Main Chat Area
+// ─────────────────────────────────────────────────
+
+.flanora-chat-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+// Blueprint grid texture
+.flanora-chat-main::before {
+  background-image:
+    linear-gradient(to right, rgba(26, 26, 26, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(26, 26, 26, 0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+}
+
+// Sidebar toggle
+.flanora-chat-sidebar-toggle {
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: #6b6560;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  left: 14px;
+  padding: 6px;
+  position: absolute;
+  top: 14px;
+  transition: background 140ms ease, color 140ms ease;
+  z-index: 10;
+
+  svg {
+    height: 18px;
+    width: 18px;
+  }
+
+  &:hover {
+    background: rgba(26, 26, 26, 0.07);
+    color: #1a1a1a;
+  }
+}
+
+// Scrollable body (empty state or messages)
+.flanora-chat-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  overflow-y: auto;
+  padding-top: 48px;
+  position: relative;
+  scrollbar-color: rgba(26, 26, 26, 0.08) transparent;
+  scrollbar-width: thin;
+  z-index: 1;
+}
+
+// ─────────────────────────────────────────────────
+// Empty State
+// ─────────────────────────────────────────────────
+
+.flanora-chat-empty {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 32px 24px;
+}
+
+.flanora-chat-hero {
+  margin-bottom: 48px;
+  max-width: 540px;
+  text-align: center;
+  width: 100%;
+}
+
+.flanora-chat-hero-eyebrow {
+  color: $accent-teal;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.flanora-chat-hero-title {
+  color: #1a1a1a;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.06;
+  margin: 0 0 14px;
+}
+
+.flanora-chat-hero-title em {
+  color: $accent-teal;
+  font-family: cursive;
+  font-size: 1.06em;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.flanora-chat-hero-subtitle {
+  color: #6b6560;
+  font-size: 0.97rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+// Feature cards
+.flanora-chat-features {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 40px;
+  max-width: 680px;
+  width: 100%;
+}
+
+.flanora-chat-feature-card {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(26, 26, 26, 0.08);
+  border-radius: 12px;
+  padding: 14px;
+
+  svg {
+    color: $accent-teal;
+    height: 18px;
+    margin-bottom: 9px;
+    width: 18px;
+  }
+
+  h4 {
+    color: #1a1a1a;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 5px;
+  }
+
+  p {
+    color: #6b6560;
+    font-size: 0.73rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+}
+
+// Example prompts
+.flanora-chat-prompts-label {
+  color: #aca9a4;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.flanora-chat-prompts {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 680px;
+  width: 100%;
+}
+
+.flanora-chat-prompt-chip {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(26, 26, 26, 0.09);
+  border-radius: 10px;
+  color: #1a1a1a;
+  cursor: pointer;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  padding: 11px 13px;
+  text-align: left;
+  transition: background 150ms ease, border-color 150ms ease, transform 150ms ease;
+
+  &:hover {
+    background: #fff;
+    border-color: rgba($accent-teal, 0.35);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// ─────────────────────────────────────────────────
+// Messages Thread
+// ─────────────────────────────────────────────────
+
+.flanora-chat-messages {
+  flex: 1;
+  margin: 0 auto;
+  max-width: 760px;
+  padding: 20px 32px 12px;
+  width: 100%;
+}
+
+.flanora-chat-message {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  &.is-user {
+    flex-direction: row-reverse;
+  }
+}
+
+.flanora-chat-message-avatar {
+  align-items: center;
+  background: rgba($accent-teal, 0.12);
+  border: 1px solid rgba($accent-teal, 0.22);
+  border-radius: 50%;
+  color: $accent-teal;
+  display: flex;
+  flex-shrink: 0;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  height: 28px;
+  justify-content: center;
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+  width: 28px;
+
+  .is-user & {
+    background: rgba(26, 26, 26, 0.07);
+    border-color: rgba(26, 26, 26, 0.1);
+    color: #1a1a1a;
+  }
+}
+
+.flanora-chat-message-bubble {
+  background: #fff;
+  border: 1px solid rgba(26, 26, 26, 0.08);
+  border-radius: 14px 14px 14px 3px;
+  box-shadow: 0 1px 4px rgba(26, 26, 26, 0.04);
+  color: #1a1a1a;
+  max-width: 75%;
+  padding: 11px 15px;
+
+  .is-user & {
+    background: #1a1a1a;
+    border-color: transparent;
+    border-radius: 14px 14px 3px 14px;
+    box-shadow: none;
+    color: #f5f5f4;
+  }
+
+  &.is-error {
+    background: rgba(239, 68, 68, 0.06);
+    border-color: rgba(239, 68, 68, 0.18);
+    color: #991b1b;
+  }
+}
+
+.flanora-chat-message-text {
+  font-size: 0.88rem;
+  line-height: 1.68;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.flanora-chat-message-image {
+  border: 1px solid rgba(26, 26, 26, 0.08);
+  border-radius: 10px;
+  margin-top: 10px;
+  overflow: hidden;
+
+  img {
+    display: block;
+    max-height: 380px;
+    object-fit: contain;
+    width: 100%;
+  }
+}
+
+.flanora-chat-message-time {
+  color: rgba(107, 101, 96, 0.6);
+  font-size: 0.67rem;
+  margin-top: 5px;
+  text-align: right;
+
+  .is-user & {
+    color: rgba(245, 245, 244, 0.4);
+  }
+}
+
+// Typing / loading indicator
+.flanora-chat-loading {
+  align-items: flex-start;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.flanora-chat-loading-dots {
+  align-items: center;
+  background: #fff;
+  border: 1px solid rgba(26, 26, 26, 0.08);
+  border-radius: 14px 14px 14px 3px;
+  box-shadow: 0 1px 4px rgba(26, 26, 26, 0.04);
+  display: flex;
+  gap: 5px;
+  padding: 14px 16px;
+
+  span {
+    animation: chat-dot-bounce 1.2s ease-in-out infinite;
+    background: $accent-teal;
+    border-radius: 50%;
+    display: block;
+    height: 6px;
+    width: 6px;
+
+    &:nth-child(2) { animation-delay: 0.18s; }
+    &:nth-child(3) { animation-delay: 0.36s; }
+  }
+}
+
+@keyframes chat-dot-bounce {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+// ─────────────────────────────────────────────────
+// Composer
+// ─────────────────────────────────────────────────
+
+.flanora-chat-composer-wrap {
+  border-top: 1px solid rgba(26, 26, 26, 0.06);
+  flex-shrink: 0;
+  padding: 14px 24px 18px;
+  position: relative;
+  z-index: 2;
+}
+
+.flanora-chat-composer {
+  background: #fff;
+  border: 1px solid rgba(26, 26, 26, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(26, 26, 26, 0.06);
+  margin: 0 auto;
+  max-width: 760px;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+
+  &:focus-within {
+    border-color: rgba($accent-teal, 0.38);
+    box-shadow: 0 2px 20px rgba(26, 26, 26, 0.07), 0 0 0 3px rgba($accent-teal, 0.07);
+  }
+}
+
+.flanora-chat-composer-textarea {
+  background: transparent;
+  border: none;
+  color: #1a1a1a;
+  display: block;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.62;
+  max-height: 180px;
+  min-height: 52px;
+  outline: none;
+  overflow-y: auto;
+  padding: 14px 16px 0;
+  resize: none;
+  scrollbar-color: rgba(26, 26, 26, 0.08) transparent;
+  scrollbar-width: thin;
+  width: 100%;
+
+  &::placeholder {
+    color: #b5b0ab;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+  }
+}
+
+.flanora-chat-composer-bottom {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  padding: 8px 12px 10px;
+}
+
+.flanora-chat-composer-bottom-left {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
+.flanora-chat-composer-bottom-right {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.flanora-chat-char-count {
+  color: #c0bbb6;
+  font-size: 0.7rem;
+  min-width: 36px;
+  text-align: right;
+
+  &.is-warning {
+    color: #d97706;
+  }
+}
+
+// Generate button
+.flanora-chat-generate-btn {
+  align-items: center;
+  background: #1a1a1a;
+  border: none;
+  border-radius: 10px;
+  color: #f5f5f4;
+  cursor: pointer;
+  display: flex;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  gap: 6px;
+  padding: 8px 16px;
+  transition: background 150ms ease, transform 130ms ease;
+
+  svg {
+    flex-shrink: 0;
+    height: 15px;
+    width: 15px;
+  }
+
+  &:hover:not(:disabled) {
+    background: #2d2d2d;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  &:disabled {
+    background: rgba(26, 26, 26, 0.15);
+    color: rgba(26, 26, 26, 0.35);
+    cursor: not-allowed;
+  }
+}
+
+.flanora-chat-spinner {
+  animation: chat-spin 0.75s linear infinite;
+  border: 2px solid rgba(245, 245, 244, 0.3);
+  border-radius: 50%;
+  border-top-color: #f5f5f4;
+  flex-shrink: 0;
+  height: 13px;
+  width: 13px;
+}
+
+@keyframes chat-spin {
+  to { transform: rotate(360deg); }
+}
+
+.flanora-chat-composer-hint {
+  color: #c0bbb6;
+  font-size: 0.68rem;
+  margin-top: 8px;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 4px;
+  text-align: center;
+}
+
+// ─────────────────────────────────────────────────
+// Model Selector
+// ─────────────────────────────────────────────────
+
+.flanora-model-selector-wrap {
+  position: relative;
+}
+
+.flanora-model-selector {
+  align-items: center;
+  background: transparent;
+  border: 1px solid rgba(26, 26, 26, 0.1);
+  border-radius: 999px;
+  color: #6b6560;
+  cursor: pointer;
+  display: flex;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  gap: 5px;
+  padding: 5px 10px 5px 8px;
+  transition: background 130ms ease, border-color 130ms ease, color 130ms ease;
+  white-space: nowrap;
+
+  svg {
+    flex-shrink: 0;
+    height: 12px;
+    transition: transform 180ms ease;
+    width: 12px;
+  }
+
+  &.is-open svg {
+    transform: rotate(180deg);
+  }
+
+  &:hover {
+    background: rgba(26, 26, 26, 0.04);
+    border-color: rgba(26, 26, 26, 0.17);
+    color: #1a1a1a;
+  }
+}
+
+.flanora-model-dot {
+  background: $accent-teal;
+  border-radius: 50%;
+  flex-shrink: 0;
+  height: 6px;
+  width: 6px;
+}
+
+.flanora-model-dropdown {
+  background: #fff;
+  border: 1px solid rgba(26, 26, 26, 0.1);
+  border-radius: 12px;
+  bottom: calc(100% + 8px);
+  box-shadow: 0 8px 32px rgba(26, 26, 26, 0.12);
+  left: 0;
+  min-width: 220px;
+  padding: 6px;
+  position: absolute;
+  z-index: 100;
+}
+
+.flanora-model-option {
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 9px 12px;
+  text-align: left;
+  transition: background 110ms ease;
+  width: 100%;
+
+  &:hover:not(:disabled) {
+    background: rgba(26, 26, 26, 0.04);
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.45;
+  }
+
+  &.is-selected {
+    background: rgba($accent-teal, 0.07);
+  }
+}
+
+.flanora-model-option-left {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
+.flanora-model-option-dot {
+  background: $accent-teal;
+  border-radius: 50%;
+  flex-shrink: 0;
+  height: 6px;
+  width: 6px;
+
+  .flanora-model-option:disabled & {
+    background: #c0bbb6;
+  }
+}
+
+.flanora-model-option-name {
+  color: #1a1a1a;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.83rem;
+  font-weight: 600;
+}
+
+.flanora-model-option-badge {
+  background: rgba(26, 26, 26, 0.05);
+  border-radius: 4px;
+  color: #aca9a4;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  text-transform: uppercase;
+}
+
+.flanora-model-check {
+  color: $accent-teal;
+  flex-shrink: 0;
+  height: 13px;
+  width: 13px;
+}
+
+// ─────────────────────────────────────────────────
+// Mobile backdrop
+// ─────────────────────────────────────────────────
+
+.flanora-chat-backdrop {
+  background: rgba(0, 0, 0, 0.45);
+  inset: 0;
+  position: fixed;
+  z-index: 35;
+}
+
+// ─────────────────────────────────────────────────
+// Responsive
+// ─────────────────────────────────────────────────
+
+@media (max-width: 1024px) {
+  .flanora-chat-features {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .flanora-chat-features {
+    grid-template-columns: 1fr;
+    display: none;
+  }
+
+  .flanora-chat-prompts {
+    grid-template-columns: 1fr;
+  }
+
+  .flanora-chat-messages {
+    padding: 16px 16px 8px;
+  }
+
+  .flanora-chat-composer-wrap {
+    padding: 10px 14px 14px;
+  }
+
+  .flanora-chat-empty {
+    padding: 24px 16px 16px;
+    justify-content: flex-start;
+    padding-top: 40px;
+  }
+
+  .flanora-chat-hero {
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .flanora-chat-prompts {
+    display: none;
+  }
+}
