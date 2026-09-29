@@ -1,14 +1,19 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { googleLogin, extractErrorMessage } from "../services/authApiService";
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+const GOOGLE_CONNECT_ERROR =
+  "We’re having trouble connecting right now. Please try again in a moment.";
 
 /**
  * Loads Google Identity Services script and renders the official Google Sign-In
- * button directly into the provided DOM ref, bypassing any modal overlay.
+ * button into the provided DOM ref as a hidden click relay. The visible UI is a
+ * custom button that triggers it via `startGoogleSignIn()`, so the option stays
+ * present even when GIS is unavailable or still loading.
  */
 export function useGoogleAuth(onSuccess, onError, buttonRef) {
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const hasScriptFailedRef = useRef(false);
 
   useEffect(() => {
     if (!GOOGLE_CLIENT_ID || !buttonRef.current) return;
@@ -87,6 +92,9 @@ export function useGoogleAuth(onSuccess, onError, buttonRef) {
       script.async = true;
       script.defer = true;
       script.onload = initializeGoogle;
+      script.onerror = () => {
+        hasScriptFailedRef.current = true;
+      };
       document.body.appendChild(script);
     }
 
@@ -95,6 +103,23 @@ export function useGoogleAuth(onSuccess, onError, buttonRef) {
     };
   }, [onSuccess, onError, buttonRef]);
 
-  return { isGoogleLoading };
+  const startGoogleSignIn = useCallback(() => {
+    if (!GOOGLE_CLIENT_ID) {
+      onError(GOOGLE_CONNECT_ERROR);
+      return;
+    }
+    if (hasScriptFailedRef.current) {
+      onError(GOOGLE_CONNECT_ERROR);
+      return;
+    }
+    const relayButton = buttonRef.current?.querySelector('[role="button"], button');
+    if (!relayButton) {
+      onError(GOOGLE_CONNECT_ERROR);
+      return;
+    }
+    relayButton.click();
+  }, [onError, buttonRef]);
+
+  return { isGoogleLoading, startGoogleSignIn };
 }
 

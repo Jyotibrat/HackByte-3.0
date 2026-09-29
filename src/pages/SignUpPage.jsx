@@ -33,6 +33,17 @@ function CameraIcon() {
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_PATTERN = /^\+?[0-9][0-9\s\-()]{5,19}$/;
+const MIN_SIGNUP_AGE = 13;
+const DOB_AGE_MESSAGE = `You must be at least ${MIN_SIGNUP_AGE} years old to create a Flanora account.`;
+const DOB_INVALID_MESSAGE = "Please enter a valid date of birth.";
+
+function calculateAge(dob) {
+  const today = new Date();
+  let age = today.getFullYear() - dob.getFullYear();
+  const monthDiff = today.getMonth() - dob.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) age -= 1;
+  return age;
+}
 
 function validateRegistration(form) {
   const password = String(form.get("password") || "");
@@ -56,9 +67,18 @@ function validateRegistration(form) {
   if (phone && !PHONE_PATTERN.test(phone)) {
     return "Please enter a valid phone number.";
   }
-  const dob = form.get("dob");
-  if (dob && new Date(dob) > new Date()) {
-    return "Date of birth cannot be in the future.";
+  const dobValue = form.get("dob");
+  if (dobValue) {
+    const dob = new Date(dobValue);
+    if (Number.isNaN(dob.getTime())) {
+      return DOB_INVALID_MESSAGE;
+    }
+    if (dob > new Date()) {
+      return "Date of birth cannot be in the future.";
+    }
+    if (calculateAge(dob) < MIN_SIGNUP_AGE) {
+      return DOB_AGE_MESSAGE;
+    }
   }
   return "";
 }
@@ -86,12 +106,37 @@ function SignUpPage() {
   const handleGoogleError = useCallback((msg) => setError(msg), []);
 
   const googleBtnRef = useRef(null);
-  const { isGoogleLoading } = useGoogleAuth(handleGoogleSuccess, handleGoogleError, googleBtnRef);
+  const { isGoogleLoading, startGoogleSignIn } = useGoogleAuth(handleGoogleSuccess, handleGoogleError, googleBtnRef);
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
     setAvatarPreview(URL.createObjectURL(file));
+  };
+
+  // Leaving the DOB field with an invalid / under-age date resets it to the
+  // browser's empty placeholder and reports why.
+  const handleDobBlur = (event) => {
+    const input = event.currentTarget;
+    const value = input.value;
+    if (!value) return;
+
+    const dob = new Date(value);
+    let message = "";
+    if (Number.isNaN(dob.getTime())) {
+      message = DOB_INVALID_MESSAGE;
+    } else if (dob > new Date()) {
+      message = "Date of birth cannot be in the future.";
+    } else if (calculateAge(dob) < MIN_SIGNUP_AGE) {
+      message = DOB_AGE_MESSAGE;
+    }
+
+    if (message) {
+      input.value = "";
+      setError(message);
+    } else {
+      setError((current) => (current === DOB_AGE_MESSAGE || current === DOB_INVALID_MESSAGE ? "" : current));
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -178,6 +223,25 @@ function SignUpPage() {
             <p>Join thousands exploring AI-generated architectural concepts.</p>
           </div>
 
+          <button
+            type="button"
+            className="flanora-google-button"
+            onClick={startGoogleSignIn}
+            disabled={isGoogleLoading}
+          >
+            {isGoogleLoading ? (
+              <svg className="flanora-google-button-spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+              </svg>
+            ) : (
+              <GoogleIcon />
+            )}
+            <span>{isGoogleLoading ? "Continuing with Google…" : "Continue with Google"}</span>
+          </button>
+          <div ref={googleBtnRef} className="flanora-google-button-host" aria-hidden="true" />
+
+          <div className="flanora-auth-divider"><span>or sign up with email</span></div>
+
           <div className="flanora-avatar-upload">
             <button
               type="button"
@@ -207,23 +271,6 @@ function SignUpPage() {
             />
           </div>
 
-          <div style={{ position: "relative", display: "flex", justifyContent: "center", width: "100%", height: 40 }}>
-            <div ref={googleBtnRef} className="flanora-google-button-container" style={{ visibility: isGoogleLoading ? "hidden" : "visible", position: "absolute", top: 0, zIndex: 1 }}></div>
-            {isGoogleLoading && (
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", justifyContent: "center", alignItems: "center", zIndex: 2 }}>
-                <button type="button" disabled style={{ width: 420, height: 40, margin: 0, borderRadius: 999, border: "1px solid rgba(255, 255, 255, 0.18)", background: "transparent", color: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontSize: "0.875rem", opacity: 0.7 }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ animation: "spin 1s linear infinite" }}>
-                    <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-                  </svg>
-                  <span style={{ fontFamily: "inherit" }}>Continuing with Google...</span>
-                  <style>{`@keyframes spin { 100% { transform: rotate(360deg); } }`}</style>
-                </button>
-              </div>
-            )}
-          </div>
-
-          <div className="flanora-auth-divider"><span>or sign up with email</span></div>
-
           <form className="flanora-auth-form flanora-signup-form" onSubmit={handleSubmit}>
             <div className="flanora-signup-row">
               <label htmlFor="firstName">First name *
@@ -236,7 +283,7 @@ function SignUpPage() {
 
             <div className="flanora-signup-row">
               <label htmlFor="dob">Date of birth *
-                <input id="dob" name="dob" type="date" autoComplete="bday" required />
+                <input id="dob" name="dob" type="date" autoComplete="bday" required onBlur={handleDobBlur} />
               </label>
               <label htmlFor="phone">Phone number
                 <input id="phone" name="phone" type="tel" autoComplete="tel" placeholder="+1 555 000 0000" />

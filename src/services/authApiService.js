@@ -54,7 +54,7 @@ function extractErrorMessage(error) {
     if (status === 429) return "Too many attempts. Please wait a moment and try again.";
     if (status >= 500) return "The service is temporarily unavailable. Try again shortly.";
   } else if (error.request) {
-    return "Cannot reach the Flanora authentication service. Is the backend running?";
+    return "We’re having trouble connecting right now. Please try again in a moment.";
   }
   return "Something went wrong. Please try again.";
 }

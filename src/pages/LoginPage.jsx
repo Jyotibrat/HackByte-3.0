@@ -45,7 +45,7 @@ function LoginPage() {
 
   const googleBtnRef = useRef(null);
 
-  const { isGoogleLoading } = useGoogleAuth(handleGoogleSuccess, handleGoogleError, googleBtnRef);
+  const { isGoogleLoading, startGoogleSignIn } = useGoogleAuth(handleGoogleSuccess, handleGoogleError, googleBtnRef);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -81,20 +81,22 @@ function LoginPage() {
             <p>Sign in to continue creating residential floor-plan concepts.</p>
           </div>
 
-          <div style={{ position: "relative", display: "flex", justifyContent: "center", width: "100%", height: 40 }}>
-            <div ref={googleBtnRef} className="flanora-google-button-container" style={{ visibility: isGoogleLoading ? "hidden" : "visible", position: "absolute", top: 0, zIndex: 1 }}></div>
-            {isGoogleLoading && (
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", justifyContent: "center", alignItems: "center", zIndex: 2 }}>
-                <button type="button" disabled style={{ width: 420, height: 40, margin: 0, borderRadius: 999, border: "1px solid rgba(255, 255, 255, 0.18)", background: "transparent", color: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontSize: "0.875rem", opacity: 0.7 }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ animation: "spin 1s linear infinite" }}>
-                    <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-                  </svg>
-                  <span style={{ fontFamily: "inherit" }}>Continuing with Google...</span>
-                  <style>{`@keyframes spin { 100% { transform: rotate(360deg); } }`}</style>
-                </button>
-              </div>
+          <button
+            type="button"
+            className="flanora-google-button"
+            onClick={startGoogleSignIn}
+            disabled={isGoogleLoading}
+          >
+            {isGoogleLoading ? (
+              <svg className="flanora-google-button-spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+              </svg>
+            ) : (
+              <GoogleIcon />
             )}
-          </div>
+            <span>{isGoogleLoading ? "Continuing with Google…" : "Continue with Google"}</span>
+          </button>
+          <div ref={googleBtnRef} className="flanora-google-button-host" aria-hidden="true" />
 
           <div className="flanora-auth-divider"><span>or continue with email</span></div>
 

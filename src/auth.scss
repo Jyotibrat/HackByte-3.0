@@ -18,6 +18,7 @@
   flex-direction: column;
   min-width: 0;
   padding: 40px;
+  text-align: center;
 }
 
 .flanora-auth-wordmark {
@@ -84,9 +85,27 @@
 }
 
 .flanora-google-button:hover,
-.flanora-google-button:focus-visible { background: rgba($white, 0.08); }
+.flanora-google-button:focus-visible {
+  background: $white;
+  border-color: $white;
+  color: $black;
+}
 
 .flanora-google-button svg { height: 20px; width: 20px; }
+
+// The official Google button is rendered into this host as a hidden click
+// relay; a 1px clipped box keeps GIS willing to render and click() working.
+.flanora-google-button-host {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
+.flanora-google-button-spinner { animation: flanora-spin 1s linear infinite; }
+
+@keyframes flanora-spin { to { transform: rotate(360deg); } }
 
 .flanora-auth-divider {
   align-items: center;
@@ -133,6 +152,136 @@
   background: rgba($white, 0.08);
   border-color: $accent-cyan;
   box-shadow: 0 0 0 3px rgba($accent-cyan, 0.15);
+}
+
+// Tick-box rows (Terms/newsletter on sign-up). The animate-ui Checkbox is
+// styled with Tailwind utilities this project doesn't ship, so size it here:
+// a small box inline with the sentence instead of a full-width native button.
+.flanora-auth-form .flanora-tos-label {
+  align-items: flex-start;
+  display: flex;
+  gap: 10px;
+  text-align: left;
+}
+
+.flanora-tos-label a { color: $accent-cyan-lt; }
+
+.flanora-tos-checkbox {
+  align-items: center;
+  background: rgba($white, 0.05);
+  border: 1px solid rgba($white, 0.25);
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  flex: 0 0 auto;
+  height: 18px;
+  justify-content: center;
+  margin-top: 2px;
+  padding: 0;
+  transition: background 160ms ease, border-color 160ms ease;
+  width: 18px;
+
+  svg[data-slot='checkbox-indicator'] {
+    height: 12px;
+    width: 12px;
+  }
+
+  &:hover { border-color: rgba($white, 0.5); }
+
+  &[data-state='checked'],
+  &[data-state='indeterminate'] {
+    background: $accent-teal;
+    border-color: $accent-teal;
+    color: $bg-primary;
+  }
+}
+
+// Sign-up extras — avatar upload and first/last-name row (their classes
+// shipped without CSS, so every element rendered raw and inline).
+.flanora-signup-row {
+  display: grid;
+  gap: 17px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.flanora-avatar-upload {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 4px 0 8px;
+}
+
+.flanora-avatar-btn {
+  align-items: center;
+  background: rgba($white, 0.05);
+  border: 1px solid rgba($white, 0.18);
+  border-radius: 50%;
+  color: rgba($fg-primary, 0.55);
+  cursor: pointer;
+  display: flex;
+  flex: 0 0 auto;
+  height: 72px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  transition: background 180ms ease, border-color 180ms ease;
+  width: 72px;
+}
+
+.flanora-avatar-btn:hover,
+.flanora-avatar-btn:focus-visible {
+  background: rgba($white, 0.08);
+  border-color: rgba($white, 0.4);
+}
+
+.flanora-avatar-btn svg { height: 26px; width: 26px; }
+
+.flanora-avatar-preview {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.flanora-avatar-label {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  text-align: left;
+}
+
+.flanora-avatar-label > span:first-child { font-weight: 700; }
+
+.flanora-avatar-change {
+  background: transparent;
+  border: 1px solid rgba($white, 0.2);
+  border-radius: 999px;
+  color: $fg-primary;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 7px 16px;
+  transition: background 180ms ease;
+}
+
+.flanora-avatar-change:hover,
+.flanora-avatar-change:focus-visible { background: rgba($white, 0.08); }
+
+.flanora-avatar-hint {
+  color: rgba($fg-primary, 0.45);
+  font-size: 0.75rem;
+}
+
+// Keep the native file input functional but invisible; the styled buttons
+// above trigger it programmatically.
+.flanora-avatar-input {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
 }
 
 .flanora-auth-submit {
@@ -208,6 +357,7 @@
   left: 12%;
   max-width: 440px;
   position: absolute;
+  text-align: center;
   z-index: 1;
 }
 
