@@ -1,4 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+const NEWSLETTER_URL = import.meta.env.VITE_NEWSLETTER_URL;
 
 const linkGroups = [
   { title: "Product", headerTo: "/", links: [["Models", "/models"], ["Features", "/features"], ["Showcase", "/showcase"], ["Try Flanora", "/chat"]] },
@@ -38,7 +41,81 @@ function PlatformIcon({ type }) {
   }
 }
 
+
+function FooterNewsletterForm() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState(null); // null | "loading" | "success" | "error"
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setStatus("loading");
+    setMessage("");
+
+    try {
+      const res = await fetch(NEWSLETTER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim().toLowerCase(), source: "footer" }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || "Something went wrong. Please try again.");
+      }
+
+      const data = await res.json();
+      const outcome = data?.outcome;
+
+      if (outcome === "subscribed") {
+        setMessage("You're subscribed! Welcome to Flanora updates.");
+      } else if (outcome === "already_subscribed" || outcome === "resubscribed") {
+        setMessage("You're already on the list!");
+      } else {
+        setMessage("Subscribed successfully!");
+      }
+
+      setStatus("success");
+      setEmail("");
+    } catch (err) {
+      setStatus("error");
+      setMessage(err.message || "Something went wrong. Please try again.");
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="newsletter-form">
+      {status !== "success" ? (
+        <>
+          <input
+            type="email"
+            placeholder="Enter your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={status === "loading"}
+          />
+          <button type="submit" disabled={status === "loading"}>
+            {status === "loading" ? "…" : "Subscribe"}
+          </button>
+        </>
+      ) : null}
+      {message && (
+        <p
+          className="newsletter-form-message"
+          style={{ color: status === "error" ? "#fecaca" : "#2dd4bf", fontSize: "0.8rem", margin: "8px 0 0", gridColumn: "1 / -1" }}
+        >
+          {message}
+        </p>
+      )}
+    </form>
+  );
+}
+
 function Footer() {
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -71,10 +148,7 @@ function Footer() {
             </div>
             <div className="flanora-footer-newsletter">
               <h3>Stay updated</h3>
-              <form onSubmit={(e) => e.preventDefault()} className="newsletter-form">
-                <input type="email" placeholder="Enter your Email" required />
-                <button type="submit">Subscribe</button>
-              </form>
+              <FooterNewsletterForm />
             </div>
           </div>
         </section>
