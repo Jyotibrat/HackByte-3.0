@@ -1,4 +1,24 @@
 import { Link, useNavigate } from "react-router-dom";
+
+const NEWSLETTER_URL = import.meta.env.VITE_NEWSLETTER_URL;
+
+/** Fire-and-forget â€” newsletter errors must never block the user. */
+async function subscribeToNewsletter({ email, source, flanoraUserId = null }) {
+  if (!NEWSLETTER_URL) return;
+  try {
+    await fetch(NEWSLETTER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email.trim().toLowerCase(),
+        source,
+        ...(flanoraUserId ? { flanoraUserId } : {}),
+      }),
+    });
+  } catch {
+    // Silently swallow â€” newsletter failure must never affect signup UX.
+  }
+}
 import { useState, useRef, useCallback, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { extractErrorMessage } from "../services/authApiService";
@@ -100,6 +120,14 @@ function SignUpPage() {
 
   const handleGoogleSuccess = useCallback((user) => {
     setUser(user);
+    // Auto-subscribe Google users â€” they have no opt-in checkbox.
+    if (user?.email) {
+      subscribeToNewsletter({
+        email: user.email,
+        source: "google_registration",
+        flanoraUserId: user.id ?? user.user_id ?? null,
+      });
+    }
     navigate("/chat", { replace: true });
   }, [setUser, navigate]);
 
@@ -152,10 +180,13 @@ function SignUpPage() {
     setError("");
     setIsSubmitting(true);
     try {
-      await signup({
+      const email = String(form.get("email") || "").trim().toLowerCase();
+      const wantsNewsletter = form.get("newsletter") === "on";
+
+      const createdUser = await signup({
         first_name: String(form.get("firstName") || "").trim(),
         last_name: String(form.get("lastName") || "").trim(),
-        email: String(form.get("email") || "").trim().toLowerCase(),
+        email,
         phone_number: String(form.get("phone") || "").trim(),
         date_of_birth: String(form.get("dob") || ""),
         password: String(form.get("password") || ""),
@@ -163,7 +194,17 @@ function SignUpPage() {
         accept_terms: form.get("tos") === "on",
         accept_privacy_policy: form.get("tos") === "on",
       });
-      setCreatedEmail(String(form.get("email") || "").trim().toLowerCase());
+
+      // Subscribe only if the user opted in.
+      if (wantsNewsletter) {
+        subscribeToNewsletter({
+          email,
+          source: "registration",
+          flanoraUserId: createdUser?.id ?? createdUser?.user_id ?? null,
+        });
+      }
+
+      setCreatedEmail(email);
     } catch (submitError) {
       setError(extractErrorMessage(submitError));
     } finally {
@@ -183,7 +224,7 @@ function SignUpPage() {
             </div>
             <p className="flanora-auth-message" role="status">
               We've sent a verification link to {createdEmail}. You can start
-              exploring right away — just verify your email later to keep full
+              exploring right away Ã¢â‚¬â€ just verify your email later to keep full
               access.
             </p>
             <button
@@ -191,7 +232,7 @@ function SignUpPage() {
               type="button"
               onClick={() => navigate("/chat", { replace: true })}
             >
-              Continue to Flanora →
+              Continue to Flanora Ã¢â€ â€™
             </button>
             <p className="flanora-auth-legal">
               Didn't get the email?{" "}
@@ -236,7 +277,7 @@ function SignUpPage() {
             ) : (
               <GoogleIcon />
             )}
-            <span>{isGoogleLoading ? "Continuing with Google…" : "Continue with Google"}</span>
+            <span>{isGoogleLoading ? "Continuing with GoogleÃ¢â‚¬Â¦" : "Continue with Google"}</span>
           </button>
           <div ref={googleBtnRef} className="flanora-google-button-host" aria-hidden="true" />
 
@@ -259,7 +300,7 @@ function SignUpPage() {
               <button type="button" className="flanora-avatar-change" onClick={() => avatarInputRef.current?.click()}>
                 {avatarPreview ? "Change photo" : "Upload photo"}
               </button>
-              <span className="flanora-avatar-hint">Optional · JPG, PNG, WEBP up to 5 MB</span>
+              <span className="flanora-avatar-hint">Optional Ã‚Â· JPG, PNG, WEBP up to 5 MB</span>
             </div>
             <input
               ref={avatarInputRef}
@@ -329,14 +370,14 @@ function SignUpPage() {
             <label className="flanora-tos-label" htmlFor="newsletter">
               <Checkbox id="newsletter" name="newsletter" className="flanora-tos-checkbox" />
               <span>
-                I’d like to receive occasional newsletters and updates from Flanora AI.
+                IÃ¢â‚¬â„¢d like to receive occasional newsletters and updates from Flanora AI.
               </span>
             </label>
 
             {error && <p className="flanora-auth-message" role="alert">{error}</p>}
 
             <button className="flanora-auth-submit" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Creating account…" : "Create account"}
+              {isSubmitting ? "Creating accountÃ¢â‚¬Â¦" : "Create account"}
             </button>
           </form>
 
