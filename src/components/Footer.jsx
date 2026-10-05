@@ -79,9 +79,9 @@ function FooterNewsletterForm() {
 
       setStatus("success");
       setEmail("");
-    } catch (err) {
+    } catch {
       setStatus("error");
-      setMessage(err.message || "Something went wrong. Please try again.");
+      setMessage("Couldn't connect. Please check your connection and try again.");
     }
   };
 
