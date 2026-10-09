@@ -2,6 +2,10 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
+import publicationsImg from "../../assets/home/publications_img.png";
+import technicalReportsImg from "../../assets/home/technical_reports_img.png";
+import articlesImg from "../../assets/home/articles_img.png";
+import resourcesImg from "../../assets/home/resources_img.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,7 +15,7 @@ const ITEMS = [
     title: "Resources /",
     link: "/research/resources",
     year: "2026",
-    img: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=85",
+    img: resourcesImg,
     alt: "Journal portrait",
   },
   {
@@ -19,7 +23,7 @@ const ITEMS = [
     title: "Publications /",
     link: "/research/publications",
     year: "2025",
-    img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/611c8074-3c56-4810-a604-812a2791a1f9_800w.webp",
+    img: publicationsImg,
     alt: "Journal fashion",
   },
   {
@@ -27,7 +31,7 @@ const ITEMS = [
     title: "Technical Reports /",
     link: "/research/technical-reports",
     year: "2025",
-    img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/cd2c33e1-4bcd-452f-ad23-223a9029f74b_800w.webp",
+    img: technicalReportsImg,
     alt: "Journal studio",
   },
   {
@@ -35,7 +39,7 @@ const ITEMS = [
     title: "Articles /",
     link: "/research/articles",
     year: "2026",
-    img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=85",
+    img: articlesImg,
     alt: "Journal campaign",
   },
 ];
