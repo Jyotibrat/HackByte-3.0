@@ -1,0 +1,30 @@
+﻿name: Sync to Flanora-AI-Chat
+
+on:
+  push:
+    branches:
+      - chat
+  workflow_dispatch:
+
+jobs:
+  sync-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout chat branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for Sync Token
+        run: |
+          if [ -z "${{ secrets.FLANORA_CHAT_SYNC_PAT }}" ]; then
+            echo "::error::Secret FLANORA_CHAT_SYNC_PAT is missing. Add a Personal Access Token (PAT) with repo write permissions in your GitHub repository secrets."
+            exit 1
+          fi
+
+      - name: Push to Flanora-AI-Chat
+        env:
+          SYNC_PAT: ${{ secrets.FLANORA_CHAT_SYNC_PAT }}
+        run: |
+          git remote add target "https://x-access-token:${SYNC_PAT}@github.com/BJYOTIBRAT/Flanora-AI-Chat.git"
+          git push --force target HEAD:main
