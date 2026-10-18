@@ -1,4 +1,4 @@
-﻿name: Sync to Flanora-AI-Chat
+name: Sync to Flanora-AI-Chat
 
 on:
   push:
@@ -14,6 +14,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Check for Sync Token
         run: |
@@ -26,5 +27,8 @@ jobs:
         env:
           SYNC_PAT: ${{ secrets.FLANORA_CHAT_SYNC_PAT }}
         run: |
-          git remote add target "https://x-access-token:${SYNC_PAT}@github.com/BJYOTIBRAT/Flanora-AI-Chat.git"
-          git push --force target HEAD:main
+          # 1. Clean up any residual Authorization header that might override the PAT
+          git config --local --unset-all "http.https://github.com/.extraheader" || true
+          
+          # 2. Push directly to the destination repository using the PAT
+          git push --force "https://x-access-token:${SYNC_PAT}@github.com/BJYOTIBRAT/Flanora-AI-Chat.git" HEAD:main
