@@ -62,16 +62,25 @@ function FooterNewsletterForm() {
       });
 
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error || "Something went wrong. Please try again.");
+        setStatus("error");
+        if (res.status === 400) {
+          setMessage("Please enter a valid email address.");
+        } else if (res.status === 429) {
+          setMessage("Too many attempts. Please wait a minute and try again.");
+        } else if (res.status >= 500) {
+          setMessage("Something went wrong on our side. Please try again in a moment.");
+        } else {
+          setMessage("Something went wrong. Please try again.");
+        }
+        return;
       }
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
       const outcome = data?.outcome;
 
-      if (outcome === "subscribed") {
-        setMessage("You're subscribed! Welcome to Flanora updates.");
-      } else if (outcome === "already_subscribed" || outcome === "resubscribed") {
+      if (outcome === "subscribed" || outcome === "resubscribed") {
+        setMessage("You're subscribed. Thanks for joining!");
+      } else if (outcome === "already_subscribed") {
         setMessage("You're already on the list!");
       } else {
         setMessage("Subscribed successfully!");
