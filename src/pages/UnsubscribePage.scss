@@ -1,0 +1,201 @@
+@use "../styles/theme" as *;
+
+.flanora-unsubscribe-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 180px);
+  padding: 64px 24px;
+  background: radial-gradient(circle at 50% 20%, rgba($accent-teal, 0.08) 0%, transparent 60%), $bg-primary;
+}
+
+.flanora-unsubscribe-card {
+  width: 100%;
+  max-width: 520px;
+  background: rgba($bg-mid, 0.35);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba($white, 0.1);
+  border-radius: 20px;
+  padding: 44px 36px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 35px rgba($accent-teal, 0.06);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, $accent-teal, $accent-cyan, transparent);
+  }
+}
+
+.flanora-unsubscribe-kicker {
+  display: block;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: $accent-teal;
+  margin-bottom: 12px;
+}
+
+.flanora-unsubscribe-title {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: $fg-primary;
+  margin: 0 0 16px;
+  line-height: 1.3;
+}
+
+.flanora-unsubscribe-prompt {
+  font-family: "Martel Sans", sans-serif;
+  font-size: 1.05rem;
+  color: rgba($fg-primary, 0.85);
+  line-height: 1.6;
+  margin: 0 0 28px;
+}
+
+.flanora-unsubscribe-masked-email {
+  display: inline-block;
+  padding: 3px 10px;
+  background: rgba($accent-teal, 0.12);
+  border: 1px solid rgba($accent-teal, 0.3);
+  border-radius: 6px;
+  color: $accent-cyan;
+  font-family: monospace;
+  font-size: 0.95em;
+  word-break: break-all;
+}
+
+.flanora-unsubscribe-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.flanora-unsubscribe-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: $accent-teal;
+  color: $bg-deeper;
+  font-family: "Martel Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 13px 28px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 140px;
+
+  &:hover:not(:disabled) {
+    background: $accent-cyan;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba($accent-teal, 0.25);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.flanora-unsubscribe-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: rgba($fg-primary, 0.75);
+  font-family: "Martel Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 13px 22px;
+  border-radius: 12px;
+  border: 1px solid rgba($white, 0.16);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: $fg-primary;
+    border-color: rgba($white, 0.35);
+    background: rgba($white, 0.04);
+  }
+}
+
+.flanora-unsubscribe-message-box {
+  padding: 20px;
+  border-radius: 14px;
+  font-family: "Martel Sans", sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  margin-bottom: 24px;
+  text-align: center;
+
+  &.success {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #86efac;
+  }
+
+  &.invalid,
+  &.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: $error-light;
+  }
+
+  &.rate-limited {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    color: #fde047;
+  }
+}
+
+.flanora-unsubscribe-footer-links {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid rgba($white, 0.08);
+
+  a {
+    color: rgba($fg-primary, 0.55);
+    font-family: "Martel Sans", sans-serif;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $accent-teal;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .flanora-unsubscribe-card {
+    padding: 32px 20px;
+  }
+
+  .flanora-unsubscribe-title {
+    font-size: 1.5rem;
+  }
+
+  .flanora-unsubscribe-actions {
+    flex-direction: column;
+    width: 100%;
+
+    button, a {
+      width: 100%;
+    }
+  }
+}

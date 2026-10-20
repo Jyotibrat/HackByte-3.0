@@ -32,6 +32,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ProfilePage from "./pages/ProfilePage";
 import DonatePage from "./pages/DonatePage";
 import TechnicalReportsPage from "./pages/TechnicalReportsPage";
+import UnsubscribePage from "./pages/UnsubscribePage";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -63,6 +64,7 @@ function AnimatedRoutes() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/status" element={<StatusPage />} />
           <Route path="/donate" element={<DonatePage />} />
+          <Route path="/unsubscribe" element={<UnsubscribePage />} />
         </Route>
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
