@@ -602,6 +602,7 @@
 
   form {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
 
     input {
@@ -610,6 +611,7 @@
       border-radius: 999px;
       color: $fg-primary;
       flex: 1;
+      min-width: 0;
       font-size: 0.8rem;
       padding: 10px 16px;
 
@@ -625,6 +627,7 @@
       border-radius: 999px;
       color: #000 !important;
       cursor: pointer;
+      flex-shrink: 0;
       font-size: 0.8rem;
       font-weight: 700;
       padding: 10px 18px;
@@ -636,6 +639,14 @@
         color: #fff !important;
         border-color: #fff !important;
       }
+    }
+
+    .newsletter-form-message {
+      width: 100%;
+      flex-basis: 100%;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      margin: 2px 0 0;
     }
   }
 }

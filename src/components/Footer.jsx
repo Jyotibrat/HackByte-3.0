@@ -114,7 +114,14 @@ function FooterNewsletterForm() {
       {message && (
         <p
           className="newsletter-form-message"
-          style={{ color: status === "error" ? "#fecaca" : "#2dd4bf", fontSize: "0.8rem", margin: "8px 0 0", gridColumn: "1 / -1" }}
+          style={{
+            color: status === "error" ? "#fecaca" : "#2dd4bf",
+            fontSize: "0.8rem",
+            lineHeight: 1.5,
+            margin: "2px 0 0",
+            width: "100%",
+            flexBasis: "100%",
+          }}
         >
           {message}
         </p>
