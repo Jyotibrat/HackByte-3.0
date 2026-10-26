@@ -1,4 +1,5 @@
 import axios from "axios";
+import { isAccountNotFoundError } from "../utils/authHelpers";
 
 /**
  * Client for the Flanora Authentication Service (Django + Simple JWT).
@@ -43,6 +44,9 @@ function extractErrorMessage(error) {
       const firstField = Object.keys(errors)[0];
       if (firstField) {
         const value = errors[firstField];
+        if (value && typeof value === "object" && !Array.isArray(value)) {
+          return value.message || JSON.stringify(value);
+        }
         const message = Array.isArray(value) ? value[0] : value;
         if (firstField !== "detail") {
           return `${humanizeField(firstField)}: ${message}`;
@@ -168,10 +172,13 @@ export async function changePassword(currentPassword, newPassword) {
 }
 
 /** Google Identity Services returns an ID token; exchange it for a JWT pair. */
-export async function googleLogin(idToken) {
-  const response = await client.post("/google/", { id_token: idToken });
+export async function googleLogin(idToken, payloadOptions = {}) {
+  const response = await client.post("/google/", {
+    id_token: idToken,
+    ...payloadOptions,
+  });
   storeTokens(response.data);
   return response.data;
 }
 
-export { extractErrorMessage };
+export { extractErrorMessage, isAccountNotFoundError };

@@ -7,8 +7,12 @@ import {
   PreviewLinkCard,
   PreviewLinkCardTrigger,
   PreviewLinkCardContent,
-  PreviewLinkCardImage
+  PreviewLinkCardImage,
 } from "@/components/animate-ui/components/radix/preview-link-card";
+import {
+  isAccountNotFoundError,
+  saveGoogleAuthSession,
+} from "../utils/authHelpers";
 
 function GoogleIcon() {
   return (
@@ -25,7 +29,11 @@ function LoginPage() {
   const { user, login, setUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [accountNotFound, setAccountNotFound] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -35,37 +43,67 @@ function LoginPage() {
     }
   }, [user, navigate, location]);
 
-  const handleGoogleSuccess = useCallback((user) => {
-    setUser(user);
-    const destination = location.state?.from || "/chat";
-    navigate(destination, { replace: true });
-  }, [setUser, navigate, location]);
+  const handleGoogleSuccess = useCallback(
+    (userData) => {
+      setUser(userData);
+      const destination = location.state?.from || "/chat";
+      navigate(destination, { replace: true });
+    },
+    [setUser, navigate, location]
+  );
 
-  const handleGoogleError = useCallback((msg) => setError(msg), []);
+  const handleGoogleError = useCallback(
+    (msg, err) => {
+      if (isAccountNotFoundError(err)) {
+        navigate("/signup", {
+          state: {
+            googleNotFoundMessage:
+              "We couldn't find a Flanora account for that Google account. Tick the boxes below and continue with Google to create one.",
+          },
+        });
+        return;
+      }
+      setError(msg);
+    },
+    [navigate]
+  );
 
   const googleBtnRef = useRef(null);
 
-  const { isGoogleLoading, startGoogleSignIn } = useGoogleAuth(handleGoogleSuccess, handleGoogleError, googleBtnRef);
+  const { isGoogleLoading, startGoogleSignIn } = useGoogleAuth(
+    handleGoogleSuccess,
+    handleGoogleError,
+    googleBtnRef,
+    { mode: "login" }
+  );
+
+  const handleGoogleClick = () => {
+    saveGoogleAuthSession({ mode: "login" });
+    startGoogleSignIn();
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const email = String(form.get("email") || "").trim();
-    const password = String(form.get("password") || "");
+    const cleanEmail = email.trim();
 
-    if (!email || !password) {
+    if (!cleanEmail || !password) {
       setError("Please enter your email and password.");
       return;
     }
 
     setError("");
+    setAccountNotFound(false);
     setIsSubmitting(true);
     try {
-      await login(email, password);
+      await login(cleanEmail, password);
       const destination = location.state?.from || "/chat";
       navigate(destination, { replace: true });
     } catch (submitError) {
-      setError(extractErrorMessage(submitError));
+      if (isAccountNotFoundError(submitError)) {
+        setAccountNotFound(true);
+      } else {
+        setError(extractErrorMessage(submitError));
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -74,7 +112,9 @@ function LoginPage() {
   return (
     <main className="flanora-auth-page">
       <section className="flanora-auth-form-panel">
-        <Link className="flanora-auth-wordmark" to="/" style={{ fontFamily: "'Playfair Display', serif" }}>Flanora</Link>
+        <Link className="flanora-auth-wordmark" to="/" style={{ fontFamily: "'Playfair Display', serif" }}>
+          Flanora
+        </Link>
         <div className="flanora-auth-form-wrap">
           <div className="flanora-auth-heading">
             <h1>Continue exploring with <em style={{ fontFamily: "'Playfair Display', serif" }}>Flanora.</em></h1>
@@ -84,7 +124,7 @@ function LoginPage() {
           <button
             type="button"
             className="flanora-google-button"
-            onClick={startGoogleSignIn}
+            onClick={handleGoogleClick}
             disabled={isGoogleLoading}
           >
             {isGoogleLoading ? (
@@ -102,12 +142,54 @@ function LoginPage() {
 
           <form className="flanora-auth-form" onSubmit={handleSubmit}>
             <label htmlFor="email">Email
-              <input id="email" name="email" type="email" autoComplete="email" placeholder="you@example.com" required />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setAccountNotFound(false);
+                  setError("");
+                }}
+                required
+              />
             </label>
             <label htmlFor="password">Password
-              <input id="password" name="password" type="password" autoComplete="current-password" placeholder="Enter your password" minLength="8" required />
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                placeholder="Enter your password"
+                minLength="8"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setAccountNotFound(false);
+                  setError("");
+                }}
+                required
+              />
             </label>
-            {error && <p className="flanora-auth-message" role="alert">{error}</p>}
+
+            {accountNotFound ? (
+              <div className="flanora-auth-not-found-banner" role="alert">
+                <p>We couldn't find an account with that email.</p>
+                <button
+                  type="button"
+                  className="flanora-auth-create-account-btn"
+                  onClick={() => navigate("/signup", { state: { prefilledEmail: email } })}
+                >
+                  Create an account
+                </button>
+              </div>
+            ) : error ? (
+              <p className="flanora-auth-message" role="alert">{error}</p>
+            ) : null}
+
             <button className="flanora-auth-submit" type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Signing in…" : "Log in"}
             </button>

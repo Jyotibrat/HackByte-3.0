@@ -1,9 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { googleLogin, extractErrorMessage } from "../services/authApiService";
+import {
+  readGoogleAuthSession,
+  clearGoogleAuthSession,
+  buildGoogleAuthPayload,
+} from "../utils/authHelpers";
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-const GOOGLE_CONNECT_ERROR =
-  "We’re having trouble connecting right now. Please try again in a moment.";
 
 /**
  * Loads Google Identity Services script and renders the official Google Sign-In
@@ -11,7 +14,7 @@ const GOOGLE_CONNECT_ERROR =
  * custom button that triggers it via `startGoogleSignIn()`, so the option stays
  * present even when GIS is unavailable or still loading.
  */
-export function useGoogleAuth(onSuccess, onError, buttonRef) {
+export function useGoogleAuth(onSuccess, onError, buttonRef, defaultOptions = { mode: "login" }) {
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const hasScriptFailedRef = useRef(false);
 
@@ -43,14 +46,23 @@ export function useGoogleAuth(onSuccess, onError, buttonRef) {
             );
             const { picture } = JSON.parse(jsonPayload);
 
-            const data = await googleLogin(response.credential);
+            const sessionOptions = readGoogleAuthSession();
+            clearGoogleAuthSession();
+            const chosenOptions = sessionOptions || defaultOptions;
+            const payload = buildGoogleAuthPayload({
+              mode: chosenOptions.mode,
+              acceptTerms: chosenOptions.accept_terms ?? chosenOptions.acceptTerms,
+              newsletterOptIn: chosenOptions.newsletter_opt_in ?? chosenOptions.newsletterOptIn,
+            });
+
+            const data = await googleLogin(response.credential, payload);
             if (picture) {
               localStorage.setItem(`flanora_pic_${data.user.email}`, picture);
               data.user.picture = picture;
             }
             onSuccess(data.user);
           } catch (err) {
-            onError(extractErrorMessage(err));
+            onError(extractErrorMessage(err), err);
             setIsGoogleLoading(false);
           }
         },
@@ -76,11 +88,11 @@ export function useGoogleAuth(onSuccess, onError, buttonRef) {
                   setIsGoogleLoading(false);
                 }
               }, 1000);
-              window.removeEventListener('focus', focusListener);
+              window.removeEventListener("focus", focusListener);
             };
-            window.addEventListener('focus', focusListener);
+            window.addEventListener("focus", focusListener);
           }, 500);
-        }
+        },
       });
     };
 
@@ -99,27 +111,21 @@ export function useGoogleAuth(onSuccess, onError, buttonRef) {
     }
 
     return () => {
-      if (focusListener) window.removeEventListener('focus', focusListener);
+      if (focusListener) {
+        window.removeEventListener("focus", focusListener);
+      }
     };
-  }, [onSuccess, onError, buttonRef]);
+  }, [buttonRef, defaultOptions, onError, onSuccess]);
 
-  const startGoogleSignIn = useCallback(() => {
-    if (!GOOGLE_CLIENT_ID) {
-      onError(GOOGLE_CONNECT_ERROR);
-      return;
+  const startGoogleSignIn = () => {
+    if (!buttonRef.current) return;
+    const btn = buttonRef.current.querySelector('div[role="button"]');
+    if (btn) {
+      btn.click();
+    } else {
+      onError("Google sign-in is initializing. Please try again in a moment.");
     }
-    if (hasScriptFailedRef.current) {
-      onError(GOOGLE_CONNECT_ERROR);
-      return;
-    }
-    const relayButton = buttonRef.current?.querySelector('[role="button"], button');
-    if (!relayButton) {
-      onError(GOOGLE_CONNECT_ERROR);
-      return;
-    }
-    relayButton.click();
-  }, [onError, buttonRef]);
+  };
 
   return { isGoogleLoading, startGoogleSignIn };
 }
-

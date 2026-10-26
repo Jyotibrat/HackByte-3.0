@@ -1,25 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
-
-const NEWSLETTER_URL = import.meta.env.VITE_NEWSLETTER_URL;
-
-/** Fire-and-forget â€” newsletter errors must never block the user. */
-async function subscribeToNewsletter({ email, source, flanoraUserId = null }) {
-  if (!NEWSLETTER_URL) return;
-  try {
-    await fetch(NEWSLETTER_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: email.trim().toLowerCase(),
-        source,
-        ...(flanoraUserId ? { flanoraUserId } : {}),
-      }),
-    });
-  } catch {
-    // Silently swallow â€” newsletter failure must never affect signup UX.
-  }
-}
+import { CountryCodeCombobox } from "../components/CountryCodeCombobox";
+import {
+  formatPhoneNumber,
+  getSanitizedPhoneNumber,
+} from "../utils/countryCodes";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useRef, useCallback, useEffect } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { extractErrorMessage } from "../services/authApiService";
 import { useGoogleAuth } from "../hooks/useGoogleAuth";
@@ -28,8 +14,14 @@ import {
   PreviewLinkCard,
   PreviewLinkCardTrigger,
   PreviewLinkCardContent,
-  PreviewLinkCardImage
+  PreviewLinkCardImage,
 } from "@/components/animate-ui/components/radix/preview-link-card";
+import { cn } from "@/lib/utils";
+import {
+  validateTermsRequired,
+  getScrollBehavior,
+  saveGoogleAuthSession,
+} from "../utils/authHelpers";
 
 function GoogleIcon() {
   return (
@@ -84,7 +76,9 @@ function validateRegistration(form) {
     return "Passwords do not match.";
   }
   const phone = String(form.get("phone") || "").trim();
-  if (phone && !PHONE_PATTERN.test(phone)) {
+  const countryCode = String(form.get("countryCode") || "+1").trim();
+  const fullPhone = getSanitizedPhoneNumber(phone, countryCode);
+  if (fullPhone && !PHONE_PATTERN.test(fullPhone)) {
     return "Please enter a valid phone number.";
   }
   const dobValue = form.get("dob");
@@ -106,11 +100,34 @@ function validateRegistration(form) {
 function SignUpPage() {
   const { user, signup, setUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [createdEmail, setCreatedEmail] = useState("");
   const [avatarPreview, setAvatarPreview] = useState(null);
   const avatarInputRef = useRef(null);
+
+  // Form inputs state
+  const [email, setEmail] = useState(location.state?.prefilledEmail || "");
+  const [countryCode, setCountryCode] = useState("+1");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const phoneInputRef = useRef(null);
+
+  const handlePhoneChange = (e) => {
+    const formatted = formatPhoneNumber(e.target.value, phoneNumber);
+    setPhoneNumber(formatted);
+  };
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [newsletterAccepted, setNewsletterAccepted] = useState(false);
+  const [termsError, setTermsError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRePassword, setShowRePassword] = useState(false);
+
+  const checkboxBlockRef = useRef(null);
+  const termsCheckboxRef = useRef(null);
+
+  const googleNotFoundMessage = location.state?.googleNotFoundMessage;
 
   useEffect(() => {
     if (user) {
@@ -118,23 +135,50 @@ function SignUpPage() {
     }
   }, [user, navigate]);
 
-  const handleGoogleSuccess = useCallback((user) => {
-    setUser(user);
-    // Auto-subscribe Google users â€” they have no opt-in checkbox.
-    if (user?.email) {
-      subscribeToNewsletter({
-        email: user.email,
-        source: "google_registration",
-        flanoraUserId: user.id ?? user.user_id ?? null,
-      });
-    }
-    navigate("/chat", { replace: true });
-  }, [setUser, navigate]);
+  const handleGoogleSuccess = useCallback(
+    (userData) => {
+      setUser(userData);
+      navigate("/chat", { replace: true });
+    },
+    [setUser, navigate]
+  );
 
   const handleGoogleError = useCallback((msg) => setError(msg), []);
 
   const googleBtnRef = useRef(null);
-  const { isGoogleLoading, startGoogleSignIn } = useGoogleAuth(handleGoogleSuccess, handleGoogleError, googleBtnRef);
+  const { isGoogleLoading, startGoogleSignIn } = useGoogleAuth(
+    handleGoogleSuccess,
+    handleGoogleError,
+    googleBtnRef,
+    { mode: "signup", accept_terms: termsAccepted, newsletter_opt_in: newsletterAccepted }
+  );
+
+  const triggerTermsError = () => {
+    setTermsError("Please tick this box to continue.");
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    checkboxBlockRef.current?.scrollIntoView({
+      behavior: getScrollBehavior(prefersReducedMotion),
+      block: "center",
+    });
+    termsCheckboxRef.current?.focus();
+  };
+
+  const handleGoogleClick = () => {
+    const check = validateTermsRequired(termsAccepted);
+    if (!check.isValid) {
+      triggerTermsError();
+      return;
+    }
+    saveGoogleAuthSession({
+      mode: "signup",
+      accept_terms: true,
+      newsletter_opt_in: newsletterAccepted,
+    });
+    startGoogleSignIn();
+  };
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
@@ -142,8 +186,6 @@ function SignUpPage() {
     setAvatarPreview(URL.createObjectURL(file));
   };
 
-  // Leaving the DOB field with an invalid / under-age date resets it to the
-  // browser's empty placeholder and reports why.
   const handleDobBlur = (event) => {
     const input = event.currentTarget;
     const value = input.value;
@@ -163,14 +205,21 @@ function SignUpPage() {
       input.value = "";
       setError(message);
     } else {
-      setError((current) => (current === DOB_AGE_MESSAGE || current === DOB_INVALID_MESSAGE ? "" : current));
+      setError((current) =>
+        current === DOB_AGE_MESSAGE || current === DOB_INVALID_MESSAGE ? "" : current
+      );
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const form = new FormData(event.currentTarget);
+    const check = validateTermsRequired(termsAccepted);
+    if (!check.isValid) {
+      triggerTermsError();
+      return;
+    }
 
+    const form = new FormData(event.currentTarget);
     const validationError = validateRegistration(form);
     if (validationError) {
       setError(validationError);
@@ -180,31 +229,25 @@ function SignUpPage() {
     setError("");
     setIsSubmitting(true);
     try {
-      const email = String(form.get("email") || "").trim().toLowerCase();
-      const wantsNewsletter = form.get("newsletter") === "on";
+      const emailValue = String(form.get("email") || "").trim().toLowerCase();
 
-      const createdUser = await signup({
+      await signup({
         first_name: String(form.get("firstName") || "").trim(),
         last_name: String(form.get("lastName") || "").trim(),
-        email,
-        phone_number: String(form.get("phone") || "").trim(),
+        email: emailValue,
+        phone_number: getSanitizedPhoneNumber(
+          String(form.get("phone") || ""),
+          String(form.get("countryCode") || countryCode)
+        ),
         date_of_birth: String(form.get("dob") || ""),
         password: String(form.get("password") || ""),
         confirm_password: String(form.get("rePassword") || ""),
-        accept_terms: form.get("tos") === "on",
-        accept_privacy_policy: form.get("tos") === "on",
+        accept_terms: true,
+        accept_privacy_policy: true,
+        newsletter_opt_in: newsletterAccepted,
       });
 
-      // Subscribe only if the user opted in.
-      if (wantsNewsletter) {
-        subscribeToNewsletter({
-          email,
-          source: "registration",
-          flanoraUserId: createdUser?.id ?? createdUser?.user_id ?? null,
-        });
-      }
-
-      setCreatedEmail(email);
+      setCreatedEmail(emailValue);
     } catch (submitError) {
       setError(extractErrorMessage(submitError));
     } finally {
@@ -224,7 +267,7 @@ function SignUpPage() {
             </div>
             <p className="flanora-auth-message" role="status">
               We've sent a verification link to {createdEmail}. You can start
-              exploring right away Ã¢â‚¬â€ just verify your email later to keep full
+              exploring right away — just verify your email later to keep full
               access.
             </p>
             <button
@@ -232,7 +275,7 @@ function SignUpPage() {
               type="button"
               onClick={() => navigate("/chat", { replace: true })}
             >
-              Continue to Flanora Ã¢â€ â€™
+              Continue to Flanora →
             </button>
             <p className="flanora-auth-legal">
               Didn't get the email?{" "}
@@ -264,10 +307,16 @@ function SignUpPage() {
             <p>Join thousands exploring AI-generated architectural concepts.</p>
           </div>
 
+          {googleNotFoundMessage && (
+            <div className="flanora-auth-info-banner" role="status">
+              {googleNotFoundMessage}
+            </div>
+          )}
+
           <button
             type="button"
             className="flanora-google-button"
-            onClick={startGoogleSignIn}
+            onClick={handleGoogleClick}
             disabled={isGoogleLoading}
           >
             {isGoogleLoading ? (
@@ -277,7 +326,7 @@ function SignUpPage() {
             ) : (
               <GoogleIcon />
             )}
-            <span>{isGoogleLoading ? "Continuing with GoogleÃ¢â‚¬Â¦" : "Continue with Google"}</span>
+            <span>{isGoogleLoading ? "Continuing with Google…" : "Continue with Google"}</span>
           </button>
           <div ref={googleBtnRef} className="flanora-google-button-host" aria-hidden="true" />
 
@@ -290,17 +339,18 @@ function SignUpPage() {
               aria-label="Upload profile picture"
               onClick={() => avatarInputRef.current?.click()}
             >
-              {avatarPreview
-                ? <img src={avatarPreview} alt="Profile preview" className="flanora-avatar-preview" />
-                : <CameraIcon />
-              }
+              {avatarPreview ? (
+                <img src={avatarPreview} alt="Profile preview" className="flanora-avatar-preview" />
+              ) : (
+                <CameraIcon />
+              )}
             </button>
             <div className="flanora-avatar-label">
               <span>Profile picture</span>
               <button type="button" className="flanora-avatar-change" onClick={() => avatarInputRef.current?.click()}>
                 {avatarPreview ? "Change photo" : "Upload photo"}
               </button>
-              <span className="flanora-avatar-hint">Optional Ã‚Â· JPG, PNG, WEBP up to 5 MB</span>
+              <span className="flanora-avatar-hint">Optional · JPG, PNG, WEBP up to 5 MB</span>
             </div>
             <input
               ref={avatarInputRef}
@@ -314,75 +364,181 @@ function SignUpPage() {
 
           <form className="flanora-auth-form flanora-signup-form" onSubmit={handleSubmit}>
             <div className="flanora-signup-row">
-              <label htmlFor="firstName">First name *
+              <label htmlFor="firstName">First Name *
                 <input id="firstName" name="firstName" type="text" autoComplete="given-name" placeholder="Ada" required />
               </label>
-              <label htmlFor="lastName">Last name *
+              <label htmlFor="lastName">Last Name *
                 <input id="lastName" name="lastName" type="text" autoComplete="family-name" placeholder="Lovelace" required />
               </label>
             </div>
 
             <div className="flanora-signup-row">
-              <label htmlFor="dob">Date of birth *
+              <label htmlFor="dob">Date of Birth *
                 <input id="dob" name="dob" type="date" autoComplete="bday" required onBlur={handleDobBlur} />
               </label>
-              <label htmlFor="phone">Phone number
-                <input id="phone" name="phone" type="tel" autoComplete="tel" placeholder="+1 555 000 0000" />
-              </label>
+              <div className="flanora-phone-field-container">
+                <label htmlFor="phone" id="phoneLabel">Phone Number</label>
+                <div className="flanora-phone-field-wrap">
+                  <CountryCodeCombobox
+                    id="countryCode"
+                    name="countryCode"
+                    value={countryCode}
+                    onChange={(code) => setCountryCode(code)}
+                    ariaLabelledBy="phoneLabel"
+                    onSelectAdvance={() => phoneInputRef.current?.focus()}
+                  />
+                  <input
+                    ref={phoneInputRef}
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel-national"
+                    placeholder="01234-56789"
+                    value={phoneNumber}
+                    onChange={handlePhoneChange}
+                    className="flanora-phone-number-input"
+                    aria-labelledby="phoneLabel"
+                    aria-label="Phone number"
+                  />
+                </div>
+              </div>
             </div>
 
-            <label htmlFor="signupEmail">Email address *
-              <input id="signupEmail" name="email" type="email" autoComplete="email" placeholder="you@example.com" required />
+            <label htmlFor="signupEmail">Email Address *
+              <input
+                id="signupEmail"
+                name="email"
+                type="email"
+                autoComplete="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </label>
 
             <label htmlFor="password">Password *
-              <input id="password" name="password" type="password" autoComplete="new-password" placeholder="8+ characters, upper &amp; lower case, a special character" minLength="8" required />
+              <div className="flanora-password-field-wrap">
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  placeholder="8+ characters, upper & lower case, a special character"
+                  minLength="8"
+                  required
+                />
+                <button
+                  type="button"
+                  className="flanora-password-toggle-btn"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowPassword((prev) => !prev); }}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  title={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeOff size={18} aria-hidden="true" /> : <Eye size={18} aria-hidden="true" />}
+                </button>
+              </div>
             </label>
 
-            <label htmlFor="rePassword">Re-enter password *
-              <input id="rePassword" name="rePassword" type="password" autoComplete="new-password" placeholder="Confirm your password" minLength="8" required />
+            <label htmlFor="rePassword">Re-enter Password *
+              <div className="flanora-password-field-wrap">
+                <input
+                  id="rePassword"
+                  name="rePassword"
+                  type={showRePassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  placeholder="Confirm your password"
+                  minLength="8"
+                  required
+                />
+                <button
+                  type="button"
+                  className="flanora-password-toggle-btn"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowRePassword((prev) => !prev); }}
+                  aria-label={showRePassword ? "Hide re-entered password" : "Show re-entered password"}
+                  title={showRePassword ? "Hide re-entered password" : "Show re-entered password"}
+                >
+                  {showRePassword ? <EyeOff size={18} aria-hidden="true" /> : <Eye size={18} aria-hidden="true" />}
+                </button>
+              </div>
             </label>
 
-            <label className="flanora-tos-label" htmlFor="tos">
-              <Checkbox id="tos" name="tos" required className="flanora-tos-checkbox" />
-              <span>
-                I agree to the{" "}
-                <PreviewLinkCard>
-                  <PreviewLinkCardTrigger asChild>
-                    <a href="https://flanora-ai.becore.space/policies/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of Service</a>
-                  </PreviewLinkCardTrigger>
-                  <PreviewLinkCardContent>
-                    <PreviewLinkCardImage src="https://placehold.co/600x400/18181b/ffffff?text=Terms+of+Service" alt="Terms of Service Preview" />
-                  </PreviewLinkCardContent>
-                </PreviewLinkCard>
-                {" "}and{" "}
-                <PreviewLinkCard>
-                  <PreviewLinkCardTrigger asChild>
-                    <a href="https://flanora-ai.becore.space/policies/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-                  </PreviewLinkCardTrigger>
-                  <PreviewLinkCardContent>
-                    <PreviewLinkCardImage src="https://placehold.co/600x400/18181b/ffffff?text=Privacy+Policy" alt="Privacy Policy Preview" />
-                  </PreviewLinkCardContent>
-                </PreviewLinkCard>
-              </span>
-            </label>
+            {/* Checkbox block stays below email fields */}
+            <div ref={checkboxBlockRef} className="flanora-tos-block">
+              <div className="flanora-tos-row">
+                <label className="flanora-tos-label" htmlFor="tos">
+                  <Checkbox
+                    id="tos"
+                    name="tos"
+                    ref={termsCheckboxRef}
+                    checked={termsAccepted}
+                    onCheckedChange={(val) => {
+                      const isChecked = Boolean(val);
+                      setTermsAccepted(isChecked);
+                      if (isChecked) setTermsError("");
+                    }}
+                    aria-invalid={Boolean(termsError)}
+                    aria-describedby={termsError ? "tos-inline-error" : undefined}
+                    className={cn("flanora-tos-checkbox", termsError && "has-error")}
+                  />
+                  <span>
+                    I agree to the{" "}
+                    <PreviewLinkCard>
+                      <PreviewLinkCardTrigger asChild>
+                        <a href="https://flanora-ai.becore.space/policies/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+                      </PreviewLinkCardTrigger>
+                      <PreviewLinkCardContent>
+                        <PreviewLinkCardImage src="https://placehold.co/600x400/18181b/ffffff?text=Terms+of+Service" alt="Terms of Service Preview" />
+                      </PreviewLinkCardContent>
+                    </PreviewLinkCard>
+                    {" "}and{" "}
+                    <PreviewLinkCard>
+                      <PreviewLinkCardTrigger asChild>
+                        <a href="https://flanora-ai.becore.space/policies/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                      </PreviewLinkCardTrigger>
+                      <PreviewLinkCardContent>
+                        <PreviewLinkCardImage src="https://placehold.co/600x400/18181b/ffffff?text=Privacy+Policy" alt="Privacy Policy Preview" />
+                      </PreviewLinkCardContent>
+                    </PreviewLinkCard>
+                  </span>
+                </label>
+                {termsError && (
+                  <span id="tos-inline-error" className="flanora-tos-inline-error" role="alert">
+                    {termsError}
+                  </span>
+                )}
+              </div>
 
-            <label className="flanora-tos-label" htmlFor="newsletter">
-              <Checkbox id="newsletter" name="newsletter" className="flanora-tos-checkbox" />
-              <span>
-                IÃ¢â‚¬â„¢d like to receive occasional newsletters and updates from Flanora AI.
-              </span>
-            </label>
+              <div className="flanora-tos-row">
+                <label className="flanora-tos-label" htmlFor="newsletter">
+                  <Checkbox
+                    id="newsletter"
+                    name="newsletter"
+                    checked={newsletterAccepted}
+                    onCheckedChange={(val) => setNewsletterAccepted(Boolean(val))}
+                    className="flanora-tos-checkbox"
+                  />
+                  <span>
+                    I’d like to receive occasional newsletters and updates from Flanora AI.
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            {/* Aria-live region announcing Terms checkbox error */}
+            <div aria-live="polite" aria-atomic="true" className="sr-only">
+              {termsError}
+            </div>
 
             {error && <p className="flanora-auth-message" role="alert">{error}</p>}
 
             <button className="flanora-auth-submit" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Creating accountÃ¢â‚¬Â¦" : "Create account"}
+              {isSubmitting ? "Creating account…" : "Create account"}
             </button>
           </form>
 
           <p className="flanora-auth-legal">
-            Already have an account?{" "}<Link to="/login">Log in</Link>
+            Already have an account? <Link to="/login">Log in</Link>
           </p>
         </div>
       </section>

@@ -14,6 +14,7 @@
 }
 
 .flanora-auth-form-panel {
+  align-items: center;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -31,8 +32,13 @@
 }
 
 .flanora-auth-form-wrap {
+  align-self: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   margin: auto;
-  max-width: 420px;
+  max-width: 440px;
   padding: 72px 0;
   width: 100%;
 }
@@ -66,6 +72,7 @@
 .flanora-auth-submit {
   align-items: center;
   border-radius: 999px;
+  box-sizing: border-box;
   cursor: pointer;
   display: flex;
   font: inherit;
@@ -80,8 +87,11 @@
   border: 1px solid rgba($white, 0.2);
   color: $fg-primary;
   gap: 10px;
+  margin: 0;
   padding: 14px 20px;
+  text-align: center;
   transition: background 180ms ease;
+  width: 100%;
 }
 
 .flanora-google-button:hover,
@@ -109,11 +119,19 @@
 
 .flanora-auth-divider {
   align-items: center;
+  box-sizing: border-box;
   color: rgba($fg-primary, 0.42);
   display: flex;
   font-size: 0.76rem;
   gap: 14px;
+  justify-content: center;
   margin: 24px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.flanora-auth-divider span {
+  text-align: center;
 }
 
 .flanora-auth-divider::before,
@@ -124,26 +142,40 @@
   flex: 1;
 }
 
-.flanora-auth-form { display: grid; gap: 17px; }
+.flanora-auth-form {
+  box-sizing: border-box;
+  display: grid;
+  gap: 17px;
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
+}
 
 .flanora-auth-form label {
+  box-sizing: border-box;
   color: rgba($fg-primary, 0.86);
   display: grid;
   font-size: 0.82rem;
   font-weight: 700;
   gap: 8px;
+  min-width: 0;
+  text-align: left;
+  width: 100%;
 }
 
 .flanora-auth-form input {
   background: rgba($white, 0.05);
   border: 1px solid rgba($white, 0.16);
   border-radius: 999px;
+  box-sizing: border-box;
   color: $fg-primary;
   font: inherit;
   font-size: 0.9rem;
+  min-width: 0;
   outline: 0;
   padding: 14px 18px;
   transition: border-color 180ms ease, background 180ms ease;
+  width: 100%;
 }
 
 .flanora-auth-form input::placeholder { color: rgba($fg-primary, 0.35); }
@@ -152,6 +184,265 @@
   background: rgba($white, 0.08);
   border-color: $accent-cyan;
   box-shadow: 0 0 0 3px rgba($accent-cyan, 0.15);
+}
+
+
+.flanora-phone-field-container {
+  box-sizing: border-box;
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  text-align: left;
+  width: 100%;
+
+  label {
+    box-sizing: border-box;
+    color: rgba($fg-primary, 0.86);
+    cursor: pointer;
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin: 0;
+    min-width: 0;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+  }
+}
+
+.flanora-phone-field-wrap {
+  align-items: center;
+  background: rgba($white, 0.05);
+  border: 1px solid rgba($white, 0.16);
+  border-radius: 999px;
+  box-sizing: border-box;
+  display: flex;
+  height: 48px;
+  min-width: 0;
+  overflow: visible;
+  position: relative;
+  transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+  width: 100%;
+
+  &:focus-within {
+    background: rgba($white, 0.08);
+    border-color: $accent-cyan;
+    box-shadow: 0 0 0 3px rgba($accent-cyan, 0.15);
+  }
+}
+
+.flanora-phone-combobox {
+  flex: 0 0 auto;
+  height: 100%;
+  position: relative;
+  width: 82px;
+}
+
+.flanora-phone-combobox-input-wrap {
+  align-items: center;
+  border-right: 1px solid rgba($white, 0.16);
+  border-radius: 999px 0 0 999px;
+  display: flex;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.flanora-phone-combobox-input {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 999px 0 0 999px !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+  color: $fg-primary !important;
+  cursor: text;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  height: 100%;
+  margin: 0 !important;
+  min-width: 0;
+  outline: none !important;
+  padding: 0 16px 0 10px !important;
+  width: 100%;
+
+  &::placeholder {
+    color: rgba($fg-primary, 0.4);
+  }
+}
+
+.flanora-phone-combobox-arrow {
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: rgba($fg-primary, 0.5);
+  cursor: pointer;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  padding: 0 4px;
+  position: absolute;
+  right: 2px;
+  top: 0;
+  transition: transform 180ms ease, color 160ms ease;
+
+  &:hover {
+    color: $fg-primary;
+  }
+
+  &.is-open {
+    transform: rotate(180deg);
+    color: $accent-cyan;
+  }
+}
+
+.flanora-country-dropdown-menu {
+  background: #081618;
+  border: 1px solid rgba($white, 0.18);
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba($accent-cyan, 0.15);
+  box-sizing: border-box;
+  left: 0;
+  list-style: none;
+  margin: 0;
+  max-height: 230px;
+  min-width: 270px;
+  overflow-y: auto;
+  padding: 6px;
+  position: absolute;
+  scrollbar-color: rgba($white, 0.2) transparent;
+  scrollbar-width: thin;
+  top: calc(100% + 8px);
+  z-index: 100;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba($white, 0.2);
+    border-radius: 999px;
+  }
+}
+
+.flanora-country-option {
+  align-items: center;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: rgba($fg-primary, 0.9);
+  cursor: pointer;
+  display: flex;
+  font-size: 0.82rem;
+  gap: 10px;
+  padding: 8px 10px;
+  transition: background 120ms ease, color 120ms ease;
+  user-select: none;
+
+  &:hover,
+  &.is-highlighted {
+    background: rgba($white, 0.08);
+    color: #ffffff;
+  }
+
+  &.is-selected {
+    color: $accent-cyan;
+    font-weight: 700;
+  }
+}
+
+.flanora-country-flag {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.flanora-country-name {
+  flex: 1;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flanora-country-code {
+  color: rgba($fg-primary, 0.65);
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-left: auto;
+}
+
+.flanora-country-check {
+  align-items: center;
+  color: $accent-cyan;
+  display: flex;
+  margin-left: 4px;
+}
+
+.flanora-country-no-results {
+  color: rgba($fg-primary, 0.45);
+  font-size: 0.82rem;
+  padding: 16px;
+  text-align: center;
+}
+
+.flanora-phone-number-input {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 999px 999px 0 !important;
+  box-shadow: none !important;
+  color: $fg-primary !important;
+  flex: 1 1 auto;
+  font: inherit;
+  font-size: 0.84rem;
+  height: 100%;
+  margin: 0 !important;
+  min-width: 0;
+  outline: none !important;
+  padding: 0 16px 0 8px !important;
+  width: 100%;
+
+  &::placeholder {
+    color: rgba($fg-primary, 0.35);
+  }
+}
+
+.flanora-password-field-wrap {
+  align-items: center;
+  display: flex;
+  position: relative;
+  width: 100%;
+
+  input {
+    padding-right: 48px;
+    width: 100%;
+  }
+}
+
+.flanora-password-toggle-btn {
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: rgba($fg-primary, 0.5);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  line-height: 1;
+  padding: 6px;
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: color 160ms ease, background 160ms ease;
+
+  &:hover {
+    background: rgba($white, 0.08);
+    color: $fg-primary;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $accent-cyan;
+    outline-offset: 1px;
+  }
 }
 
 // Tick-box rows (Terms/newsletter on sign-up). The animate-ui Checkbox is
@@ -199,17 +490,25 @@
 // Sign-up extras — avatar upload and first/last-name row (their classes
 // shipped without CSS, so every element rendered raw and inline).
 .flanora-signup-row {
+  box-sizing: border-box;
   display: grid;
-  gap: 17px;
-  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
 }
 
 .flanora-avatar-upload {
   align-items: center;
+  box-sizing: border-box;
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  gap: 12px;
   justify-content: center;
-  margin: 4px 0 8px;
+  margin: 8px 0 20px;
+  text-align: center;
+  width: 100%;
 }
 
 .flanora-avatar-btn {
@@ -245,10 +544,12 @@
 }
 
 .flanora-avatar-label {
-  display: grid;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   gap: 6px;
-  justify-items: start;
-  text-align: left;
+  justify-content: center;
+  text-align: center;
 }
 
 .flanora-avatar-label > span:first-child { font-weight: 700; }
@@ -395,4 +696,97 @@
 @media (max-width: 900px) {
   .flanora-auth-page { grid-template-columns: 1fr; }
   .flanora-auth-visual { display: none; }
+}
+
+// Accessibility screen-reader only class
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.flanora-tos-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.flanora-tos-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.flanora-tos-checkbox.has-error {
+  border-color: #ef4444 !important;
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
+
+.flanora-tos-inline-error {
+  color: #ef4444;
+  font-size: 0.8125rem;
+  margin-left: 28px;
+  text-align: left;
+}
+
+.flanora-auth-info-banner {
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(14, 165, 233, 0.35);
+  border-radius: 12px;
+  color: #bae6fd;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  text-align: left;
+}
+
+.flanora-auth-not-found-banner {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 12px;
+  color: #fca5a5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  text-align: left;
+
+  p {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+
+  .flanora-auth-create-account-btn {
+    align-self: flex-start;
+    background: #ef4444;
+    border: none;
+    border-radius: 999px;
+    color: #ffffff;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    padding: 7px 16px;
+    transition: background 160ms ease;
+
+    &:hover {
+      background: #dc2626;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .flanora-signup-row {
+    grid-template-columns: 1fr;
+  }
 }
